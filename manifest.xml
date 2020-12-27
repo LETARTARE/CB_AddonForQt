@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_plugin_manifest_file>
+    <SdkVersion major="2" minor="5" release="0" />
+    <Plugin name="AddOnForQt">
+        <Value title="Addons generation for Qt " />
+        <Value version="3.3.0-2020/12/25" />
+        <Value description="Compilling Qt software with this plugin (sdk 2.5.0)" />
+        <Value author="LETARTARE" />
+        <Value authorEmail="" />
+        <Value authorWebsite="https://github.com/LETARTARE/AddOnForQtForCB" />
+        <Value thanksTo="C::B IDE developers, plugins developers and others" />
+        <Value license="GPL" />
+    </Plugin>
+</CodeBlocks_plugin_manifest_file>

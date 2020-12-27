@@ -1,0 +1,251 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+// Code::Blocks new project wizard script
+//
+// Project	: CbQt5 project  :  (with Qt5.x only)
+// Author	: LETARTARE http://forums.codeblocks.org
+// Modified	: LETARTARE June 18, 2019
+//
+////////////////////////////////////////////////////////////////////////////////
+
+// globals
+QtPathDefault5   <- _T"$(#qt5)");
+QtPathDefaultInc <- _T"");
+QtPathDefaultLib <- _T"");
+QtPath5 <- _T"");
+QtPathSpecs <- _T"mkspecs") + wxFILE_SEP_PATH + _T"win32-g++") ;
+// not used here
+QtVersion <- _T"");
+// local
+QtLocalPathQt	 <- _T"qt");
+
+function BeginWizard()
+{
+    local intro_msg = _"Welcome to the new 'Qt Group Plc' CbQt5 project wizard!\n" +
+                         "This wizard will guide you to create a new 'CbQt5' project\n" +
+                         "using the 'Qt Group Plc' Qt5.x cross-platform GUI toolkit\n\n" +
+                         "When you're ready to proceed, please click \"Next\"...");
+/// -> cbqt5
+	local  advice_msg =_"This is an experimental wizard, using a plugin\n" +
+						 "'QtPreGen-x.y.z', which allows generate additional files for Qt:\n" +
+						 "- meta-objects ('Q_OBJECT', 'Q_GADGET' in .h, .hpp, .cpp)\n" +
+						 "- forms (.ui)\n" +
+						 "- resources (.qrc).\n" +
+						 "When you're ready to proceed, please click \"Next\"...\n\n");
+/// <--
+
+    local qtpath_msg = _"Please select the location of Qt5 on your computer.\n" +
+                          "This is the top-level folder where Qt5 was installed.\n" +
+                          "To help you, this folder must contain the subfolders\n" +
+                          "\"include\" and \"lib\".");
+
+    Wizard.AddInfoPage(_T"QtIntro"), intro_msg);
+///--> cbqt5
+    Wizard.AddInfoPage(_T"QtAdvice"), advice_msg);
+/// <--
+    Wizard.AddGenericSelectPathPage(_T"QtPath"), qtpath_msg, _"Qt's location:"), QtPathDefault5);
+
+    Wizard.AddProjectPathPage();
+
+    Wizard.AddCompilerPage(_T""), _T"gcc*"), true, true);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Qt's path page
+////////////////////////////////////////////////////////////////////////////////
+
+function OnLeave_QtPath(fwd)
+{
+    if (fwd)
+    {
+		// txtFolder is the text control in GenericSelectPathPage
+        local dir         = Wizard.GetTextControlValue(_T"txtFolder"));
+//print(dir)
+        local dir_nomacro = VerifyDirectory(dir);
+//print(dir_nomacro)
+
+        if (dir_nomacro.IsEmpty())
+            return false;
+
+        QtPathDefault5 = dir;
+        QtPathDefaultInc = QtPathDefault5  +  wxFILE_SEP_PATH + _T"include");
+        QtPathDefaultLib = QtPathDefault5  +  wxFILE_SEP_PATH + _T"lib");
+
+        // verify include dependencies
+        local dir_nomacro_inc = GetCompilerIncludeDir(dir, QtPathDefault5, QtPathDefaultInc);
+//print(dir_nomacro_inc)
+        if (dir_nomacro_inc.IsEmpty())
+            return false;
+        if (PLATFORM == PLATFORM_MSW
+            && !VerifyFile(dir_nomacro_inc + wxFILE_SEP_PATH + _T"QtWidgets"), _T"QApplication"), _"Qt's include")))
+            return false;
+		else
+		{
+		//if (PLATFORM != PLATFORM_MSW && !VerifyFile(dir_nomacro_inc + wxFILE_SEP_PATH + _T"QtWidgets"), _T"QApplication"), _"Qt's include")))
+        //    return false
+            ;
+		}
+
+        // verify library dependencies
+        local dir_nomacro_lib = GetCompilerLibDir(dir, QtPathDefault5, QtPathDefaultLib);
+//print(dir_nomacro_lib)
+        if (dir_nomacro_lib.IsEmpty())
+            return false;
+
+        if (PLATFORM == PLATFORM_MSW && !VerifyLibFile(dir_nomacro_lib, _T"Qt5Core"), _T"Qt's")))
+            return false;
+        else //
+        if (PLATFORM != PLATFORM_MSW && !VerifyLibFile(dir_nomacro_lib, _T"QtCore"), _T"Qt's")))
+            return false;
+
+        // Remember the original selection.
+       // QtPath5 = dir;
+
+        local is_macro = _T"");
+
+        // try to resolve the include directory as macro
+        is_macro = GetCompilerIncludeMacro(dir, QtPathDefault5, QtPathDefaultInc);
+        if (is_macro.IsEmpty())
+        {
+            // not possible -> use the real inc path we had computed instead
+            QtPathDefaultInc = dir_nomacro_inc;
+        }
+
+        // try to resolve the library directory as macro
+        is_macro = GetCompilerLibMacro(dir, QtPathDefault5, QtPathDefaultLib);
+        if (is_macro.IsEmpty())
+        {
+            // not possible -> use the real lib path we had computed instead
+            QtPathDefaultLib = dir_nomacro_lib;
+        }
+    }
+    return true;
+}
+
+// return the files this project contains
+function GetFilesDir()
+{
+/// -->  cbqt5
+	// -> main.cpp, qtest.h, qtest.cpp
+	return _T"cbqt5/files");
+/// <--
+}
+
+// setup the already created project
+function SetupProject(project)
+{
+/// qt = $(#qt5)
+	project.SetVar(QtLocalPathQt, QtPathDefault5, false);
+/// replace $(#qt5) by $qt ( or $(qt)
+	local dir ;
+	QtPathDefaultInc.Replace(QtPathDefault5, _T"$") + QtLocalPathQt);
+	//dir =  ReplaceMacros(QtPathDefaultInc, true);
+	//ShowMessage(_T"QtPathDefaultInc = ") + QtPathDefaultInc);
+	//ShowMessage(_T"dir = ") + dir);
+	//dir = VerifyDirectory(QtPathDefaultInc);
+	//if (dir.IsEmpty())
+	//	return false;
+	QtPathDefaultLib.Replace(QtPathDefault5, _T"$") + QtLocalPathQt);
+	//dir = VerifyDirectory(QtPathDefaultLib);
+	//if (dir.IsEmpty())
+	//	return false;
+
+    project.AddIncludeDir(QtPathDefaultInc);
+    project.AddIncludeDir(QtPathDefaultInc + wxFILE_SEP_PATH + _T"QtGui"));
+/// --> cbqt5
+    project.AddIncludeDir(QtPathDefaultInc + wxFILE_SEP_PATH + _T"QtWidgets"));
+    project.AddIncludeDir(QtPathDefaultInc + wxFILE_SEP_PATH + _T"QtCore"));
+    project.AddIncludeDir(QtPathDefaultInc + wxFILE_SEP_PATH + _T"QtXml"));
+    project.AddIncludeDir(QtPathDefaultInc + wxFILE_SEP_PATH + _T"ActiveQt"));
+	project.AddIncludeDir(QtPathDefaultInc + wxFILE_SEP_PATH + QtPathSpecs);
+/// <--
+    project.AddLibDir(QtPathDefaultLib);
+/// --> cbqt5
+    project.AddCompilerOption (_T"-frtti"));
+    project.AddCompilerOption (_T"-DUNICODE"));
+    /// qt > 5.6
+  //  project.AddCompilerOption (_T"-DQT_LARGEFILE_SUPPORT"));
+	project.AddCompilerOption (_T"-std=gnu++11"));
+    project.AddCompilerOption (_T"-DQT_NEEDS_QMAIN") );
+
+ // enable compiler exception
+    local idcompiler = Wizard.GetCompilerID();
+	CppExceptionsOn(project, idcompiler);
+//print(idcompiler);
+	if (idcompiler.Find(_T"gcc")) != -1)
+	{
+		project.AddCompilerOption(_T"-mthreads")) ;
+		project.AddLinkerOption (_T"-mthreads") );
+	}
+
+    project.AddLinkerOption (_T"--enable-stcall-fixup") );
+    project.AddLinkerOption (_T"--enable-auto-import") );
+    project.AddLinkerOption (_T"--enable-runtime-pseudo-reloc") );
+    if (PLATFORM == PLATFORM_MSW)
+	{
+		project.AddLinkerOption (_T"-mconsole") );
+		project.AddLinkerOption (_T"-mwindows") );
+    }
+    else {
+    	/// ...
+    }
+/// <--
+    // enable compiler warnings (project-wide)
+    WarningsOn(project, idcompiler);
+
+    // Debug
+    local target = project.GetBuildTarget(Wizard.GetDebugName());
+    if (!IsNull(target))
+    {
+		// ttConsoleOnly: console for debugging
+        target.SetTargetType(ttConsoleOnly);
+        target.AddLibDir(QtPathDefaultLib);
+/// -> cbqt5
+		// add link libraries
+		if (PLATFORM == PLATFORM_MSW)    {
+			target.AddLinkLib(_T"Qt5Cored"));
+			target.AddLinkLib(_T"Qt5Guid"));
+			target.AddLinkLib(_T"Qt5Widgetsd"));
+			target.AddLinkLib(_T"Qt5Xmld"));
+		}
+		else { // to verify
+			target.AddLinkLib(_T"QtCored"));
+			target.AddLinkLib(_T"QtGuid"));
+			target.AddLinkLib(_T"QtWidgetsd"));
+			target.AddLinkLib(_T"QtXmld"));
+		}
+/// <--
+        target.SetOutputFilename(Wizard.GetDebugOutputDir() + Wizard.GetProjectName() + DOT_EXT_EXECUTABLE);
+        // enable generation of debugging symbols for target
+        DebugSymbolsOn(target, Wizard.GetCompilerID());
+    }
+
+    // Release
+    local target = project.GetBuildTarget(Wizard.GetReleaseName());
+    if (!IsNull(target))
+    {
+		// ttExecutable: no console
+        target.SetTargetType(ttExecutable);
+        target.AddLibDir(QtPathDefaultLib);
+/// -> cbqt5
+        // add link libraries
+		if (PLATFORM == PLATFORM_MSW) {
+			target.AddLinkLib(_T"Qt5Core"));
+			target.AddLinkLib(_T"Qt5Gui"));
+			target.AddLinkLib(_T"Qt5Widgets"));
+			target.AddLinkLib(_T"Qt5Xml"));
+		}
+		else { // to verify
+			target.AddLinkLib(_T"QtCore"));
+			target.AddLinkLib(_T"QtGui"));
+			target.AddLinkLib(_T"QtWidgets"));
+			target.AddLinkLib(_T"QtXml"));
+		}
+/// <--
+        target.SetOutputFilename(Wizard.GetReleaseOutputDir() + Wizard.GetProjectName() + DOT_EXT_EXECUTABLE);
+        // enable optimizations for target
+        OptimizationsOn(target, Wizard.GetCompilerID());
+    }
+
+    return true;
+}
