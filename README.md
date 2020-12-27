@@ -48,7 +48,7 @@ It uses a log 'Prebuild log' for all posts plugin.
 	1- first install wizards 'cbqt5',
 	2- then with 'C::B-12270' compile and install the plugin 'AddOnForQt' 
         : change the local variable 'cb = $(#sdk250)' in agreement with your 
-        global 'sdk240' which should identify sources of 'Code::Blocks-sdk250' ( or C:B-12270 )
+        global 'sdk250' which should identify sources of 'Code::Blocks-sdk250' ( or C:B-12270 )
 
 5- Using
 
@@ -61,8 +61,9 @@ Menu for Qt
 
 ![Menu](https://github.com/LETARTARE/CB_AddonForQt/blob/Images/3.3/MenuAddOn.png "MenuAddonForQt")
 
-![POpup](https://github.com/LETARTARE/CB_AddonForQt/blob/Images/3.3/PopUpAddOn.png "PopUpAddonForQt")
+Popup menu on project
 
+![POpup](https://github.com/LETARTARE/CB_AddonForQt/blob/Images/3.3/PopUpAddOn.png "PopUpAddonForQt")
 
 Window log 
 
