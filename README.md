@@ -2,9 +2,9 @@
 
 Plugin to compile QT applications with 'Code::Blocks, but without 'Code:Block' patch'
 
-**Versions for all 'Code::Block, sdk >= 2.5.0, svn >= 12142'**
+**Versions for all 'Code::Block, sdk >= 2.4.0, svn >= 12142'**
 
-**Last: sdk = 2.5.0, svn = 12252 -> ...**
+**Last: sdk = 2.6.0, svn = 12252 -> ...**
 
 It uses a log 'Prebuild log' for all posts plugin.
 
@@ -43,12 +43,12 @@ It uses a log 'Prebuild log' for all posts plugin.
 	4- a directory 'CodeBlocks' containing wizards and templates files 'cbqt5'
 
 
-4- Installation to 'Code::Blocks 12270' (sdk-2.5.0)
+4- Installation to 'Code::Blocks 12281' (sdk-2.6.0)
 
 	1- first install wizards 'cbqt5',
-	2- then with 'C::B-12270' compile and install the plugin 'AddOnForQt' 
-        : change the local variable 'cb = $(#sdk250)' in agreement with your 
-        global 'sdk250' which should identify sources of 'Code::Blocks-sdk250' ( or C:B-12270 )
+	2- then with 'C::B-12281' compile and install the plugin 'AddOnForQt' 
+        : change the local variable 'cb = $(#sdk260)' in agreement with your 
+        global 'sdk260' which should identify sources of 'Code::Blocks-sdk260' (= C:B-12252 )
 
 5- Using
 
