@@ -2,13 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="qtPregen-3.1-0-sdk240-(Unix)" />
+		<Option title="qtPregen-3.1-0-sdk260-(Unix)" />
 		<Option platforms="Unix;" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Option show_notes="0">
 			<notes>
-				<![CDATA[with cb-11798-q, sdk-1.43.0]]>
 			</notes>
 		</Option>
 		<Build>
@@ -38,7 +37,7 @@
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="cb" value="$(#sdk240)" />
+					<Variable name="cb" value="$(#sdk260)" />
 				</Environment>
 			</Target>
 			<Target title="local_30">
@@ -68,7 +67,7 @@
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="cb" value="$(#sdk240)" />
+					<Variable name="cb" value="$(#sdk260)" />
 				</Environment>
 			</Target>
 			<Target title="cbqt5">
@@ -102,13 +101,9 @@
 			<Option target="default_30" />
 			<Option target="local_30" />
 		</Unit>
-		<Unit filename="infos/qtpregen.his">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="manifest.xml">
 			<Option target="default_30" />
 			<Option target="local_30" />
-			<Option target="info" />
 		</Unit>
 		<Unit filename="res/dummy.xrc">
 			<Option target="default_30" />
@@ -117,37 +112,30 @@
 		<Unit filename="src/defines.h">
 			<Option target="default_30" />
 			<Option target="local_30" />
-			<Option target="info" />
 		</Unit>
-		<Unit filename="src/qtpre.cpp">
+		<Unit filename="src/pre.cpp">
 			<Option target="default_30" />
 			<Option target="local_30" />
-			<Option target="info" />
 		</Unit>
-		<Unit filename="src/qtpre.h">
+		<Unit filename="src/pre.h">
 			<Option target="default_30" />
 			<Option target="local_30" />
-			<Option target="info" />
 		</Unit>
-		<Unit filename="src/qtprebuild.cpp">
+		<Unit filename="src/build.cpp">
 			<Option target="default_30" />
 			<Option target="local_30" />
-			<Option target="info" />
 		</Unit>
-		<Unit filename="src/qtprebuild.h">
+		<Unit filename="src/build.h">
 			<Option target="default_30" />
 			<Option target="local_30" />
-			<Option target="info" />
 		</Unit>
-		<Unit filename="src/qtpregen.cpp">
+		<Unit filename="src/addonforqt.cpp">
 			<Option target="default_30" />
 			<Option target="local_30" />
-			<Option target="info" />
 		</Unit>
-		<Unit filename="src/qtpregen.h">
+		<Unit filename="src/addonforqt.h">
 			<Option target="default_30" />
 			<Option target="local_30" />
-			<Option target="info" />
 		</Unit>
 		<Extensions>
 			<DoxyBlocks>

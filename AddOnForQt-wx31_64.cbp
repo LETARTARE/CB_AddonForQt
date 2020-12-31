@@ -2,21 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="AddOnForQt-3.3.0-810seh-sdk250" />
+		<Option title="AddOnForQt-3.3.0-810seh-sdk260" />
 		<Option platforms="Windows;" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Option show_notes="0">
 			<notes>
-				<![CDATA[2.6.1-svn56 use cb11798-q sdk143
-...
-2.6.2-svn56 use cb11865-q sdk145
-
-2.6.2-svn57 use cb11883-q sdk146
-...
-2.7.0-svn57 use cb11883-q sdk146
-
-]]>
 			</notes>
 		</Option>
 		<Build>
@@ -31,7 +22,7 @@
 				</Linker>
 				<ExtraCommands>
 					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQt.zip manifest.xml" />
-					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQ..zip res\*" />
+					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQ.zip res\*" />
 					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQt.zip images\*" />
 					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQt.cbplugin $(TARGET_NAME)\AddOnForQt.dll  $(TARGET_NAME)\AddOnForQt.zip" />
 					<Mode after="always" />
@@ -74,10 +65,6 @@
 				<Environment>
 					<Variable name="qt" value="$(#qt5122)" />
 				</Environment>
-			</Target>
-			<Target title="infos">
-				<Option type="4" />
-				<Option compiler="gcc" />
 			</Target>
 			<Target title="local_313">
 				<Option platforms="Windows;" />
@@ -123,52 +110,12 @@
 					<Variable name="wx" value="$(#wx313_810seh)" />
 				</Environment>
 			</Target>
-			<Target title="to_cb313">
-				<Option platforms="Windows;" />
-				<Option output="$(TARGET_NAME)/QtPregen" prefix_auto="0" extension_auto="1" />
-				<Option object_output="objs/$(TARGET_NAME)" />
-				<Option type="3" />
+			<Target title="sdk">
+				<Option type="4" />
 				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-std=gnu++11" />
-					<Add option="-Wno-deprecated-declarations" />
-					<Add option="-pipe" />
-					<Add option="-mthreads" />
-					<Add option="-fmessage-length=0" />
-					<Add option="-fexceptions" />
-					<Add option="-Winvalid-pch" />
-					<Add option="-s" />
-					<Add option="-DBUILDING_PLUGIN" />
-					<Add option="-DHAVE_W32API_H" />
-					<Add option="-D__WXMSW__" />
-					<Add option="-DWXUSINGDLL" />
-					<Add option="-DcbDEBUG" />
-					<Add option="-DCB_PRECOMP" />
-					<Add option="-DWX_PRECOMP" />
-					<Add option="-DwxUSE_UNICODE" />
-				</Compiler>
-				<ResourceCompiler>
-					<Add directory="$wx/include" />
-				</ResourceCompiler>
-				<Linker>
-					<Add library="codeblocks" />
-					<Add library="wxmsw31u" />
-					<Add directory="$cb/devel31" />
-					<Add directory="$cb/devel31/share/CodeBlocks/plugins/" />
-				</Linker>
-				<ExtraCommands>
-					<Add after="zip -j9  $(TARGET_NAME)\QtPregen.zip manifest.xml" />
-					<Add after="zip -j9  $(TARGET_NAME)\QtPregen.zip res\*" />
-					<Add after="zip -j9  $(TARGET_NAME)\QtPregen.zip images\*" />
-					<Add after="zip -j9  $(TARGET_NAME)\QtPregen.cbplugin $(TARGET_NAME)\QtPregen.dll  $(TARGET_NAME)\QtPregen.zip" />
-					<Mode after="always" />
-				</ExtraCommands>
-				<Environment>
-					<Variable name="wx" value="$(#wx313_810seh)" />
-				</Environment>
 			</Target>
 			<Environment>
-				<Variable name="cb" value="$(#sdk250seh)" />
+				<Variable name="cb" value="$(#sdk260)" />
 			</Environment>
 		</Build>
 		<Compiler>
@@ -208,110 +155,43 @@
 		</Unit>
 		<Unit filename="images/dummy.txt">
 			<Option target="local_313" />
-			<Option target="to_cb313" />
-		</Unit>
-		<Unit filename="infos/Concept.his">
-			<Option target="infos" />
-		</Unit>
-		<Unit filename="infos/LISMOI.md">
-			<Option target="infos" />
-		</Unit>
-		<Unit filename="infos/README.md">
-			<Option target="infos" />
-		</Unit>
-		<Unit filename="infos/Todo.his">
-			<Option target="infos" />
-		</Unit>
-		<Unit filename="infos/addonforQt.his">
-			<Option target="infos" />
-		</Unit>
-		<Unit filename="infos/comtoPlugin.txt">
-			<Option target="infos" />
-		</Unit>
-		<Unit filename="infos/erreur.his">
-			<Option target="infos" />
-		</Unit>
-		<Unit filename="infos/qtpregen_exp.en">
-			<Option target="infos" />
-		</Unit>
-		<Unit filename="infos/qtpregen_exp.fr">
-			<Option target="infos" />
-		</Unit>
-		<Unit filename="infos/sdk.his">
-			<Option target="infos" />
 		</Unit>
 		<Unit filename="manifest.xml">
-			<Option target="to_cb313" />
 			<Option target="local_313" />
-		</Unit>
-		<Unit filename="patch/cb-16-01-evPREGEN-0.8.5.patch">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="patch/svn10253-evPREGEN-0.8.5.patch">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="patch/svn10376-evPREGEN-0.8.5.patch">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="patch/svn10474-evPREGEN-0.8.5.patch">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="patch/svn10528-evPREGEN-0.8.5.patch">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="patch/svn10600-evPREGEN-0.8.5.patch">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="patch/svn10703-evPREGEN-0.8.5.patch">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="patch/svn10922-evPREGEN-0.8.6.patch">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="patch/svn11021-evPREGEN-0.8.6.patch">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="patch/svn11021-evPREGEN-0.8.7.patch">
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="res/dummy.xrc">
 			<Option target="local_313" />
-			<Option target="to_cb313" />
+		</Unit>
+		<Unit filename="sdk/sdk.his">
+			<Option target="sdk" />
 		</Unit>
 		<Unit filename="src/addonforqt.cpp">
 			<Option target="local_314" />
 			<Option target="local_313" />
-			<Option target="to_cb313" />
 		</Unit>
 		<Unit filename="src/addonforqt.h">
 			<Option target="local_314" />
 			<Option target="local_313" />
-			<Option target="to_cb313" />
 		</Unit>
 		<Unit filename="src/build.cpp">
 			<Option target="local_314" />
 			<Option target="local_313" />
-			<Option target="to_cb313" />
 		</Unit>
 		<Unit filename="src/build.h">
 			<Option target="local_314" />
 			<Option target="local_313" />
-			<Option target="to_cb313" />
 		</Unit>
 		<Unit filename="src/defines.h">
-			<Option target="to_cb313" />
 			<Option target="local_313" />
 			<Option target="local_314" />
 		</Unit>
 		<Unit filename="src/pre.cpp">
 			<Option target="local_314" />
 			<Option target="local_313" />
-			<Option target="to_cb313" />
 		</Unit>
 		<Unit filename="src/pre.h">
 			<Option target="local_314" />
 			<Option target="local_313" />
-			<Option target="to_cb313" />
 		</Unit>
 		<Extensions>
 			<envvars set="default" />
