@@ -1,10 +1,10 @@
-# AddOnForQt-3.3 January 01, 2020 (Win32-64, Linux-64)
+# AddOnForQt-3.3 January 03, 2020 (Win32-64, Linux-64)
 
 Plugin to compile QT applications with 'Code::Blocks, but without 'Code:Block' patch'
 
 **Versions for all 'Code::Block, sdk >= 2.4.0, svn >= 12142'**
 
-**Last: sdk = 2.6.0, svn = 12252 -> ...**
+**Last: sdk = 2.6.0, svn = 12271 -> ...**
 
 It uses a log 'Prebuild log' for all posts plugin.
 

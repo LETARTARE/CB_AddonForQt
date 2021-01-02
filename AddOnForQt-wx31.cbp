@@ -2,12 +2,14 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="AddOnForQt-3.3" />
+		<Option title="AddOnForQt-3.3-sdk260" />
 		<Option platforms="Windows;" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Option show_notes="0">
 			<notes>
+				<![CDATA[
+]]>
 			</notes>
 		</Option>
 		<Build>
@@ -55,50 +57,6 @@
 					<Variable name="wx" value="$(#wx314_810dw)" />
 				</Environment>
 			</Target>
-			<Target title="local_313">
-				<Option platforms="Windows;" />
-				<Option output="$(TARGET_NAME)/AddOnForQt" prefix_auto="0" extension_auto="1" />
-				<Option object_output="objs/$(TARGET_NAME)" />
-				<Option type="3" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-std=gnu++11" />
-					<Add option="-Wno-deprecated-declarations" />
-					<Add option="-pipe" />
-					<Add option="-mthreads" />
-					<Add option="-fmessage-length=0" />
-					<Add option="-fexceptions" />
-					<Add option="-Winvalid-pch" />
-					<Add option="-s" />
-					<Add option="-DBUILDING_PLUGIN" />
-					<Add option="-DHAVE_W32API_H" />
-					<Add option="-D__WXMSW__" />
-					<Add option="-DWXUSINGDLL" />
-					<Add option="-DcbDEBUG" />
-					<Add option="-DCB_PRECOMP" />
-					<Add option="-DWX_PRECOMP" />
-					<Add option="-DwxUSE_UNICODE" />
-				</Compiler>
-				<ResourceCompiler>
-					<Add directory="$wx/include" />
-				</ResourceCompiler>
-				<Linker>
-					<Add library="codeblocks" />
-					<Add library="wxmsw31u" />
-					<Add directory="$cb/devel31" />
-					<Add directory="$cb/devel31/share/CodeBlocks/plugins/" />
-				</Linker>
-				<ExtraCommands>
-					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQt.zip manifest.xml" />
-					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQt.zip res\*" />
-					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQt.zip images\*" />
-					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQtcbplugin $(TARGET_NAME)\AddOnForQt.dll  $(TARGET_NAME)\AddOnForQt.zip" />
-					<Mode after="always" />
-				</ExtraCommands>
-				<Environment>
-					<Variable name="wx" value="$(#wx313_810dw)" />
-				</Environment>
-			</Target>
 			<Target title="cbqt5">
 				<Option output="BuildCB/cbq5.exe" prefix_auto="1" extension_auto="0" />
 				<Option object_output="BuildCB/.objs" />
@@ -134,7 +92,18 @@
 					<Variable name="qt" value="$(#qt597)" />
 				</Environment>
 			</Target>
+			<Target title="doc">
+				<Option type="4" />
+				<Option compiler="gcc" />
+			</Target>
+			<Environment>
+				<Variable name="cb" value="$(#sdk260dw)" />
+			</Environment>
+		</Build>
 		<Compiler>
+			<Add option="-std=gnu++11" />
+			<Add option="-fPIC" />
+			<Add option="-m32" />
 			<Add directory="src" />
 			<Add directory="$cb/include" />
 			<Add directory="$cb/include/tinyxml" />
@@ -145,6 +114,7 @@
 			<Add directory="$wx/lib/gcc_dll/mswu" />
 		</Compiler>
 		<Linker>
+			<Add option="-m32" />
 			<Add directory="$wx/lib/gcc_dll" />
 		</Linker>
 		<Unit filename="CodeBlocks/templates/wizard/cbqt5/files/main.cpp">
@@ -168,46 +138,44 @@
 		<Unit filename="adding/cbqt5/moc_qtest.cpp">
 			<Option target="cbqt5" />
 		</Unit>
+		<Unit filename="doc/Todo.his">
+			<Option target="doc" />
+		</Unit>
+		<Unit filename="doc/addonforQt.his">
+			<Option target="doc" />
+		</Unit>
+		<Unit filename="doc/sdk.his">
+			<Option target="doc" />
+		</Unit>
 		<Unit filename="images/dummy.txt">
-			<Option target="local_313" />
 			<Option target="local_314" />
 		</Unit>
 		<Unit filename="manifest.xml">
-			<Option target="local_313" />
 			<Option target="local_314" />
 		</Unit>
 		<Unit filename="res/dummy.xrc">
-			<Option target="local_313" />
 			<Option target="local_314" />
 		</Unit>
 		<Unit filename="src/addonforqt.cpp">
 			<Option target="local_314" />
-			<Option target="local_313" />
 		</Unit>
 		<Unit filename="src/addonforqt.h">
 			<Option target="local_314" />
-			<Option target="local_313" />
 		</Unit>
 		<Unit filename="src/build.cpp">
 			<Option target="local_314" />
-			<Option target="local_313" />
 		</Unit>
 		<Unit filename="src/build.h">
 			<Option target="local_314" />
-			<Option target="local_313" />
 		</Unit>
 		<Unit filename="src/defines.h">
-			<Option target="local_313" />
 			<Option target="local_314" />
 		</Unit>
 		<Unit filename="src/pre.cpp">
 			<Option target="local_314" />
-			<Option target="local_313" />
-			<Option target="to_cb313" />
 		</Unit>
 		<Unit filename="src/pre.h">
 			<Option target="local_314" />
-			<Option target="local_313" />
 		</Unit>
 		<Extensions>
 			<envvars set="default" />

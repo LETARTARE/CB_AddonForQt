@@ -2,51 +2,19 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="qtPregen-3.1-0-sdk260-(Unix)" />
+		<Option title="AddOnForCb-3.3-0-sdk260-(Unix)" />
 		<Option platforms="Unix;" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option show_notes="0">
-			<notes>
-			</notes>
-		</Option>
 		<Build>
-			<Target title="default_30">
-				<Option platforms="Unix;" />
-				<Option output="$(TARGET_NAME)/QtPregen" prefix_auto="0" extension_auto="1" />
-				<Option object_output=".objs/$(TARGET_NAME)/" />
-				<Option type="3" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="`wx-config --cflags  --version=3.0`" />
-					<Add directory="$cb/include" />
-					<Add directory="$cb/include/tinyxml" />
-					<Add directory="$cb/sdk/wxscintilla/include" />
-					<Add directory="$cb/plugins/codecompletion" />
-				</Compiler>
-				<Linker>
-					<Add option="`wx-config --libs  --version=3.0`" />
-					<Add library="codeblocks" />
-					<Add directory="$cb/devel30" />
-				</Linker>
-				<ExtraCommands>
-					<Add after="zip -j9 $(TARGET_NAME)/QtPregen.zip manifest.xml" />
-					<Add after="zip -j9 $(TARGET_NAME)/QtPregen.zip res/*" />
-					<Add after="zip -j9 $(TARGET_NAME)/QtPregen.zip images/*" />
-					<Add after="zip -j9 $(TARGET_NAME)/QtPregen.cbplugin $(TARGET_NAME)/QtPregen.so $(TARGET_NAME)/QtPregen.zip" />
-					<Mode after="always" />
-				</ExtraCommands>
-				<Environment>
-					<Variable name="cb" value="$(#sdk260)" />
-				</Environment>
-			</Target>
 			<Target title="local_30">
 				<Option platforms="Unix;" />
-				<Option output="$(TARGET_NAME)/QtPregen" prefix_auto="0" extension_auto="1" />
+				<Option output="$(TARGET_NAME)/AddOnForQt" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/$(TARGET_NAME)/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-Wall" />
 					<Add option="`wx-config --cflags  --version=3.0`" />
 					<Add directory="src" />
 					<Add directory="$cb/include" />
@@ -60,10 +28,10 @@
 					<Add directory="$cb/devel30" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="zip -j9 $(TARGET_NAME)/QtPregen.zip manifest.xml" />
-					<Add after="zip -j9 $(TARGET_NAME)/QtPregen.zip res/*" />
-					<Add after="zip -j9 $(TARGET_NAME)/QtPregen.zip images/*" />
-					<Add after="zip -j9 $(TARGET_NAME)/QtPregen.cbplugin $(TARGET_NAME)/QtPregen.so $(TARGET_NAME)/QtPregen.zip" />
+					<Add after="zip -j9 $(TARGET_NAME)/AddOnForQt.zip manifest.xml" />
+					<Add after="zip -j9 $(TARGET_NAME)/AddOnForQt.zip res/*" />
+					<Add after="zip -j9 $(TARGET_NAME)/AddOnForQt.zip images/*" />
+					<Add after="zip -j9 $(TARGET_NAME)/AddOnForQt.cbplugin $(TARGET_NAME)/AddOnForQt.so $(TARGET_NAME)/AddOnForQt.zip" />
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
@@ -72,22 +40,15 @@
 			</Target>
 			<Target title="cbqt5">
 				<Option type="4" />
-				<Option compiler="null" />
+				<Option compiler="gcc" />
 			</Target>
-			<Target title="patchs">
+			<Target title="doc">
 				<Option type="4" />
-				<Option compiler="null" />
-			</Target>
-			<Target title="info">
-				<Option platforms="Unix;" />
-				<Option output="$(TARGET_NAME)/QtPregen" prefix_auto="0" extension_auto="1" />
-				<Option object_output=".objs/$(TARGET_NAME)/" />
-				<Option type="3" />
 				<Option compiler="null" />
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++11" />
+			<Add option="-std=gnu++11" />
 			<Add option="-fPIC" />
 			<Add option="-m64" />
 			<Add option="-D__WXGTK__" />
@@ -97,44 +58,40 @@
 			<Add option="-m64" />
 			<Add option="-Wl,--no-undefined" />
 		</Linker>
+		<Unit filename="doc/addonforQt.his">
+			<Option target="doc" />
+		</Unit>
+		<Unit filename="doc/sdk.his">
+			<Option target="doc" />
+		</Unit>
 		<Unit filename="images/dummy.txt">
-			<Option target="default_30" />
 			<Option target="local_30" />
 		</Unit>
 		<Unit filename="manifest.xml">
-			<Option target="default_30" />
 			<Option target="local_30" />
 		</Unit>
 		<Unit filename="res/dummy.xrc">
-			<Option target="default_30" />
-			<Option target="local_30" />
-		</Unit>
-		<Unit filename="src/defines.h">
-			<Option target="default_30" />
-			<Option target="local_30" />
-		</Unit>
-		<Unit filename="src/pre.cpp">
-			<Option target="default_30" />
-			<Option target="local_30" />
-		</Unit>
-		<Unit filename="src/pre.h">
-			<Option target="default_30" />
-			<Option target="local_30" />
-		</Unit>
-		<Unit filename="src/build.cpp">
-			<Option target="default_30" />
-			<Option target="local_30" />
-		</Unit>
-		<Unit filename="src/build.h">
-			<Option target="default_30" />
 			<Option target="local_30" />
 		</Unit>
 		<Unit filename="src/addonforqt.cpp">
-			<Option target="default_30" />
 			<Option target="local_30" />
 		</Unit>
 		<Unit filename="src/addonforqt.h">
-			<Option target="default_30" />
+			<Option target="local_30" />
+		</Unit>
+		<Unit filename="src/build.cpp">
+			<Option target="local_30" />
+		</Unit>
+		<Unit filename="src/build.h">
+			<Option target="local_30" />
+		</Unit>
+		<Unit filename="src/defines.h">
+			<Option target="local_30" />
+		</Unit>
+		<Unit filename="src/pre.cpp">
+			<Option target="local_30" />
+		</Unit>
+		<Unit filename="src/pre.h">
 			<Option target="local_30" />
 		</Unit>
 		<Extensions>
