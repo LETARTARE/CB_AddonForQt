@@ -1,6 +1,6 @@
-# AddOnForQt-3.3 January 03, 2020 (Win32-64, Linux-64)
+# AddOnForQt-3.3 January 04, 2020 (Win32-64, Linux-64)
 
-Plugin to compile QT applications with 'Code::Blocks, but without 'Code:Block' patch'
+Plugin to compile QT applications with 'Code::Blocks', but without 'Code:Block' patch.
 
 **Versions for all 'Code::Block, sdk >= 2.4.0, svn >= 12142'**
 
@@ -43,12 +43,12 @@ It uses a log 'Prebuild log' for all posts plugin.
 	4- a directory 'CodeBlocks' containing wizards and templates files 'cbqt5'
 
 
-4- Installation to 'Code::Blocks 12281' (sdk-2.6.0)
+4- Installation to 'Code::Blocks 12286' (sdk-2.6.0)
 
 	1- first install wizards 'cbqt5',
-	2- then with 'C::B-12281' compile and install the plugin 'AddOnForQt' 
+	2- then with 'C::B-12286' compile and install the plugin 'AddOnForQt' 
         : change the local variable 'cb = $(#sdk260)' in agreement with your 
-        global 'sdk260' which should identify sources of 'Code::Blocks-sdk260' (= C:B-12252 )
+        global 'sdk260' which should identify sources of 'Code::Blocks-sdk260' (>= C:B-12271 )
 
 5- Using
 

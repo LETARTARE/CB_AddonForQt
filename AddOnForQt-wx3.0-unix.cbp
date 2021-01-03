@@ -39,8 +39,30 @@
 				</Environment>
 			</Target>
 			<Target title="cbqt5">
-				<Option type="4" />
+				<Option output="buildCB/cbqt5" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="buildCB" />
+				<Option object_output="/home/louis/Travail/SVN_COMPILE/Cb/Gcc750/Extensions/AddOnForQt/sdk260/3.3/.objs" />
+				<Option type="0" />
 				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-m64" />
+					<Add directory="$qt/include" />
+					<Add directory="$t/include/QWidgets" />
+					<Add directory="$qt/include/QtCore" />
+					<Add directory="$qt/include/QtGui" />
+					<Add directory="adding/cbqt5/" />
+				</Compiler>
+				<Linker>
+					<Add option="-m64" />
+					<Add library="Qt5Widgets" />
+					<Add library="Qt5Core" />
+					<Add library="Qt5Gui" />
+					<Add directory="$qt/lib" />
+				</Linker>
+				<Environment>
+					<Variable name="qt" value="$(#qt5128)" />
+				</Environment>
 			</Target>
 			<Target title="doc">
 				<Option type="4" />
@@ -58,6 +80,18 @@
 			<Add option="-m64" />
 			<Add option="-Wl,--no-undefined" />
 		</Linker>
+		<Unit filename="CodeBlocks/templates/wizard/cbqt5/files/main.cpp">
+			<Option target="cbqt5" />
+		</Unit>
+		<Unit filename="CodeBlocks/templates/wizard/cbqt5/files/qtest.cpp">
+			<Option target="cbqt5" />
+		</Unit>
+		<Unit filename="CodeBlocks/templates/wizard/cbqt5/files/qtest.h">
+			<Option target="cbqt5" />
+		</Unit>
+		<Unit filename="adding/cbqt5/moc_qtest.cpp">
+			<Option target="cbqt5" />
+		</Unit>
 		<Unit filename="doc/addonforQt.his">
 			<Option target="doc" />
 		</Unit>
