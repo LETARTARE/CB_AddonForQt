@@ -1,4 +1,4 @@
-# AddOnForQt-3.3 January 04, 2020 (Win32-64, Linux-64)
+# AddOnForQt-3.3 January 04, 2021 (Win32-64, Linux-64)
 
 Plugin to compile QT applications with 'Code::Blocks', but without 'Code:Block' patch.
 
