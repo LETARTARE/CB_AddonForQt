@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-10-17
- * Modified:  2020-10-05
+ * Modified:  2020-12-31
  * Copyright: LETARTARE
  * License:   GPL
  **************************************************************/
@@ -604,7 +604,7 @@ printD("=> Begin 'Build::findTargetQtexe(...)");
 //	Mes = "m_Uexe = " + quote(m_Uexe) ;  printWarn(Mes);
 //	Mes = "m_Rexe = " + quote(m_Rexe) ;  printWarn(Mes);
 //	Mes = "m_Lexe = " + quote(m_Lexe) ;  printWarn(Mes);
-    bool Findqtexe = true, dquote = false;
+    bool Findqtexe = true, bdquote = false;
 	bool FindMexe  = wxFileExists(m_Mexe) ;
 	bool FindUexe  = wxFileExists(m_Uexe) ;
 	bool FindRexe  = wxFileExists(m_Rexe);
@@ -613,27 +613,27 @@ printD("=> Begin 'Build::findTargetQtexe(...)");
     {
 		Mes = _("Could not query the executable Qt") +  quote(m_Mexe)  ;
 		Findqtexe = false;
-		dquote = m_Mexe.find(Dquote) != -1 ;
+		bdquote = m_Mexe.find(Dquote);// != -1 ;
     }
     else
     if (!FindUexe)
     {
         Mes = _("Could not query the executable Qt") +  quote(m_Uexe)  ;
-        dquote = m_Mexe.find(Dquote);
+        bdquote = m_Mexe.find(Dquote);
         Findqtexe = false;
     }
     else
     if (!FindRexe)
     {
         Mes = _("Could not query the executable Qt") +  quote(m_Rexe)  ;
-        dquote = m_Rexe.find(Dquote);
+        bdquote = m_Rexe.find(Dquote);
         Findqtexe = false;
     }
     else
     if (!FindLexe)
     {
         Mes = _("Could not query the executable Qt") +  quote(m_Lexe)  ;
-        dquote = m_Lexe.find(Dquote);
+        bdquote = m_Lexe.find(Dquote);
         Findqtexe = false;
     }
 // error on path ?
@@ -642,7 +642,7 @@ printD("=> Begin 'Build::findTargetQtexe(...)");
 		Mes += Lf + _("Cannot continue") ;
 		Mes += ", " ;
 		Mes += _("Verify your installation Qt");
-		if (dquote)
+		if (bdquote)
 		{
             Mes += " (" ;
             Mes += _("!! you have a quote in path !!");
@@ -1201,6 +1201,7 @@ bool Build::unregisterCreatorFile(wxString & _file)
 
 	return ok;
 }
+
 ///-----------------------------------------------------------------------------
 ///	To unregister project file(s) (complements) in 'Pregen'
 ///		format 'm_Registered' ->  'dircomplement\\moc_xxx.cpp'  (m_dirPreBuild\\debug\\moc_xxx.cpp)
@@ -1212,11 +1213,12 @@ bool Build::unregisterCreatorFile(wxString & _file)
 ///
 ///	Calls to :
 ///		1. Pre::nameCreated(const wxString& _file):1,
-/// 	2. Build::removeComplementToDisk(const wxString & _filename, bool _withobject):1
+// 	2. Build::removeComplementToDisk(const wxString & _filename, bool _withobject = false):1,
 ///
+
 bool Build::unregisterComplementFile(wxString & _file)
 {
-printD("=> Begin 'Build::unregisterComplementFile(" + _file + ", " + strBool(_first) );
+printD("=> Begin 'Build::unregisterComplementFile(" + _file + ")");
 
 // copy file, absolute project path
 	wxString filename = _file, pathproject = m_pProject->GetCommonTopLevelPath();
@@ -1276,8 +1278,6 @@ printD("	<= End Build::unregisterComplementFile(...) => " + strBool(ok) );
 ///		1. Build::removeComplementToDisk(const wxString & _filename,
 ///											  bool _withobject):1,
 ///
-//bool Build::unregisterAllComplementsToCB(const wxString & _oldTargetName,
-//											  cbProject * _pProject, bool _first)
 bool Build::unregisterAllComplementsToCB(const wxString & _oldTargetName,
 											  cbProject * _pProject)
 {
@@ -1365,12 +1365,11 @@ printD("	<= End 	Build::unregisterAllComplementsToCB(...) => " + strBool(ok) );
 ///		1. Build::unregisterComplementFile(const wxString & _file, bool _creator, bool _first):1,
 ///		2. Build::unregisterAllComplementsToCB(const wxString & _oldTargetName, cbProject * _project, bool _first):1,
 
-//bool Build::removeComplementToDisk(const wxString & _filename, bool _first, bool _withobject)
 bool Build::removeComplementToDisk(const wxString & _filename, bool _withobject)
 {
 Mes = "=> Begin 'Build::removeComplementToDisk(" ;
 Mes += _filename + "," + strBool(_withobject) ;
-Mes += "'";
+Mes += ")";
 printD(Mes);
 
 // complement exists

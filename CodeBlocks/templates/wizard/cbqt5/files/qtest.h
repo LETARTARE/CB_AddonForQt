@@ -18,7 +18,7 @@ class Qtest : public QWidget
     	 *  @param parent : widget parent
     	 *  @param flags : widget flags
     	 */
-		Qtest ( QWidget *parent = 0, Qt::WindowFlags flags = 0 );
+		Qtest ( QWidget *parent = 0, Qt::WindowFlags flags = Qt::WindowFlags() );
 		/** \brief Test application destructor
     	 */
 		virtual ~Qtest ();

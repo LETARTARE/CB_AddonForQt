@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="AddOnForCb-3.3-0-sdk260-(Unix)" />
+		<Option title="AddOnForCb-3.4.0-sdk2160-(Unix)" />
 		<Option platforms="Unix;" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="local_30">
+			<Target title="local_305">
 				<Option platforms="Unix;" />
 				<Option output="$(TARGET_NAME)/AddOnForQt" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/$(TARGET_NAME)/" />
@@ -35,20 +35,53 @@
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="cb" value="$(#sdk260)" />
+					<Variable name="cb" value="$(#sdk2160)" />
+				</Environment>
+			</Target>
+			<Target title="local_303">
+				<Option platforms="Unix;" />
+				<Option output="$(TARGET_NAME)/AddOnForQt" prefix_auto="0" extension_auto="1" />
+				<Option object_output=".objs/$(TARGET_NAME)/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="`wx-config --cflags  --version=3.0`" />
+					<Add directory="src" />
+					<Add directory="$cb/include" />
+					<Add directory="$cb/include/tinyxml" />
+					<Add directory="$cb/sdk/wxscintilla/include" />
+					<Add directory="$cb/plugins/codecompletion" />
+				</Compiler>
+				<Linker>
+					<Add option="`wx-config --libs  --version=3.0`" />
+					<Add library="codeblocks" />
+					<Add directory="$cb/devel30" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="zip -j9 $(TARGET_NAME)/AddOnForQt.zip manifest.xml" />
+					<Add after="zip -j9 $(TARGET_NAME)/AddOnForQt.zip res/*" />
+					<Add after="zip -j9 $(TARGET_NAME)/AddOnForQt.zip images/*" />
+					<Add after="zip -j9 $(TARGET_NAME)/AddOnForQt.cbplugin $(TARGET_NAME)/AddOnForQt.so $(TARGET_NAME)/AddOnForQt.zip" />
+					<Mode after="always" />
+				</ExtraCommands>
+				<Environment>
+					<Variable name="cb" value="$(#sdk2160)" />
 				</Environment>
 			</Target>
 			<Target title="cbqt5">
-				<Option output="buildCB/cbqt5" prefix_auto="0" extension_auto="0" />
-				<Option working_dir="buildCB" />
-				<Option object_output="/home/louis/Travail/SVN_COMPILE/Cb/Gcc750/Extensions/AddOnForQt/sdk260/3.3/.objs" />
+				<Option platforms="Unix;" />
+				<Option output="$build/cbqt5" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="$build/" />
+				<Option object_output="$build/.objs/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-Wall" />
+					<Add option="-std=c11" />
 					<Add option="-m64" />
 					<Add directory="$qt/include" />
-					<Add directory="$t/include/QWidgets" />
+					<Add directory="$qt/include/QtWidgets" />
 					<Add directory="$qt/include/QtCore" />
 					<Add directory="$qt/include/QtGui" />
 					<Add directory="adding/cbqt5/" />
@@ -61,7 +94,8 @@
 					<Add directory="$qt/lib" />
 				</Linker>
 				<Environment>
-					<Variable name="qt" value="$(#qt5128)" />
+					<Variable name="build" value="buildCBLin" />
+					<Variable name="qt" value="$(#qt5152)" />
 				</Environment>
 			</Target>
 			<Target title="doc">
@@ -90,6 +124,7 @@
 			<Option target="cbqt5" />
 		</Unit>
 		<Unit filename="adding/cbqt5/moc_qtest.cpp">
+			<Option weight="1" />
 			<Option target="cbqt5" />
 		</Unit>
 		<Unit filename="doc/addonforQt.his">
@@ -99,34 +134,44 @@
 			<Option target="doc" />
 		</Unit>
 		<Unit filename="images/dummy.txt">
-			<Option target="local_30" />
+			<Option target="local_303" />
+			<Option target="local_305" />
 		</Unit>
 		<Unit filename="manifest.xml">
-			<Option target="local_30" />
+			<Option target="local_303" />
+			<Option target="local_305" />
 		</Unit>
 		<Unit filename="res/dummy.xrc">
-			<Option target="local_30" />
+			<Option target="local_303" />
+			<Option target="local_305" />
 		</Unit>
 		<Unit filename="src/addonforqt.cpp">
-			<Option target="local_30" />
+			<Option target="local_303" />
+			<Option target="local_305" />
 		</Unit>
 		<Unit filename="src/addonforqt.h">
-			<Option target="local_30" />
+			<Option target="local_303" />
+			<Option target="local_305" />
 		</Unit>
 		<Unit filename="src/build.cpp">
-			<Option target="local_30" />
+			<Option target="local_303" />
+			<Option target="local_305" />
 		</Unit>
 		<Unit filename="src/build.h">
-			<Option target="local_30" />
+			<Option target="local_303" />
+			<Option target="local_305" />
 		</Unit>
 		<Unit filename="src/defines.h">
-			<Option target="local_30" />
+			<Option target="local_303" />
+			<Option target="local_305" />
 		</Unit>
 		<Unit filename="src/pre.cpp">
-			<Option target="local_30" />
+			<Option target="local_303" />
+			<Option target="local_305" />
 		</Unit>
 		<Unit filename="src/pre.h">
-			<Option target="local_30" />
+			<Option target="local_303" />
+			<Option target="local_305" />
 		</Unit>
 		<Extensions>
 			<DoxyBlocks>

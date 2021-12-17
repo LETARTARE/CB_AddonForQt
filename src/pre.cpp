@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-02-27
- * Modified:  2020-10-05
+ * Modified:  2021-12-01
  * Copyright: LETARTARE
  * License:   GPL
  **************************************************************/
@@ -395,7 +395,7 @@ void Pre::setBuildTarget(ProjectBuildTarget * _pBuildTarget)
 	/// NO for a virtaual target
 		m_dirObjects =  m_pBuildTarget->GetObjectOutput();
         m_pMam->ReplaceMacros(m_dirObjects);
-        if (!m_dirObjects.Last() != Slash )
+        if (!(m_dirObjects.Last() != Slash) )
 				m_dirObjects += Slash;
 	}
 	else
@@ -1104,7 +1104,8 @@ printD("=> Begin 'Pre::filenameOk(" + _namefile + ")'" );
 	size_t ncar = illegal.Len();
 	wxString car;
 /// all illegal characters
-	for (int u = 0; u < ncar; u++)
+	//for (int u = 0; u < ncar; u++)
+	for (uint32_t u = 0; u < ncar; u++)
 	{
 		car = illegal.Mid(u, 1);
 		if (_namefile.Find(car) != 1)

@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="AddOnForQt-3.3.0-810seh-sdk260" />
+		<Option title="AddOnForQt-3.4.0-810seh-315-sdk2160" />
 		<Option platforms="Windows;" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="local_314">
+			<Target title="local_315">
 				<Option output="$(TARGET_NAME)/AddOnForQt" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -30,14 +30,14 @@
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="wx" value="$(#wx314_810seh)" />
+					<Variable name="wx" value="$(#wx315_810seh)" />
 				</Environment>
 			</Target>
 			<Target title="cbqt5">
-				<Option output="BuildCB/cbq5.exe" prefix_auto="1" extension_auto="0" />
-				<Option object_output="BuildCB/.objs" />
+				<Option output="$build/cbq5.exe" prefix_auto="1" extension_auto="0" />
+				<Option object_output="$build/.objs" />
 				<Option type="1" />
-				<Option compiler="gnu_gcc_compiler_730_qt5122-64" />
+				<Option compiler="gnu_gcc_compiler_810_qt515-64" />
 				<Option use_console_runner="0" />
 				<Option projectCompilerOptionsRelation="1" />
 				<Option projectLinkerOptionsRelation="1" />
@@ -65,7 +65,8 @@
 					<Add directory="$qt/lib" />
 				</Linker>
 				<Environment>
-					<Variable name="qt" value="$(#qt5122)" />
+					<Variable name="build" value="buildCBWin" />
+					<Variable name="qt" value="$(#qt5152)" />
 				</Environment>
 			</Target>
 			<Target title="doc">
@@ -77,7 +78,7 @@
 				<Option compiler="null" />
 			</Target>
 			<Environment>
-				<Variable name="cb" value="$(#sdk260)" />
+				<Variable name="cb" value="$(#sdk2160)" />
 			</Environment>
 		</Build>
 		<Compiler>
@@ -133,32 +134,27 @@
 		<Unit filename="res/dummy.xrc">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="sdk/sdk.his">
-			<Option target="sdk" />
-		</Unit>
 		<Unit filename="src/addonforqt.cpp">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="src/addonforqt.h">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="src/build.cpp">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="src/build.h">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="src/defines.h">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="src/pre.cpp">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="src/pre.h">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
-		<Extensions>
-			<envvars set="default" />
-		</Extensions>
+		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

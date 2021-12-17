@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin '
  * Author:    LETARTARE
  * Created:   2015-10-17
- * Modified:  2020-10-05
+ * Modified:  2021-12-15
  * Copyright: LETARTARE
  * License:   GPL
  **************************************************************/
@@ -311,6 +311,18 @@ protected:
     void OnProjectFileRemoved(CodeBlocksEvent& _event);
     void OnEndFileRemoved(CodeBlocksEvent& _event);
 
+
+    /** \brief This method called by 'cbEVT_WORKSPACE_CLOSING_BEGIN' for
+      * no analyse by AddOnForQt
+      * @param _event Contains the event which call this method
+      */
+    void OnWorkspaceClosed(CodeBlocksEvent& _event);
+     /** \brief This method called by 'cbEVT_WORKSPACE_LOADING_COMPLETE' for
+      * allows analyse by AddOnForQt
+      * @param _event Contains the event which call this method
+      */
+    void OnWorkspaceComplete(CodeBlocksEvent& _event);
+
     /** \brief This method called by 'cbEVT_COMPILER_FINISHED' for
       *   1. abort pre-build all the additional files ...
       *   2. abort pre-compile one additional file ...
@@ -368,10 +380,13 @@ protected:
     /**  \brief a pseudo event
      */
     bool m_pseudoEvent = false;
-    /**  \brief app init done
+    /**  \brief app init done, all plugins loading
       */
     bool m_initDone = false;
-    /** \brief
+    /**  \brief no parsing while workspace changed
+      */
+    bool m_noParsing = true;
+    /** \brief state build running
       */
     bool m_isRunning = false ;
 
@@ -402,6 +417,11 @@ protected:
       * @param _idAbort : Abort identificator
      */
     void compilingStop(int _idAbort);
+
+    /** \brief Give a string for a 'cbFutureBuild'
+      * @param _domake : a 'cbFurureBuild'
+     */
+    wxString domakeToStr(const cbFutureBuild&  _domake);
 
   private:
 

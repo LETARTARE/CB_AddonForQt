@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-10-17
- * Modified:  2020-10-06
+ * Modified:  2021-12-17
  * Copyright: LETARTARE
  * License:   GPL
  *************************************************************
@@ -134,10 +134,10 @@ void AddOnForQt::OnAttach()
 		new cbEventFunctor<AddOnForQt, CodeBlocksEvent>(this, &AddOnForQt::OnNewProject);
 	pm->RegisterEventSink(cbEVT_PROJECT_NEW, functorNewProject);
 
-//7- handle build stop
+///7- handle build stop
 	cbEventFunctor<AddOnForQt, CodeBlocksEvent>* functorAbortGen =
 		new cbEventFunctor<AddOnForQt, CodeBlocksEvent>(this, &AddOnForQt::OnAbortAdding);
-	//pm->RegisterEventSink(cbEVT_COMPILER_FINISHED, functorAbortGen);
+	///pm->RegisterEventSink(cbEVT_COMPILER_FINISHED, functorAbortGen);
 
 //8- before the first file was removed !
 	cbEventFunctor<AddOnForQt, CodeBlocksEvent>* functorBeginFileRemoved =
@@ -152,10 +152,20 @@ void AddOnForQt::OnAttach()
 		new cbEventFunctor<AddOnForQt, CodeBlocksEvent>(this, &AddOnForQt::OnEndFileRemoved);
 	pm->RegisterEventSink(cbEVT_PROJECT_END_REMOVE_FILES, functorEndFileRemoved);
 
-//11- a project is renommed :  !! DISABLED !!
+//11- a current workspace is begin closing :
+	cbEventFunctor<AddOnForQt, CodeBlocksEvent>* functorWorkspaceCLosed =
+		new cbEventFunctor<AddOnForQt, CodeBlocksEvent>(this, &AddOnForQt::OnWorkspaceClosed);
+	pm->RegisterEventSink(cbEVT_WORKSPACE_CLOSING_BEGIN, functorWorkspaceCLosed);
+
+//11.2- a new workspace is complete loading :
+	cbEventFunctor<AddOnForQt, CodeBlocksEvent>* functorWorkspaceComplete =
+		new cbEventFunctor<AddOnForQt, CodeBlocksEvent>(this, &AddOnForQt::OnWorkspaceComplete);
+	pm->RegisterEventSink(cbEVT_WORKSPACE_LOADING_COMPLETE, functorWorkspaceComplete);
+
+///11- a project is renommed :  !! DISABLED !!
 	cbEventFunctor<AddOnForQt, CodeBlocksEvent>* functorRenameProject =
 		new cbEventFunctor<AddOnForQt, CodeBlocksEvent>(this, &AddOnForQt::OnRenameProjectOrTarget);
-	//pm->RegisterEventSink(cbEVT_PROJECT_RENAMED, functorRenameProject);
+	///pm->RegisterEventSink(cbEVT_PROJECT_RENAMED, functorRenameProject);
 
 //12- a target is renommed
 	cbEventFunctor<AddOnForQt, CodeBlocksEvent>* functorRenameTarget =
@@ -425,6 +435,16 @@ printD("=> Begin 'AddOnForQt::enableAllMenus(" + strInt(_state) + ")'" );
 			case fbActionRebuildWS:
 			//	m_buildMenu->Enable(idActionStop,  true);
 				break;
+    /// TODO ...
+            case fbWait:
+
+                break;
+            case fbWaitCleanWS:
+
+                break;
+            case fbActionCleanWS:
+
+                break;
 		}
 	}
 
@@ -952,7 +972,7 @@ printD("=> Begin 'AddOnForQt::doComplements(" + strInt(_domake) + ")'" );
 	if (!m_isQtProject) return false;
 
 	if (_domake < fbNone) return false;
-//print("domake :" + strInt(_domake) ) ;
+// print("domake :" + domakeToStr(_domake) ) ;
 
 	if (!m_isQtActiveTarget )	return false;
 
@@ -960,7 +980,7 @@ printD("=> Begin 'AddOnForQt::doComplements(" + strInt(_domake) + ")'" );
 
 /// DEBUG
 //* ********************************************************
-	m_pBuild->beginDuration("doComplements(...)");
+//  m_pBuild->beginDuration("doComplements(...)");
 //* ********************************************************
 	Mes = NamePlugin + "::doComplements(cbFutureBuild  _domake, ) -> ";
 // just project created ?
@@ -970,6 +990,10 @@ printD("=> Begin 'AddOnForQt::doComplements(" + strInt(_domake) + ")'" );
 	{
 		Mes += _("no target supplied !!"); printError(Mes);
 		return false;
+	}
+	else
+	{
+        Mes =  Lf + domakeToStr(_domake) + quote("::" + nametarget) ; print(Mes);
 	}
 	// allright !
 	bool valid = true;
@@ -993,7 +1017,7 @@ printD("=> Begin 'AddOnForQt::doComplements(" + strInt(_domake) + ")'" );
 		-> evt.SetInt(static_cast<int>(GetFutureBuild()))
 		-> 10, 11, 12, 13, 14, 15, 16
 	*/
-	int idMenuKillProcess ;
+	int idMenuKillProcess = 0;
 	wxString file = m_fileCreator;
 //print("fileCreator =" + quote(file) );
 	bool BuildOneFile = !file.IsEmpty()
@@ -1142,7 +1166,7 @@ printWarn(Mes);
 
 /// DEBUG
 //* ******************************************************
-	m_pBuild->endDuration("doComplements(...)");
+	//m_pBuild->endDuration("doComplements(...)");
 //* ******************************************************
 	Mes.Clear();
 
@@ -1152,32 +1176,39 @@ printWarn(Mes);
 }
 
 ///-----------------------------------------------------------------------------
-/// Validate messages to 'Prebuild log'
-///		- called only when the plugin is manually loaded
+/// Loading manually plugin
+///		- called ONLY when the plugin is manually loaded
 ///
 ///	Called by :
 ///		1. cbEVT_PLUGIN_INSTALLED
 ///
 void AddOnForQt::OnPluginLoaded(CodeBlocksEvent& _event)
 {
+printD("=> Begin 'AddOnForQt::OnPluginLoaded((...)'");
+
+/// with parsing project
+    m_noParsing = false;
+/// with visible messages
 	m_WithMessage = true;
-// init done
+/// init done
 	m_initDone = true;
 /// just for debug
 /*
-	Mes = "AddOnForQt::OnPluginLoaded(...) -> ");
-	Mes +=  " 'Pregen' is manually loaded";
-	Mes += Space + "-> m_initDone = " + strBool(m_initDone) ; printWarn(Mes) ;
+	Mes = "AddOnForQt::OnPluginLoaded(...) -> ";
+	Mes +=  " 'AddOnForQt' is manually loaded";
+	Mes += Space + "-> m_noParsing = " + strBool(m_noParsing) ; printError(Mes) ;
 */
-// the active project
-	m_pProject = Manager::Get()->GetProjectManager()->GetActiveProject();
-	if (m_pProject)
-	{
-	// pseudo event
-		m_pseudoEvent = true;
-		CodeBlocksEvent evt(cbEVT_PROJECT_ACTIVATE, 0, m_pProject, 0, this);
-		OnActivateProject(evt);
-	}
+/// the active project
+    m_pProject = Manager::Get()->GetProjectManager()->GetActiveProject();
+    if (m_pProject)
+    {
+/// debug
+/// Mes = "Notify activate project ..."; printWarn(Mes);
+    // pseudo event
+        m_pseudoEvent = true;
+        CodeBlocksEvent evt(cbEVT_PROJECT_ACTIVATE, 0, m_pProject, 0, this);
+        OnActivateProject(evt);
+    }
 
 	Mes.Clear();
 /// The event processing system continues searching
@@ -1185,15 +1216,20 @@ void AddOnForQt::OnPluginLoaded(CodeBlocksEvent& _event)
 }
 
 ///-----------------------------------------------------------------------------
-/// Validate messages to 'Prebuild log'
+/// The new workspace is completely loaded
 ///
-///	Called by : DISCONNECTED !
+///	Called by :
 ///		1. cbEVT_WORKSPACE_LOADING_COMPLETE
 ///
 void AddOnForQt::OnPluginLoadingComplete(CodeBlocksEvent& _event)
 {
+printD("=> Begin 'AddOnForQt::OnPluginLoadingComplete((...)'");
+
+/// with parsing project
+    m_noParsing = false;
+///
 	m_WithMessage = true;
-	// using plugins
+/// using plugins
 	m_initDone = true;
 /// just for debug
 /*
@@ -1206,6 +1242,56 @@ void AddOnForQt::OnPluginLoadingComplete(CodeBlocksEvent& _event)
 	_event.Skip();
 }
 
+
+///-----------------------------------------------------------------------------
+/// origin : ProjectManager
+///		- the current workspace is begin closed
+/// Called by :
+///		1. event 'cbEVT_WORKSPACE_CLOSING_BEGIN'
+///
+void AddOnForQt::OnWorkspaceClosed(CodeBlocksEvent& _event)
+{
+printD("=> Begin 'AddOnForQt::OnWorkspaceClosed((...)'");
+/// stop parsing project
+    m_noParsing = true;
+
+	m_WithMessage = true;
+/// just for debug
+/*
+	Mes = "AddOnForQt::OnWorkspaceClosed(...) -> ";
+	Mes +=  " 'Current Workspace' is begin closed";
+	Mes += Space + "-> m_noParsing = " + strBool(m_noParsing) ; printError(Mes) ;
+*/
+	Mes.Clear();
+/// The event processing system continues searching
+    _event.Skip();
+}
+
+///-----------------------------------------------------------------------------
+/// origin : ProjectManager
+///	prevent that the workspace is complete loading
+/// Called by :
+///		1. event 'cbEVT_WORKSPACE_LOADONG_COMPLETE'
+///
+void AddOnForQt::OnWorkspaceComplete(CodeBlocksEvent& _event)
+{
+printD("=> Begin 'AddOnForQt::OnWorkspaceComplete(...)'");
+
+/// with parsing project
+    m_noParsing = false;
+///
+	m_WithMessage = true;
+/// just for debug
+
+	Mes = "AddOnForQt::OnWorkspaceComplete(...) -> ";
+	Mes +=  " 'Workspace' is completely loaded";
+	Mes += Space + "-> m_noParsing = " + strBool(m_noParsing) ; printError(Mes) ;
+
+	Mes.Clear();
+/// The event processing system continues searching
+    _event.Skip();
+}
+
 ///-----------------------------------------------------------------------------
 /// Invalid the messages to 'Prebuild log'
 ///
@@ -1214,8 +1300,14 @@ void AddOnForQt::OnPluginLoadingComplete(CodeBlocksEvent& _event)
 ///
 void AddOnForQt::OnAppBeginShutDown(CodeBlocksEvent& _event)
 {
-//Mes = "AddOnForQt::OnAppBeginShutDown(...) ..."; printWarn(Mes) ;
+Mes = "AddOnForQt::OnAppBeginShutDown(...) ..."; printError(Mes) ;
 	m_WithMessage = false;
+
+/// stop project parsing
+    m_noParsing = true;
+
+/// using plugins
+	m_initDone = false;
 
 	Mes.Clear();
 /// The event processing system continues searching
@@ -1246,7 +1338,7 @@ void AddOnForQt::OnRelease(bool appShutDown)
     }
     m_AddonLog = nullptr;
     m_menuBar = nullptr;
-m_buildMenu = nullptr;
+    m_buildMenu = nullptr;
 
 //3- do de-initialization for your plugin
     // if appShutDown is true, the plugin is unloaded because Code::Blocks is being shut down,
@@ -1307,11 +1399,17 @@ void AddOnForQt::SwitchToMyLog()
 void AddOnForQt::OnActivateProject(CodeBlocksEvent& _event)
 {
 // print("=> Begin 'AddOnForQt::OnActivateProject(...)" );
+/// current workspace is begin closed or new workspace is completely loaded ?
+	if (m_noParsing)
+	{
+		_event.Skip() ; return;
+	}
 /// plugins are loaded ?
 	if (!m_initDone)
 	{
 		_event.Skip() ; return;
 	}
+
 // wait for message validation
 	if (!m_WithMessage)
 	{
@@ -1407,12 +1505,18 @@ printD("	<= End 'AddOnForQt::OnActivateProject(...)");
 void AddOnForQt::OnActivateTarget(CodeBlocksEvent& _event)
 {
 printD("=> Begin 'AddOnForQt::OnActivateTarget(...)");
+/// if stop parsing project
+    if (m_noParsing)
+    {
+		_event.Skip() ; return;
+	}
 
 /// At startup, this method is called before any project is active !!
 	if (!m_pProject)
 	{
 		_event.Skip(); return;
 	}
+
 /// a Qt target can exist in a non-Qt project!
 // not a Qt current project
 	if (!m_isQtProject)
@@ -1501,11 +1605,18 @@ printD("	<= End 'AddOnForQt::OnActivateTarget(...)");
 ///
 void AddOnForQt::OnNewProject(CodeBlocksEvent& _event)
 {
-// wait for message validation
+
+/// if stop parsing project
+    if (m_noParsing)
+    {
+		_event.Skip() ; return;
+	}
+/// wait for message validation
 	if (!m_initDone || !m_WithMessage)
 	{
 		_event.Skip(); return;
 	}
+
 /// just for debug
 	//Mes = NamePlugin + "::OnNewProject(CodeBlocksEvent& event) -> ";
 	//printError(Mes);
@@ -1581,6 +1692,11 @@ void AddOnForQt::OnNewProject(CodeBlocksEvent& _event)
 ///
 void AddOnForQt::OnRenameProjectOrTarget(CodeBlocksEvent& _event)
 {
+/// if stop parsing project
+    if (m_noParsing)
+    {
+		_event.Skip() ; return;
+	}
 	// no project is activated yet
 	if (!m_pProject)
 	{
@@ -1720,13 +1836,36 @@ void AddOnForQt::OnRenameProjectOrTarget(CodeBlocksEvent& _event)
 
 void AddOnForQt::compilingStop(int _idAbort)
 {
-//Mes = "AddOnForQt::compilingStop(" + strInt(_idAbort) + ""; printError(Mes);
+Mes = "AddOnForQt::compilingStop(" + strInt(_idAbort) + ""; printError(Mes);
 	CodeBlocksEvent evtMenu(wxEVT_COMMAND_MENU_SELECTED, _idAbort);
 	// if comes from 'AddOnForQt' for 'CompilerGCC' !
 	evtMenu.SetInt(_idAbort);
 	Manager::Get()->ProcessEvent(evtMenu);
 // Not mandatory
 //	Manager::Yield();
+}
+
+///-----------------------------------------------------------------------------
+/// Return a string for a 'cbFutureBuild'
+///
+/// Called by :
+///     1. AddOnForQt::doComplements(const cbFutureBuild&  _domake)
+
+wxString AddOnForQt::domakeToStr(const cbFutureBuild&  _domake)
+{
+    wxString str = _("None");
+    switch (_domake)
+    {
+        case fbNone             : str = _("None"); break;
+        case fbBuild            : str = _("Build"); break;
+        case fbClean            : str = _("Clean"); break;
+        case fbRebuild          : str = _("ReBuild"); break;
+        case fbWorkspaceBuild   : str = _("WsBuild"); break;
+        case fbWorkspaceClean   : str = _("WsClean"); break;
+        case fbWorkspaceReBuild : str = _("WsReBuild"); break;
+    }
+
+    return str;
 }
 ///-----------------------------------------------------------------------------
 /// origin : compilergxx.cpp
@@ -1776,7 +1915,6 @@ void AddOnForQt::OnUpdateUI(wxUpdateUIEvent& _event)
     _event.Skip();
 }
 
-
 ///-----------------------------------------------------------------------------
 ///  Abort compiling complement files from 'CompilerGCC'
 ///
@@ -1790,6 +1928,11 @@ void AddOnForQt::OnUpdateUI(wxUpdateUIEvent& _event)
 ///
 void AddOnForQt::OnAbortAdding(CodeBlocksEvent& _event)
 {
+/// if stop parsing project
+    if (m_noParsing)
+    {
+		_event.Skip() ; return;
+	}
 // not a Qt current project
 	if (!m_isQtProject)
 	{
@@ -1836,6 +1979,12 @@ void AddOnForQt::OnBeginFileRemoved(CodeBlocksEvent& _event)
 {
 printD("=> Begin 'AddOnForQt::OnBeginFileRemoved(..)'" );
 
+/// if stop parsing project
+    if (m_noParsing)
+    {
+		_event.Skip() ; return;
+	}
+
 	if (_event.GetProject() == m_pProject)
 	{
 	/// the indicator
@@ -1867,6 +2016,11 @@ printD("	<= End  'AddOnForQt::OnBeginFileRemoved(..)'" );
 void AddOnForQt::OnProjectFileRemoved(CodeBlocksEvent& _event)
 {
 printD("=> Begin 'AddOnForQt::OnProjectFileRemoved(..)'" );
+/// if stop parsing project
+    if (m_noParsing)
+    {
+		_event.Skip() ; return;
+	}
 ///	the project used
 	cbProject *prj = _event.GetProject();
 	if (!prj)
@@ -1968,6 +2122,12 @@ void AddOnForQt::OnEndFileRemoved(CodeBlocksEvent& _event)
 {
 printD("=> Begin 'AddOnForQt::OnEndFileRemoved(..)'" );
 
+/// if stop parsing project
+    if (m_noParsing)
+    {
+		_event.Skip() ; return;
+	}
+
 	if (_event.GetProject() != m_pProject)
 	{
 		_event.Skip(); ; return;
@@ -2057,9 +2217,9 @@ void AddOnForQt::OnOpenProject(CodeBlocksEvent& _event)
 		return;
 	}
 /// DEBUG
-//* *****************************************************
+/// *****************************************************
 //	m_pBuild->beginDuration("OnOpenProject(...)");
-//* *****************************************************
+/// *****************************************************
 // active target
 	wxString nametarget = prj->GetActiveBuildTarget();
 	Mes += quote(prj->GetTitle()) ;
@@ -2080,9 +2240,9 @@ void AddOnForQt::OnOpenProject(CodeBlocksEvent& _event)
 	_event.Skip();
 
 /// DEBUG
-//* ***************************************************
+/// ***************************************************
 //	m_pBuild->endDuration("OnOpenProject(...)");
-//* ***************************************************
+/// ***************************************************
 	Mes.Clear();
 }
 */
@@ -2096,6 +2256,11 @@ void AddOnForQt::OnOpenProject(CodeBlocksEvent& _event)
 ///
 void AddOnForQt::OnSaveProject(CodeBlocksEvent& _event)
 {
+/// if stop parsing project
+    if (m_noParsing)
+    {
+		_event.Skip() ; return;
+	}
 // wait for message validation
 	if (!m_WithMessage)
 	{
@@ -2135,6 +2300,11 @@ void AddOnForQt::OnSaveProject(CodeBlocksEvent& _event)
 ///
 void AddOnForQt::OnSaveFileEditor(CodeBlocksEvent& _event)
 {
+/// if stop parsing project
+    if (m_noParsing)
+    {
+		_event.Skip() ; return;
+	}
 // wait for message validation
 	if (!m_WithMessage)
 	{
@@ -2214,9 +2384,9 @@ void AddOnForQt::OnCloseProject(CodeBlocksEvent& _event)
 	_event.Skip();
 
 /// DEBUG
-//* ****************************************************
+/// ****************************************************
 //	m_pBuild->endDuration("OnCloseProject(...)");
-//* ****************************************************
+/// ****************************************************
 	Mes.Clear();
 }
 */

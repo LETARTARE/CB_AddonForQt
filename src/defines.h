@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-10-17
- * Modified:  2020-06-27
+ * Modified:  2021-12-15
  * Copyright: LETARTARE
  * License:   GPL
  **************************************************************/
@@ -15,7 +15,7 @@
 ///-----------------------------------------------------------------------------
 /** Version
  */
-#define VERSION_WXT wxString("'3.3.0'")
+#define VERSION_WXT wxString("'3.4.0'")
 
 /** \brief display begin and end messages of function
  */
@@ -28,7 +28,7 @@
 #define 	CrLf 	wxString("\r\n")
 #define 	Eol 	wxString("\r\n")
 #define 	Quote 	wxString("'")
-#define	Dquote  wxString("\"")
+#define	    Dquote  wxString("\"")
 #define 	Tab	wxString("\t")
 #define 	Space	wxString(" ")
 #define 	Point	wxString(".")
@@ -39,7 +39,7 @@
 #define 	SepD 	char(13) 	// 0xD, \n
 #define 	SepA 	char(10)	// 0xA, \r
 #define 	SizeSep 2
-#define	SizeLe	16
+#define	    SizeLe	16
 /** @brief surrounded by 'Quote'
  */
 #define 	quote(a)	(Space + Quote + wxString(a) + Quote + Space)
@@ -47,9 +47,9 @@
 #define 	dquote(a)	(Space + Dquote + wxString(a) + Dquote + Space)
 /** \brief  for print an integer and a boolean
  */
-#define strInt(a)	(wxString()<<a)
-#define strBool(a)	(wxString()<<(a==0 ? _("false"): _("true") ))
-#define strChar(a)	wxString(a)
+#define     strInt(a)	(wxString()<<a)
+#define     strBool(a)	(wxString()<<(a==0 ? _("false"): _("true") ))
+#define     strChar(a)	wxString(a)
 
 #include <wx/filefn.h>
 /** @brief directory separator

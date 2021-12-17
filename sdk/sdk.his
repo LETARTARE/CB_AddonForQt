@@ -1,4 +1,4 @@
-// Historic of cb::sdk
+// Historique des sdk de cb
 
     svn 806    	sdk 1.0.0   	1.0  2005-08-25
     svn 2983   	sdk 1.10.0
@@ -46,9 +46,21 @@
     svn 11883 	sdk 1.46.0  2019-10-26
     svn 11944   sdk 1.47.0  2020-01-05
     svn 12004   sdk 2.0.0       20.03   March 29, 2020
-    svn 12020   sdk 2.1.0   2020-04-04  fugitif ...
+    svn 12020   sdk 2.1.0   2020-04-04
     svn 12025   sdk 2.2.0   2020-04-04
-    svn 12046   sdk 2.2.0	last wx28, wx30 for window
+    svn 12133   sdk 2.3.0   2020-05-31
+    svn 12046   sdk 2.2.0	    last wx28, wx30 for window
     svn 12142   sdk 2.4.0   2020-05-31
     svn 12252   sdk 2.5.0   2020-12-22
-    svn 12271   sdk 2.6.0   2020-12-36
+    svn 12271   sdk 2.6.0   2020-12-30
+    svn 12317   sdk 2.7.0   2021-05-04
+    svn 12446   sdk 2.8.0   2021-05-09
+    svn 12451   sdk 2.9.0   2021-05-22
+    svn 12465   sdk 2.10.0  2021-06-24
+    svn 12467   sdk 2.11.0  2021-06-24
+    svn 12503   sdk 2.12.0  2021-08-14
+    svn 12513   sdk 2.13.0  2021-08-15 fugitif
+    svn 12516   sdk 2.14.0  2021-08-15
+    svn 12521   sdk 2.15.0  2021-09-04 fugitif
+    svn 12524   sdk 2.16.0  2021-09-04
+    
