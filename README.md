@@ -4,7 +4,7 @@ Plugin to compile QT applications with 'Code::Blocks', but without 'Code:Block' 
 
 **Versions for all 'Code::Block, sdk >= 2.4.0, svn >= 12142'**
 
-**Last: sdk = 2.17.0, svn = 12682 -> ...**
+**Last: sdk = 2.17.0, svn = 12782 -> ...**
 
 It uses a log 'Prebuild log' for all posts plugin.
 
