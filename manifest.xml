@@ -1,13 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_plugin_manifest_file>
-    <SdkVersion major="2" minor="16" release="0" />
-    <Plugin name="AddOnForQt">
-        <Value title="Addons generation for Qt " />
-        <Value version="3.4.0-2021/12/17" />
-        <Value description="Compilling Qt software with this plugin (sdk 2.16.0)" />
+    <SdkVersion major="2" minor="17" release="0" />
+    <Plugin name="addonforQt">
+        <Value title="Addons for Qt" translate="yes"/>
+        <Value version="3.4.7-2022/04/22" />
+        <Value description="Compilling Qt software with this plugin (sdk 2.17.0)
+Plugin to compile QT applications with 'Code::Blocks'
+1- Overview
+    It is a plugin to compile C++ Qt5 applications using 'Code::Blocks',
+    in a very similar way as projects 'wxWidgets'.
+    For now it works on 'Win64' and on 'LInux'.
+2- Features
+    It does not use the 'Makefile'.
+    This generates additional files the project by the Qt works
+	'moc (.exe)', 'uic (.exe)', 'rcc (.exe)'  in a single directory in the
+	active target :  'adding/nametarget'
+    1- it detects meta-objects 'Q_OBJECT' and 'QGADGETS' in files
+        '*.h, *.hpp, *.cpp' and generates files 'moc_xxxxxx.cpp'
+    2- it detected in file '*.cpp' files included by
+         '#include 'moc_xxxx.cpp' or '#include yyyyyy.moc'
+      to mark those files included 'no compile' and 'no link'
+    3- detects forms of files '*.ui' to generate files 'ui_filename.h'
+    4- detects resource files '*.qrc' to generate files 'qrc_filename.cpp'
+3- 'AddOnForQt-x.y.z' contains :
+	1- a plugin project 'AddOnForQt.cbp' using the directory 'src'
+	2- a directory 'CodeBlocks' containing wizard 'cbqt5'
+4- Installation to 'Code::Blocks'
+    1- first install wizards 'cbqt5',
+	2- install the plugin 'AddOnForQ-xyz'
+5- Using
+    1- create a new project by 'cbqt5',
+    2- pre-compile, compile, run (if executable).
+    3- you can stop the pre-compilation by pressing the stop compilation button
+        " translate="yes" />
         <Value author="LETARTARE" />
         <Value authorEmail="" />
-        <Value authorWebsite="https://github.com/LETARTARE/AddOnForQtForCB" />
+        <Value authorWebsite="https://github.com/LETARTARE/AddOnForQt" />
         <Value thanksTo="C::B IDE developers, plugins developers and others" />
         <Value license="GPL" />
     </Plugin>

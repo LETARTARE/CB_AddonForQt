@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-10-17
- * Modified:  2021-12-15
+ * Modified:  2022-04-22
  * Copyright: LETARTARE
  * License:   GPL
  **************************************************************/
@@ -15,7 +15,7 @@
 ///-----------------------------------------------------------------------------
 /** Version
  */
-#define VERSION_WXT wxString("'3.4.0'")
+#define VERSION_WXT wxString("'3.4.7'")
 
 /** \brief display begin and end messages of function
  */
@@ -29,10 +29,10 @@
 #define 	Eol 	wxString("\r\n")
 #define 	Quote 	wxString("'")
 #define	    Dquote  wxString("\"")
-#define 	Tab	wxString("\t")
+#define 	Tab	    wxString("\t")
 #define 	Space	wxString(" ")
 #define 	Point	wxString(".")
-#define 	Dot	wxString(".")
+#define 	Dot	    wxString(".")
 #define 	dot		'.'
 /** \brief text separator
  */
@@ -47,9 +47,10 @@
 #define 	dquote(a)	(Space + Dquote + wxString(a) + Dquote + Space)
 /** \brief  for print an integer and a boolean
  */
-#define     strInt(a)	(wxString()<<a)
-#define     strBool(a)	(wxString()<<(a==0 ? _("false"): _("true") ))
-#define     strChar(a)	wxString(a)
+#define     strInt(a)		(wxString()<<a)
+#define     strDouble(a)	(wxString()<<a)
+#define     strBool(a)		(wxString()<<(a==0 ? _("false"): _("true") ))
+#define     strChar(a)		wxString(a)
 
 #include <wx/filefn.h>
 /** @brief directory separator
@@ -63,7 +64,7 @@
 /** @brief messages  -> 'Code::Blocks log'
  */
 #define Print			lm->Log
-#define PrintLn		lm->Log("")
+#define PrintLn		    lm->Log("")
 #define PrintWarn		lm->LogWarning
 #define PrintError		lm->LogError
 /** @brief messages  -> 'Code::Blocks Debug log'
@@ -71,7 +72,7 @@
 #define DPrint			lm->DebugLog
 #define DPrintErr		lm->DebugLogError
 
-/** @brief messages  -> 'PreBuild log'
+/** @brief messages  -> 'Addons log'
  */
 #define p               m_LogPageIndex
 #define print(a)	    lm->Log(a, p)
@@ -96,11 +97,12 @@
 #define		DOT_EXT_QRC		".qrc"
 
 #include <filefilters.h>
-#define  	EXT_H 			FileFilters::H_EXT
-#define  	EXT_HPP 		FileFilters::HPP_EXT
-#define  	EXT_CPP 		FileFilters::CPP_EXT
-#define 	DOT_EXT_H 		FileFilters::H_DOT_EXT
-#define 	DOT_EXT_CPP 	FileFilters::CPP_DOT_EXT
+#define  	EXT_H 				FileFilters::H_EXT
+#define  	EXT_HPP 			FileFilters::HPP_EXT
+#define  	EXT_CPP 			FileFilters::CPP_EXT
+#define 	DOT_EXT_H 			FileFilters::H_DOT_EXT
+#define 	DOT_EXT_CPP 		FileFilters::CPP_DOT_EXT
+#define     DOT_DYNAMICLIB_EXT  FileFilters::DYNAMICLIB_DOT_EXT
 ///-----------------------------------------------------------------------------
 /** @brief booleans
  */

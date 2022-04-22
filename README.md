@@ -1,10 +1,10 @@
-# AddOnForQt-3.4 December 17, 2021 (Win32-64, Linux-64)
+# AddOnForQt-3.4.7 April 22, 2022 (Win32-64, Linux-64)
 
 Plugin to compile QT applications with 'Code::Blocks', but without 'Code:Block' patch.
 
 **Versions for all 'Code::Block, sdk >= 2.4.0, svn >= 12142'**
 
-**Last: sdk = 2.16.0, svn = 12524 -> ...**
+**Last: sdk = 2.17.0, svn = 12682 -> ...**
 
 It uses a log 'Prebuild log' for all posts plugin.
 
@@ -39,16 +39,16 @@ It uses a log 'Prebuild log' for all posts plugin.
 	1- a plugin project for Win32 : 'AddOnForQt-wx31.cbp' using the directory 'src'
 	2- a plugin project for Win64 : 'AddOnForQt-wx31-64.cbp' using the directory 'src'
 	3- a plugin project for Linux : 'AddOnForQt-wx30-unix.cbp' using the directory 'src'
+	4- a plugin project for Linux : 'AddOnForQt-wx31-unix.cbp' using the directory 'src'
+	5- a directory 'CodeBlocks' containing wizards and templates files 'cbqt5'
 
-	4- a directory 'CodeBlocks' containing wizards and templates files 'cbqt5'
 
-
-4- Installation to 'Code::Blocks 12582' (sdk-2.16.0)
+4- Installation to 'Code::Blocks 12800' (sdk-2.17.0)
 
 	1- first install wizards 'cbqt5',
-	2- then with 'C::B-12582' compile and install the plugin 'AddOnForQt' 
-        : change the local variable 'cb = $(#sdk2160)' in agreement with your 
-        global 'sdk2160' which should identify sources of 'Code::Blocks-sdk2160' (>= C:B-12524 )
+	2- then with 'C::B-12800' compile and install the plugin 'AddOnForQt' 
+        : change the local variable 'cb = $(#sdk2170)' in agreement with your 
+        global 'sdk2170' which should identify sources of 'Code::Blocks-sdk2170' (>= C:B-12682 )
 
 5- Using
 

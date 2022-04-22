@@ -1,13 +1,13 @@
 /***************************************************************
- * Name:      build.cpp
+ * Name:      creater.cpp
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-10-17
- * Modified:  2020-12-31
+ * Modified:  2022-04-22
  * Copyright: LETARTARE
  * License:   GPL
  **************************************************************/
-#include "build.h"
+#include "creater.h"
 
 #include <manager.h>
 #include <cbproject.h>
@@ -28,10 +28,10 @@
 /// Called by :
 ///		1. AddOnForQt::OnAttach():1,
 ///
-Build::Build(wxString & _namePlugin, int _logIndex)
+Creater::Creater(const wxString & _namePlugin, int _logIndex)
 	: Pre(_namePlugin, _logIndex)
 {
-	/// !! not use  '+ Slash'   !!  because Slash = wxT(...)
+/// !! not use  '+ Slash'   !!  because Slash = wxT(...)
 	m_dirPreBuild = "adding" + wxString(Slash) ;
 }
 ///-----------------------------------------------------------------------------
@@ -40,20 +40,19 @@ Build::Build(wxString & _namePlugin, int _logIndex)
 /// Called by :
 ///		1. AddOnForQt::OnRelease():1,
 ///
-Build::~Build()
+Creater::~Creater()
 {
-	m_pProject = nullptr;  m_pMam = nullptr;
 }
 
 ///-----------------------------------------------------------------------------
-///  Build create start banner
+///  Creater create start banner
 ///
 /// Called by :
-///		1. Build::buildAllFiles(cbProject * _pProject, bool _workspace, bool _allbuild):1,
+///		1. Creater::buildAllFiles(cbProject * _pProject, bool _workspace, bool _allbuild):1,
 /// Calls to :
 ///		1. Pre::date():1,
 ///
-void Build::beginMesBuildCreate()
+void Creater::beginMesBuildCreate()
 {
 // begin
 	if(!m_pProject)
@@ -69,8 +68,8 @@ void Build::beginMesBuildCreate()
 
 	m_nameProject = m_pProject->GetTitle();
 	m_nameActiveTarget = m_pProject->GetActiveBuildTarget();
-	// for test
-	//m_pBuildTarget = m_pProject->GetBuildTarget(m_nameActiveTarget);
+// for test
+//m_pBuildTarget = m_pProject->GetBuildTarget(m_nameActiveTarget);
 
 // display log
 	Mes = "-------------- " ;
@@ -90,15 +89,15 @@ void Build::beginMesBuildCreate()
 }
 
 ///-----------------------------------------------------------------------------
-///  Build create end banner
+///  Creater create end banner
 ///
 /// Called by :
-///		1. Build::buildAllFiles(cbProject * _pProject, bool _workspace, bool _allbuild):1,
+///		1. Creater::buildAllFiles(cbProject * _pProject, bool _workspace, bool _allbuild):1,
 /// Calls to :
 ///		1. Pre::date():1,
 ///		2. Pre::duration():1,
 ///
-void Build::endMesBuildCreate()
+void Creater::endMesBuildCreate()
 {
 // date and duration
 	Mes = _("ended on") ;
@@ -113,18 +112,18 @@ void Build::endMesBuildCreate()
 /// Generating the complements files...
 ///
 /// Called by :
-///		1. AddOnForQt::OnComplements(CodeBlocksEvent& _event):1
+///		1. AddOnForQt::doComplements(const cbFutureBuild&  _domake):1
 ///
 /// Calls to :
-///		1. Build::beginMesBuildCreate():1,
-///		2. Build::findGoodfiles():1,
-///		3. Build::addAllFiles():1,
-///		4. Build::filesTocreate(bool _allrebuild) :1,
-///		5. Build::createFiles():1,
-///		6. Build::validCreated():1,
-///		7. Build::endMesBuildCreate():1,
+///		1. Creater::beginMesBuildCreate():1,
+///		2. Creater::findGoodfiles():1,
+///		3. Creater::addAllFiles():1,
+///		4. Creater::filesTocreate(bool _allrebuild) :1,
+///		5. Creater::createFiles():1,
+///		6. Creater::validCreated():1,
+///		7. Creater::endMesBuildCreate():1,
 ///
-bool Build::buildAllFiles(cbProject * _pProject, bool _workspace, bool _allbuild)
+bool Creater::buildAllFiles(cbProject * _pProject, cb_unused bool _workspace, bool _allbuild)
 {
 	if (!_pProject) return false;
 
@@ -137,9 +136,10 @@ bool Build::buildAllFiles(cbProject * _pProject, bool _workspace, bool _allbuild
 	m_pProject = _pProject;
 	bool ok = false;
 	m_clean = false;
-	///***************************************
-	///1- find good target with eligible files
-	///***************************************
+	m_abort = false;
+///***************************************
+///1- find good target with eligible files
+///***************************************
 	// analyzing all project files
 	Mes = _("Search creator file(s)") ;
 	Mes += " ..." ;
@@ -147,41 +147,43 @@ bool Build::buildAllFiles(cbProject * _pProject, bool _workspace, bool _allbuild
 	int nelegible =  findGoodfiles() ;
 	if (nelegible > 0)
 	{
-		///******************************************
-		///2-  registered all files in 'm_Registered'
-		///******************************************
+///******************************************
+///2-  registered all files in 'm_Registered'
+///******************************************
 		int nfiles = addAllFiles() ;
 		Mes = Tab + "-> " + strInt(nfiles) + Space ;
 		Mes += _("creator(s) file(s) registered in the plugin") ;
 		print(Mes) ;
 		if (nfiles > 0)
 		{
-			///****************************************
-			///3-  files to create to 'm_Filestocreate'
-			///****************************************
-			uint16_t ntocreate = filesTocreate(_allbuild) ;
+///****************************************
+///3-  files to create to 'm_Filestocreate'
+///****************************************
+			wxUint16 ntocreate = filesTocreate(_allbuild) ;
 			if (ntocreate == 0 )
 				ok = !_allbuild ;
 			else
 				ok = true;
-
 			if (ok)
 			{
-				///**********************************************************
-				///4- create files
-				/// 	from 'FileCreator', 'm_Registered'
-				/// 	1- adds files created in 'm_Createdfile'
-				/// 	2- create additional files as needed  by 'create(qexe, fileori)'
-				///***********************************************************
-				Mes = _("Creating complement file(s)") ;
-				Mes += " ..." ;
+///********************************************************************
+///4- create files
+/// 	from 'FileCreator', 'm_Registered'
+/// 	1- adds files created in 'm_Createdfile'
+/// 	2- create additional files as needed  by 'create(qexe, fileori)'
+///*********************************************************************
+				Mes = _("Creating complement file(s)") + " ..." ;
 				printWarn(Mes);
+
 				bool good = createFiles() ;
 				if (good)
 				{
-					///**************************
-					///5- register files created
-					///**************************
+                    Mes = "... "  + _("End creating complement file(s)") ;
+                    printWarn(Mes);
+
+///**************************
+///5- register files created
+///**************************
 					good = validCreated() ;
 					if (!good)
 					{
@@ -192,18 +194,10 @@ bool Build::buildAllFiles(cbProject * _pProject, bool _workspace, bool _allbuild
 					ok = true;
 				} // end (good)
 				else
+				if (! m_abort)
 				{
-					if (m_abort)
-					{
-						Mes = Tab + _("Abort complement file(s) building") + " ..." ;
-						printWarn(Mes);
-						setAbort(false);
-					}
-					else
-					{
-						Mes = Tab + _("Complement file creation error") + " !!" ;
-						printError(Mes);
-					}
+					Mes = Tab + _("Complement file creation error") + " !!" ;
+					printError(Mes);
 				}
 				ok = good;
 			}	//end (ntocreate > 0)
@@ -225,13 +219,12 @@ bool Build::buildAllFiles(cbProject * _pProject, bool _workspace, bool _allbuild
 		printWarn(Mes);
 		ok = true;
 	}
+
 /// debug
 //print(allStrTable("m_Registered", m_Registered));
-
+/// <=
 
     m_clean = m_Registered.IsEmpty();
-// end banner
-//	endMesBuildCreate();
 
 /// DEBUG
 //* **************************************
@@ -242,14 +235,14 @@ bool Build::buildAllFiles(cbProject * _pProject, bool _workspace, bool _allbuild
 	return ok;
 }
 ///-----------------------------------------------------------------------------
-///  Build create one file start banner
+///  Creater create one file start banner
 ///
 /// Called by :
-///		1. Build::buildOneFile(cbProject * _pProject, const wxString& _fcreator) :1,
+///		1. Creater::buildOneFile(cbProject * _pProject, const wxString& _fcreator) :1,
 /// Calls to :
 ///		1. Pre::date():1,
 ///
-void Build::beginMesFileCreate()
+void Creater::beginMesFileCreate()
 {
 // banner
 	printLn;
@@ -269,15 +262,15 @@ void Build::beginMesFileCreate()
 	Mes.Clear();
 }
 ///-----------------------------------------------------------------------------
-///  Build create one file end banner
+///  Creater create one file end banner
 ///
 /// Called by :
-///		1. Build::buildOneFile(cbProject * _pProject, const wxString& _fcreator) :1,
+///		1. Creater::buildOneFile(cbProject * _pProject, const wxString& _fcreator) :1,
 /// Calls to :
 ///		1. Pre::date():1,
 ///		2. Pre::duration():1,
 ///
-void Build::endMesFileCreate()
+void Creater::endMesFileCreate()
 {
 // date and duration
 	Mes = _("ended on : ") + date() ;
@@ -293,34 +286,39 @@ void Build::endMesFileCreate()
 ///		1. AddOnForQt::OnComplements(CodeBlocksEvent& _event):1,
 ///
 ///  Calls to :
-///		1.	Build::beginMesFileCreate():1,
-///		2.	Build::isElegible(const wxString& _file):1,
-///		3.	Build::inProjectFileCB(const wxString& _file):1,
-///		4.	Build::compareDate(const wxString&  _fileref
+///		1.	Creater::beginMesFileCreate():1,
+///		2.	Creater::isElegible(const wxString& _file):1,
+///		3.	Creater::inProjectFileCB(const wxString& _file):1,
+///		4.	Creater::compareDate(const wxString&  _fileref
 ///									, const wxString&  _filetarget):1
-///		5.  Build::createFileComplement(const wxString& _qexe
+///		5.  Creater::createFileComplement(const wxString& _qexe
 ///							, const wxString& _fcreator, const wxString& _fout):1,
-///		6.	Build::endMesFileCreate():1,
+///		6.	Creater::endMesFileCreate():1,
 ///
 
-bool Build::buildOneFile(cbProject * _pProject, const wxString& _fcreator)
+bool Creater::buildOneFile(cbProject * _pProject, const wxString& _fcreator)
 {
 	if(!_pProject)		return false;
-printD("=> Begin Build::buildOneFile(..., " + quote(_fcreator) + ")'" );
+printD("=> Begin Creater::buildOneFile(..., " + quote(_fcreator) + ")'" );
 
-	m_pProject = _pProject;
+    m_pProject = _pProject;
+    m_nameActiveTarget = m_pProject->GetActiveBuildTarget();
+	if (m_nameActiveTarget.IsEmpty())
+        return false;
+
 	ProjectBuildTarget * pBuildTarget = m_pProject->GetBuildTarget(m_nameActiveTarget)  ;
-	if (!pBuildTarget)	return false ;
+	if (!pBuildTarget)
+        return false ;
 
 	m_filename = _fcreator;
-
 // directory changed
 	m_dirProject = m_pProject->GetBasePath();
 	wxFileName::SetCwd (m_dirProject);
 	bool ok = createDir (m_dirPreBuild) ;
+//print("ok =" + strBool(ok) );
 	if (!ok)	return ok;
 
-// file it is correct ?
+// file it is correct ? already tested  in 'AddOnForQt::BuildModuleMenu(...)'
     bool elegible = isElegible(_fcreator);
 //print("elegible =" + strBool(elegible) );
     if (!elegible)		return elegible ;
@@ -329,14 +327,93 @@ printD("=> Begin Build::buildOneFile(..., " + quote(_fcreator) + ")'" );
 	beginMesFileCreate() ;
 //print(" target name :" + quote(pBuildTarget->GetTitle()) );
 // init Qt tools
-	//ok = findTargetQtexe(m_pProject) ;
 	ok = findTargetQtexe(pBuildTarget) ;
 //print("ok =" + strBool(ok) );
 	if (!ok)	return ok ;
 
 	m_nameActiveTarget =  m_pProject->GetActiveBuildTarget() ;
 //print("m_nameActiveTarget =" + quote(m_nameActiveTarget) );
-	/*  TO REVIEW ...
+///-----------------------------------------------------------------------------
+// complete path
+     wxString fout = complementDirectory() + nameCreated(_fcreator) ;
+//Mes = Tab + quote( _fcreator + quote( " -> " ) + fout ) ; print(Mes);
+// already registered
+    bool inproject = inProjectFileCB(fout) ;
+    if (!inproject)
+    {
+    // has included ?
+        wxString extin = _fcreator.AfterLast('.') ;
+        wxString extout = fout.AfterLast('.')  ;
+        bool nocompile = false ;
+        if ( extin.Matches(EXT_H) && extout.Matches(EXT_CPP) )
+            nocompile =  hasIncluded(_fcreator) ;
+    // add file : AddFile(Nametarget, file, compile, link, weight)
+        ProjectFile* prjfile = m_pProject->AddFile(m_nameActiveTarget, fout, !nocompile, !nocompile, 50);
+        if (!prjfile)
+        {
+        // display message
+            Mes  = "===> " ;
+            Mes += _("can not add this file ");
+            Mes += quote( fout ) + _(" to target ") + m_nameActiveTarget ;
+            printError (Mes) ;
+            cbMessageBox(Mes, "AddFile(...)", wxICON_ERROR) ;
+        }
+    // display
+        if (nocompile)
+        {
+            Mes = Tab + _("Add ") + quote( fout ) ;
+            Mes += Lf + Tab + Tab + "*** " + _("This file is included, ") ;
+            Mes += _("attributes 'compile' and 'link' will be set to 'false'") ;
+            print(Mes);
+        }
+	// svn 9501 : CB 13.12  and >
+	// verify if complements exists already
+         m_pMprj->GetUI().RebuildTree() ;
+
+    // create complement ...
+        m_Identical = false;
+    }
+    else
+    {
+//print("not registered in project...");
+    // Check the date
+        m_Identical = false ;
+        //- verify datation on disk
+        if (::wxFileExists(fout))
+            m_Identical = compareDate(_fcreator, fout) ;
+    }
+    if (m_Identical)
+    {
+        Mes = Tab + _("Nothing to do (complement file exist on disk)") ;
+        print(Mes) ;
+    }
+// ! identical date -> create
+    else
+///-----------------------------------------------------------------------------
+    {
+        Mes = Tab + _(" One complement file is created in the project ...") ;
+        printWarn(Mes);
+    // create file complement with 'moc'
+        wxString strerror = createFileComplement(m_Mexe, _fcreator, fout);
+// print("buildOneFile::strerror = " + quote(strerror)) ;
+        if (!strerror.IsEmpty())
+        {
+        // error message
+            wxString title = _("Creating ") + quote( fout ) ;
+            title += _(" failed") ;
+            title += " ...";
+		//1- error create directory  :
+			// = _("Unable to create directory ")
+		//2- error buildtarget no exist :
+			// = quote( m_nameActiveTarget ) + _(" does not exist !!") ;
+		//3- error create complement
+            Mes =  "=> " ;
+            Mes += strerror.BeforeLast(Lf.GetChar(0)) ;
+            printError (Mes) ;
+            cbMessageBox(Mes, title) ;
+        }
+    }
+/*  TO REVIEW ...
 	// targets no virtual list
 	wxArrayString rltargets;
 // virtual target ?  without warning
@@ -346,100 +423,26 @@ printD("=> Begin Build::buildOneFile(..., " + quote(_fcreator) + ")'" );
 	else
 		rltargets.Add(m_nameActiveTarget);
 
-	uint16_t ntargets = rltargets.GetCount();
+	wxUint16 ntargets = rltargets.GetCount();
 	ProjectBuildTarget* pBuildTarget;
 	wxString fout;
-    for (uint16_t nt = 0 ; nt < ntargets ; nt++ )
+    for (wxUint16 nt = 0 ; nt < ntargets ; nt++ )
     {
 		m_nameActiveTarget = rltargets.Item(nt);
 		// all targets are reals
 		pBuildTarget = m_pProject->GetBuildTarget(m_nameActiveTarget);
 		if (isCommandTarget(pBuildTarget) ) 	continue;
 
-		fout = complementDirectory() + nameCreated(_fcreator) ;
-		Mes = Tab + quote( _fcreator + quote( " -> " ) + fout ) ;
-		print(Mes);
-	// already registered
-		bool inproject = inProjectFileCB(fout) ;
-		if (!inproject)
-		{
-		// has included ?
-			wxString extin = _fcreator.AfterLast('.') ;
-			wxString extout = fout.AfterLast('.')  ;
-			bool nocompile = false ;
-			if ( extin.Matches(EXT_H) && extout.Matches(EXT_CPP) )
-				nocompile =  hasIncluded(_fcreator) ;
-		// add file : AddFile(Nametarget, file, compile, link, weight)
-			ProjectFile* prjfile = m_pProject->AddFile(m_nameActiveTarget, fout, !nocompile, !nocompile, 50);
-			if (!prjfile)
-			{
-			// display message
-				Mes  = "===> " ;
-				Mes += _("can not add this file ");
-				Mes += quote( fout ) + _(" to target ") + m_nameActiveTarget ;
-				printError (Mes) ;
-				cbMessageBox(Mes, "AddFile(...)", wxICON_ERROR) ;
-			}
-		// display
-			if (nocompile)
-			{
-				Mes = Tab + _("Add ") + quote( fout ) ;
-				Mes += Lf + Tab + Tab + "*** " + _("This file is included, ") ;
-				Mes += _("attributes 'compile' and 'link' will be set to 'false'") ;
-				print(Mes);
-			}
-			// svn 9501 : CB 13.12  and >// verify if complements exists already
-			Manager::Get()->GetProjectManager()->GetUI().RebuildTree() ;
-
-		// create complement ...
-			m_Identical = false;
-		}
-		else
-		{
-		// Check the date
-			m_Identical = false ;
-			//- verify datation on disk
-			if (::wxFileExists(fout))
-				m_Identical = compareDate(_fcreator, fout) ;
-		}
-
-		if (m_Identical)
-		{
-			Mes = Tab + _("Nothing to do (complement file exist on disk)") ;
-			print(Mes) ;
-		}
-	// ! identical date -> create
-		else
-		{
-			Mes = Tab + _(" One complement file is created in the project ...") ;
-			printWarn(Mes);
-		// create file complement with 'moc'
-			wxString strerror = createFileComplement(m_Mexe, _fcreator, fout);
-			if (!strerror.IsEmpty())
-			{
-			// error message
-				wxString title = _("Creating ") + quote( fout ) ;
-				title += _(" failed") ;
-				title += " ...";
-				//1- error create directory  :
-					// = _("Unable to create directory ")
-				//2- error buildtarget no exist :
-					// = quote( m_nameActiveTarget ) + _(" does not exist !!") ;
-				//3- error create complement
-				Mes =  "=> " ;
-				Mes += strerror.BeforeLast(Lf.GetChar(0)) ;
-				printError (Mes) ;
-				cbMessageBox(Mes, title) ;
-			}
-		}
+		.... see code before
 	}
 */
+
 // end preCompile
 	endMesFileCreate() ;
 
 	Mes.Clear();
 
-printD("=> Begin Build::buildOneFile(...) => "  + strBool(elegible) );
+printD(" <= End Creater::buildOneFile(...) => "  + strBool(elegible) );
 
     return elegible;
 }
@@ -450,20 +453,20 @@ printD("=> Begin Build::buildOneFile(...) => "  + strBool(elegible) );
 ///		1. AddOnForQt::OnComplements(CodeBlocksEvent& _event):1,
 ///
 ///  Calls to :
-///		1.	Build::beginMesFileCreate():1,
-///		2.	Build::isElegible(const wxString& _file):1,
-///		3.	Build::inProjectFileCB(const wxString& _file):1,
-///		4.	Build::compareDate(const wxString&  _fileref
+///		1.	Creater::beginMesFileCreate():1,
+///		2.	Creater::isElegible(const wxString& _file):1,
+///		3.	Creater::inProjectFileCB(const wxString& _file):1,
+///		4.	Creater::compareDate(const wxString&  _fileref
 ///									, const wxString&  _filetarget):1
-///		5.  Build::createFileComplement(const wxString& _qexe
+///		5.  Creater::createFileComplement(const wxString& _qexe
 ///							, const wxString& _fcreator, const wxString& _fout):1,
-///		6.	Build::endMesFileCreate():1,
+///		6.	Creater::endMesFileCreate():1,
 ///
-bool Build::cleanOneFile(cbProject * _pProject, const wxString& _fcreator)
+bool Creater::cleanOneFile(cbProject * _pProject, const wxString& _fcreator)
 {
 	if(!_pProject)		return false;
 
-printD("=> Begin Build::buildOneFile(..., " + quote(_fcreator) + ")'" );
+printD("=> Begin Creater::buildOneFile(..., " + quote(_fcreator) + ")'" );
 
 	bool ok = false;
 	m_pProject = _pProject;
@@ -471,11 +474,9 @@ printD("=> Begin Build::buildOneFile(..., " + quote(_fcreator) + ")'" );
 	if (!pBuildTarget)	return false ;
 
 	m_filename = _fcreator;
-	/// ......... TO DO
+	/// ......... TO FINISH
 
-
-
-printD("	<= End Build::cleanOneFile(...) => "  + strBool(ok) );
+printD("	<= End Creater::cleanOneFile(...) => "  + strBool(ok) );
 	return ok;
 }
 
@@ -483,11 +484,11 @@ printD("	<= End Build::cleanOneFile(...) => "  + strBool(ok) );
 /// Find path Qt container  ->  'CompileOptionsBase * container'
 ///
 /// Called by  :
-///		1. Build::findTargetQtexe(CompileTargetBase * _buildtarget):1,
+///		1. Creater::findTargetQtexe(CompileTargetBase * _buildtarget):1,
 ///
-wxString Build::pathlibQt(CompileTargetBase * _pContainer)
+wxString Creater::pathlibQt(CompileTargetBase * _pContainer)
 {
-printD("=> Begin 'Build::pathlibQt(...)");
+printD("=> Begin 'Creater::pathlibQt(...)");
 	wxString path;
 	if (!_pContainer) 	return path;
 //print("Name container : " + quote(_pContainer->GetTitle()) );
@@ -507,7 +508,7 @@ printD("=> Begin 'Build::pathlibQt(...)");
 		{
 			path = tablibdirs.Item(u++);
 			path.Lower();
-			// used local variable ?
+		// used local variable ?
 			ok = path.Find("$qt") != -1 ;
 			if (ok)
 			{
@@ -515,12 +516,13 @@ printD("=> Begin 'Build::pathlibQt(...)");
 				m_pMam->ReplaceEnvVars(path) ;
 //Mes = Lf + _("Local variable path Qt => '") + path; Mes += "'"; print(Mes);
 				path_nomacro =  path ;
-				// remove "\lib"
+			// remove "\lib"
 				path_nomacro = path_nomacro.BeforeLast(Slash) ;
 				path_nomacro += wxString(Slash)  ;
 			}
 			else
-			{  // use global variable ?
+			{
+			// use global variable ?
 				ok = path.Find("#qt") != -1 ;
 				if (ok)
 				{
@@ -529,11 +531,11 @@ printD("=> Begin 'Build::pathlibQt(...)");
 					m_pMam->ReplaceMacros(path) ;
 //Mes = Lf + _("Global variable path Qt => '") + path;Mes += "'"; print(Mes);
 					path_nomacro =  path ;
-					// remove "\lib"
+				// remove "\lib"
 					path_nomacro = path_nomacro.BeforeLast(Slash) ;
 					path_nomacro += wxString(Slash)  ;
 				}
-				// no variable ! , absolute path ?
+			// no variable ! , absolute path ?
 				else
 				{
 //Mes = Lf + _("Path Qt => '") + path ; Mes += "'";	printWarn(Mes);
@@ -543,7 +545,7 @@ printD("=> Begin 'Build::pathlibQt(...)");
 		}
 	}
 	Mes.Clear();
-printD("	<= End 'Build::pathlibQt(...) => " + quote(path_nomacro) );
+printD("	<= End 'Creater::pathlibQt(...) => " + quote(path_nomacro) );
 
 	return path_nomacro  ;
 }
@@ -552,15 +554,15 @@ printD("	<= End 'Build::pathlibQt(...) => " + quote(path_nomacro) );
 /// Find path Qt exe : 'ProjectBuildTarget* _pBuildTarget'
 ///
 /// Called by  :
-///		1.	Build::createFiles():1
-///		2.	Build::buildOneFile(cbProject * _pProject, const wwxFileExistsxString& _fcreator):1
+///		1.	Creater::createFiles():1
+///		2.	Creater::buildOneFile(cbProject * _pProject, const wwxFileExistsxString& _fcreator):1
 ///
 
-bool Build::findTargetQtexe(CompileTargetBase * _pBuildTarget)
+bool Creater::findTargetQtexe(CompileTargetBase * _pBuildTarget)
 {
 	if (! _pBuildTarget)  return false ;
 
-printD("=> Begin 'Build::findTargetQtexe(...)");
+printD("=> Begin 'Creater::findTargetQtexe(...)");
 
 	wxString qtpath = pathlibQt(_pBuildTarget) ;
 // Mes = Lf + _("QT path for the target = ") + quote(qtpath); print(Mes);
@@ -600,10 +602,12 @@ printD("=> Begin 'Build::findTargetQtexe(...)");
 		m_Rexe = qtexe + "rcc" ;
 		m_Lexe = qtexe + "lrelease" ;
 	}
+/// debug
 //	Mes = "m_Mexe = " + quote(m_Mexe) ;  printWarn(Mes);
 //	Mes = "m_Uexe = " + quote(m_Uexe) ;  printWarn(Mes);
 //	Mes = "m_Rexe = " + quote(m_Rexe) ;  printWarn(Mes);
 //	Mes = "m_Lexe = " + quote(m_Lexe) ;  printWarn(Mes);
+/// <=
     bool Findqtexe = true, bdquote = false;
 	bool FindMexe  = wxFileExists(m_Mexe) ;
 	bool FindUexe  = wxFileExists(m_Uexe) ;
@@ -660,7 +664,7 @@ printD("=> Begin 'Build::findTargetQtexe(...)");
 
 	Mes.Clear();
 
-printD("	<=> End 'Build::findTargetQtexe(...) => " + strBool(Findqtexe) );
+printD("	<=> End 'Creater::findTargetQtexe(...) => " + strBool(Findqtexe) );
 
 	return Findqtexe ;
 }
@@ -668,47 +672,33 @@ printD("	<=> End 'Build::findTargetQtexe(...) => " + strBool(Findqtexe) );
 ///	Read content file
 ///
 /// Called by  :
-/// 	1. Build:: q_object(filename, qt_macro):1,
-///		2. Build::hasIncluded(const wxString& fcreator):1,
+/// 	1. Creater:: q_object(filename, qt_macro):1,
+///		2. Creater::hasIncluded(const wxString& fcreator):1,
 ///
-wxString Build::ReadFileContents(const wxString& _filename)
+wxString Creater::ReadFileContents(const wxString& _filename)
 {
-	wxFileName fname(Manager::Get()->GetMacrosManager()->ReplaceMacros(_filename));
+	wxFileName fname(m_pMam->ReplaceMacros(_filename));
 	NormalizePath(fname, wxEmptyString);
 	wxFile f(fname.GetFullPath());
 
 	return cbReadFileContents(f);
 }
-/*
-///-----------------------------------------------------------------------------
-///	Write content file
-///
-/// Called by  : none
-///
-bool Build::WriteFileContents(const wxString& _filename, const wxString& _contents)
-{
-	wxFileName fname(Manager::Get()->GetMacrosManager()->ReplaceMacros(_filename));
-	NormalizePath(fname, wxEmptyString);
-	wxFile f(fname.GetFullPath(), wxFile::write);
-
-	return cbWrite(f, _contents);
-}
-*/
 
 ///-----------------------------------------------------------------------------
 /// Looking for eligible files to the active target (around project files),
 /// 	meet to table 'm_Filecreator' : return eligible file number
 ///
 /// Called by  :
-///		1. Build::buildAllFiles(cbProject * prj, bool workspace, bool allbuild):1
+///		1. Creater::buildAllFiles(cbProject * prj, bool workspace, bool allbuild):1
 ///
 /// Calls to :
-///		1. Build::virtualToFirstRealTarget(m_nameactivetarget):1,
-///		2. Build::isGoodTargetQt(m_nameActiveTarget):1,
-///		3. Build::isElegible(file):1,
+///		1. Creater::virtualToFirstRealTarget(m_nameactivetarget):1,
+///		2. Creater::isGoodTargetQt(m_nameActiveTarget):1,
+///		3. Creater::isElegible(file):1,
 ///
-uint16_t Build::findGoodfiles()
+wxUint16 Creater::findGoodfiles()
 {
+printD("=> Begin 'Creater::findGoodfiles()'");
 //	Mes = _("Search creator file(s) ...") ; printWarn(Mes);
 	/// DEBUG
 //* ****************************************
@@ -720,7 +710,8 @@ uint16_t Build::findGoodfiles()
 	if (m_nameActiveTarget.IsEmpty() )
 		return 0;
 
-	// => peek the first real target of the virtual
+	m_nameProject = m_pProject->GetTitle();
+// => peek the first real target of the virtual
 	virtualToFirstRealTarget(m_nameActiveTarget);
 // is good target  ?
 	ProjectBuildTarget * pBuildTarget = m_pProject->GetBuildTarget(m_nameActiveTarget);
@@ -736,6 +727,7 @@ uint16_t Build::findGoodfiles()
 	wxArrayString tabtargets ;
 	wxString file, nametarget;
 	int nt, nfprj = m_pProject->GetFilesCount()  ;
+//Mes = "nfprj = " + strInt(nfprj); print(Mes);
 	bool good ;
 	/// DEBUG
 //* ************************************************
@@ -744,23 +736,37 @@ uint16_t Build::findGoodfiles()
 // all files project
 	for (int nf =0 ; nf < nfprj; nf++ )
 	{
+	// abort ?
+		if (m_abort)
+		{
+			good = false;
+			break;
+		}
 		prjfile = m_pProject->GetFile(nf);
 		if (!prjfile) 	continue  ;
 	//	file name
 		file = prjfile->relativeFilename ;
+//Mes = "file = " + file; print(Mes);
 		if (file.IsEmpty() )	continue  ;
 		// no complement file
 		if (file.StartsWith(m_dirPreBuild) )	continue  ;
-//Mes = "file = " + file; print(Mes);
+//Mes = "finded file = " + file; print(Mes);
 	// all targets of file
 		tabtargets = prjfile->GetBuildTargets() ;
 		nt = tabtargets.GetCount()  ;
+//Mes = "nt = " + strInt(nt); print(Mes);
 		if (nt > 0)
 		{
 		// all file targets
 			for (int nft=0; nft < nt; nft++)
 			{
+				if (m_abort)
+				{
+					good = false;
+					break;
+				}
 				nametarget = tabtargets.Item(nft) ;
+//Mes = "nametarget = " + nametarget; print(Mes);
 				good = nametarget.Matches(m_nameActiveTarget) ;
 				if (good )
 					break ;
@@ -768,7 +774,7 @@ uint16_t Build::findGoodfiles()
 		// target == active target
 			if (good )
 			{
-//Mes = "nametarget = " + nametarget;	print(Mes);
+//Mes = "nametarget = " + nametarget;	printError(Mes);
 //Mes = Tab + "file finded " + strInt(nf) + " = " + file;  printWarn(Mes);
 			// not eligible ?
 				if (! isElegible(file))		continue  ;
@@ -777,20 +783,19 @@ uint16_t Build::findGoodfiles()
 				m_Filecreator.Add(file, 1) ;
 //Mes = "elegible file = " + file; print(Mes);
 			}
-			else
-			{
-				// no target active !!
-//Mes = "no target active = " + nametarget; print(Mes);
-			}
 		}
 	// execute pending events
-		m_pm->ProcessPendingEvents();
+		m_pM->ProcessPendingEvents();
 	}
 	/// DEBUG
 //* **********************************************
 //	endDuration("findGoodFiles:: all files)");
 //* **********************************************
 	Mes.Clear();
+
+	if (m_abort) return 0;
+
+printD("	<= End 'Creater::findGoodfiles()'");
 
 //  number file eligible
 	return m_Filecreator.GetCount()  ;
@@ -803,15 +808,15 @@ uint16_t Build::findGoodfiles()
 ///		'qtmain' -> '0'
 ///
 /// Called by  :
-///		-# Build::isGoodTargetQt(const ProjectBuildTarget * _pBuildtarget):1,
+///		-# Creater::isGoodTargetQt(const ProjectBuildTarget * _pBuildtarget):1,
 ///
-wxString Build::refTargetQt(const ProjectBuildTarget * _pBuildTarget)
+wxString Creater::refTargetQt(const ProjectBuildTarget * _pBuildTarget)
 {
 	wxString refqt ;
 	if (! _pBuildTarget)
 		return refqt  ;
 
-//Mes = "Build::refTargetQt(...)"; printWarn(Mes);
+//Mes = "Creater::refTargetQt(...)"; printWarn(Mes);
 	wxArrayString tablibs = _pBuildTarget->GetLinkLibs();
 	int nlib = tablibs.GetCount() ;
 //Mes = "nlib = " + strInt(nlib); printWarn(Mes);
@@ -834,35 +839,35 @@ wxString Build::refTargetQt(const ProjectBuildTarget * _pBuildTarget)
 	int u=0, index= -1, pos ;
 	while (u < nlib && !ok )
 	{
-		// lower, no extension
+	// lower, no extension
 		namelib = tablibs.Item(u++).Lower().BeforeFirst('.') ;
 //Mes = strInt(u) + "- namelib = " + quote( namelib )); printWarn(Mes);
-		// no prefix "lib"
+	// no prefix "lib"
 		pos = namelib.Find("lib");
 		if (pos == 0)
 			namelib.Remove(0, 3) ;
-		// begin == "qt"
+	// begin == "qt"
 		pos = namelib.Find("qt") ;
 		if (pos != 0)	continue ;
 //Mes = strInt(pos) ; printWarn(Mes);
-		// compare
+	// compare
 		index = m_TablibQt.Index(namelib);
 //Mes = strInt(index) ; printWarn(Mes);
 		ok = index != -1 ;
-		// first finded
+	// first finded
 		if (ok)
 		{
-			// == 'qtmain' or 'qtmaind'
+		// == 'qtmain' or 'qtmaind'
 			if ( namelib.StartsWith("qtmain" ) )
 			{
 				refqt = "0";
 			}
 			else
-			// qt5xxxx or qt5xxxd
+		// qt5xxxx or qt5xxxd
 			if (namelib.GetChar(2) == '5')
 			{
 				refqt = "5" ;
-				// the last
+			// the last
 				str = namelib.Right(1) ;
 				if ( str.Matches("d" ) )
 					refqt += "d" ;
@@ -885,12 +890,12 @@ wxString Build::refTargetQt(const ProjectBuildTarget * _pBuildTarget)
 ///
 /// Called by  :
 ///		1. AddOnForQt::OnComplements(CodeBlocksEvent& event):1,
-///		2. Build::findGoodfiles():1,
+///		2. Creater::findGoodfiles():1,
 ///
 /// Calls to:
-///		1. Build::refTargetQt(ProjectBuildTarget * _pBuildtarget):1,
+///		1. Creater::refTargetQt(ProjectBuildTarget * _pBuildtarget):1,
 ///
-bool Build::isGoodTargetQt(const ProjectBuildTarget * _pBuildTarget)
+bool Creater::isGoodTargetQt(const ProjectBuildTarget * _pBuildTarget)
 {
 	if (!_pBuildTarget)
 		return false ;
@@ -900,7 +905,8 @@ bool Build::isGoodTargetQt(const ProjectBuildTarget * _pBuildTarget)
 //Mes = "str = " + quote( str ); printWarn(Mes);
 	bool isqt = ! str.IsEmpty()  ;
 	if (!isqt)
-	{   // TODO ...
+	{
+	// TODO ...
 		Mes = Tab + _("This target have nothing library Qt") + " !" ;
 		Mes += Lf + Tab + _("PreBuild cannot continue.") ;
 		printWarn(Mes);
@@ -918,14 +924,15 @@ bool Build::isGoodTargetQt(const ProjectBuildTarget * _pBuildTarget)
 /// 'file' was created ?  ->  moc_*.cxx, ui_*.h, qrc_*.cpp
 ///
 /// Called by  :
-///		1. Build::buildOneFile(cbProject * prj, const wxString& fcreator):1,
+///		1.
+///		2. Creater::buildOneFile(cbProject * prj, const wxString& fcreator):1,
 ///
 /// Calls to :
-/// 	1. Build::q_object(const wxString& filename, const wxString& qt_macro):1;
+/// 	1. Creater::q_object(const wxString& filename, const wxString& qt_macro):1;
 ///
-bool Build::isElegible(const wxString& _file)
+bool Creater::isElegible(const wxString& _file)
 {
-printD("=> Begin 'Build::isElegible(" + _file + "'" );
+printD("=> Begin 'Creater::isElegible(" + _file + "'" );
 	wxString ext = _file.AfterLast('.')  ;
 //print("ext = " + quote(ext) );
 	bool ok = ext.Matches(m_UI) || ext.Matches(m_Qrc) ;
@@ -936,33 +943,34 @@ printD("=> Begin 'Build::isElegible(" + _file + "'" );
 	if (ext.Matches(EXT_H) || ext.Matches(EXT_HPP) || ext.Matches(EXT_CPP) )
 		ok = q_object(_file, "Q_OBJECT" ) > 0  ;
 
-printD("	<= End 'Build::isElegible(...) => " + strBool(ok) );
+printD("	<= End 'Creater::isElegible(...) => " + strBool(ok) );
 
 	return ok ;
 }
 
 ///-----------------------------------------------------------------------------
 /// Return occurrences of "Q_OBJECT" + occurrences of "Q_GADGET"
+/// ==> TO DO : with 'RegExp' ...
 ///
 /// Called by  :
-///		1. Build::isElegible(const wxString& file):1
+///		1. Creater::isElegible(const wxString& file):1
 ///
-int Build::q_object(const wxString& _filename, const wxString& _qt_macro)
+int Creater::q_object(const wxString& _filename, const wxString& _qt_macro)
 {
-printD("=> Begin 'Build::q_object(" + _filename + ", " + _qt_macro + "'" );
+printD("=> Begin 'Creater::q_object(" + _filename + ", " + _qt_macro + "'" );
 /// DEBUG
 //* **************************************************************************
 //	beginDuration("q_object(" + filename + ", " + qt_macro + "");
 //* **************************************************************************
 
-//1- the comments
+///1- the comments
 	wxString CPP = "//" ;
 	wxString BCC = "/*", ECC = "*/" ;
 	// ends of line
 	wxString SA, SD;
 	SA.Append(SepA); SD.Append(SepD) ;
 
-//2- verify exist  : 'filename' is relative file name
+///2- verify exist  : 'filename' is relative file name
 	wxString namefile = m_dirProject + _filename ;
 	if (! ::wxFileExists(namefile))
 	{
@@ -970,7 +978,7 @@ printD("=> Begin 'Build::q_object(" + _filename + ", " + _qt_macro + "'" );
 		printError(Mes) ;
 		return -1  ;
 	}
-//3- read source 'namefile'
+///3- read source 'namefile'
 	wxString source = ReadFileContents(namefile) ;
 	if (source.IsEmpty())
 	{
@@ -981,20 +989,18 @@ printD("=> Begin 'Build::q_object(" + _filename + ", " + _qt_macro + "'" );
 ///----------------------------------------------------------------------
 /// 1st test before the detailed analysis
 	int number = 0  ;
-	number = qt_find(source, "Q_OBJECT")  ;
-	number += qt_find(source, "Q_GADGET" )  ;
+	number = qt_find(source, "Q_OBJECT");
+	number += qt_find(source, "Q_GADGET");
 ///-----------------------------------------------------------------------
 	if (number)
 	{
-		// wxString
 		int rest = source.length() ;
-		// string copy
+	// copy
 		wxString temp = source.Mid(0, rest ), after ;
-		// pos
+	// pos
 		int posbcc, posecc, poscpp;
-		// boolean
 		bool ok ;
-	//4- delete C comments
+///4- delete C comments
 		do
 		{
 			posecc = -1;
@@ -1008,16 +1014,16 @@ printD("=> Begin 'Build::q_object(" + _filename + ", " + _qt_macro + "'" );
 				posecc = after.Find(ECC) ;
 				// 'posecc' relative to 'posbcc' !!
 			}
-			// comments exists ?
+		// comments exists ?
 			ok = posbcc != -1 && posecc != -1  ;
 			if (ok)
 			{
-			// delete full comment
+		// delete full comment
 				temp.Remove(posbcc, posecc + ECC.length()) ;
 			}
 		}
 		while (ok)  ;
-	//5- delete C++ comments
+///5- delete C++ comments
 		do
 		{
 			posecc = -1;
@@ -1047,7 +1053,8 @@ printD("=> Begin 'Build::q_object(" + _filename + ", " + _qt_macro + "'" );
 			}
 		}
 		while (ok) ;
-	//6- delete all text == "...."
+
+///6- delete all text == "...."
 		if (temp.Contains(Dquote) )
 		{
 			int posb, pose ;
@@ -1075,7 +1082,7 @@ printD("=> Begin 'Build::q_object(" + _filename + ", " + _qt_macro + "'" );
 			} while (ok);
 		}
 
-//6- find "Q_OBJECT" and/or "Q_GADJECT"
+///7- find "Q_OBJECT" and/or "Q_GADJECT"
 		number = 0  ;
 		wxString findtext = "Q_OBJECT" ;
 		if ( _qt_macro.Matches(findtext) )
@@ -1098,7 +1105,7 @@ printD("=> Begin 'Build::q_object(" + _filename + ", " + _qt_macro + "'" );
 //* *********************************
 	Mes.Clear();
 
-printD("	<= End 'Build::q_object(...) => " + strInt(number) );
+printD("	<= End 'Creater::q_object(...) => " + strInt(number) );
 
 	return number ;
 }
@@ -1121,9 +1128,9 @@ printD("	<= End 'Build::q_object(...) => " + strInt(number) );
 /// Search 'qt_text' in 'tmp'
 ///
 /// Called by  :
-///		1. Build::q_object(const wxString& filename, const wxString& qt_macro):4
+///		1. Creater::q_object(const wxString& filename, const wxString& qt_macro):4
 ///
-int  Build::qt_find (wxString _tmp, const wxString& _qt_text)
+int  Creater::qt_find (wxString _tmp, const wxString& _qt_text)
 {
 	uint8_t tab = 0x9, espace = 0x20  ;
 	int len_text = _qt_text.length() ;
@@ -1136,10 +1143,10 @@ int  Build::qt_find (wxString _tmp, const wxString& _qt_text)
 		if (ok)
 		{
 		// pred and next caracter
-			//wxUChar
-			uint8_t xcar = _tmp.GetChar(posq-1) ;
-			//wxUChar
-			uint8_t carx = _tmp.GetChar(posq + len_text)  ;
+			wxUChar xcar = _tmp.GetChar(posq-1) ;
+			//uint8_t xcar = _tmp.GetChar(posq-1) ;
+			wxUChar carx = _tmp.GetChar(posq + len_text)  ;
+			//uint8_t carx = _tmp.GetChar(posq + len_text)  ;
 		// only autorized caracters
 			// before
 			goodb = (xcar == espace || xcar == tab || xcar == SepA) ;
@@ -1171,20 +1178,20 @@ int  Build::qt_find (wxString _tmp, const wxString& _qt_text)
 ///		1. AddOnForQt::OnProjectFileRemoved(CodeBlocksEvent& _event):1,
 ///
 ///	Calls to :
-///		1. Build::unregisterComplementFile(const wxString & _file):1,
+///		1. Creater::unregisterComplementFile(const wxString & _file):1,
 ///
-bool Build::unregisterCreatorFile(wxString & _file)
+bool Creater::unregisterCreatorFile(const wxString & _file)
 {
-	// copy file, absolute project path
+// copy file, absolute project path
 	wxString filename = _file, pathproject = m_pProject->GetCommonTopLevelPath();
-	// relative file path
+// relative file path
 	filename.Replace(pathproject, "" ) ;
 //Mes = " ==> creator filename to find =" + quote( filename ); print(Mes);
 	int16_t index = m_Filecreator.Index (filename);
 	bool ok = index != wxNOT_FOUND;
 	if (!ok)
 		return ok;
-	// replace creator by 'm_Devoid'
+// replace creator by 'm_Devoid'
 	m_Filecreator.RemoveAt(index); m_Filecreator.Insert(m_Devoid, index);
 // print(allStrTable("m_Filecreator", m_Filecreator));
 // find complement in m_Registered
@@ -1193,7 +1200,6 @@ bool Build::unregisterCreatorFile(wxString & _file)
 	ok = filename.Matches(m_Devoid);
 	if (!ok)
 	{
-		//ok = unregisterComplementFile(filename, _first);
 		ok = unregisterComplementFile(filename);
 	}
 
@@ -1209,25 +1215,25 @@ bool Build::unregisterCreatorFile(wxString & _file)
 ///
 ///	Called by :
 ///		1. AddOnForQt::OnProjectFileRemoved(CodeBlocksEvent& _event):1,
-///		2. Build::unregisterCreatorFile(const wxString & _file):n,
+///		2. Creater::unregisterCreatorFile(const wxString & _file):n,
 ///
 ///	Calls to :
 ///		1. Pre::nameCreated(const wxString& _file):1,
-// 	2. Build::removeComplementToDisk(const wxString & _filename, bool _withobject = false):1,
+/// 	2. Creater::removeComplementToDisk(const wxString & _filename, bool _withobject = false):1,
 ///
 
-bool Build::unregisterComplementFile(wxString & _file)
+bool Creater::unregisterComplementFile(wxString & _file)
 {
-printD("=> Begin 'Build::unregisterComplementFile(" + _file + ")");
+printD("=> Begin 'Creater::unregisterComplementFile(" + _file + ")");
 
 // copy file, absolute project path
 	wxString filename = _file, pathproject = m_pProject->GetCommonTopLevelPath();
-	// relative file path
+// relative file path
 	filename.Replace(pathproject, "" ) ;
-//Mes = " Build::unregisterComplementFile() ==> filename to find = " + quote( filename ); printWarn(Mes);
+//Mes = " Creater::unregisterComplementFile() ==> filename to find = " + quote( filename ); printWarn(Mes);
 // we look for the number of 'complement' occurrences in 'm_Registered'
 	bool ok = false;
-	uint16_t nf = m_Registered.GetCount();
+	wxUint16 nf = m_Registered.GetCount();
 //Mes =  " from " + quote( strInt(nf) )  + " file(s) ..." ; print(Mes);
 	wxString item;
 	while (nf--)
@@ -1249,19 +1255,17 @@ printD("=> Begin 'Build::unregisterComplementFile(" + _file + ")");
 			Mes = " ==> ";
 			Mes += _("error filename") ;
 			Mes += + " =" + quote( filename );
-		//	printError(Mes);
-		//	break;
 		/// TO DO an other method ...
 			ok = true;
 		}
 	}
 	// no file  ?
 	m_clean = m_Registered.IsEmpty();
-	// return short name
+// return short name
 	_file = filename ;
 
 	Mes.Clear();
-printD("	<= End Build::unregisterComplementFile(...) => " + strBool(ok) );
+printD("	<= End Creater::unregisterComplementFile(...) => " + strBool(ok) );
 
 	return ok;
 }
@@ -1271,19 +1275,18 @@ printD("	<= End Build::unregisterComplementFile(...) => " + strBool(ok) );
 /// return 'true' when right
 ///
 /// Called by :
-///		1. Build::updateNewTargetName(ProjectBuildTarget * _pBuildTarget,
+///		1. Creater::updateNewTargetName(ProjectBuildTarget * _pBuildTarget,
 ///							   				const wxString & _oldTargetName):1,
 ///
 /// Call to :
-///		1. Build::removeComplementToDisk(const wxString & _filename,
+///		1. Creater::removeComplementToDisk(const wxString & _filename,
 ///											  bool _withobject):1,
 ///
-bool Build::unregisterAllComplementsToCB(const wxString & _oldTargetName,
+bool Creater::unregisterAllComplementsToCB(const wxString & _oldTargetName,
 											  cbProject * _pProject)
 {
-Mes = "=> Begin 'Build::unregisterAllComplementsToCB(" ;
-Mes += _oldTargetName + ", ...)";
-printD(Mes);
+Mes = "=> Begin 'Creater::unregisterAllComplementsToCB(" ;
+Mes += _oldTargetName + ", ...)"; printD(Mes);
 
 	bool ok = false;
 	wxString filename ;
@@ -1292,7 +1295,7 @@ printD(Mes);
 // begin remove files
 	_pProject->BeginRemoveFiles();
 	bool withObject;
-	/// all complement are registerd to 'm_Registered'
+// all complement are registerd to 'm_Registered'
 	for (wxString fregistered : m_Registered)
 	{
 //Mes = " fregistered = " + quote( fregistered  ) ; print(Mes);
@@ -1303,9 +1306,9 @@ printD(Mes);
 		{
 			filename = prjfile->relativeFilename ;
 			if (filename.IsEmpty())		continue  ;
-			// memorize compiled complement before remove from project...
+		// memorize compiled complement before remove from project...
 			withObject	= prjfile->compile || prjfile->link;
-			// unregister file from CB
+		// unregister file from CB
 			ok = _pProject->RemoveFile(prjfile);
 			if (!ok)
 			{
@@ -1319,14 +1322,12 @@ printD(Mes);
 			{
 			// update  'm_Registered'
 				index = m_Registered.Index(fregistered);
-				// replace 'fregistered' by 'm_Devoid'
+			// replace 'fregistered' by 'm_Devoid'
 				m_Registered.RemoveAt(index); m_Registered.Insert(m_Devoid, index);
 
 			// also remove file from disk
 //Mes = " file = " + quote( file ) ; print(Mes);
 				ok = removeComplementToDisk(filename, withObject);
-			//	if (_first)
-			//		_first = false;
 				if (!ok)
 				{
 					Mes = " ==> removeComplementToDisk() : ";
@@ -1342,14 +1343,14 @@ printD(Mes);
 // end remove files
 	_pProject->EndRemoveFiles();
 // mandatory ! tree refresh
-	Manager::Get()->GetProjectManager()->GetUI().RebuildTree() ;
+	 m_pMprj->GetUI().RebuildTree() ;
 
 	Mes = Tab + "<== " + _("End complement file(s) was removed from C::B and disk");
 	printWarn(Mes);
 
 	Mes.Clear();
 
-printD("	<= End 	Build::unregisterAllComplementsToCB(...) => " + strBool(ok) );
+printD("	<= End 	Creater::unregisterAllComplementsToCB(...) => " + strBool(ok) );
 
 	return ok;
 }
@@ -1362,33 +1363,23 @@ printD("	<= End 	Build::unregisterAllComplementsToCB(...) => " + strBool(ok) );
 ///		return 'true' when right
 ///
 /// Called by :
-///		1. Build::unregisterComplementFile(const wxString & _file, bool _creator, bool _first):1,
-///		2. Build::unregisterAllComplementsToCB(const wxString & _oldTargetName, cbProject * _project, bool _first):1,
+///		1. Creater::unregisterComplementFile(const wxString & _file, bool _creator, bool _first):1,
+///		2. Creater::unregisterAllComplementsToCB(const wxString & _oldTargetName, cbProject * _project, bool _first):1,
 
-bool Build::removeComplementToDisk(const wxString & _filename, bool _withobject)
+bool Creater::removeComplementToDisk(const wxString & _filename, bool _withobject)
 {
-Mes = "=> Begin 'Build::removeComplementToDisk(" ;
-Mes += _filename + "," + strBool(_withobject) ;
-Mes += ")";
-printD(Mes);
+Mes = "=> Begin 'Creater::removeComplementToDisk(" ;
+Mes += _filename + "," + strBool(_withobject) + ")";printD(Mes);
 
 // complement exists
 	bool ok = ::wxFileExists(_filename);
 // Mes = "ok = " + strBool(ok); print(Mes);
 	if (ok)
 	{
-	/// remove complement file
+	// remove complement file
 		ok = ::wxRemoveFile(_filename);
 		if (ok)
 		{
-		/*
-			if (_first)
-			{
-				Mes = Tab + "==> " + _("Complement file(s) was removed from C::B and disk");
-				Mes += " ..." ;
-			//	printWarn(Mes);
-			}
-			*/
 			Mes = Tab +  "-" + quote( _filename );
 		// if 'ui_xxx.h' => no compiled file '*.o'
 			wxString beginfile = _filename.AfterLast('\\').BeforeFirst('_');
@@ -1397,17 +1388,18 @@ printD(Mes);
 				printWarn(Mes);
 				return ok;
 			}
-
-			// extract the used target
+		// extract the used target
 			wxString  pathadding, targethere;
-			// find target here
+		// find target here
 			int32_t pos = _filename.Find(m_dirPreBuild);
 			if (pos >=0)
 			{
 				targethere  = _filename.Mid(pos).BeforeLast('\\').AfterLast('\\');
 			}
+
 /// it is also necessary to delete the compiled file from the old complement
 /// ATTENTION : the active target may be different of target used !!
+
 			wxString pathObjects, ofile = _filename.Before('.')  + ".o";
 //Mes = " m_dirObjects  =" + quote( m_dirObjects ) ; printWarn(Mes);
 			pathObjects = m_dirObjects + ofile;
@@ -1424,14 +1416,14 @@ printD(Mes);
 						Mes += "," + quote( pathObjects );
 						print(Mes);
 					}
-					// error to removing :
+				// error to removing :
 					else
 					{
 						Mes = Tab + Tab + "-> " + _("not removed") + quote( pathObjects );
 						printError(Mes);
 					}
 				}
-				// no compiled complement
+			// no compiled complement
 				else
 				{
 				// the compiled complement file is missing
@@ -1441,7 +1433,6 @@ printD(Mes);
 						printError(Mes);
 
 					}
-
 				// no complement has been compiled
 					else
 					{
@@ -1464,7 +1455,7 @@ printD(Mes);
 	}
 	Mes.Clear();
 
-printD("	<= End 'Build::removeComplementToDisk(...) =>" + strBool(ok) );
+printD("	<= End 'Creater::removeComplementToDisk(...) =>" + strBool(ok) );
 
 	return ok;
 }
@@ -1474,9 +1465,9 @@ printD("	<= End 'Build::removeComplementToDisk(...) =>" + strBool(ok) );
 ///		return 'true' when right
 ///
 /// Called by :
-///		1. Build::removeComplementToDisk(const wxString & _filename):1,
+///		1. Creater::removeComplementToDisk(const wxString & _filename):1,
 
-bool Build::removeComplementObjToDisk(const wxString & _filename)
+bool Creater::removeComplementObjToDisk(const wxString & _filename)
 {
 	bool ok = ::wxFileExists(_filename);
 	/// TO FINISH ...
@@ -1490,16 +1481,16 @@ bool Build::removeComplementObjToDisk(const wxString & _filename)
 /// return 'true' when right
 ///
 /// Called by :
-///		1. Build::unregisterAllComplementsToCB(const wxString & _oldTargetName,
+///		1. Creater::unregisterAllComplementsToCB(const wxString & _oldTargetName,
 ///													cbProject * _pProject, bool _first):1,
 ///
 /// Call to :
-///		1. bool Build::recursRmDir(wxString _rmDir):2,
+///		1. bool Creater::recursRmDir(wxString _rmDir):2,
 ///
-bool Build::removeComplementDirToDisk(const wxString & _oldTargetName)
+bool Creater::removeComplementDirToDisk(const wxString & _oldTargetName)
 {
 	bool ok ;
-/// delete old complements directory : '"m_dirPreBuild"\_oldTargetName\*.*'
+// delete old complements directory : '"m_dirPreBuild"\_oldTargetName\*.*'
 	wxString file = m_dirPreBuild + _oldTargetName;
 	Mes = Tab + _("Complement directory was removed from disk") + " ...";
 	printWarn(Mes);
@@ -1517,12 +1508,12 @@ bool Build::removeComplementDirToDisk(const wxString & _oldTargetName)
 		Mes +=  _(" cannot be deleted !!!");
 		printError(Mes);
 	}
-/// delete old complements objects directory : 'obj\_oldTargetName\"m_dirPreBuild"\*.*'
+// delete old complements objects directory : 'obj\_oldTargetName\"m_dirPreBuild"\*.*'
 	file = m_dirObjects + m_dirPreBuild ;
 //Mes = "==> to delete objects" + Space + quote( file ) ; printWarn(Mes);
-Mes = Tab + _("Object complement directory was removed from disk");
+	Mes = Tab + _("Object complement directory was removed from disk");
 //	Mes +=  Space + quote( file );
-printWarn(Mes);
+	printWarn(Mes);
 	ok = recursRmDir(file);
 	Mes = Tab + "-" + quote( file + "*.*" ) ;
 	if (ok)
@@ -1546,11 +1537,11 @@ printWarn(Mes);
 /// Remove old executable from old target
 ///
 /// Called by :
-///		1. Build::updateNewTargetName(ProjectBuildTarget * _pBuildTarget,
+///		1. Creater::updateNewTargetName(ProjectBuildTarget * _pBuildTarget,
 ///									 		const wxString & _oldTargetName):1,
 ///
 
-bool Build::removeOldExecutable(ProjectBuildTarget* _pBuildTarget, const wxString & _oldTargetName)
+bool Creater::removeOldExecutable(ProjectBuildTarget* _pBuildTarget, const wxString & _oldTargetName)
 {
 	bool ok = _pBuildTarget != nullptr;
 	if (ok)
@@ -1588,13 +1579,13 @@ bool Build::removeOldExecutable(ProjectBuildTarget* _pBuildTarget, const wxStrin
 /// Remove old include path qt for CB
 ///
 /// Called by :
-///		1. Build::updateNewTargetName(ProjectBuildTarget * _pBuildTarget,
+///		1. Creater::updateNewTargetName(ProjectBuildTarget * _pBuildTarget,
 ///									 		const wxString & _oldTargetName):1,
 ///
 
-bool Build::removeOldPathtoCB(ProjectBuildTarget * _pContainer, const wxString & _oldTargetName)
+bool Creater::removeOldPathtoCB(ProjectBuildTarget * _pContainer, const wxString & _oldTargetName)
 {
-//Mes = " *** removeOldPathtoCB(...) from" + quote( _oldTargetName ) ; printWarn(Mes);
+//Mes = " *** removeOldPathtoCB(...) from" + quote( _oldTargetName ) ; printD(Mes);
 	bool ok = false;
 	// read target include path
 	wxArrayString tabincludedirs = _pContainer->GetIncludeDirs(), tabpath;
@@ -1605,13 +1596,13 @@ bool Build::removeOldPathtoCB(ProjectBuildTarget * _pContainer, const wxString &
 		{
 			m_pMam->ReplaceMacros(line) ;
 //Mes = "** line =" + quote(line); print(Mes);
-			// it's an old path
+		// it's an old path
 			if (line.Contains(_oldTargetName))	continue;
-			// memorize the line
+		// memorize the line
 			tabpath.Add(line, 1);
 		}
 //print(allStrTable( " include dir", tabpath));
-		// rewrite the paths without the old ones
+	// rewrite the paths without the old ones
 		_pContainer->SetIncludeDirs(tabpath);
 	}
 
@@ -1621,11 +1612,10 @@ bool Build::removeOldPathtoCB(ProjectBuildTarget * _pContainer, const wxString &
 /// Recursively deletes all directories and files
 ///
 /// Called by :
-///		1. bool Build::recursRmDir(wxString _rmDir):1,
-///		2. bool Build::removeComplementDirToDisk(const wxString & _oldTargetName):2,
+///		1. bool Creater::recursRmDir(wxString _rmDir):1,
+///		2. bool Creater::removeComplementDirToDisk(const wxString & _oldTargetName):2,
 ///
-
-bool Build::recursRmDir(wxString _rmDir)
+bool Creater::recursRmDir(wxString _rmDir)
 {
 // For safety, you don't empty a complete disk ('..' or '.')
     if (_rmDir.length() <= 3)
@@ -1654,15 +1644,15 @@ bool Build::recursRmDir(wxString _rmDir)
     {
         do
         {
-            // If the item found is a directory
+		// If the item found is a directory
             if (wxDirExists(_rmDir + item))
-				/// recursive call ...
+			/// !!! recursive call !!!
                 recursRmDir(_rmDir + item);
             else
-			// Otherwise, we delete the file
+		// Otherwise, we delete the file
 			if(!wxRemoveFile(_rmDir + item))
 			{
-				//Error during deletion (access rights ?)
+			//Error during deletion (access rights ?)
 				Mes =_( "Could not remove item") + quote(_rmDir + item);
 				printError(Mes);
 			}
@@ -1676,7 +1666,7 @@ bool Build::recursRmDir(wxString _rmDir)
     ok = wxFileName::Rmdir(_rmDir);
     if (!ok)
     {
-        //Error during deletion (access rights ?)
+	//Error during deletion (access rights ?)
 		Mes = _("Could not remove directory") + quote(_rmDir);
 		printError(Mes);
     }
@@ -1693,29 +1683,29 @@ bool Build::recursRmDir(wxString _rmDir)
 ///		1. AddOnForQt::OnRenameProjectOrTarget(CodeBlocksEvent& _event):1,
 ///
 /// Calls to :
-///		1. Build::unregisterAllComplementsToCB(const wxString & _oldTargetName,
+///		1. Creater::unregisterAllComplementsToCB(const wxString & _oldTargetName,
 ///											  		cbProject * _project, bool _first):1,
-///		2. Build::removeComplementDirToDisk(const wxString & _oldTargetName):1,
-///		3. Build::removeOldPathtoCB(ProjectBuildTarget * _pContainer, const wxString & _oldTargetName):1,
-///		4. Build::removeOldExecutable(ProjectBuildTarget* _pBuildTarget, const wxString & _oldTargetName):1,
+///		2. Creater::removeComplementDirToDisk(const wxString & _oldTargetName):1,
+///		3. Creater::removeOldPathtoCB(ProjectBuildTarget * _pContainer, const wxString & _oldTargetName):1,
+///		4. Creater::removeOldExecutable(ProjectBuildTarget* _pBuildTarget, const wxString & _oldTargetName):1,
 
-bool Build::updateNewTargetName(ProjectBuildTarget * _pBuildTarget,
+bool Creater::updateNewTargetName(ProjectBuildTarget * _pBuildTarget,
 									 const wxString & _oldTargetName)
 {
 	bool ok = true;
 
-	//1- unregister complements in 'm_dirPreBuild\\oldNameTarget\\*.*'
-	//2- remove complements from disk
+//1- unregister complements in 'm_dirPreBuild\\oldNameTarget\\*.*'
+//2- remove complements from disk
 	//ok = unregisterAllComplementsToCB(_oldTargetName, m_pProject, FIRST);
 	ok = unregisterAllComplementsToCB(_oldTargetName, m_pProject);
 
-	//3- remove old directory to disk
+//3- remove old directory to disk
 	ok = removeComplementDirToDisk(_oldTargetName);
 
-	//4- remove old paths to new build target
+//4- remove old paths to new build target
 	ok = removeOldPathtoCB(_pBuildTarget, _oldTargetName);
 
-	//5- remove 'BuildCB\\oldNameTarget\\app.exe'
+//5- remove 'BuildCB\\oldNameTarget\\app.exe'
 	ok = removeOldExecutable(_pBuildTarget, _oldTargetName);
 
 	return ok;
@@ -1729,15 +1719,17 @@ bool Build::updateNewTargetName(ProjectBuildTarget * _pBuildTarget,
 ///	return 'true' when right
 ///
 /// Called by  :
-///		1. Build::buildAllFiles(cbProject * prj, bool workspace, bool allbuild):1,
+///		1. Creater::buildAllFiles(cbProject * prj, bool workspace, bool allbuild):1,
 ///
 /// Calls to :
-///		1. Build::addOneFile(const wxString& fcreator, const wxString& fout):1,
+///		1. Creater::addOneFile(const wxString& fcreator, const wxString& fout):1,
 ///
-uint16_t Build::addAllFiles()
+wxUint16 Creater::addAllFiles()
 {
+printD(="=> Begin Creater::addAllFiles()");
+
 	m_Registered.Clear();
-// local variables
+
 	bool valid = false;
 	wxString fout;
 // read file list to 'm_Filecreator'  (*.h, *.cpp, *.qrc, *.ui)
@@ -1747,7 +1739,7 @@ uint16_t Build::addAllFiles()
 		fout = complementDirectory() + nameCreated(fcreator) ;
 	// record one complement file
 		valid = addOneFile(fcreator, fout) ;
-	// valid
+	// ok ?
 		if (valid)
 		{	// registered in table
 			m_Registered.Add(fout, 1) ;
@@ -1755,13 +1747,14 @@ uint16_t Build::addAllFiles()
 	}
 // tree refresh
 	// >= svn 9501 : CB 13.12
-	Manager::Get()->GetProjectManager()->GetUI().RebuildTree() ;
-
+	if (m_pMprj)
+		m_pMprj->GetUI().RebuildTree() ;
 //  end registering
-	uint16_t nf = m_Registered.GetCount() ;
+	wxUint16 nf = m_Registered.GetCount() ;
 //	Mes = Tab + "-> " + strInt(nf) ;
 //	Mes += Space + _("creator(s) file(s) registered in the plugin") ; print(Mes) ;
 
+printD("	<== End Creater::addAllFiles()");
 	return  nf;
 }
 ///-----------------------------------------------------------------------------
@@ -1769,13 +1762,13 @@ uint16_t Build::addAllFiles()
 ///	return 'true' when right
 ///
 /// Called by  :
-///		1. Build::addAllFiles():1,
+///		1. Creater::addAllFiles():1,
 ///
 /// Calls to :
 ///		1. Pre::nameCreated(const wxString& file):1,
-///		2. Build::hasIncluded(const wxString& fcreator):1,
+///		2. Creater::hasIncluded(const wxString& fcreator):1,
 ///
-bool Build::addOneFile(const wxString& _fcreator, const wxString& _fout)
+bool Creater::addOneFile(const wxString& _fcreator, const wxString& _fout)
 {
 // local variables
 	bool valid = false, nocompile = false, weight = 50;
@@ -1785,7 +1778,7 @@ bool Build::addOneFile(const wxString& _fcreator, const wxString& _fout)
 		 (extin.Matches(EXT_CPP) && extout.Matches(EXT_MOC)) )
 		nocompile =  hasIncluded(_fcreator) ;
 	else
-	// ui_*.h file
+// ui_*.h file
 	if (extin.Matches(EXT_UI) && extout.Matches(EXT_H) )  {
 		nocompile = true;
 		weight = 40; // before all files
@@ -1796,7 +1789,8 @@ bool Build::addOneFile(const wxString& _fcreator, const wxString& _fout)
 // find projectfile in project ?
 	ProjectFile * prjfile = m_pProject->GetFileByFilename(_fout);
 	valid = prjfile != nullptr;
-	if (valid) {
+	if (valid)
+	{
 	// and add target to this projectfile
 		prjfile->AddBuildTarget(m_nameActiveTarget);
 		valid = prjfile != nullptr;
@@ -1810,7 +1804,6 @@ bool Build::addOneFile(const wxString& _fcreator, const wxString& _fout)
 	}
 	else {
 	// then create a projectfile with the file to target
-		// cbProject::AddFile(Nametarget, file, compile, link, weight)
 		prjfile = m_pProject->AddFile(m_nameActiveTarget, _fout, !nocompile, !nocompile, weight);
 		valid = prjfile != nullptr;
 		if (!valid)
@@ -1833,15 +1826,15 @@ bool Build::addOneFile(const wxString& _fcreator, const wxString& _fout)
 ///  *.cpp contains  (# include "moc_*.cpp" or (# include "*.moc" at the file end
 ///
 /// Called by  :
-///		1. Build::buildOneFile(cbProject * prj, const wxString& fcreator):1
-///		2. Build::addOneFile(const wxString& fcreator, const wxString& fout):1,
+///		1. Creater::buildOneFile(cbProject * prj, const wxString& fcreator):1
+///		2. Creater::addOneFile(const wxString& fcreator, const wxString& fout):1,
 ///
 /// Calls to :
-///		1. Build::verifyIncluded(wxString& source, wxString& txt)
+///		1. Creater::verifyIncluded(wxString& source, wxString& txt)
 ///
-bool Build::hasIncluded(const wxString& _fcreator)
+bool Creater::hasIncluded(const wxString& _fcreator)
 {
-//Mes = Tab + quote( fcreator ) ; printWarn(Mes);
+printD("==> Begin 'Creater::hasIncluded(" + _fcreator + ")'" );
 // if '_fcreator' == 'xxxx.h' -> search in 'xxxx.cpp'
 // if '_fcreator' == 'xxxx.cpp'  -> search in 'xxxx.cpp'
 	wxString namefile = _fcreator.BeforeLast('.') + DOT_EXT_CPP;
@@ -1859,13 +1852,13 @@ bool Build::hasIncluded(const wxString& _fcreator)
 	namefile = namefile.AfterLast(Slash).BeforeLast('.')  ;
 	wxString txt = "";
 	bool include = false;
-	//1- ext == EXT_H =>  search >"moc_namefile.cpp"<
+//1- ext == EXT_H =>  search >"moc_namefile.cpp"<
 	if (ext.Matches(EXT_H))
 	{
 		txt = "moc_" + namefile + DOT_EXT_CPP;
 	}
 	else
-	//2- ext == EXT_CPP => search >"namefile.moc"<
+//2- ext == EXT_CPP => search >"namefile.moc"<
 	if (ext.Matches(EXT_CPP) )
 	{
 		txt = namefile + DOT_EXT_MOC ;
@@ -1874,14 +1867,14 @@ bool Build::hasIncluded(const wxString& _fcreator)
 // find from end
 	include = verifyIncluded(source, txt) ;
 
-//Mes = "Creator " + quote( fcreator ) ;
-//Mes += " : hasIncluded(...) -> " + strInt(include); printWarn(Mes);
+printD("	<== End 'Creater::hasIncluded(...)' => " + strBool(include));
 	return  include ;
 }
+
 /// Called by  :
 ///		1. hasIncluded(const wxString& fcreator):2
 ///
-bool Build::verifyIncluded(wxString& _source, wxString& _txt)
+bool Creater::verifyIncluded(wxString& _source, wxString& _txt)
 {
 	wxString temp;
 	int32_t pos = _source.Find(_txt);
@@ -1922,10 +1915,10 @@ bool Build::verifyIncluded(wxString& _source, wxString& _txt)
 /// Indicates whether a file is registered in the project
 ///
 /// Called by  :
-///		1. Build::buildOneFile(cbProject * prj, const wxString& fcreator):1,
-///		2. Build::filesTocreate(bool allrebuild):1,
+///		1. Creater::buildOneFile(cbProject * prj, const wxString& fcreator):1,
+///		2. Creater::filesTocreate(bool allrebuild):1,
 ///
-bool Build::inProjectFileCB(const wxString& _file)
+bool Creater::inProjectFileCB(const wxString& _file)
 {
 //Mes = Tab + quote( file ) ;
     // relative filename !!!
@@ -1938,18 +1931,18 @@ bool Build::inProjectFileCB(const wxString& _file)
 ///  Create directory for "qtbrebuilt\"
 ///
 ///  Called by :
-///		1. Build::beginMesBuildCreate():1,
-///		2. Build::buildOneFile(cbProject * prj, const wxString& fcreator):1,
-///		1. Build::createComplement(const wxString& qexe, const uint16_t index):1,
+///		1. Creater::beginMesBuildCreate():1,
+///		2. Creater::buildOneFile(cbProject * prj, const wxString& fcreator):1,
+///		1. Creater::createComplement(const wxString& qexe, const wxUint16 index):1,
 ///
-bool Build::createDir (const wxString&  _dircomplement)
+bool Creater::createDir (const wxString&  _dircomplement)
 {
-//Mes = "Build::createDir(") + quote( dircomplement ) + "" ;
+//Mes = "Creater::createDir(") + quote( dircomplement ) + "" ;
 //printWarn(Mes);
 	bool ok = true  ;
 	if (! wxDirExists(_dircomplement))
 	{
-	    // Linux -> droit d'accès = 0x0777
+	// Linux -> access right = 0x0777
 		ok = wxFileName::Mkdir(_dircomplement,  wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
 		if (!ok)
 		{
@@ -1968,7 +1961,7 @@ bool Build::createDir (const wxString&  _dircomplement)
 ///
 ///  Called by : none
 ///
-bool Build::removeDir(const wxString& _dirgen )
+bool Creater::removeDir(const wxString& _dirgen )
 {
 	bool ok = ::wxDirExists(_dirgen) ;
 	if (ok)
@@ -1991,18 +1984,18 @@ bool Build::removeDir(const wxString& _dirgen )
 /// Must complete the table 'm_Filestocreate'
 ///
 /// Called by
-///		1. Build::buildAllFiles(cbProject * prj, bool workspace, bool allbuild)
+///		1. Creater::buildAllFiles(cbProject * prj, bool workspace, bool allbuild)
 ///
 ///	Calls to
 ///		1. Pre::copyArray(const wxArrayString& strarray):1,
-///		2. Build::inProjectFileCB(const wxString& file):1,
-///		3. Build::compareDate(const wxString&  fileref, const wxString&  filetarget):1,
+///		2. Creater::inProjectFileCB(const wxString& file):1,
+///		3. Creater::compareDate(const wxString&  fileref, const wxString&  filetarget):1,
 ///
-uint16_t Build::filesTocreate(bool _allrebuild)
+wxUint16 Creater::filesTocreate(bool _allrebuild)
 {
 	m_Filestocreate.Clear();
 // save all open files
-	bool ok = Manager::Get()->GetEditorManager()->SaveAll();
+	bool ok = m_pM->GetEditorManager()->SaveAll();
 	if (!ok )
 	{
 		Mes = _("Couldn't save all files ") ;
@@ -2012,7 +2005,7 @@ uint16_t Build::filesTocreate(bool _allrebuild)
 		return ok  ;
 	}
 
-    uint16_t  ntocreate = 0;
+    wxUint16  ntocreate = 0;
 // all rebuild : copy table
 	if (_allrebuild)
 	{
@@ -2026,9 +2019,14 @@ uint16_t Build::filesTocreate(bool _allrebuild)
 		wxString inputfile, nameout ;
 		bool inproject ;
 	// analyze all eligible files/targets
-		uint16_t nfiles = m_Filecreator.GetCount() ;
-		for (uint16_t i=0; i < nfiles ; i++ )
+		wxUint16 nfiles = m_Filecreator.GetCount() ;
+		for (wxUint16 i=0; i < nfiles ; i++ )
 		{
+			if (m_abort)
+			{
+				ntocreate = 0;
+				break;
+			}
 		// relative name inputfile
 			inputfile = m_Filecreator.Item(i) ;
 		// file registered to create
@@ -2046,7 +2044,7 @@ uint16_t Build::filesTocreate(bool _allrebuild)
 					m_Identical = compareDate(inputfile, nameout) ;
 				}
 			}
-			// identical date -> no create
+		// identical date -> no create
 			if (m_Identical)
 			// add 'm_Devoid' to 'Filetocreate' and continue
 				m_Filestocreate.Add(m_Devoid, 1) ;
@@ -2065,10 +2063,10 @@ uint16_t Build::filesTocreate(bool _allrebuild)
 /// Compare file date
 ///
 /// Called by  :
-///		1. Build::buildOneFile(cbProject * prj, const wxString& fcreator):1,
-///		1. Build::filesTocreate(bool allrebuild):1,
+///		1. Creater::buildOneFile(cbProject * prj, const wxString& fcreator):1,
+///		1. Creater::filesTocreate(bool allrebuild):1,
 ///
-bool Build::compareDate(const wxString& _fileref, const wxString&  _filetarget)
+bool Creater::compareDate(const wxString& _fileref, const wxString&  _filetarget)
 {
 	if ( !(::wxFileExists(_fileref) && ::wxFileExists(_filetarget) ) )
 		return false;
@@ -2087,10 +2085,10 @@ bool Build::compareDate(const wxString& _fileref, const wxString&  _filetarget)
 /// Set date to target
 ///
 /// Called by  :
-///		1. Build::createFileComplement(const wxString& qexe, const wxString& fcreator
+///		1. Creater::createFileComplement(const wxString& qexe, const wxString& fcreator
 ///											, const wxString& fout):1,
 ///
-bool Build::modifyDate(const wxString&  _fileref, const wxString& _filetarget)
+bool Creater::modifyDate(const wxString&  _fileref, const wxString& _filetarget)
 {
 	if ( !(::wxFileExists(_fileref) && ::wxFileExists(_filetarget) ) )
 		return false;
@@ -2117,14 +2115,14 @@ bool Build::modifyDate(const wxString&  _fileref, const wxString& _filetarget)
 /// return true if all right
 ///
 /// Called by  :
-///		1. Build::buildAllFiles(cbProject * prj, bool workspace, bool allbuild):1,
+///		1. Creater::buildAllFiles(cbProject * prj, bool workspace, bool allbuild):1,
 ///
 ///	Calls to :
-///		1. Build::isNoFile(const wxArrayString& arraystr):1,
-///		2. Build::findTargetQtexe(buildtarget->GetParentProject()):1,
-///		3. Build::createComplement(const wxString& qexe, const uint16_t index):3,
+///		1. Creater::isNoFile(const wxArrayString& arraystr):1,
+///		2. Creater::findTargetQtexe(buildtarget->GetParentProject()):1,
+///		3. Creater::createComplement(const wxString& qexe, const wxUint16 index):3,
 ///
-bool Build::createFiles()
+bool Creater::createFiles()
 {
 // search target qt path for moc, ...
 	ProjectBuildTarget * pBuildTarget = m_pProject->GetBuildTarget(m_nameActiveTarget)  ;
@@ -2141,9 +2139,11 @@ bool Build::createFiles()
 	uint32_t nftocreate = nfilesToCreate(m_Filestocreate)
 			, nfcreated = m_Createdfile.GetCount()
 			, nftodisk = m_Filewascreated.GetCount();
+
 //Mes = "nftocreate = "  + strInt(nftocreate) ;
 //Mes += ", nfcreated = "  + strInt(nfcreated) ;
 //Mes += ", nftodisk = "  + strInt(nftodisk) ; printWarn(Mes);
+
 // no 'abort' during last build
 	if (nftocreate == nfcreated )
 	{
@@ -2172,14 +2172,15 @@ bool Build::createFiles()
 // used by 'createComplement()'
 //	if (m_clean)
 //		m_nfilesCreated = nfcreated;
+
 	m_nfilesCreated = 0;
 // local variables
 	wxString nameout, ext, strerror ;
 	bool created = false, abandonment = false ;
-	uint16_t nfiles = m_Filestocreate.GetCount() ;
+	wxUint16 nfiles = m_Filestocreate.GetCount() ;
 	int32_t ncreated = 0 ;
 // analyze all eligible files/target
-	for (uint16_t i = 0; i < nfiles ; i++ )
+	for (wxUint16 i = 0; i < nfiles ; i++ )
 	{
 		if (m_abort)
 		{
@@ -2194,18 +2195,18 @@ bool Build::createFiles()
 	// extension creator
 		ext = m_Filecreator.Item(i).AfterLast('.') ;
 	// create file
-		//1- file *.ui : launch 'uic.exe'
+	//1- file *.ui : launch 'uic.exe'
 		if ( ext.Matches(m_UI) )
 			strerror = createComplement(m_Uexe, i) ;
 		else
-		//2- file *.qrc : launch 'rcc.exe'
+	//2- file *.qrc : launch 'rcc.exe'
 		if (ext.Matches(m_Qrc) )
 			strerror = createComplement(m_Rexe, i)  ;
 		else
-		//3- file with 'Q_OBJECT' and/or 'Q_GADGET' : launch 'moc.exe'
+	//3- file with 'Q_OBJECT' and/or 'Q_GADGET' : launch 'moc.exe'
 		if (ext.Matches(EXT_H) || ext.Matches(EXT_HPP) || ext.Matches(EXT_CPP) )
 			strerror = createComplement(m_Mexe, i)  ;
-		// more one
+	// more one
 		created = strerror.IsEmpty();
 		if (created)
 		{
@@ -2219,7 +2220,7 @@ bool Build::createFiles()
 			wxString title = _("Creating") + quote( m_Registered.Item(i)) ;
 			title += _("failed") ;
 			title += " ...";
-			// error create complement
+		// error create complement
 			Mes =  Tab +"=> " ;
 			Mes += strerror.BeforeLast(Lf.GetChar(0)) ;
 			printError (Mes) ;
@@ -2257,7 +2258,7 @@ bool Build::createFiles()
 		print(Mes);
     // adversing
 		Mes = _("The 'abort' button was pressed during the creation of the complement files(s)") + " !!!";
-		printWarn(Mes) ;
+	//	printWarn(Mes) ;
 		cbMessageBox(Mes, "Create File(...)", wxICON_WARNING ) ;
 	// adjust 'm_Createdfile'
 		wxArrayString  temp ;
@@ -2270,12 +2271,11 @@ bool Build::createFiles()
 			m_Registered= copyArray(temp);
 	// remove old file on disk
     // ...
- // Debug
-//uint16_t nf = m_Createdfile.GetCount() ;
+/// Debug
+//wxUint16 nf = m_Createdfile.GetCount() ;
 //Mes =  Tab + "- " + strInt(nf) + Space  ;
 //Mes += _("complement(s) file(s) are created in the target") ; printWarn(Mes)  ;
-		// demand cancelled
-		setAbort(false);
+/// <=
 	}
 	Mes.Clear();
 
@@ -2285,9 +2285,9 @@ bool Build::createFiles()
 /// Search all 'm_Devoid' to an wxArrayString
 ///
 /// Called by  :
-///		1. Build::createFiles():1,
+///		1. Creater::createFiles():1,
 ///
-bool Build::isNoFile (const wxArrayString& _arraystr)
+bool Creater::isNoFile (const wxArrayString& _arraystr)
 {
 	bool devoid = false ;
 	for (const auto item : _arraystr)
@@ -2303,11 +2303,11 @@ bool Build::isNoFile (const wxArrayString& _arraystr)
 /// Search all files to create into an wxArrayString
 ///
 /// Called by  :
-///		1. Build::createFiles():1,
+///		1. Creater::createFiles():1,
 ///
-uint16_t Build::nfilesToCreate(const wxArrayString& _arraystr)
+wxUint16 Creater::nfilesToCreate(const wxArrayString& _arraystr)
 {
-	uint16_t nftocreate = 0;
+	wxUint16 nftocreate = 0;
 	for (const auto item : _arraystr)
 	{
 		if(! item.Matches(m_Devoid) )
@@ -2321,21 +2321,23 @@ uint16_t Build::nfilesToCreate(const wxArrayString& _arraystr)
 ///	else return an error string
 ///
 /// Called by  :
-///		1. Build::buildOneFile(cbProject * prj, const wxString& fcreator):1,
-///		2. Build::createComplement(const wxString& qexe, const uint16_t index):1,
+///		1. Creater::buildOneFile(cbProject * prj, const wxString& fcreator):1,
+///		2. Creater::createComplement(const wxString& qexe, const wxUint16 index):1,
 ///
 ///	Calls to :
-///		1. Build::executeAndGetOutputAndError():1,
-///		2. Build::modifyDate(const wxString&  fcreator, const wxString& fout):1,
+///		1. Creater::executeAndGetOutputAndError():1,
+///		2. Creater::modifyDate(const wxString&  fcreator, const wxString& fout):1,
 ///
-wxString Build::createFileComplement(const wxString& _qexe,
+wxString Creater::createFileComplement(const wxString& _qexe,
 										  const wxString& _fcreator,
 										  const wxString& _fout)
 {
 // build command
 	wxString command = _qexe  ;
-//Mes = "Build::createFileComplement() => command = *>" + command  + "<*";
+
+//Mes = "Creater::createFileComplement() => command = *>" + command  + "<*";
 //printWarn(Mes);
+
 // add file name whithout extension
 	if (_qexe.Matches(m_Rexe))
 	{
@@ -2355,7 +2357,11 @@ wxString Build::createFileComplement(const wxString& _qexe,
 // execute command line : use short file name
 	wxString strerror = executeAndGetOutputAndError(command, PREPEND_ERROR)  ;
 	bool created =  strerror.IsEmpty() ;
+//print("createFileComplement::strerror = " + quote(strerror) + " => created : " + strBool(created));
+
 // file-project              : params = name, is relative, is Unixfilename
+//print("fout = " + quote(_fout));
+
 	ProjectFile * prjfile =  m_pProject->GetFileByFilename(_fout, IS_RELATIVE, IS_UNIX_FILENAME) ;
 	if (!prjfile)
 	{
@@ -2366,16 +2372,14 @@ wxString Build::createFileComplement(const wxString& _qexe,
 	if (m_abort)
 	{
 		created = false;
-		// demand cancelled
-		setAbort(false);
 	}
 // create error
 	if (! created )
 	{
 	// unregister the last file 'fout' in the project
 		m_pProject->RemoveFile(prjfile) ;
-		//  >= svn 9501 : CB 13.12
-		Manager::Get()->GetProjectManager()->GetUI().RebuildTree() ;
+	//  >= svn 9501 : CB 13.12
+		 m_pMprj->GetUI().RebuildTree() ;
 	}
 	else
 	{
@@ -2399,7 +2403,9 @@ wxString Build::createFileComplement(const wxString& _qexe,
 	}
 	Mes.Clear();
 
+//print("createFileComplement::strerror = " + quote(strerror));
 // return  error  : good if strerror is empty
+
 	return strerror ;
 }
 ///-----------------------------------------------------------------------------
@@ -2407,14 +2413,15 @@ wxString Build::createFileComplement(const wxString& _qexe,
 ///	else return an error string
 ///
 /// Called by  :
-///		1. Build::createFiles():3,
+///		1. Creater::createFiles():3,
 ///	Calls to :
-///		1. Build::createFileComplement(const wxString& qexe, cnst wxString& fcreator
+///		1. Creater::createFileComplement(const wxString& qexe, cnst wxString& fcreator
 ///											, const wxString& fout):1,
 ///
-wxString Build::createComplement(const wxString& _qexe, const uint16_t _index)
+wxString Creater::createComplement(const wxString& _qexe, const wxUint16 _index)
 {
-//Mes = "Build::createComplement(...)" ; print(Mes);
+printD("=> Begin 'Creater::createComplement(...)'");
+
 //1- name relative input file  "src\filecreator.xxx"
 	wxString inputfile = m_Filecreator.Item(_index) ;
 	// create directory for m_nameActiveTarget
@@ -2441,16 +2448,21 @@ wxString Build::createComplement(const wxString& _qexe, const uint16_t _index)
 	wxString outputfile = m_Registered.Item(_index) ;
 //4- create on file complement
 	wxString strerror = createFileComplement(_qexe, inputfile, outputfile) ;
+
+
+printD("	<= End 'Creater::createComplement(...)'");
+//print("createComplement::strerror = " + quote(strerror));
 //5- return  error  : good if 'strerror' is empty
+
 	return strerror ;
 }
 ///-----------------------------------------------------------------------------
 /// Give include path qt for 'm_Moc'
 ///
 /// Called by :
-///		1. Build::findTargetQtexe(CompileTargetBase * buildtarget):1,
+///		1. Creater::findTargetQtexe(CompileTargetBase * buildtarget):1,
 ///
-wxString Build::pathIncludeMoc(const CompileTargetBase * _pContainer)
+wxString Creater::pathIncludeMoc(const CompileTargetBase * _pContainer)
 {
 	wxArrayString tabincludedirs = _pContainer->GetIncludeDirs(), tabpath;
 	wxString incpath;
@@ -2460,7 +2472,7 @@ wxString Build::pathIncludeMoc(const CompileTargetBase * _pContainer)
 		line.Prepend("-I");
 		tabpath.Add(line, 1);
 	}
-	// build 'incpath'
+// build 'incpath'
 	if (tabpath.GetCount())
 		incpath = Space + GetStringFromArray(tabpath, Space, SEPARATOR_AT_END) + Space;
 
@@ -2471,9 +2483,9 @@ wxString Build::pathIncludeMoc(const CompileTargetBase * _pContainer)
 /// Give 'defines' qt for 'm_Moc'
 ///
 /// Called by :
-///		1. Build::findTargetQtexe (CompileTargetBase * buildtarget):1,
+///		1. Creater::findTargetQtexe (CompileTargetBase * buildtarget):1,
 ///
-wxString Build::definesMoc(CompileTargetBase * _pContainer)
+wxString Creater::definesMoc(CompileTargetBase * _pContainer)
 {
 	wxArrayString tabdefines = _pContainer->GetCompilerOptions(), tabdef ;
 	wxString def ;
@@ -2482,7 +2494,7 @@ wxString Build::definesMoc(CompileTargetBase * _pContainer)
 		if (line.Find("-D") != -1 )
 			tabdef.Add(line, 1) ;
 	}
-	// build 'def'
+// build 'def'
 	if (tabdef.GetCount())
 		def = " " + GetStringFromArray(tabdef, " ", true) + " " ;
 
@@ -2492,12 +2504,12 @@ wxString Build::definesMoc(CompileTargetBase * _pContainer)
 /// Verify if at least one valid file is saved in 'm_Createdfile'
 ///
 /// Called by  :
-/// 	1. Build::buildAllFiles(cbProject * prj, bool workspace, bool allbuild):1,
+/// 	1. Creater::buildAllFiles(cbProject * prj, bool workspace, bool allbuild):1,
 ///
-bool Build::validCreated()
+bool Creater::validCreated()
 {
 	bool tocreate = false, ok = true;
-	uint16_t ncase = m_Createdfile.GetCount()  ;
+	wxUint16 ncase = m_Createdfile.GetCount()  ;
 	while (ncase > 0 && !tocreate)
 	{
 		tocreate = ! m_Createdfile.Item(--ncase).Matches(m_Devoid)  ;
@@ -2506,10 +2518,10 @@ bool Build::validCreated()
 	}
 	if (tocreate)
 	{
-		// svn >= svn 9501 : CB 13.12
-		Manager::Get()->GetProjectManager()->GetUI().RebuildTree()  ;
+	// svn >= svn 9501 : CB 13.12
+		 m_pMprj->GetUI().RebuildTree()  ;
 	// save project
-		ok = Manager::Get()->GetProjectManager()->SaveProject(m_pProject)  ;
+		ok =  m_pMprj->SaveProject(m_pProject)  ;
 		if(!ok)
 		{
 			Mes = _("Save project is not possible !!");
@@ -2524,10 +2536,10 @@ bool Build::validCreated()
 /// Execute another program (always synchronous).
 ///
 /// Called by :
-///		1. Build::createFileComplement(const wxString& qexe, const wxString& fcreator
+///		1. Creater::createFileComplement(const wxString& qexe, const wxString& fcreator
 ///											, const wxString& fout):1,
 ///
-wxString Build::executeAndGetOutputAndError(const wxString& _command, bool _prepend_error)
+wxString Creater::executeAndGetOutputAndError(const wxString& _command, bool _prepend_error)
 {
 	wxArrayString output;
 	wxArrayString error;

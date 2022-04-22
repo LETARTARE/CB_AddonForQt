@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-10-17
- * Modified:  2020-10-05
+ * Modified:  2022-04-22
  * Copyright: LETARTARE
  * License:   GPL
  *************************************************************
@@ -11,9 +11,10 @@
 
 #ifndef _PRE_H_
 #define _PRE_H_
+
+#include "projectmanager.h"
 //------------------------------------------------------------------------------
-#include <wx/arrstr.h>
-#include <time.h>
+#include <wx/menu.h>	// wxMenuBar
 //------------------------------------------------------------------------------
 class cbProject;
 class CompileTargetBase;
@@ -42,16 +43,21 @@ class Pre
 		virtual ~Pre();
 
 		/** \brief Locate and call a menu from string (e.g. "/Valgrind/Run Valgrind::MemCheck")
-		 *  it's a copy of 'CodeBlocks::sc_globals.cpp::CallMenu(const wxString& menuPath)'		 *
-         *  \param _menuPath
-		 *  \return menu identificateur or -1 il failed
+		 *  it's a copy of 'CodeBlocks::sc_globals.cpp::CallMenu(const wxString& menuPath)'
+		 *  \param _menuBar : search for _menuPath
+         *  \param _menuPath : menu to find
+		 *  \return true if is good
          */
-        int CallMenu(const wxString& _menuPath);
+        bool CallMenu(const wxMenuBar* _mbar, const wxString& _menuPath);
 
 		/** \brief Plugin name
 		 * @return name
 		 */
 		wxString namePlugin();
+		/** \brief Get the date followed by the time of construction of the plugin
+		 * @return date and time
+		 */
+		wxString GetDateBuildPlugin();
 
 		/** \brief Set 'm_pProject'
 		 * @param _pProject :
@@ -77,6 +83,12 @@ class Pre
 		 * @return true if is a creator file
 		 */
         bool isCreatorFile(const wxString & _file);
+        /** \brief Test if a filename is registerd to target
+		 * @param _file : short name
+		 * @param _nametarget : target name
+		 * @return true if is a registerd file inot target
+		 */
+        bool isRegisteredToTarget(const wxString & _filename, wxString & _nametarget);
         /** \brief Generate the name of the complement file
 		 *	 @param _file : file name creator
 		 *   @return file name complement
@@ -85,7 +97,7 @@ class Pre
 
         /** \brief Give complement directory
 		 * @return directory name
-		*/
+	     */
 		wxString complementDirectory() const;
 
         /**
@@ -143,8 +155,8 @@ class Pre
          * @return true : if complement on disk
          */
 		bool detectComplementsOnDisk(cbProject * _pProject,
-										const wxString & _nametarget=wxEmptyString,
-										bool _report = true);
+										const wxString & _nametarget,
+										bool _report);
 
 		/** \brief refresh all tables from 'm_Filewascreated'
 		 * @param _debug : display report if true.
@@ -163,9 +175,13 @@ class Pre
 		void SetPageIndex(int _logindex);
 
 		/** \brief setAbort complement file creating
-		  * @param _abort
+		 * @param _abort
 		 */
 		void setAbort(bool _abort) ;
+		/** \brief getAbort complement file creating
+		 * @return m_abort
+		 */
+		bool getAbort();
 
 		/** \brief Startup duration
 		 * @param _namefunction : used function name
@@ -193,7 +209,7 @@ class Pre
 		wxArrayString copyArray (const wxArrayString& _strarray,  int _nlcopy = 0)  ;
 
 		/** \brief give a string of table 'title' for debug
-		 *	@param _title : titlr name
+		 *	@param _title : title name
 		 *	@param _strarray : array name
 		 *  @return one string of array
 		 */
@@ -264,7 +280,7 @@ class Pre
                   m_nameActiveTarget = wxEmptyString;
 		/**  \brief numbers files projects
 		 */
-		uint16_t m_nfilesCreated = 0;
+		wxUint16 m_nfilesCreated = 0;
 		/** \brief executable name files Qt : 'moc'
 		 */
 		wxString m_Mexe = wxEmptyString,
@@ -292,10 +308,13 @@ class Pre
 
 		/**  \brief manager
 		 */
-		Manager * m_pm = nullptr;
+		Manager * m_pM = nullptr;
 		/**  \brief macros manager
 		 */
 		MacrosManager  * m_pMam = nullptr;
+		/**  \brief manager
+	     */
+		ProjectManager * m_pMprj = nullptr;
 
 		/** \brief table contains libray name Qt
 		 */

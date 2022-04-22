@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-02-27
- * Modified:  2021-12-01
+ * Modified:  2022-04-22
  * Copyright: LETARTARE
  * License:   GPL
  **************************************************************/
@@ -26,15 +26,20 @@
 // not place change !
 #include "defines.h"
 ///-----------------------------------------------------------------------------
+/** \brief protect for 'm_Stop' access
+ */
+static wxMutex st_mutexStop;
+///-----------------------------------------------------------------------------
 ///	Constructor
 ///
 /// Called by :
-///		1. Build::Build(cbProject * _pProject, int _logindex, wxString & _nameplugin):1,
+///		1. Creater::Creater(cbProject * _pProject, int _logindex, wxString & _nameplugin):1,
 ///
 Pre::Pre(const wxString & _nameplugin, int _logindex)
 	: m_namePlugin(_nameplugin),
-	  m_pm(Manager::Get()),
-	  m_pMam(Manager::Get()->GetMacrosManager() ),
+	  m_pM(Manager::Get()),
+	  m_pMam(m_pM->GetMacrosManager() ),
+	  m_pMprj(m_pM->GetProjectManager()),
 	  m_LogPageIndex(_logindex)
 {
 #if   defined(__WXMSW__)
@@ -51,28 +56,29 @@ Pre::Pre(const wxString & _nameplugin, int _logindex)
 ///	Destructor
 ///
 /// Called by
-///		1. Build::~Build():1,
+///		1. Creater::~Creater():1,
 ///
 Pre::~Pre()
 {
+	//m_pMprj = nullptr ; m_pMam = nullptr;
+	//m_pProject = nullptr;
 }
 
 #include <wx/menu.h>
 /// ----------------------------------------------------------------------------
 /// Locate and call a menu from string (e.g. "/Valgrind/Run Valgrind::MemCheck")
 /// it's a copy of 'CodeBlocks::sc_globals.cpp::CallMenu(const wxString& menuPath)'
-/// return menu identificateur or -1 il failed
+/// return true il is good
 ///
 /// called by;
 ///		1. AddOnForQt::OnMenuComplements(wxCommandEvent& _event):1,
 ///
 /// ----------------------------------------------------------------------------
-int Pre::CallMenu(const wxString& _menuPath)
+bool Pre::CallMenu(const wxMenuBar* _mbar, const wxString& _menuPath)
 {
-printD("=> Begin 'Pre::CallMenu(" + _menuPath + ")'" );
-    int idMenu = wxNOT_FOUND;
+printD("=> Begin 'Pre::CallMenu(...," + _menuPath + ")'" );
+	bool good = false;
     // this code is partially based on MenuItemsManager::CreateFromString()
-    wxMenuBar* mbar = Manager::Get()->GetAppFrame()->GetMenuBar();
     wxMenu* menu = nullptr;
     size_t pos = 0;
     while (true)
@@ -84,20 +90,20 @@ printD("=> Begin 'Pre::CallMenu(" + _menuPath + ")'" );
         // find next slash
         size_t nextPos = pos;
         while (nextPos < _menuPath.Length() && _menuPath.GetChar(++nextPos) != '/' ) ;
-//print(" => menuPath =" + quote(menuPath) );
+printD(" => menuPath =" + quote(_menuPath) );
         wxString current = _menuPath.Mid(pos, nextPos - pos);
-//print(" => current =" + quote(current) );
+printD(" => current =" + quote(current) );
         if (current.IsEmpty())       break;
 
         bool isLast = nextPos >= _menuPath.Length();
         // current holds the current search string
         if (!menu) // no menu yet? look in menubar
         {
-            int menuPos = mbar->FindMenu(current);
+			int menuPos = _mbar->FindMenu(current);
             if (menuPos == wxNOT_FOUND)
                 break; // failed
             else
-                menu = mbar->GetMenu(menuPos);
+				menu =  _mbar->GetMenu(menuPos);
         }
         else
         {
@@ -105,22 +111,12 @@ printD("=> Begin 'Pre::CallMenu(" + _menuPath + ")'" );
             {
                 int id = menu->FindItem(current);
 printD("id => " + strInt(id) );
-                if (id != wxNOT_FOUND)
+				good = id != wxNOT_FOUND ;
+                if (good)
                 {
                     wxCommandEvent evt(wxEVT_COMMAND_MENU_SELECTED, id);
-			//	#if wxCHECK_VERSION(3, 0, 0)
-                    mbar->GetEventHandler()->ProcessEvent(evt);
-		/*
-				#else
-                    if ( !mbar->ProcessEvent(evt) )
-                    {
-                        wxString msg; msg.Printf(_("Calling the menu '%s' with ID %d failed."), menuPath.wx_str(), id);
-                        cbMessageBox(msg, _("Script error"), wxICON_WARNING);
-                    }
-				#endif
-		*/
-                    // done
-                    idMenu = id;
+                    _mbar->GetEventHandler()->ProcessEvent(evt);
+				// done
                 }
                 break;
             }
@@ -134,20 +130,18 @@ printD("id => " + strInt(id) );
     }
 
 printD("    <= End 'Pre::CallMenu(...) =>" + strInt(idMenu) );
-
-    return idMenu;
+    return good ;
 }
 ///-----------------------------------------------------------------------------
 /// Get date
 ///
 /// Called by  :
-///		1. Build::beginMesBuildCreate():1,
-///		2. Build::endMesBuildCreate():1
+///		1. Creater::beginMesBuildCreate():1,
+///		2. Creater::endMesBuildCreate():1
 ///
 wxString Pre::date()
 {
 	wxDateTime now = wxDateTime::Now();
-	//wxString str = now.FormatISODate() + "-" + now.FormatISOTime();
 	wxString str = now.FormatDate() + "-" + now.FormatTime();
 
     return str ;
@@ -156,8 +150,8 @@ wxString Pre::date()
 /// Execution time
 ///
 /// Called by  :
-///		1. Build::endMesBuildCreate():1
-///		2. Build::endMesFileCreate():1,
+///		1. Creater::endMesBuildCreate():1
+///		2. Creater::endMesFileCreate():1,
 ///
 wxString Pre::duration()
 {
@@ -183,7 +177,7 @@ void Pre::beginDuration(const wxString & _namefunction)
 	Mes += " :" ;
 	Mes += quote( m_nameActiveTarget );
 	printWarn(Mes);
-	*/
+*/
 // date
 	Mes = Lf + "==> ";
 	Mes += _("Start of") + quote(_namefunction) ;
@@ -206,7 +200,6 @@ void Pre::endDuration(const wxString & _namefunction)
 	Mes += _("End of") + quote( _namefunction  ) ;
 	Mes += " : " + date();
 	Mes += " -> " + duration();
-	//printError(Mes);
 	printWarn(Mes);
 	Mes.Clear();
 }
@@ -218,6 +211,47 @@ void Pre::endDuration(const wxString & _namefunction)
 wxString Pre::namePlugin()
 {
 	return m_namePlugin;
+}
+///-----------------------------------------------------------------------------
+/// Give the date followed by the time of construction of the plugin
+///
+/// Called by : AddOnForQt::OnAttach()
+///
+wxString Pre::GetDateBuildPlugin()
+{
+    wxString str = _("date error !");
+/// TODO ...
+	// search lang = "xx_XX"
+	// wxString lang =  wxLocale::GetLanguageInfo(wxLANGUAGE_DEFAULT)->GetLocaleName();
+	// printWarn(quote(lang));
+/// path of '*.so' or 'lib*.so'
+	if (! m_pMam)
+		m_pMam = m_pM->GetMacrosManager();
+	if (m_pMam)
+	{
+		wxString namePath = m_pMam->ReplaceMacros(_T("$PLUGINS") ), namePlugin;
+                //,namePlugin = m_pMam->ReplaceMacros(_T("$TARGET_OUTPUT_BASENAME") );
+        #ifdef __WXGTK__ /// TO VERIFY
+            namePlugin = "lib" + m_namePlugin;
+        #else
+            namePlugin = m_namePlugin;
+        #endif
+		namePath += strSlash + namePlugin + DOT_DYNAMICLIB_EXT;
+//printWarn(namePath);
+		if (::wxFileExists(namePath))
+		{
+			wxFileName pluginFile(namePath);
+			if (pluginFile.FileExists())
+			{
+			// plugin date
+				wxDateTime plugindate = pluginFile.GetModificationTime();
+				str = plugindate.FormatDate() + "::" + plugindate.FormatTime();
+			}
+			else printError("Plugin not finded :" + quote(namePath));
+		}
+		else printError("File not finded :" + quote(namePath));
+	}
+    return str;
 }
 ///-----------------------------------------------------------------------------
 /// Determines the system platform
@@ -236,7 +270,7 @@ wxString Pre::platForm()
 		#undef SizeSep
 		#define SizeSep 1
 	// tables  ( >= Qt-5.9 )
-       //   TODO ????
+       //   TO REVIEW
 		m_TablibQt.Add("qtmain",1) ;
 		m_TablibQt.Add("qtmaind",1) ;
 		// qt5
@@ -314,9 +348,9 @@ wxString Pre::platForm()
 wxString Pre::GetVersionSDK()
 {
 	// from 'cbplugin.h'
-	uint16_t major 	= PLUGIN_SDK_VERSION_MAJOR
-				,minor 	= PLUGIN_SDK_VERSION_MINOR
-				,release= PLUGIN_SDK_VERSION_RELEASE;
+	wxUint16 major 	= PLUGIN_SDK_VERSION_MAJOR
+			,minor 	= PLUGIN_SDK_VERSION_MINOR
+			,release= PLUGIN_SDK_VERSION_RELEASE;
 
     return  strInt(major) + "." + strInt(minor) + "." + strInt(release);
 }
@@ -326,7 +360,6 @@ wxString Pre::GetVersionSDK()
 ///
 ///  Called by :none
 ///
-
 bool Pre::isClean()
 {
 	if (m_clean)
@@ -345,11 +378,28 @@ bool Pre::isClean()
 /// Set abort
 ///
 /// Called by :
-///		1. AddOnForQt::OnAbortAdding(CodeBlocksEvent& event):1,
+///		1. AddOnForQt::OnMenuStop(wxCommandEvent& _event):1,
 ///
 void Pre::setAbort(bool _abort)
 {
+printD("=> Begin Pre::setAbort(" + strBool(_abort) + ")'" );
+// before using the code we must acquire the mutex
+	wxMutexLocker lock(st_mutexStop);
 	m_abort = _abort;
+
+printD("	<= End Pre::setAbort(" + strBool(m_abort) + ")'" );
+}
+///-----------------------------------------------------------------------------
+/// Get abort
+///
+/// Called by :
+///		1. AddOnForQt::OnMenuComplements(wxCommandEvent& _event):1,
+///		2. AddOnForQt::doComplements(const cbFutureBuild&  _domake):1,
+///
+bool Pre::getAbort()
+{
+	wxMutexLocker lock(st_mutexStop);
+	return m_abort;
 }
 
 ///-----------------------------------------------------------------------------
@@ -372,10 +422,11 @@ void Pre::setProject(cbProject * _pProject)
 		m_nameActiveTarget = m_pProject->GetActiveBuildTarget();
 		ProjectBuildTarget * pBuildTarget = m_pProject->GetBuildTarget(m_nameActiveTarget);
 		if (pBuildTarget)   setBuildTarget(pBuildTarget);
-		/// active target is virtual !!
+	/// active target is virtual !!
 		else
-		//...
-			;
+		{
+		/// TODO ...
+		}
 	}
 	else
 		printError(" Error in 'Pre::setProject(_pProject == null)'" );
@@ -421,8 +472,8 @@ wxString Pre::fullFilename(const wxString & _file)
 ///	Give the complement directory
 ///
 ///  Called by :
-///		1. Build::buildOneFile(cbProject * _pProject, const wxString& _fcreator):1,
-///		2. Build::addAllFiles():1,
+///		1. Creater::buildOneFile(cbProject * _pProject, const wxString& _fcreator):1,
+///		2. Creater::addAllFiles():1,
 
 wxString Pre::complementDirectory() const
 {
@@ -443,14 +494,13 @@ wxString Pre::complementDirectory() const
 ///
 bool Pre::isComplementFile(const wxString & _file)
 {
-//Mes = "isComplementFile ? -> " + _file ;
-//printWarn(Mes);
+printD("==> Begin 'Pre::isComplementFile(" + _file + ")" );
 //print(allStrTable("m_Registered", m_Registered));
 
 // target name
 	m_nameActiveTarget = m_pProject->GetActiveBuildTarget() ;
 // if it is a virtual target, replace it with its first real target
-	virtualToFirstRealTarget(m_nameActiveTarget );
+	virtualToFirstRealTarget(m_nameActiveTarget);
 
 	wxString filename = m_dirPreBuild + fullFilename(_file) ;
 //Mes = " Pre::isComplementFile : filename = " + quote(filename);
@@ -458,6 +508,7 @@ bool Pre::isComplementFile(const wxString & _file)
 	int16_t  index = m_Registered.Index (filename);
 	bool ok = index != wxNOT_FOUND;
 
+printD("	<= End 'Pre::isComplementFile()=> ok = " + strBool(ok));
 	return ok;
 }
 
@@ -470,8 +521,7 @@ bool Pre::isComplementFile(const wxString & _file)
 ///
 bool Pre::isCreatorFile(const wxString & _file)
 {
-//Mes = "isCreatorFile -> " + file ;
-//printWarn(Mes);
+printD("==> Begin 'Pre::isCreatorFile(" + _file + ")" );
 //print(allStrTable("m_Filecreator", m_Filecreator));
 	wxString dircreator = m_Filecreator.Item(0).BeforeLast(Slash)  ;
 	wxString filename =  dircreator + Slash + _file;
@@ -482,8 +532,47 @@ bool Pre::isCreatorFile(const wxString & _file)
 //Mes += ", filename = " + filename;
 //Mes += ", index = " + strInt(index);
 //print(Mes);
-
+printD("	<= End 'Pre::isCreatorFile() => ok = " + strBool(ok));
 	return ok;
+}
+
+///-----------------------------------------------------------------------------
+///  Search if a file is registerd into target current
+///
+///
+///  Called by :
+///		1. AddOnForQt::AddOnForQt::BuildModuleMenu(...)
+//
+bool Pre::isRegisteredToTarget(const wxString & _filename, wxString & _nametarget)
+{
+printD("=> Begin Pre::isRegisteredToTarget(" + _filename + ")");
+    if (! m_pProject)
+        return false;
+
+    bool ok = false;
+    m_nameActiveTarget = m_pProject->GetActiveBuildTarget();
+//print("m_nameActiveTarget = " + quote(m_nameActiveTarget) );
+
+// filename is registerd to project ?
+    int16_t  index = m_Filecreator.Index (_filename);
+	ok = index != wxNOT_FOUND;
+	if (ok)
+	{
+//Mes = _("This file ") + quote(_filename) + _(" is registered"); print(Mes);
+	// read target name in path 'm_Registered' at index
+        _nametarget = m_Registered[index].AfterFirst(Slash).BeforeFirst(Slash);
+//print("_nametarget = " + quote(_nametarget) );
+        ok = _nametarget == m_nameActiveTarget;
+	}
+/// all cases
+	if (!ok)
+	{
+    // return active 'nametarget'
+        _nametarget = m_nameActiveTarget;
+	}
+
+printD("    <= End Pre::isRegisteredToTarget(...)");
+    return ok;
 }
 
 ///-----------------------------------------------------------------------------
@@ -494,9 +583,9 @@ bool Pre::isCreatorFile(const wxString & _file)
 ///		file = xxx.cpp	->  xxx.moc
 ///
 /// Called by  :
-///		1. Build::buildOneFile(cbProject * _pProject, const wxString& _fcreator):1,
-///		2. Build::unregisterComplementFile(const wxString & file, bool _creator, bool _first):1,
-///		3. Build::addAllFiles():1,
+///		1. Creater::buildOneFile(cbProject * _pProject, const wxString& _fcreator):1,
+///		2. Creater::unregisterComplementFile(const wxString & file, bool _creator, bool _first):1,
+///		3. Creater::addAllFiles():1,
 ///
 wxString Pre::nameCreated(const wxString& _file)
 {
@@ -551,7 +640,7 @@ void Pre::SetPageIndex(int _logindex)
 ///
 bool Pre::isCommandTarget(const ProjectBuildTarget * _pBuildTarget)
 {
-	// virtual target ?
+// virtual target ?
 	if (!_pBuildTarget)		return false;
 
 	return _pBuildTarget->GetTargetType() == ::ttCommandsOnly;
@@ -581,9 +670,9 @@ bool Pre::isVirtualQtTarget(const wxString& _namevirtualtarget, bool _warning)
 	bool ok = m_pProject->HasVirtualBuildTarget(_namevirtualtarget);
 	if (ok)
 	{
-		//ProjectBuildTarget * pBuildTarget ;
+	//ProjectBuildTarget * pBuildTarget ;
 		wxArrayString realtargets = compileableVirtualTargets(_namevirtualtarget);
-		// search the first Qt targets
+	// search the first 'Qt' target
 		for (wxString target : realtargets)
 		{
 			ok = hasLibQt(m_pProject->GetBuildTarget(target));
@@ -610,17 +699,17 @@ wxArrayString Pre::compileableProjectTargets()
 {
 	wxArrayString compilTargets;
 	ProjectBuildTarget * pBuildTarget ;
-	uint16_t ntarget = m_pProject->GetBuildTargetsCount();
+	wxUint16 ntarget = m_pProject->GetBuildTargetsCount();
 	while (ntarget)
 	{
 		ntarget--;
 //Mes = "indice ntarget : " + strInt(ntarget); printWarn(Mes);
 		pBuildTarget = m_pProject->GetBuildTarget(ntarget);
-		// virtual target ?
+	// virtual target ?
 		if(!pBuildTarget) continue;
-		// real command target ?
+	// real command target ?
 		if (isCommandTarget(pBuildTarget) ) continue;
-		// a compileable target
+	// a compileable target
 		compilTargets.Add(pBuildTarget->GetTitle());
 //Mes = "valid target : " + strInt(ntarget); printWarn(Mes);
 	}
@@ -647,13 +736,14 @@ wxArrayString Pre::compileableVirtualTargets(const wxString& _virtualtarget)
 	// the table may contain non-compileable targets
 	for (wxString target : realTargets)
 	{
-		// search 'ttCommandOnly' type
+	// search 'ttCommandOnly' type
 		pBuildTarget = m_pProject->GetBuildTarget(target);
 		if (!pBuildTarget) 	continue;
-		// real command target ?
+
+	// real command target ?
 		if (isCommandTarget(pBuildTarget) ) continue ;
 
-		// good target
+	// good target
 		compilTargets.Add(pBuildTarget->GetTitle());
 	}
 
@@ -686,8 +776,6 @@ printD("=> Begin 'Pre::detectQtProject(...)");
 	// search in compileable targets
 	if (!isQtProject)
 	{
-		//wxArrayString compiletable = compileableProjectTargets();
-//Mes = allStrTable("compiltable", compiletable); printWarn(Mes);
 		for( wxString target: compileableProjectTargets())
 		{
 			isQtTarget = hasLibQt(m_pProject->GetBuildTarget(target));
@@ -696,15 +784,16 @@ printD("=> Begin 'Pre::detectQtProject(...)");
 				break;
 		}
 	}
-
+/// project and target use Qt
+	// project Qt = (project Qt and not target Qt) or (project and target Qt)
 	if (isQtProject || isQtTarget)
 	{
+		m_abort = false;
 		if (_report)
 		{
-			wxString nametarget = m_pProject->GetTitle() ;
 			wxString title = _("The project") +  quote(m_nameProject) + _("uses Qt libraries !") ;
 			wxString txt =  quote( m_namePlugin ) + _("will generate the complements files") + "..." ;
-			// also to Code::Blocks log
+		// also to 'Code::Blocks log'
 			InfoWindow::Display(title, txt, 5000);
 		}
 		// usemake ?
@@ -736,14 +825,14 @@ printD("	<= End 'Pre::detectQtProject(...)");
 /// If virtual target give the real fist target
 ///
 /// Called by  :
-///		1. Build::findGoodfiles():1,
+///		1. Creater::findGoodfiles():1,
 ///		2. Pre::isComplementFile(const wxString & _file):1,
 ///
 bool Pre::virtualToFirstRealTarget(wxString& _virtualtarget, bool _warning)
 {
-	// verify if it'a a virtual target
+// verify if it'a a virtual target
 	if (!m_pProject->HasVirtualBuildTarget(_virtualtarget)) return false;
-	// the first real target not command target
+// the first real target not command target
 	_virtualtarget = compileableVirtualTargets(_virtualtarget).Item(0);
 	if (_warning) {
 			Mes = quote( _virtualtarget );
@@ -776,9 +865,9 @@ bool Pre::detectQtTarget(const wxString& _nametarget, bool _report)
 	bool ok = false ;
 	if(!m_pProject)  return ok;
 	if (isCommandTarget(_nametarget)) 	return ok;
+printD("==> Begin 'Pre::detectQtTarget(" + _nametarget + ")");
 
-//Mes = "qtpre::detectQtTarget -> " + quote( _nametarget ) ; printWarn(Mes);
-	// is one virtual target
+// is one virtual target
 	bool virtQt = isVirtualQtTarget(_nametarget);
 	wxArrayString compilTargets;	//
 	if (virtQt)
@@ -806,7 +895,6 @@ bool Pre::detectQtTarget(const wxString& _nametarget, bool _report)
 		{
 			if (virtQt) 	Mes = Tab ;
 			else			Mes = wxEmptyString;
-		//Mes += "qtpre::detectQtTarget ->";
 			Mes += Tab + quote( "::" + target);
 		// advices
 			Mes += Tab + Tab + _("is") + Space;
@@ -817,6 +905,13 @@ bool Pre::detectQtTarget(const wxString& _nametarget, bool _report)
 		goodQt = goodQt || ok ;
 	}
 //Mes = strBool(goodQt) ; printError(Mes);
+	if (goodQt)
+	{
+	// init
+		m_abort = false;
+	}
+
+printD("	<= End 'Pre::detectQtTarget(...)' => goodQt = " + strBool(goodQt) );
 
 	return goodQt;
 }
@@ -830,42 +925,43 @@ bool Pre::detectQtTarget(const wxString& _nametarget, bool _report)
 ///
 bool Pre::hasLibQt(CompileTargetBase * _pContainer)
 {
-//Mes = "into 'Pre::hasLibQt(...)'" ; printWarn(Mes);
+printD("==> Begin Pre::hasLibQt(...)");
 	bool ok = false;
 	if (!_pContainer) 	return ok;
 
 	wxArrayString tablibs = _pContainer->GetLinkLibs() ;
-	uint16_t nlib = tablibs.GetCount() ;
+	wxUint16 nlib = tablibs.GetCount() ;
 //Mes = "nlib = " + strInt(nlib); printWarn(Mes);
 	if (nlib > 0 )
 	{
 		wxString namelib ;
-		uint16_t u=0;
+		wxUint16 u=0;
 		int16_t index= -1, pos ;
 		while (u < nlib && !ok )
 		{
-			// lower, no extension
+		// lower, no extension
 			namelib = tablibs.Item(u++).Lower().BeforeFirst('.') ;
 //Mes = strInt(u) + " -> " + quote( namelib ); printWarn(Mes);
-			// no prefix "lib"
+		// no prefix "lib"
 			pos = namelib.Find("lib") ;
 			if (pos == 0)
 				namelib.Remove(0, 3) ;
-			// begin == "qt"
+		// begin == "qt"
 			pos = namelib.Find("qt") ;
 //Mes = "pos 'qt' = " + strInt(pos); printWarn(Mes);
 			if (pos != 0) 		continue ;
-			// find
+		// find
 /// ATTENTION : the table should then contain all Qt libraries !!
 			index = m_TablibQt.Index(namelib);
 //Mes = "index = " + strInt(index); printWarn(Mes);
 			ok = index != -1 ;
-			// first finded
+		// first finded
 			if (ok)
 				break;
 		}
 	}
-//Mes = "haslibQt(...) = " + strBool(ok); printWarn(Mes);
+
+printD("	<== End Pre::hasLibQt(...) => ok = " + strBool(ok));
 
 	return ok;
 }
@@ -877,7 +973,7 @@ bool Pre::hasLibQt(CompileTargetBase * _pContainer)
 /// Called by :
 ///		1. AddOnForQt::OnActivateProject(CodeBlocksEvent& _event):1,
 ///		2. AddOnForQt::OnRenameProjectOrTarget(CodeBlocksEvent& _event):2,
-///		3. AddOnForQt::OnComplements(CodeBlocksEvent& _event):1,
+///		3. AddOnForQt::doComplements(CodeBlocksEvent& _event):1,
 ///
 /// Calls to :
 ///		1. Pre::refreshTables():1,
@@ -895,7 +991,7 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 	bool ok = wxDirExists(m_dirPreBuild);
 //Mes = "m_dirPreBuild = " + quote( m_dirPreBuild ) + ",  ok = ") +  strBool(ok);
 //print(Mes);
-	// it's an old project already compiled once
+// it's an old project already compiled once
 	if (ok)
 	{
 		wxArrayString filesdisk; wxArrayString compilTargets;
@@ -909,11 +1005,12 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 	// read directory names = target name of project
 		for (wxString filepath : filesdisk)
 		{
-//Mes = quote(filepath); print(Mes);
-			// extract target name
+		// extract target name
 			nametarget = filepath.AfterFirst(Slash).BeforeFirst(Slash);
-//Mes = quote(nametarget); print(Mes);
-			// is a target of project ?
+/// Debug
+//Mes = quote(nametarget) + Tab + "=> " + quote(filepath) ; printD(Mes);
+/// ...
+		// is a target of project ?
 			if (_pProject->GetBuildTarget(nametarget) )
 			{
 				m_Filewascreated.Add(filepath) ;
@@ -927,8 +1024,8 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 		{
 		// initializes all other tables
 			refreshTables();
-			// for debug
-			//refreshTables(WITH_DEBUG);
+	// for debug
+	//refreshTables(WITH_DEBUG);
 		// we have to do it for compileable targets Qt
 			bool virt = m_pProject->HasVirtualBuildTarget(_nametarget);
 			if (virt)
@@ -957,10 +1054,10 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 						if (virt)	Mes = Tab;
 						else 		Mes = wxEmptyString;
 						Mes +=  Tab + quoteNS("::" + target);
-						// tabulation to SizeLe (=16)
+					// tabulation to SizeLe (=16)
 						size_t le = Mes.Len();
 						if (le <= SizeLe)	Mes.Append(' ', SizeLe-le);
-						// advices
+					// advices
 						Mes += Tab +  _("is") + Space;
 						if(!ok)		Mes += _("NOT") + Space;
 						Mes += _("a Qt target") ;
@@ -989,7 +1086,8 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 				}
 			} // end for
 		}
-		else{
+		else
+		{
 			Mes =  Tab+ "=> " + _("The directory") + quote(m_dirPreBuild);
 			Mes += _("is empty")  + Dot +  Space ;
 			Mes += _("You need to 'Rebuild' the project")  +  " !!";
@@ -1005,10 +1103,9 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 		}
 	}
 	else
-	// it's a new project or people has deleted 'm_dirPreBuild' !
+// it's a new project or people has deleted 'm_dirPreBuild' !
 	if (_report)
 	{
-		//Mes = "Pre::detectComplementsOnDisk -> ");
 		Mes =  Tab+ "=> " + _("The directory of complements does not exist") ;
 		Mes += " ! ,";
 		Mes += _("you need to 'Rebuild' the project") ;
@@ -1062,7 +1159,7 @@ bool Pre::refreshTables(bool _debug)
 	}
 	if (_debug)
 	{
-		// DEBUG
+	// DEBUG
 		Mes = allStrTable("m_Filewascreated", m_Filewascreated);
 		print(Mes);
 
@@ -1096,26 +1193,26 @@ bool Pre::refreshTables(bool _debug)
 ///
 int Pre::filenameOk(wxString & _namefile)
 {
-printD("=> Begin 'Pre::filenameOk(" + _namefile + ")'" );
-	// all blanks -> "____"
+printD("==> Begin 'Pre::filenameOk(" + _namefile + ")'" );
+// all blanks -> "____"
 	int nrep =  _namefile.Replace(" ", "____" , true ) ;
-	/// characters list
+// characters list
 	wxString illegal = "[:*?\"<>|]";
 	size_t ncar = illegal.Len();
 	wxString car;
-/// all illegal characters
-	//for (int u = 0; u < ncar; u++)
-	for (uint32_t u = 0; u < ncar; u++)
+// all illegal characters
+	for (wxUint32 u = 0; u < ncar; u++)
 	{
 		car = illegal.Mid(u, 1);
 		if (_namefile.Find(car) != 1)
-		{ /// replace all illegal character  by " "
+		{
+		// replace all illegal character  by " "
 			_namefile.Replace(car, " ", true);
 		}
 	}
-	/// illegal characters ?
+// illegal characters ?
 	ncar = _namefile.Replace(" ", "" , true );
-	/// change
+// change
 	if (nrep)
 	{
 		_namefile.Replace("____", " " , true );
@@ -1130,8 +1227,8 @@ printD("	<= End 'Pre::filenameOk(...)' => " + strInt(ncar) + " illegal character
 /// Copy a 'wxArrayString' to an another
 ///
 /// Called by  :
-///		-# Build::filesTocreate(bool _allrebuild):1,
-///		-# Build::createFiles():4,
+///		-# Creater::filesTocreate(bool _allrebuild):1,
+///		-# Creater::createFiles():4,
 ///		-# Pre::refreshTables(bool debug):2,
 ///
 wxArrayString Pre::copyArray (const wxArrayString& _strarray, int _nlcopy)
@@ -1140,10 +1237,10 @@ wxArrayString Pre::copyArray (const wxArrayString& _strarray, int _nlcopy)
 	int nl = _strarray.GetCount()  ;
 	if (!nl)
 		return  tmp ;
-    // adjust number of lines to copy
+// adjust number of lines to copy
 	if (_nlcopy > 0 && _nlcopy <= nl)
 		nl = _nlcopy;
-	// a line
+// a line
 	wxString line;
 	for (int u = 0; u < nl; u++)
 	{
@@ -1163,14 +1260,13 @@ wxArrayString Pre::copyArray (const wxArrayString& _strarray, int _nlcopy)
 ///
 wxString Pre::allStrTable(const wxString& _title, const wxArrayString& _strarray)
 {
-//Mes = "Pre::allStrTable ...";
-//printError(Mes);
+//Mes = "Pre::allStrTable ..."; printError(Mes);
 	wxString mes = "--------- debug --------------";
 	mes += Lf + quote( m_dirProject ) ;
 	mes += Lf +"=>" + quote( _title ) ;
-	uint16_t nl = _strarray.GetCount();
+	wxUint16 nl = _strarray.GetCount();
 	mes += " : " + strInt(nl) + Space + _("files") ;
-	for (uint16_t u = 0; u < nl; u++)
+	for (wxUint16 u = 0; u < nl; u++)
 	{
 	// read strarray line from  '1' ... 'nl'
 		mes += Lf + strInt(u+1) + "- " + _strarray.Item(u) ;
@@ -1208,7 +1304,7 @@ wxArrayString Pre::wasCreatedToCreator()
 	return tmp;
 }
 ///-----------------------------------------------------------------------------
-/// For create  'creator files' from  'created files'
+/// For create  'creator files' from  'created files' (*.h, *.cpp)
 /// reverse a (string' to an another
 ///
 /// Called by  :
@@ -1219,8 +1315,17 @@ wxArrayString Pre::wasCreatedToCreator()
 ///
 wxString Pre::toFileCreator(const wxString &_fcreated)
 {
-	wxString target, fcreated, fcreator , prepend, ext, name, fullname;
-//Mes = " ::toFileCreator :: _fcreated = " + quote(_fcreated ) ; printWarn(Mes);
+	wxString ext = _fcreated.AfterLast('.'), fullname;
+	bool good =  ext.Matches(EXT_H) || ext.Matches(EXT_CPP) ;
+    if (!good)
+    {
+        Mes = Tab + "- " + "the file" + quote(_fcreated) ;
+        Mes += "is unexpected here, you can delete it !";
+        printWarn(Mes);
+
+        return fullname;
+    }
+    wxString target, fcreated, fcreator , prepend, name;
 	target = _fcreated.AfterFirst(Slash).BeforeFirst(Slash);
 //Mes = " target = " + quote(target) ; printWarn(Mes);
 	fcreated = _fcreated.AfterLast(Slash);
@@ -1230,7 +1335,7 @@ wxString Pre::toFileCreator(const wxString &_fcreated)
 		prepend = fcreated.BeforeFirst('_') ;
 		name = fcreated.AfterFirst('_') ;
 	}
-	/// 'xxx.moc'
+	// 'xxx.moc'
 	else
 	{
 		name = fcreated;
@@ -1238,7 +1343,6 @@ wxString Pre::toFileCreator(const wxString &_fcreated)
 //Mes = " 		prepend = " + quote(prepend) ; printWarn(Mes);
 //Mes = " 		name = " + quote(name) ; printWarn(Mes);
 	name = name.BeforeFirst('.');
-	ext = fcreated.AfterLast('.');
 //1- file 'ui_uuu.h'  (forms)  -> 'uuu.ui'
 	if ( prepend.Matches(m_UI) && ext.Matches(EXT_H))
 		fcreator =  name + DOT_EXT_UI ;
@@ -1273,27 +1377,26 @@ wxString Pre::toFileCreator(const wxString &_fcreated)
 wxString Pre::fullFileCreator(const wxString&  _fcreator, wxString _creatortarget)
 {
 	wxString fullname = wxEmptyString ;
-	if (!m_pProject)
-		return fullname;
+	if (!m_pProject)    return fullname;
 //Mes = Tab + " ==> search _fcreator = " + quote( _fcreator ) ;
 //Mes += " of target :" + quote(_creatortarget);
 //print(Mes);
 	ProjectFile * prjfile ;
 	bool good = false;
 	// all files of the project
-	for (uint16_t  nf = 0; nf < m_pProject->GetFilesCount() ; nf++)
+	for (wxUint16  nf = 0; nf < m_pProject->GetFilesCount() ; nf++)
 	{
-		// get a file of the project
+	// get a file of the project
 		prjfile = m_pProject->GetFile(nf);
         if (!prjfile) 	continue;
-        // search in all the real targets of the file
+	// search in all the real targets of the file
 		if (prjfile->GetBuildTargets().Index(_creatortarget) == wxNOT_FOUND)	continue;
-		// is a command target : it's possible ?
+	// is a command target : it's possible ?
 		if (isCommandTarget(_creatortarget) )	continue;
 
-		// read the relative file name
+	// read the relative file name
 		fullname = prjfile->relativeToCommonTopLevelPath ;
-		// we found the file ?
+	// we found the file ?
 		good = fullname.AfterLast(Slash).Matches(_fcreator);
 		if (good)
 			break;
@@ -1306,7 +1409,7 @@ wxString Pre::fullFileCreator(const wxString&  _fcreator, wxString _creatortarge
 		printError(Mes);
 		fullname = wxEmptyString ;
 		/// ask if we should delete it!
-		/// TODO
+		/// TODO ...
 
 	}
 //Mes = _(" => fullname = ") + quote( fullname);print(Mes);
