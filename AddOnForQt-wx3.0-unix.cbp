@@ -2,14 +2,14 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="AddOnForCb-3.4.6-sdk2160-(Unix)" />
+		<Option title="AddOnForCb-3.4.7-sdk2170-(Unix)" />
 		<Option platforms="Unix;" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="local_305">
 				<Option platforms="Unix;" />
-				<Option output="$(TARGET_NAME)/libaddonforQt" prefix_auto="0" extension_auto="1" />
+				<Option output="$(TARGET_NAME)/addonforQt" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/$(TARGET_NAME)/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -32,11 +32,11 @@
 					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.zip manifest.xml" />
 					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.zip res/*" />
 					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.zip images/*" />
-					<Add after="zip -j9 $(TARGET_NAME)/libaddonforQt.cbplugin $(TARGET_NAME)/libaddonforQt.so $(TARGET_NAME)/addonforQt.zip" />
+					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.cbplugin $(TARGET_NAME)/addonforQt.so $(TARGET_NAME)/addonforQt.zip" />
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="cb" value="$(#sdk2160)" />
+					<Variable name="cb" value="$(#sdk2170_305)" />
 				</Environment>
 			</Target>
 			<Target title="cbqt5">
@@ -75,6 +75,7 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-Wall" />
 			<Add option="-std=gnu++11" />
 			<Add option="-fPIC" />
 			<Add option="-m64" />
@@ -134,10 +135,10 @@
 		<Unit filename="src/addonforqt.h">
 			<Option target="local_305" />
 		</Unit>
-		<Unit filename="src/build.cpp">
+		<Unit filename="src/creater.cpp">
 			<Option target="local_305" />
 		</Unit>
-		<Unit filename="src/build.h">
+		<Unit filename="src/creater.h">
 			<Option target="local_305" />
 		</Unit>
 		<Unit filename="src/defines.h">

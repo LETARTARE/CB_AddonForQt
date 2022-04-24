@@ -232,7 +232,8 @@ wxString Pre::GetDateBuildPlugin()
 		wxString namePath = m_pMam->ReplaceMacros(_T("$PLUGINS") ), namePlugin;
                 //,namePlugin = m_pMam->ReplaceMacros(_T("$TARGET_OUTPUT_BASENAME") );
         #ifdef __WXGTK__ /// TO VERIFY
-            namePlugin = "lib" + m_namePlugin;
+           // namePlugin = "lib" + m_namePlugin;
+            namePlugin = m_namePlugin;
         #else
             namePlugin = m_namePlugin;
         #endif

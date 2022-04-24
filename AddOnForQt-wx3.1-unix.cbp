@@ -36,7 +36,7 @@
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="cb" value="$(#sdk2170_31)" />
+					<Variable name="cb" value="$(#sdk2170_315)" />
 				</Environment>
 			</Target>
 			<Target title="local_305">
@@ -47,7 +47,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-Wall" />
-					<Add option="`wx-config --cflags  --version=3.0`" />
+					<Add option="`wx-config --cflags  --version=3.1`" />
 					<Add option="-Wno-write-strings" />
 					<Add directory="src" />
 					<Add directory="$cb/include" />
@@ -56,9 +56,9 @@
 					<Add directory="$cb/plugins/codecompletion" />
 				</Compiler>
 				<Linker>
-					<Add option="`wx-config --libs  --version=3.0`" />
+					<Add option="`wx-config --libs  --version=3.1`" />
 					<Add library="codeblocks" />
-					<Add directory="$cb/devel30" />
+					<Add directory="$cb/devel31" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.zip manifest.xml" />
@@ -68,7 +68,7 @@
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="cb" value="$(#sdk2170_30)" />
+					<Variable name="cb" value="$(#sdk2170)" />
 				</Environment>
 			</Target>
 			<Target title="cbqt5">
