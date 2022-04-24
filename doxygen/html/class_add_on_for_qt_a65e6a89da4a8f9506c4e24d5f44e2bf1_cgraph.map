@@ -1,0 +1,9 @@
+<map id="AddOnForQt::OnNewProject" name="AddOnForQt::OnNewProject">
+<area shape="rect" id="node2" href="$class_pre.html#a38b56fceb859dbb8eb6f23079767cefe" title="Detects if the project has at least one target using Qt libraries refuses QT projects using a &#39;makefi..." alt="" coords="427,5,569,32"/>
+<area shape="rect" id="node6" href="$class_pre.html#ab083f585803ea1ec03a3511709396890" title="Detects if the current target uses Qt libraries,. " alt="" coords="240,107,376,133"/>
+<area shape="rect" id="node3" href="$class_pre.html#ac27db6d07134211ee91fb08a5daa3b94" title="Search Qt libraries in project or target. " alt="" coords="670,56,773,83"/>
+<area shape="rect" id="node4" href="$class_pre.html#ad69b57decb44dabf2ed92df9d84a0147" title="Give compileable targets list for project or virtual target. " alt="" coords="620,5,823,32"/>
+<area shape="rect" id="node5" href="$class_pre.html#a70d06eec2a18717fa4bfc0d9a6c9a2b1" title="Give if target is command only. " alt="" coords="871,132,1027,159"/>
+<area shape="rect" id="node7" href="$class_pre.html#afc6ff6a132516346e5e3ac7ae1215c59" title="Give if target is virtual Qt. " alt="" coords="424,107,572,133"/>
+<area shape="rect" id="node8" href="$class_pre.html#a9fde82bbc8790fc150a7922595e02911" title="Give compileable targets list for project or virtual target. " alt="" coords="621,132,821,159"/>
+</map>

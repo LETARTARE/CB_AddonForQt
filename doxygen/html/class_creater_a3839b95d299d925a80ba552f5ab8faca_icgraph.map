@@ -1,0 +1,9 @@
+<map id="Creater::removeComplementToDisk" name="Creater::removeComplementToDisk">
+<area shape="rect" id="node2" href="$class_creater.html#afe8712a0fbf50679bee8c773ee97d2e1" title="Unregister a project file complement to &#39;Pregen&#39;. " alt="" coords="259,54,485,81"/>
+<area shape="rect" id="node6" href="$class_creater.html#acc6136a82883d29c4c69c1f4381fedc4" title="Unregister an old target to &#39;CB&#39;. " alt="" coords="243,105,501,131"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a7e14fd23c1a5e3a4aa3b97eb41f3bc1f" title="AddOnForQt::OnProjectFile\lRemoved" alt="" coords="821,5,1003,47"/>
+<area shape="rect" id="node5" href="$class_creater.html#a36c8306ab2dc70634980cdc605b777c7" title="Unregister a project file creator to &#39;Pregen&#39;. " alt="" coords="557,54,752,81"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="1064,55,1221,82"/>
+<area shape="rect" id="node7" href="$class_creater.html#aeb5dbc63005929e220fedcfd3cfb9a05" title="Total updates of the new target. " alt="" coords="549,105,760,131"/>
+<area shape="rect" id="node8" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="808,80,1016,121"/>
+</map>

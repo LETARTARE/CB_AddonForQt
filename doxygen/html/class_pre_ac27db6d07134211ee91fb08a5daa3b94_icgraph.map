@@ -1,0 +1,14 @@
+<map id="Pre::hasLibQt" name="Pre::hasLibQt">
+<area shape="rect" id="node2" href="$class_pre.html#afc6ff6a132516346e5e3ac7ae1215c59" title="Give if target is virtual Qt. " alt="" coords="156,107,304,133"/>
+<area shape="rect" id="node3" href="$class_pre.html#ab083f585803ea1ec03a3511709396890" title="Detects if the current target uses Qt libraries,. " alt="" coords="352,107,488,133"/>
+<area shape="rect" id="node13" href="$class_pre.html#a38b56fceb859dbb8eb6f23079767cefe" title="Detects if the project has at least one target using Qt libraries refuses QT projects using a &#39;makefi..." alt="" coords="571,208,712,235"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a7f329c0fb9b4a95d5c1614597674b078" title="This method called by project activate allows detect project using the Qt libraries. " alt="" coords="795,107,1002,133"/>
+<area shape="rect" id="node7" href="$class_add_on_for_qt.html#acffd342a9ece6dbf1d2353e83736949f" title="This method called by target activate allows detect target using the Qt libraries. " alt="" coords="1065,5,1268,32"/>
+<area shape="rect" id="node8" href="$class_add_on_for_qt.html#a65e6a89da4a8f9506c4e24d5f44e2bf1" title="AddOnForQt::OnNewProject" alt="" coords="805,259,992,285"/>
+<area shape="rect" id="node9" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="795,175,1003,217"/>
+<area shape="rect" id="node10" href="$class_pre.html#afbf33d96d5e261d073efceef616f8c0d" title="Detects if the project has complements on disk. " alt="" coords="536,107,747,133"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="1331,157,1488,184"/>
+<area shape="rect" id="node6" href="$class_add_on_for_qt.html#a9e26c0625bf170ea273b83884e449365" title="This method called by plugin is manually loaded. " alt="" coords="1068,107,1265,133"/>
+<area shape="rect" id="node11" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="800,56,997,83"/>
+<area shape="rect" id="node12" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="1051,56,1283,83"/>
+</map>

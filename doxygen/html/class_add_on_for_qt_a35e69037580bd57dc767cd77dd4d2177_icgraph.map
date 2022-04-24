@@ -1,0 +1,6 @@
+<map id="AddOnForQt::SwitchToMyLog" name="AddOnForQt::SwitchToMyLog">
+<area shape="rect" id="node2" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="530,10,689,36"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="493,123,725,150"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="248,148,445,175"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a7e14fd23c1a5e3a4aa3b97eb41f3bc1f" title="AddOnForQt::OnProjectFile\lRemoved" alt="" coords="255,32,438,73"/>
+</map>

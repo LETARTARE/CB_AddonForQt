@@ -1,0 +1,11 @@
+<map id="Creater::ReadFileContents" name="Creater::ReadFileContents">
+<area shape="rect" id="node2" href="$class_creater.html#ad8926d4761e32b7c2e85b82aaf7301d9" title="Search a Qt macro inside file. " alt="" coords="241,5,363,32"/>
+<area shape="rect" id="node8" href="$class_creater.html#aeabf6115b7eff219e9f599dcacc447fa" title="Indicates whether the file is already included in another. " alt="" coords="231,56,373,83"/>
+<area shape="rect" id="node3" href="$class_creater.html#a14195c51b8836f1ab1d1ec40e2ed60a2" title="Give if file is elegible. " alt="" coords="426,5,555,32"/>
+<area shape="rect" id="node4" href="$class_creater.html#ad1855fcda415c49ea304fa1e9c3e7f87" title="Built one file elegible necessary complement. " alt="" coords="610,56,755,83"/>
+<area shape="rect" id="node7" href="$class_creater.html#aa6decf57b5e24a39198b7b25f5853521" title="Search the eligible files (which requires additional files) " alt="" coords="608,5,757,32"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="805,56,1003,83"/>
+<area shape="rect" id="node6" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="1051,56,1283,83"/>
+<area shape="rect" id="node9" href="$class_creater.html#a7e5eb4c44171aca6b3dc35c28d956b37" title="Record one file elegible necessary complement. " alt="" coords="421,107,560,133"/>
+<area shape="rect" id="node10" href="$class_creater.html#a43598b93980df75bd8b45fd14acf6fd0" title="Records in an internal table to build additional files. " alt="" coords="614,107,751,133"/>
+</map>

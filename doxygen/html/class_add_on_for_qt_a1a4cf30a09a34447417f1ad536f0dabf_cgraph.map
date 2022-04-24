@@ -1,0 +1,47 @@
+<map id="AddOnForQt::OnMenuComplements" name="AddOnForQt::OnMenuComplements">
+<area shape="rect" id="node2" href="$class_add_on_for_qt.html#a05d7100ded0366a1d46a8ebb39135b64" title="Enable alls menus : menu bar, popup menu, tool menu for Qt. " alt="" coords="287,211,481,238"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#aad6a516558f710b189c836bd3d5ff80a" title="AddOnForQt::SwitchToLog" alt="" coords="547,249,725,275"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="285,389,483,415"/>
+<area shape="rect" id="node22" href="$class_pre.html#a516413482b2134abb91e2b67be7255e9" title="getAbort complement file creating " alt="" coords="586,705,686,731"/>
+<area shape="rect" id="node46" href="$class_pre.html#ad5be40aabbb96b7e0e96060bdfb816dd" title="Locate and call a menu from string (e.g. &quot;/Valgrind/Run Valgrind::MemCheck&quot;) it&#39;s a copy of &#39;CodeBloc..." alt="" coords="331,490,437,517"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a5052ad009afe668df4540517c5607c11" title="Enable alls menus bar for Qt. " alt="" coords="533,198,739,225"/>
+<area shape="rect" id="node6" href="$class_add_on_for_qt.html#a75aa79ee1ce77da56908459a03668be7" title="Give a string for a &#39;cbFutureBuild&#39;. " alt="" coords="547,451,725,478"/>
+<area shape="rect" id="node7" href="$class_pre.html#afbf33d96d5e261d073efceef616f8c0d" title="Detects if the project has complements on disk. " alt="" coords="531,654,741,681"/>
+<area shape="rect" id="node19" href="$class_creater.html#ae30cf306089ecbce661bd5ae7db0f0b6" title="Give if target is a Qt target. " alt="" coords="554,299,718,326"/>
+<area shape="rect" id="node21" href="$class_creater.html#a6e2b0f55ede69708f479336b97f0c9a3" title="Built all files necessary complements. " alt="" coords="565,350,707,377"/>
+<area shape="rect" id="node23" href="$class_creater.html#ad1855fcda415c49ea304fa1e9c3e7f87" title="Built one file elegible necessary complement. " alt="" coords="563,401,709,427"/>
+<area shape="rect" id="node8" href="$class_pre.html#a7d459cbf34dd34cdad89f2403f5e7743" title="refresh all tables from &#39;m_Filewascreated&#39; " alt="" coords="827,806,955,833"/>
+<area shape="rect" id="node15" href="$class_pre.html#a9fde82bbc8790fc150a7922595e02911" title="Give compileable targets list for project or virtual target. " alt="" coords="1291,977,1491,1003"/>
+<area shape="rect" id="node16" href="$class_pre.html#ab083f585803ea1ec03a3511709396890" title="Detects if the current target uses Qt libraries,. " alt="" coords="823,1034,959,1061"/>
+<area shape="rect" id="node9" href="$class_pre.html#ab689a6ece34f421ffa05427eba2e9b3d" title="Give an array from another. " alt="" coords="1087,882,1197,909"/>
+<area shape="rect" id="node10" href="$class_pre.html#ac62c969d8110bed016f491417759370a" title="Construct &#39;m_FilesCreator&#39; from &#39;m_Filewascreated&#39;. " alt="" coords="1054,781,1230,807"/>
+<area shape="rect" id="node14" href="$class_pre.html#a7db810e7c49ed541b37cc0118634a560" title="give a string of table &#39;title&#39; for debug " alt="" coords="1087,831,1197,858"/>
+<area shape="rect" id="node11" href="$class_pre.html#a5ed098f76b18d56146066371e7040a7b" title="Give an string from another. " alt="" coords="1328,831,1453,858"/>
+<area shape="rect" id="node12" href="$class_pre.html#a50c1bd5137d2c100111e5accc858c475" title="Give a full relative name. " alt="" coords="1539,857,1669,883"/>
+<area shape="rect" id="node13" href="$class_pre.html#a70d06eec2a18717fa4bfc0d9a6c9a2b1" title="Give if target is command only. " alt="" coords="1717,863,1873,890"/>
+<area shape="rect" id="node17" href="$class_pre.html#afc6ff6a132516346e5e3ac7ae1215c59" title="Give if target is virtual Qt. " alt="" coords="1068,1034,1216,1061"/>
+<area shape="rect" id="node18" href="$class_pre.html#ac27db6d07134211ee91fb08a5daa3b94" title="Search Qt libraries in project or target. " alt="" coords="1339,1053,1442,1079"/>
+<area shape="rect" id="node20" href="$class_creater.html#a84ad620776c340f640bb179043a12d44" title="Reference string of libQt by target: &quot;&quot; or &quot;4r&quot; or &quot;4d&quot; or &quot;5r&quot; or &quot;5d&quot;. " alt="" coords="822,71,961,98"/>
+<area shape="rect" id="node24" href="$class_creater.html#ac520d581ba994f4c1e5d7ffce3d8ae60" title="Create a directory. " alt="" coords="828,375,955,402"/>
+<area shape="rect" id="node25" href="$class_creater.html#a14195c51b8836f1ab1d1ec40e2ed60a2" title="Give if file is elegible. " alt="" coords="827,426,956,453"/>
+<area shape="rect" id="node29" href="$class_creater.html#ab42c9eb75b9a56daa2ad4db936ca5dd9" title="Startup banner pre&#45;compiling file. " alt="" coords="797,527,986,554"/>
+<area shape="rect" id="node31" href="$class_creater.html#ae2e5f5cd3e6e1e55be6c09873ad32a34" title="Is whether the QT executables exist. " alt="" coords="809,654,973,681"/>
+<area shape="rect" id="node35" href="$class_pre.html#a9a52f9cdc8edc97f49e13592df7d31e3" title="Give complement directory. " alt="" coords="804,122,979,149"/>
+<area shape="rect" id="node36" href="$class_pre.html#a33507726e1b384cdeeac1d3e8f2c9047" title="Generate the name of the complement file. " alt="" coords="827,173,955,199"/>
+<area shape="rect" id="node37" href="$class_creater.html#a66f3dbb843fc984fac8517efb904ac22" title="Indicates whether the file is already registered in the CB project. " alt="" coords="809,223,973,250"/>
+<area shape="rect" id="node38" href="$class_creater.html#aeabf6115b7eff219e9f599dcacc447fa" title="Indicates whether the file is already included in another. " alt="" coords="820,477,963,503"/>
+<area shape="rect" id="node40" href="$class_creater.html#a2ce0f81c06e06ebdc85dd708e33d3ae5" title="Compare both date files. " alt="" coords="816,274,967,301"/>
+<area shape="rect" id="node41" href="$class_creater.html#adc1a58a4728a2558363c63ef55347389" title="Execute commands &#39;moc&#39;, &#39;uic&#39;, &#39;rcc&#39;. " alt="" coords="789,325,993,351"/>
+<area shape="rect" id="node44" href="$class_creater.html#af6b4f0c7b056498b17af5fc5128387e9" title="Banner End pre&#45;compiling file. " alt="" coords="802,578,981,605"/>
+<area shape="rect" id="node26" href="$class_creater.html#ad8926d4761e32b7c2e85b82aaf7301d9" title="Search a Qt macro inside file. " alt="" coords="1081,375,1203,402"/>
+<area shape="rect" id="node27" href="$class_creater.html#a6f96db025f3d6c74dc387a0c0fd055b8" title="Read contents file. " alt="" coords="1302,451,1479,478"/>
+<area shape="rect" id="node28" href="$class_creater.html#a192760acfd37a50cd0eb581f708fb10a" title="Search a text inside a string. " alt="" coords="1335,375,1447,402"/>
+<area shape="rect" id="node30" href="$class_pre.html#ac79cc09d7d7cf858c712c8c8c9e2cbbb" title="Give a date. " alt="" coords="1105,527,1179,554"/>
+<area shape="rect" id="node32" href="$class_creater.html#ad1b9ee9da9130e0d529f7f245f4e9d7c" title="Find container path. " alt="" coords="1079,730,1205,757"/>
+<area shape="rect" id="node33" href="$class_creater.html#a11c61237e431f9e2553b261d0aa8179d" title="Retrieve path include table for executable. " alt="" coords="1059,629,1225,655"/>
+<area shape="rect" id="node34" href="$class_creater.html#ad2d46f45bd8b0148e0e1a79488e1a346" title="Retrieve all defines table for executables. " alt="" coords="1072,679,1212,706"/>
+<area shape="rect" id="node39" href="$class_creater.html#a2c521c30fb217f6f4c2d1cd8cf320d09" title="Creater::verifyIncluded" alt="" coords="1065,426,1219,453"/>
+<area shape="rect" id="node42" href="$class_creater.html#a390ad41ebe8fbc87824dadd2fafd85f6" title="Launch a command line. " alt="" coords="1041,309,1243,351"/>
+<area shape="rect" id="node43" href="$class_creater.html#a6588a2dd5fdf8cc7c7b350cc077c3a2b" title="Modify date file target. " alt="" coords="1072,258,1212,285"/>
+<area shape="rect" id="node45" href="$class_pre.html#a4a35361069bc37bad4ad0c7d363afbe7" title="Give a duration. " alt="" coords="1094,578,1190,605"/>
+</map>

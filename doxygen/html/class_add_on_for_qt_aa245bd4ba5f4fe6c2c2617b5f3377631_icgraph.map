@@ -1,0 +1,6 @@
+<map id="AddOnForQt::enableToolBarQt" name="AddOnForQt::enableToolBarQt">
+<area shape="rect" id="node2" href="$class_add_on_for_qt.html#a7f329c0fb9b4a95d5c1614597674b078" title="This method called by project activate allows detect project using the Qt libraries. " alt="" coords="252,24,459,50"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#acffd342a9ece6dbf1d2353e83736949f" title="This method called by target activate allows detect target using the Qt libraries. " alt="" coords="507,74,709,101"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="757,24,916,50"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a9e26c0625bf170ea273b83884e449365" title="This method called by end start application. " alt="" coords="509,24,707,50"/>
+</map>

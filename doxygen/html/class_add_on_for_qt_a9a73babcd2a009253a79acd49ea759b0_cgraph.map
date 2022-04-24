@@ -1,0 +1,25 @@
+<map id="AddOnForQt::OnRenameProjectOrTarget" name="AddOnForQt::OnRenameProjectOrTarget">
+<area shape="rect" id="node2" href="$class_pre.html#a38b56fceb859dbb8eb6f23079767cefe" title="Detects if the project has at least one target using Qt libraries refuses QT projects using a &#39;makefi..." alt="" coords="851,5,992,32"/>
+<area shape="rect" id="node6" href="$class_pre.html#afbf33d96d5e261d073efceef616f8c0d" title="Detects if the project has complements on disk. " alt="" coords="261,259,472,285"/>
+<area shape="rect" id="node14" href="$class_pre.html#ab083f585803ea1ec03a3511709396890" title="Detects if the current target uses Qt libraries,. " alt="" coords="581,183,717,209"/>
+<area shape="rect" id="node16" href="$class_pre.html#a5c97ece38dda5b4371754bde1a9a32f8" title="Set &#39;m_pProject&#39;. " alt="" coords="312,335,421,361"/>
+<area shape="rect" id="node18" href="$class_creater.html#aeb5dbc63005929e220fedcfd3cfb9a05" title="Total updates of the new target. " alt="" coords="261,461,472,488"/>
+<area shape="rect" id="node3" href="$class_pre.html#ac27db6d07134211ee91fb08a5daa3b94" title="Search Qt libraries in project or target. " alt="" coords="1113,56,1215,83"/>
+<area shape="rect" id="node4" href="$class_pre.html#ad69b57decb44dabf2ed92df9d84a0147" title="Give compileable targets list for project or virtual target. " alt="" coords="1312,56,1515,83"/>
+<area shape="rect" id="node5" href="$class_pre.html#a70d06eec2a18717fa4bfc0d9a6c9a2b1" title="Give if target is command only. " alt="" coords="1563,183,1719,209"/>
+<area shape="rect" id="node7" href="$class_pre.html#a7d459cbf34dd34cdad89f2403f5e7743" title="refresh all tables from &#39;m_Filewascreated&#39; " alt="" coords="585,309,713,336"/>
+<area shape="rect" id="node13" href="$class_pre.html#a9fde82bbc8790fc150a7922595e02911" title="Give compileable targets list for project or virtual target. " alt="" coords="1064,157,1264,184"/>
+<area shape="rect" id="node8" href="$class_pre.html#ab689a6ece34f421ffa05427eba2e9b3d" title="Give an array from another. " alt="" coords="867,411,976,437"/>
+<area shape="rect" id="node9" href="$class_pre.html#ac62c969d8110bed016f491417759370a" title="Construct &#39;m_FilesCreator&#39; from &#39;m_Filewascreated&#39;. " alt="" coords="833,360,1009,387"/>
+<area shape="rect" id="node12" href="$class_pre.html#a7db810e7c49ed541b37cc0118634a560" title="give a string of table &#39;title&#39; for debug " alt="" coords="866,309,977,336"/>
+<area shape="rect" id="node10" href="$class_pre.html#a5ed098f76b18d56146066371e7040a7b" title="Give an string from another. " alt="" coords="1101,309,1227,336"/>
+<area shape="rect" id="node11" href="$class_pre.html#a50c1bd5137d2c100111e5accc858c475" title="Give a full relative name. " alt="" coords="1348,284,1479,311"/>
+<area shape="rect" id="node15" href="$class_pre.html#afc6ff6a132516346e5e3ac7ae1215c59" title="Give if target is virtual Qt. " alt="" coords="847,107,995,133"/>
+<area shape="rect" id="node17" href="$class_pre.html#a64b4d6cd53cf2ee82505d1c5a264bf62" title="Set &#39;m_pBuildTarget&#39;. " alt="" coords="583,360,716,387"/>
+<area shape="rect" id="node19" href="$class_creater.html#acc6136a82883d29c4c69c1f4381fedc4" title="Unregister an old target to &#39;CB&#39;. " alt="" coords="520,512,779,539"/>
+<area shape="rect" id="node21" href="$class_creater.html#a549f2a0d6febde534249af55be0a4d2b" title="Remove complement directory file to disk directory &quot;m_dirPreBuild&quot;. " alt="" coords="555,563,744,605"/>
+<area shape="rect" id="node23" href="$class_creater.html#ac83efc7e5ad1034c4994d801a7a5ffda" title="Remove old path include table for executable. " alt="" coords="553,411,745,437"/>
+<area shape="rect" id="node24" href="$class_creater.html#abaf5e701336f1061200c83cbb46fbe77" title="Remove old executable. " alt="" coords="550,461,749,488"/>
+<area shape="rect" id="node20" href="$class_creater.html#a3839b95d299d925a80ba552f5ab8faca" title="Remove one complement file to disk directory &quot;m_dirPreBuild&quot;. " alt="" coords="827,505,1016,546"/>
+<area shape="rect" id="node22" href="$class_creater.html#a4133fd9ca174319b29b95aa53c02b0ef" title="Recursively deletes non&#45;empty directories. " alt="" coords="848,571,995,597"/>
+</map>

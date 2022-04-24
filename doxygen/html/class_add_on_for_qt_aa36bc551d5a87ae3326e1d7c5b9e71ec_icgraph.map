@@ -1,0 +1,6 @@
+<map id="AddOnForQt::buildMenuBarQt" name="AddOnForQt::buildMenuBarQt">
+<area shape="rect" id="node2" href="$class_add_on_for_qt.html#adf1435e8a1b3453cbcf6ef164fc28b72" title="This method is called by Code::Blocks and is used by the plugin to add any menu items it needs on Cod..." alt="" coords="270,5,433,32"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a7f329c0fb9b4a95d5c1614597674b078" title="This method called by project activate allows detect project using the Qt libraries. " alt="" coords="248,56,455,83"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="748,56,905,83"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a9e26c0625bf170ea273b83884e449365" title="This method called by plugin is manually loaded. " alt="" coords="503,81,700,108"/>
+</map>

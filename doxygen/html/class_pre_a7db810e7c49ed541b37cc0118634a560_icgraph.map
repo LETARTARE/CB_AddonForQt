@@ -1,0 +1,10 @@
+<map id="Pre::allStrTable" name="Pre::allStrTable">
+<area shape="rect" id="node2" href="$class_pre.html#a7d459cbf34dd34cdad89f2403f5e7743" title="refresh all tables from &#39;m_Filewascreated&#39; " alt="" coords="164,95,292,121"/>
+<area shape="rect" id="node3" href="$class_pre.html#afbf33d96d5e261d073efceef616f8c0d" title="Detects if the project has complements on disk. " alt="" coords="340,95,551,121"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="603,19,801,45"/>
+<area shape="rect" id="node6" href="$class_add_on_for_qt.html#a7f329c0fb9b4a95d5c1614597674b078" title="This method called by project activate allows detect project using the Qt libraries. " alt="" coords="599,95,805,121"/>
+<area shape="rect" id="node9" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="865,158,1073,199"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="853,5,1085,32"/>
+<area shape="rect" id="node7" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="1133,107,1291,133"/>
+<area shape="rect" id="node8" href="$class_add_on_for_qt.html#a9e26c0625bf170ea273b83884e449365" title="This method called by plugin is manually loaded. " alt="" coords="871,107,1068,133"/>
+</map>
