@@ -95,7 +95,7 @@ function OnLeave_QtPath(fwd)
         if (PLATFORM == PLATFORM_MSW && !VerifyLibFile(dir_nomacro_lib, _T("Qt5Core"), _T("Qt's")))
             return false;
         else //
-        if (PLATFORM != PLATFORM_MSW && !VerifyLibFile(dir_nomacro_lib, _T("QtCore"), _T("Qt's")))
+        if (PLATFORM != PLATFORM_MSW && !VerifyLibFile(dir_nomacro_lib, _T("Qt5Core"), _T("Qt's")))
             return false;
 
         // Remember the original selection.
@@ -156,8 +156,8 @@ function SetupProject(project)
     project.AddIncludeDir(QtPathDefaultInc + wxFILE_SEP_PATH + _T("QtWidgets"));
     project.AddIncludeDir(QtPathDefaultInc + wxFILE_SEP_PATH + _T("QtCore"));
     project.AddIncludeDir(QtPathDefaultInc + wxFILE_SEP_PATH + _T("QtXml"));
-    project.AddIncludeDir(QtPathDefaultInc + wxFILE_SEP_PATH + _T("ActiveQt"));
-	project.AddIncludeDir(QtPathDefaultInc + wxFILE_SEP_PATH + QtPathSpecs);
+   // project.AddIncludeDir(QtPathDefaultInc + wxFILE_SEP_PATH + _T("ActiveQt"));
+   project.AddIncludeDir(QtPathDefaultInc + wxFILE_SEP_PATH + QtPathSpecs);
 /// <--
     project.AddLibDir(QtPathDefaultLib);
 /// --> cbqt5
@@ -165,14 +165,16 @@ function SetupProject(project)
     project.AddCompilerOption (_T("-DUNICODE"));
     /// qt > 5.6
   //  project.AddCompilerOption (_T"-DQT_LARGEFILE_SUPPORT"));
-	project.AddCompilerOption (_T("-std=gnu++11"));
-    project.AddCompilerOption (_T("-DQT_NEEDS_QMAIN") );
+    
+    project.AddCompilerOption (_T("-std=gnu++11"));
+    project.AddCompilerOption (_T("--fPIC"));
+   // project.AddCompilerOption (_T("-DQT_NEEDS_QMAIN") );
 
  // enable compiler exception
     local idcompiler = Wizard.GetCompilerID();
 	CppExceptionsOn(project, idcompiler);
 //print(idcompiler);
-	if (idcompiler.Find(_T("gcc")) != -1)
+	if (PLATFORM == PLATFORM_MSW && idcompiler.Find(_T("gcc")) != -1)
 	{
 		project.AddCompilerOption(_T("-mthreads")) ;
 		project.AddLinkerOption (_T("-mthreads") );
@@ -208,11 +210,11 @@ function SetupProject(project)
 			target.AddLinkLib(_T("Qt5Widgetsd"));
 			target.AddLinkLib(_T("Qt5Xmld"));
 		}
-		else { // to verify
-			target.AddLinkLib(_T("QtCore"));
-			target.AddLinkLib(_T("QtGui"));
-			target.AddLinkLib(_T("QtWidgets"));
-			target.AddLinkLib(_T("QtXml"));
+		else { 
+			target.AddLinkLib(_T("Qt5Core"));
+			target.AddLinkLib(_T("Qt5Gui"));
+			target.AddLinkLib(_T("Qt5Widgets"));
+			target.AddLinkLib(_T("Qt5Xml"));
 		}
 /// <--
         target.SetOutputFilename(Wizard.GetDebugOutputDir() + Wizard.GetProjectName() + DOT_EXT_EXECUTABLE);
@@ -236,10 +238,10 @@ function SetupProject(project)
 			target.AddLinkLib(_T("Qt5Xml"));
 		}
 		else { // to verify
-			target.AddLinkLib(_T("QtCore"));
-			target.AddLinkLib(_T("QtGui"));
-			target.AddLinkLib(_T("QtWidgets"));
-			target.AddLinkLib(_T("QtXml"));
+			target.AddLinkLib(_T("Qt5Core"));
+			target.AddLinkLib(_T("Qt5Gui"));
+			target.AddLinkLib(_T("Qt5Widgets"));
+			target.AddLinkLib(_T("Qt5Xml"));
 		}
 /// <--
         target.SetOutputFilename(Wizard.GetReleaseOutputDir() + Wizard.GetProjectName() + DOT_EXT_EXECUTABLE);
