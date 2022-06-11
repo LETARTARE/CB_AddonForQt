@@ -93,13 +93,13 @@ AddOnForQt::AddOnForQt()
 }
 ///-----------------------------------------------------------------------------
 /// Create handlers event and creating the pre-builders
-/// N° 0 : the first called ( who qupports 'print(...)
+/// N° 0 : the first called ( who qupports '_print(...)
 ///
 /// Called by 'PluginManager' actually
 ///
 void AddOnForQt::OnAttach()
 {
-printD("=> Begin AddOnForQt::OnAttach()");
+_printD("=> Begin AddOnForQt::OnAttach()");
 //1- managers
 	m_pM = Manager::Get();
 	if (!m_pM)  return ;
@@ -201,39 +201,39 @@ printD("=> Begin AddOnForQt::OnAttach()");
 		Mes += ", sdk => " + quoteNS(m_pCreater->GetVersionSDK());
 		Mes += ",  " + quote(m_NamePlugin) + _(" version") + " : " + VERSION_WXT;
 		Mes += ", " + _("built on") + quote(m_pCreater->GetDateBuildPlugin()) + Lf;
-		printWarn(Mes);
+		_printWarn(Mes);
     // icons from *.zip
         m_bmLogoQt    = LoadPNG(_T("logo.png"));
-            if (!m_bmLogoQt.IsOk()) printError("Error with 'm_bmLogoQt'");
+            if (!m_bmLogoQt.IsOk()) _printError("Error with 'm_bmLogoQt'");
         m_bmBuild   = LoadPNG(_T("build.png"));
-            if (!m_bmBuild.IsOk()) printError("Error with 'm_bmBuild'");
+            if (!m_bmBuild.IsOk()) _printError("Error with 'm_bmBuild'");
 		//	m_bmBuildOff   = LoadPNG(_T("buildoff.png"));
-		//        if (!m_bmBuildOff.IsOk()) printError("Error with 'm_bmBuildOff'");
+		//        if (!m_bmBuildOff.IsOk()) _printError("Error with 'm_bmBuildOff'");
 		m_bmBuildPlus   = LoadPNG(_T("build+.png"));
-            if (!m_bmBuildPlus.IsOk()) printError("Error with 'm_bmBuild'");
+            if (!m_bmBuildPlus.IsOk()) _printError("Error with 'm_bmBuild'");
 		//	m_bmBuildPlusOff   = LoadPNG(_T("buildPlusoff.png"));
-		//        if (!m_bmBuilPlusdOff.IsOk()) printError("Error with 'm_bmBuildPlusOff'");
+		//        if (!m_bmBuilPlusdOff.IsOk()) _printError("Error with 'm_bmBuildPlusOff'");
         m_bmReBuild = LoadPNG(_T("rebuild.png"));
-            if (!m_bmReBuild.IsOk()) printError("Error with 'm_bmReBuild'");
+            if (!m_bmReBuild.IsOk()) _printError("Error with 'm_bmReBuild'");
 		//	m_bmReBuildOff   = LoadPNG(_T("rebuildoff.png"));
-		//        if (!m_bmReBuildOff.IsOk()) printError("Error with 'm_bmReBuildOff'");
+		//        if (!m_bmReBuildOff.IsOk()) _printError("Error with 'm_bmReBuildOff'");
 		m_bmReBuildPlus = LoadPNG(_T("rebuild+.png"));
-            if (!m_bmReBuildPlus.IsOk()) printError("Error with 'm_bmReBuild'");
+            if (!m_bmReBuildPlus.IsOk()) _printError("Error with 'm_bmReBuild'");
 		//	m_bmReBuildPlusOff   = LoadPNG(_T("rebuild+off.png"));
-		//        if (!m_bmReBuildPlusOff.IsOk()) printError("Error with 'm_bmReBuildPlusOff'");
+		//        if (!m_bmReBuildPlusOff.IsOk()) _printError("Error with 'm_bmReBuildPlusOff'");
         m_bmStop    = LoadPNG(_T("stop.png"));
-            if (!m_bmStop.IsOk()) printError("Error with 'm_bmStop'");
+            if (!m_bmStop.IsOk()) _printError("Error with 'm_bmStop'");
        // m_bmStopOff     = LoadPNG(_T("stopoff.png"));
-        //    if (!m_bmStopOff.IsOk()) printError("Error with 'm_bmStopOff'");
+        //    if (!m_bmStopOff.IsOk()) _printError("Error with 'm_bmStopOff'");
 		m_bmSetting     = LoadPNG(_T("options.png"));
-            if (!m_bmSetting.IsOk()) printError("Error with 'm_bmSetting'");
+            if (!m_bmSetting.IsOk()) _printError("Error with 'm_bmSetting'");
 		//m_bmSettingOff     = LoadPNG(_T("optionsoff.png"));
-          //  if (!m_bmSettingOff.IsOk()) printError("Error with 'm_bmSettingOff'");
+          //  if (!m_bmSettingOff.IsOk()) _printError("Error with 'm_bmSettingOff'");
 	}
 	else
 	{
 		Mes = _("Error to create") + Space + "m_pCreater" ;
-		Mes += Lf + _("The plugin is not operational") + " !!"; printError(Mes);
+		Mes += Lf + _("The plugin is not operational") + " !!"; _printError(Mes);
 	///  release plugin
 	    OnRelease(false);
 	}
@@ -241,7 +241,7 @@ printD("=> Begin AddOnForQt::OnAttach()");
 
 	Mes.Clear();
 
-printD("	=> End AddOnForQt::OnAttach()");
+_printD("	=> End AddOnForQt::OnAttach()");
 }
 /// ----------------------------------------------------------------------------
 ///	menu 'Qt' in 'AddonsQt' menubar
@@ -253,7 +253,7 @@ printD("	=> End AddOnForQt::OnAttach()");
 ///
 void AddOnForQt::BuildMenu(wxMenuBar* _menuBar)
 {
-printD("=> Begin 'AddOnForQt::BuildMenu(...)'");
+_printD("=> Begin 'AddOnForQt::BuildMenu(...)'");
 
 	if (!IsAttached() || ! _menuBar )	return;
 
@@ -262,10 +262,10 @@ printD("=> Begin 'AddOnForQt::BuildMenu(...)'");
 // locate "&Project" menu and insert after it
 	wxString label = _("&Project");
 	m_menuposX = _menuBar->FindMenu(label);
-//print("m_menuposX = " + strInt(m_menuposX));
+//_print("m_menuposX = " + strInt(m_menuposX));
 	if (m_menuposX == wxNOT_FOUND )
 	{
-		printError( quote(label) + _("cannot be found") + " !!!");
+		_printError( quote(label) + _("cannot be found") + " !!!");
 		return ;
 	}
 	// just after ...
@@ -281,7 +281,7 @@ printD("=> Begin 'AddOnForQt::BuildMenu(...)'");
 // construct all items Qt in menu bar
 	buildMenuBarQt();
 
-printD("	<= End 'AddOnForQt::BuildMenu(...)'");
+_printD("	<= End 'AddOnForQt::BuildMenu(...)'");
 }
 ///-----------------------------------------------------------------------------
 /// Construct items of "For a 'Qt project"
@@ -293,7 +293,7 @@ printD("	<= End 'AddOnForQt::BuildMenu(...)'");
 ///
 void AddOnForQt::buildMenuBarQt()
 {
-printD("=> Begin 'AddOnForQt::buildMenuBarQt(...)'");
+_printD("=> Begin 'AddOnForQt::buildMenuBarQt(...)'");
 /// m_menuposX == -1 => called by first 'OnActivateProject(...)'
 
 	if (!m_pMenuBar) return ;
@@ -357,7 +357,7 @@ printD("=> Begin 'AddOnForQt::buildMenuBarQt(...)'");
 
 /// enable or not
 	//enableMenuBarQt(true);
-printD("    <= End 'AddOnForQt::buildMenuBarQt(...)'");
+_printD("    <= End 'AddOnForQt::buildMenuBarQt(...)'");
 }
 
 ///-----------------------------------------------------------------------------
@@ -371,7 +371,7 @@ printD("    <= End 'AddOnForQt::buildMenuBarQt(...)'");
 ///
 void AddOnForQt::enableMenuBarQt(const bool _enable /* = true */)
 {
-printD("=> Begin 'AddOnForQt::enableMenuBarQt(" + strBool( _enable) + ")' ");
+_printD("=> Begin 'AddOnForQt::enableMenuBarQt(" + strBool( _enable) + ")' ");
 
 	if(m_pMenuBar && m_buildFinded)
 	{
@@ -380,7 +380,7 @@ printD("=> Begin 'AddOnForQt::enableMenuBarQt(" + strBool( _enable) + ")' ");
 		bool otherRunning = pOtherRunning &&  pOtherRunning != this;
 		bool enable = !(m_isRunning || otherRunning) ;
 		bool valid = _enable && enable && m_isBothQt ;
-//printWarn(" enableAllMenuBarQt::valid => " + strBool(valid) );
+//_printWarn(" enableAllMenuBarQt::valid => " + strBool(valid) );
 	// menu bar
 		m_pItem1->Enable(valid);
 		m_pItem2->Enable(valid);
@@ -392,7 +392,7 @@ printD("=> Begin 'AddOnForQt::enableMenuBarQt(" + strBool( _enable) + ")' ");
 	//	m_pItem6->Enable(valid);
 	}
 
-printD("	<= End 'AddOnForQt::enableMenuBarQt(...)'");
+_printD("	<= End 'AddOnForQt::enableMenuBarQt(...)'");
 }
 
 ///-----------------------------------------------------------------------------
@@ -405,7 +405,7 @@ printD("	<= End 'AddOnForQt::enableMenuBarQt(...)'");
 ///
 void AddOnForQt::AddOnForQt::BuildModuleMenu(const ModuleType _type, wxMenu* _menu, const FileTreeData* _data)
 {
-printD("=> Begin 'AddOnForQt::BuildModuleMenu(...)'");
+_printD("=> Begin 'AddOnForQt::BuildModuleMenu(...)'");
 
 	if (!IsAttached())     return;
 /// Only on 'ProjectManager'
@@ -415,8 +415,8 @@ printD("=> Begin 'AddOnForQt::BuildModuleMenu(...)'");
 /// when running a 'Build addon' and you stop => its a new popup !
 	if(m_pPopupQt)
 	{
-		if(m_pPopupQt != _menu) printError("'m_pPopupQt' is not the same !!");
-		else 	printWarn("'m_pPopupQt' is the same ...");
+		if(m_pPopupQt != _menu) _printError("'m_pPopupQt' is not the same !!");
+		else 	_printWarn("'m_pPopupQt' is the same ...");
 	}
 */
 	m_pPopupQt = _menu;
@@ -424,15 +424,15 @@ printD("=> Begin 'AddOnForQt::BuildModuleMenu(...)'");
 	cbPlugin * pOtherRunning = m_pMprj->GetIsRunning();
 	bool otherRunning = pOtherRunning &&  pOtherRunning != this;
 	bool enable = !(m_isRunning || otherRunning) ;
-//printError("otherRunning = " + strBool(otherRunning)  );
+//_printError("otherRunning = " + strBool(otherRunning)  );
     m_isBothQt = m_isQtProject && m_isQtActiveTarget;
     wxString label;
 /// popup menu in empty space in ProjectManager
 	if (!_data || _data->GetKind() == FileTreeData::ftdkUndefined)
     {
-//printError"BuildModuleMenu::_data is NOT here !" );
+//_printError"BuildModuleMenu::_data is NOT here !" );
 	/// worspace or empty space for Qt project ??
-//print("BuildModuleMenu:workspace => m_isBothQt: "+ strBool(m_isBothQt) );
+//_print("BuildModuleMenu:workspace => m_isBothQt: "+ strBool(m_isBothQt) );
 		if (m_isBothQt)
 		{
 		/// menu entries
@@ -468,14 +468,14 @@ printD("=> Begin 'AddOnForQt::BuildModuleMenu(...)'");
 	// on project
 	if (_data)
 	{
-//printWarn("BuildModuleMenu::_data is here !" );
+//_printWarn("BuildModuleMenu::_data is here !" );
 		/// project* exist
 		cbProject * prj = _data->GetProject();
 		if (prj)
 		{
 		/// verify that active project is same as clicked project
 			wxString nameprj = prj->GetTitle();
-// print("nameprj:" + quote(nameprj));
+// _print("nameprj:" + quote(nameprj));
             if ( nameprj.Matches(m_activeNameProject) )
             {
             /// change to 'Addons' pane
@@ -483,14 +483,14 @@ printD("=> Begin 'AddOnForQt::BuildModuleMenu(...)'");
             /// popup menu on a project
                 if (_data->GetKind() == FileTreeData::ftdkProject)
                 {
-    //printWarn("FileTreeData::ftdkProject ...");
+    //_printWarn("FileTreeData::ftdkProject ...");
 				///-------------------------------------------------------------
                 /// Windows alone
                     if (m_pCreater->m_Win)
                     {
                     /// test illegal characters
                         int  ncar = m_pCreater->filenameOk(nameprj);
-    //print("ncar:" + strInt(ncar) );
+    //_print("ncar:" + strInt(ncar) );
                         if (ncar)
                         {
                            // wxString title = quote("addonforQt ") + VERSION_WXT ;
@@ -503,9 +503,9 @@ printD("=> Begin 'AddOnForQt::BuildModuleMenu(...)'");
                             {
                                 Mes = m_activeNameProject + " -> " + nameprj + " : ";
                                 Mes += strInt(ncar) + " " + _("illegalcharacters  changed");
-                                print(Mes);
+                                _print(Mes);
                             /// name changed
-    //print("nameprj:" + quote(nameprj));
+    //_print("nameprj:" + quote(nameprj));
 
                                 m_pMprj->GetActiveProject()->SetTitle(nameprj);
                                  m_pMprj->GetUI().RebuildTree() ;
@@ -513,7 +513,7 @@ printD("=> Begin 'AddOnForQt::BuildModuleMenu(...)'");
                         } // ncar
                     } /// m_Win
 					///---------------------------------------------------------
-    //printWarn("BuildModuleMenu:data => m_isBothQt: "+ strBool(m_isBothQt) );
+    //_printWarn("BuildModuleMenu:data => m_isBothQt: "+ strBool(m_isBothQt) );
                 /// test if project and target uses 'Qt'
                     if (m_isBothQt)
                     //if (m_isQtProject && m_isQtActiveTarget)
@@ -527,7 +527,7 @@ printD("=> Begin 'AddOnForQt::BuildModuleMenu(...)'");
                         {
                         // children ?
                             _menu->FindChildItem(idBuild, &posiY);
-            //print("pos 'Build option...' = " + strInt(posi) );
+            //_print("pos 'Build option...' = " + strInt(posi) );
                         }
                     // menu insertion : a separator
                         _menu->InsertSeparator(posiY);
@@ -609,20 +609,20 @@ printD("=> Begin 'AddOnForQt::BuildModuleMenu(...)'");
             /// popup menu on a file
                 if (_data->GetKind() == FileTreeData::ftdkFile )
                 {
-    //print("BuildModuleMenu:ftdkfile => m_isBothQt: "+ strBool(m_isBothQt) );
+    //_print("BuildModuleMenu:ftdkfile => m_isBothQt: "+ strBool(m_isBothQt) );
                     if (m_isBothQt)
                     {
                     /// change to 'Addons' log
                         SwitchToLog();
                     /// parse file
                         wxString file = _data->GetProjectFile()->relativeFilename;
-    //print("*** file to parse :" + quote(file) );
+    //_print("*** file to parse :" + quote(file) );
 
                     /// verify file registered to active target
                         wxString nametarget;
                         if (m_pCreater->isRegisteredToTarget(file, nametarget) )
                         {
-    //print("it's a creator file : => " + quote(m_fileCreator) );
+    //_print("it's a creator file : => " + quote(m_fileCreator) );
                         /// menu entries
                             _menu->AppendSeparator();
                             wxMenuItem * item;
@@ -650,7 +650,7 @@ printD("=> Begin 'AddOnForQt::BuildModuleMenu(...)'");
                         {
                             Mes = Tab + " => " + quote(file) ;
                             Mes +=  _("it's not a creator file of") + quote(nametarget);
-                            printWarn(Mes);
+                            _printWarn(Mes);
                         }
 
                     } // m_isBothQT
@@ -661,7 +661,7 @@ printD("=> Begin 'AddOnForQt::BuildModuleMenu(...)'");
 		}// prj
 	} // _data
 
-printD("	<= End 'AddOnForQt::BuildModuleMenu(...)'");
+_printD("	<= End 'AddOnForQt::BuildModuleMenu(...)'");
 }
 ///-----------------------------------------------------------------------------
 /// Enable the all popup items of "=> For a 'Qt project"
@@ -671,7 +671,7 @@ printD("	<= End 'AddOnForQt::BuildModuleMenu(...)'");
 ///
 void AddOnForQt::enablePopupQt(const bool _enable)
 {
-printD("=> Begin 'AddOnForQt::enablePopupQt(" + strBool( _enable) + ")' ");
+_printD("=> Begin 'AddOnForQt::enablePopupQt(" + strBool( _enable) + ")' ");
 
     cbPlugin * pOtherRunning =  m_pMprj->GetIsRunning();
 	bool otherRunning = pOtherRunning &&  pOtherRunning != this ;
@@ -680,7 +680,7 @@ printD("=> Begin 'AddOnForQt::enablePopupQt(" + strBool( _enable) + ")' ");
 	{
 		m_pPopupQt->Enable(idMbarStop, !valid);
     }
-printD("	<= End 'AddOnForQt::enablePopupQt(...)");
+_printD("	<= End 'AddOnForQt::enablePopupQt(...)");
 }
 
 ///-----------------------------------------------------------------------------
@@ -695,11 +695,11 @@ printD("	<= End 'AddOnForQt::enablePopupQt(...)");
 ///
 void AddOnForQt::enableMenusQt(const bool _enable)
  {
-printD("=> Begin 'AddOnForQt::enableMenusQt(" + strBool( _enable) + ")' ");
+_printD("=> Begin 'AddOnForQt::enableMenusQt(" + strBool( _enable) + ")' ");
 	if (m_pMenuBar)
 		enableMenuBarQt(_enable);
 
-printD("    <= End 'AddOnForQt::enabledMenusQt(...)'");
+_printD("    <= End 'AddOnForQt::enabledMenusQt(...)'");
  }
 
 ///-----------------------------------------------------------------------------
@@ -711,7 +711,7 @@ printD("    <= End 'AddOnForQt::enabledMenusQt(...)'");
 ///
 void AddOnForQt::OnMenuComplements(wxCommandEvent& _event)
 {
-printD("=> Begin 'AddOnForQt::OnMenuComplements(...)'  with 'checked' :" + strBool(_event.IsChecked()));
+_printD("=> Begin 'AddOnForQt::OnMenuComplements(...)'  with 'checked' :" + strBool(_event.IsChecked()));
 
 	if (! _event.IsChecked()) 	return;
 /// caller id verifying
@@ -728,10 +728,10 @@ printD("=> Begin 'AddOnForQt::OnMenuComplements(...)'  with 'checked' :" + strBo
 // read file name
 	wxString filename = _event.GetString();
 /// debug
-//print("id =" + strInt(id) );
-//print("filename =" + quote(filename) );
-//print("m_fileCreator =" + quote(m_fileCreator) );
-//print("check => " + quote(strBool(checked)) );
+//_print("id =" + strInt(id) );
+//_print("filename =" + quote(filename) );
+//_print("m_fileCreator =" + quote(m_fileCreator) );
+//_print("check => " + quote(strBool(checked)) );
 ///
 /// only if target uses 'Qt'
 	if (! m_isQtActiveTarget ) 	return;
@@ -743,7 +743,7 @@ printD("=> Begin 'AddOnForQt::OnMenuComplements(...)'  with 'checked' :" + strBo
 	m_isRunning = true;
 // display 'm_AddonLog'
 	SwitchToLog();
-//print("m_activeNameTarget :" + quote(m_activeNameTarget) );
+//_print("m_activeNameTarget :" + quote(m_activeNameTarget) );
 /// search menu label ...
 	cbFutureBuild domake = fbNone;
 	filename = wxEmptyString ;
@@ -783,7 +783,7 @@ printD("=> Begin 'AddOnForQt::OnMenuComplements(...)'  with 'checked' :" + strBo
 // fbClean = 12, one file, only
 	if (id == idMbarCleanOneAddin)
 	{
-//print("Clean One => 12");
+//_print("Clean One => 12");
 		domake = fbBuild;
 		menuItemLabel = _("/&Build/Clean");
 		filename = m_fileCreator;
@@ -837,20 +837,20 @@ printD("=> Begin 'AddOnForQt::OnMenuComplements(...)'  with 'checked' :" + strBo
 		/// call compiler
 			if (!menuItemLabel.IsEmpty() )
 			{
-//	print("menuItemLabel called =>" + quote(menuItemLabel) );
+//	_print("menuItemLabel called =>" + quote(menuItemLabel) );
 				bool good = m_pCreater->CallMenu(m_pMenuBar, menuItemLabel);
 				if (! good)
 				{
 					Mes = _("The menu") + quote(menuItemLabel) ;
 					Mes += _("is not finded") + "!";
-					printError(Mes);
+					_printError(Mes);
 				}
 			}
 			else
 			{
 				Mes = _("The menu item provided was empty," );
 				Mes += _("Calling 'CallMenu(...)' is not possible") +  " !!" ;
-				printError(Mes);
+				_printError(Mes);
 				_event.Skip(); return;
 			}
 		}
@@ -866,13 +866,13 @@ printD("=> Begin 'AddOnForQt::OnMenuComplements(...)'  with 'checked' :" + strBo
 		if (m_pCreater->getAbort())
 		{
 			Mes = _("You had avorted building processus !!!");
-			printWarn(Mes);
+			_printWarn(Mes);
 		}
 		else
 		{
 			Mes = _("Call to 'AddOnForQt::doComplements(" + strInt(domake) + ")' ") ;
 			Mes += _("is failed") + " !!!";
-			printError(Mes);
+			_printError(Mes);
 		}
 	}
 /// all menus (menuBar) enabled
@@ -880,7 +880,7 @@ printD("=> Begin 'AddOnForQt::OnMenuComplements(...)'  with 'checked' :" + strBo
 
 	_event.Skip();
 
-printD("	<= End AddOnForQt::OnMenuComplements(...)" );
+_printD("	<= End AddOnForQt::OnMenuComplements(...)" );
 }
 
 ///-----------------------------------------------------------------------------
@@ -897,7 +897,7 @@ printD("	<= End AddOnForQt::OnMenuComplements(...)" );
 ///
 bool AddOnForQt::doComplements(const cbFutureBuild&  _domake)
 {
-printD("=> Begin 'AddOnForQt::doComplements(" + strInt(_domake) + ")'" );
+_printD("=> Begin 'AddOnForQt::doComplements(" + strInt(_domake) + ")'" );
 
 	if (!m_pProject) 	return false;
 
@@ -918,12 +918,12 @@ printD("=> Begin 'AddOnForQt::doComplements(" + strInt(_domake) + ")'" );
 	wxString nametarget = m_pProject->GetActiveBuildTarget();
 	if (nametarget.IsEmpty() )
 	{
-		Mes += _("no target supplied !!"); printError(Mes);
+		Mes += _("no target supplied !!"); _printError(Mes);
 		return false;
 	}
 	else
 	{
-        Mes =  Lf + domakeToStr(_domake) + quote("::" + nametarget) ; print(Mes);
+        Mes =  Lf + domakeToStr(_domake) + quote("::" + nametarget) ; _print(Mes);
 	}
 
 /// verify if complements exists already
@@ -931,7 +931,7 @@ printD("=> Begin 'AddOnForQt::doComplements(" + strInt(_domake) + ")'" );
 	//ok = m_pCreater->detectComplementsOnDisk(m_pProject, nametarget, WITH_REPORT);
 	// withless report
 	ok = m_pCreater->detectComplementsOnDisk(m_pProject, nametarget, NO_REPORT);
-//printError("ok = " + strBool(ok));
+//_printError("ok = " + strBool(ok));
 
 	// it' now an old project with complement files on disk
 	m_isNewProject = false;
@@ -939,17 +939,17 @@ printD("=> Begin 'AddOnForQt::doComplements(" + strInt(_domake) + ")'" );
 	m_removingIsFirst = false;
 
 	wxString file = m_fileCreator;
-//print("fileCreator =" + quote(file) );
+//_print("fileCreator =" + quote(file) );
 	bool BuildOneFile = !file.IsEmpty()
 		,BuildAllAddons = !BuildOneFile && (_domake > fbNone)
 		;
 /// debug
 //Mes = Lf + "Call 'doComplements' ...";
-//Mes += " _domake = " + strInt(_domake); printWarn(Mes);
+//Mes += " _domake = " + strInt(_domake); _printWarn(Mes);
 
 //Mes =  ", BuildOneFile = " ;
 //Mes += BuildOneFile ? "true ->" + quote(file) : "false";
-//Mes += ", BuildAllAddons = " + strBool(BuildAllAddons); printWarn(Mes);
+//Mes += ", BuildAllAddons = " + strBool(BuildAllAddons); _printWarn(Mes);
 /// <==
 	if (!BuildOneFile && !BuildAllAddons)
 	{
@@ -968,7 +968,7 @@ Mes = " FBuild = " + strBool(FBuild);
 Mes += ", Build(11) = " + strBool(Build);
 Mes += ", Clean(12) = " + strBool(Clean);
 Mes += ", Rebuild(13) = " + strBool(Rebuild);
-printWarn(Mes);
+_printWarn(Mes);
 */
 // to 'Addons' Log
 	SwitchToLog();
@@ -980,7 +980,7 @@ printWarn(Mes);
 	{
 	// log clear
 		Mes =Tab +  _("Wait a little bit") ;Mes += " ...";
-		printWarn(Mes);
+		_printWarn(Mes);
 	/// build
 		if (Build)
 		{
@@ -988,7 +988,7 @@ printWarn(Mes);
 			{
 				Mes =  _("Build workspace") ;
 				Mes += " ..." + _("NOT YET ACHIEVED") ;
-				printError(Mes);
+				_printError(Mes);
 			}
 		// real target
 			m_pProject->SetActiveBuildTarget(nametarget);
@@ -1010,7 +1010,7 @@ printWarn(Mes);
 			    	if (!m_pCreater->getAbort())
 					{
 						Mes = Tab + "m_pCreater->buildAllFiles(...) => ";
-						Mes += _("Error 'PreBuild' !!!");   printError(Mes);
+						Mes += _("Error 'PreBuild' !!!");   _printError(Mes);
 					}
 			    }
 			    m_isRunning = false;
@@ -1020,7 +1020,7 @@ printWarn(Mes);
 			    Mes = _("It's not a valid Qt target") ;
 			    Mes += ", " + _("check if the target is not virtual or only a command");
 			    Mes += " !!!";
-			    printError(Mes);
+			    _printError(Mes);
 			}
 			Build = false;
 		} /// end Build
@@ -1029,7 +1029,7 @@ printWarn(Mes);
 		{
 			Mes =  _("Clean all files") ;
 			Mes += " ..." + _("NOT YET ACHIEVED") ;
-			printError(Mes);
+			_printError(Mes);
 		/// cleanning current file
 			//ok = m_pCreater->cleanOneFile(m_pProject, file);
 			ok = true;
@@ -1042,14 +1042,14 @@ printWarn(Mes);
 ///********************************
 	if (BuildOneFile)
 	{
-//print("One file to compile ...");
+//_print("One file to compile ...");
 		m_isRunning = true;
 
 		if (Clean)
 		{
 			Mes =  _("Clean OneFile") ;
 			Mes += " ..." + _("NOT YET ACHIEVED") ;
-			printError(Mes);
+			_printError(Mes);
 		/// cleanning current file
 			//ok = m_pCreater->cleanOneFile(m_pProject, file);
 			ok = true;
@@ -1079,7 +1079,7 @@ printWarn(Mes);
 //* ******************************************************
 	Mes.Clear();
 
-printD("	=> End 'AddOnForQt::doComplements(...)' => " + strBool(ok) );
+_printD("	=> End 'AddOnForQt::doComplements(...)' => " + strBool(ok) );
 
 	return ok;
 }
@@ -1096,7 +1096,7 @@ printD("	=> End 'AddOnForQt::doComplements(...)' => " + strBool(ok) );
 ///
 void AddOnForQt::OnMenuStop(wxCommandEvent& _event)
 {
-printD("=> Begin 'AddOnForQt::OnMenuStop(...)' with 'checked':" + strBool(_event.IsChecked()));
+_printD("=> Begin 'AddOnForQt::OnMenuStop(...)' with 'checked':" + strBool(_event.IsChecked()));
 
 // origin
 	wxInt64 id = _event.GetId();
@@ -1106,7 +1106,7 @@ printD("=> Begin 'AddOnForQt::OnMenuStop(...)' with 'checked':" + strBool(_event
 		SwitchToLog();
 		m_pCreater->setAbort(true);
 	}
-printD("	=> End 'AddOnForQt::OnMenuStop(...)'");
+_printD("	=> End 'AddOnForQt::OnMenuStop(...)'");
 }
 
 ///-----------------------------------------------------------------------------
@@ -1118,7 +1118,7 @@ printD("	=> End 'AddOnForQt::OnMenuStop(...)'");
 ///
 void AddOnForQt::OnPluginLoaded(CodeBlocksEvent& _event)
 {
-printD("=> Begin 'AddOnForQt::OnPluginLoaded((...)'");
+_printD("=> Begin 'AddOnForQt::OnPluginLoaded((...)'");
 
 /// with parsing project
     m_noParsing = false;
@@ -1130,14 +1130,14 @@ printD("=> Begin 'AddOnForQt::OnPluginLoaded((...)'");
 /*
 	Mes = "AddOnForQt::OnPluginLoaded(...) -> ";
 	Mes +=  " 'AddOnForQt' is manually loaded";
-	Mes += Space + "-> m_noParsing = " + strBool(m_noParsing) ; printError(Mes) ;
+	Mes += Space + "-> m_noParsing = " + strBool(m_noParsing) ; _printError(Mes) ;
 */
 /// the active project
     m_pProject =  m_pMprj->GetActiveProject();
     if (m_pProject)
     {
 /// debug
-/// Mes = "Notify activate project ..."; printWarn(Mes);
+/// Mes = "Notify activate project ..."; _printWarn(Mes);
     // pseudo event
         m_pseudoEvent = true;
         CodeBlocksEvent evt(cbEVT_PROJECT_ACTIVATE, 0, m_pProject, 0, this);
@@ -1148,7 +1148,7 @@ printD("=> Begin 'AddOnForQt::OnPluginLoaded((...)'");
 /// The event processing system continues searching
 	_event.Skip();
 
-printD("    <= End 'AddOnForQt::OnPluginLoaded((...)'");
+_printD("    <= End 'AddOnForQt::OnPluginLoaded((...)'");
 }
 
 ///-----------------------------------------------------------------------------
@@ -1159,7 +1159,7 @@ printD("    <= End 'AddOnForQt::OnPluginLoaded((...)'");
 ///
 void AddOnForQt::OnPluginLoadingComplete(CodeBlocksEvent& _event)
 {
-printD("=> Begin 'AddOnForQt::OnPluginLoadingComplete((...)'");
+_printD("=> Begin 'AddOnForQt::OnPluginLoadingComplete((...)'");
 
 /// with parsing project
     m_noParsing = false;
@@ -1171,12 +1171,12 @@ printD("=> Begin 'AddOnForQt::OnPluginLoadingComplete((...)'");
 /*
 	Mes = "AddOnForQt::OnPluginLoadingComplete(...) -> ";
 	Mes += _("all plugins are loaded");
-	Mes += Space + "m_initDone = " + strBool(m_initDone) ; printWarn(Mes) ;
+	Mes += Space + "m_initDone = " + strBool(m_initDone) ; _printWarn(Mes) ;
 */
 	Mes.Clear();
 /// The event processing system continues searching
 	_event.Skip();
-printD("    <= End 'AddOnForQt::OnPluginLoadingComplete((...)'");
+_printD("    <= End 'AddOnForQt::OnPluginLoadingComplete((...)'");
 }
 
 ///-----------------------------------------------------------------------------
@@ -1188,7 +1188,7 @@ printD("    <= End 'AddOnForQt::OnPluginLoadingComplete((...)'");
 ///
 void AddOnForQt::OnWorkspaceClosed(CodeBlocksEvent& _event)
 {
-printD("=> Begin 'AddOnForQt::OnWorkspaceClosed((...)'");
+_printD("=> Begin 'AddOnForQt::OnWorkspaceClosed((...)'");
 /// stop parsing project
     m_noParsing = true;
 
@@ -1197,12 +1197,12 @@ printD("=> Begin 'AddOnForQt::OnWorkspaceClosed((...)'");
 /*
 	Mes = "AddOnForQt::OnWorkspaceClosed(...) -> ";
 	Mes +=  " 'Current Workspace' is begin closed";
-	Mes += Space + "-> m_noParsing = " + strBool(m_noParsing) ; printError(Mes) ;
+	Mes += Space + "-> m_noParsing = " + strBool(m_noParsing) ; _printError(Mes) ;
 */
 	Mes.Clear();
 /// The event processing system continues searching
     _event.Skip();
-printD("    <= End 'AddOnForQt::OnWorkspaceClosed((...)'");
+_printD("    <= End 'AddOnForQt::OnWorkspaceClosed((...)'");
 }
 
 ///-----------------------------------------------------------------------------
@@ -1215,7 +1215,7 @@ printD("    <= End 'AddOnForQt::OnWorkspaceClosed((...)'");
 ///
 void AddOnForQt::OnWorkspaceComplete(CodeBlocksEvent& _event)
 {
-printD("=> Begin 'AddOnForQt::OnWorkspaceComplete(...)'");
+_printD("=> Begin 'AddOnForQt::OnWorkspaceComplete(...)'");
 
 /// with parsing project
     m_noParsing = false;
@@ -1225,12 +1225,12 @@ printD("=> Begin 'AddOnForQt::OnWorkspaceComplete(...)'");
 /*
 	Mes = "AddOnForQt::OnWorkspaceComplete(...) -> ";
 	Mes +=  " 'Workspace' is completely loaded";
-	Mes += Space + "-> m_noParsing = " + strBool(m_noParsing) ; printError(Mes) ;
+	Mes += Space + "-> m_noParsing = " + strBool(m_noParsing) ; _printError(Mes) ;
 */
 	Mes.Clear();
 /// The event processing system continues searching
     _event.Skip();
-printD("    <= End 'AddOnForQt::OnWorkspaceComplete(...)'");
+_printD("    <= End 'AddOnForQt::OnWorkspaceComplete(...)'");
 }
 ///-----------------------------------------------------------------------------
 ///	Called by :
@@ -1248,7 +1248,7 @@ bool AddOnForQt::IsRunning() const
 ///
 void AddOnForQt::OnAppBeginShutDown(CodeBlocksEvent& _event)
 {
-printD("=> Begin 'AddOnForQt::OnAppBeginShutDown(...)'");
+_printD("=> Begin 'AddOnForQt::OnAppBeginShutDown(...)'");
 	m_WithMessage = false;
 
 /// stop project parsing
@@ -1269,7 +1269,7 @@ printD("=> Begin 'AddOnForQt::OnAppBeginShutDown(...)'");
 ///
 void AddOnForQt::OnRelease(bool appShutDown)
 {
-/// !! No print here !!
+/// !! No _print here !!
 //1- delete builder"
 	if (m_pCreater)
 	{
@@ -1302,11 +1302,11 @@ void AddOnForQt::OnRelease(bool appShutDown)
 /// Append text to log
 ///
 /// Called by :
-///		-# all printxxx(wxString)
+///		-# all _printxxx(wxString)
 ///
 void AddOnForQt::AppendToLog(const wxString& _Text, Logger::level _lv)
 {
-printD("=> Begin AddOnForQt::AppendToLog(...)");
+_printD("=> Begin AddOnForQt::AppendToLog(...)");
     if(m_AddonLog && m_WithMessage)
     {
         CodeBlocksLogEvent evtSwitch(cbEVT_SWITCH_TO_LOG_WINDOW, m_AddonLog);
@@ -1324,14 +1324,14 @@ printD("=> Begin AddOnForQt::AppendToLog(...)");
 ///
 void AddOnForQt::SwitchToLog(int _indexLog)
 {
-printD("=> Begin AddOnForQt::SwitchToLog(...)");
+_printD("=> Begin AddOnForQt::SwitchToLog(...)");
 // display a log
 	CodeBlocksLogEvent evtSwitch(cbEVT_SWITCH_TO_LOG_WINDOW, _indexLog);
 	m_pM->ProcessEvent(evtSwitch);
 }
 void AddOnForQt::SwitchToLog()
 {
-printD("=> Begin AddOnForQt::SwitchToLog(...)");
+_printD("=> Begin AddOnForQt::SwitchToLog(...)");
 // display a log
 	CodeBlocksLogEvent evtSwitch(cbEVT_SWITCH_TO_LOG_WINDOW, m_AddonLog);
 	m_pM->ProcessEvent(evtSwitch);
@@ -1352,44 +1352,44 @@ printD("=> Begin AddOnForQt::SwitchToLog(...)");
 ///
 void AddOnForQt::OnActivateProject(CodeBlocksEvent& _event)
 {
-printD("=> Begin 'AddOnForQt::OnActivateProject(...)" );
+_printD("=> Begin 'AddOnForQt::OnActivateProject(...)" );
 
 /// enabled menu Qt
 	if (!m_buildFinded)
 		buildMenuBarQt();
-//printError("call to false");
+//_printError("call to false");
     enableMenuBarQt(false);
 /// current workspace is begin closed or new workspace is completely loaded ?
 	if (m_noParsing)
 	{
 /// at CB startup  => m_noParsing = true
-printD("m_noParsing = true");
+_printD("m_noParsing = true");
 		//_event.Skip() ; return;
 	}
 
-//print("m_noParsing is false");
+//_print("m_noParsing is false");
 /// plugins are loaded ?
 	if (!m_initDone)
 	{
-//print("m_initDone is false");
+//_print("m_initDone is false");
 		_event.Skip() ; return;
 	}
-//print("m_initDone is true");
+//_print("m_initDone is true");
 // wait for message validation
 	if (!m_WithMessage)
 	{
-//print("m_WithMessage is false");
+//_print("m_WithMessage is false");
 		_event.Skip(!m_pseudoEvent);
 		m_pseudoEvent = false;
 		return;
 	}
-//print("m_WithMessage is true");
+//_print("m_WithMessage is true");
 // the active project
 	cbProject *prj = _event.GetProject();
 	if(!prj)
 	{
 		Mes += _("no project supplied") ;
-		Mes += " !!"; printError(Mes);
+		Mes += " !!"; _printError(Mes);
 		_event.Skip(!m_pseudoEvent);
 		m_pseudoEvent = false;
 		return;
@@ -1399,17 +1399,17 @@ printD("m_noParsing = true");
 	m_pProject = prj;
 	m_activeNameProject = m_pProject->GetTitle();
 	m_activeNameTarget = m_pProject->GetActiveBuildTarget();
-//print("m_activeNameProject : " + m_activeNameProject);
-//print("m_activeNameTarget : " + m_activeNameTarget);
+//_print("m_activeNameProject : " + m_activeNameProject);
+//_print("m_activeNameTarget : " + m_activeNameTarget);
 
-////printD("OnActivateProject::m_activeNameProject = " + quote(m_activeNameProject + "::" + m_activeNameTarget ) );
+////_printD("OnActivateProject::m_activeNameProject = " + quote(m_activeNameProject + "::" + m_activeNameTarget ) );
 /// DEBUG
 //* *********************************************************
 //	m_pCreater->beginDuration("OnActivateProject(...)");
 //* *********************************************************
 // detect Qt project ... with report : feed 'qtpre::m_pProject'
 	m_isQtProject = m_pCreater->detectQtProject(m_pProject, WITH_REPORT);
-//Mes = "m_qtproject = " + strBool(m_isQtProject); printWarn(Mes);
+//Mes = "m_qtproject = " + strBool(m_isQtProject); _printWarn(Mes);
 	// advice
 	Mes = _("The project") +  quote(m_pProject->GetTitle());
 	if (m_isQtProject)
@@ -1422,10 +1422,10 @@ printD("m_noParsing = true");
 		Mes += _("is NOT a Qt project") ;
 		Mes += " !!";
 	}
-	printWarn(Mes);
+	_printWarn(Mes);
 	if (!m_isQtProject)
 	{
-    //printError("call to false");
+    //_printError("call to false");
         enableMenuBarQt(false); //enableToolBarQt(false);
 		_event.Skip(!m_pseudoEvent);
 		m_pseudoEvent = false ;
@@ -1439,10 +1439,10 @@ printD("m_noParsing = true");
 ///
 	m_isBothQt = m_isQtProject && m_isQtActiveTarget;
 	// enable menubar items
-//print("OnActivateProject(...)::m_isBothQt = " + strBool(m_isBothQt) );
+//_print("OnActivateProject(...)::m_isBothQt = " + strBool(m_isBothQt) );
 	enableMenuBarQt(m_isBothQt);
 
-//Mes = "AddOnForQt::OnActivateProject() : m_isQtActiveTarget = " + strBool(m_isQtActiveTarget); print(Mes);
+//Mes = "AddOnForQt::OnActivateProject() : m_isQtActiveTarget = " + strBool(m_isQtActiveTarget); _print(Mes);
 /// search if complements exists already on disk ?
 		// ok = true => files Qt exists on disk
 	bool ok = m_pCreater->detectComplementsOnDisk(m_pProject, m_activeNameTarget, NO_REPORT);
@@ -1462,7 +1462,7 @@ printD("m_noParsing = true");
 //* *******************************************************
 	Mes.Clear();
 
-printD("	<= End 'AddOnForQt::OnActivateProject(...)");
+_printD("	<= End 'AddOnForQt::OnActivateProject(...)");
 }
 
 ///-----------------------------------------------------------------------------
@@ -1479,23 +1479,23 @@ printD("	<= End 'AddOnForQt::OnActivateProject(...)");
 ///
 void AddOnForQt::OnActivateTarget(CodeBlocksEvent& _event)
 {
-printD("=> Begin 'AddOnForQt::OnActivateTarget(...)");
+_printD("=> Begin 'AddOnForQt::OnActivateTarget(...)");
 
 /// enabled menu Qt
-//printError("call to false");
+//_printError("call to false");
     enableMenuBarQt(false);
 /// if stop parsing project
     if (m_noParsing)
     {
 /// at CB startup  => m_noParsing = true
-printD("m_noParsing = true");
+_printD("m_noParsing = true");
 		_event.Skip() ; return;
 	}
 
 /// At startup, this method is called before any project is active !!
 	if (!m_pProject)
 	{
-//printD("m_pProject = nullptr");
+//_printD("m_pProject = nullptr");
 		_event.Skip(); return;
 	}
 
@@ -1503,7 +1503,7 @@ printD("m_noParsing = true");
 // not a Qt current project
 	if (!m_isQtProject)
 	{
-//printD("m_isQtProject =" + strBool(m_isQtProject) );
+//_printD("m_isQtProject =" + strBool(m_isQtProject) );
 		_event.Skip(); return;
 	}
 /// Only for message validation
@@ -1516,10 +1516,10 @@ printD("m_noParsing = true");
 	cbProject *prj = _event.GetProject();
 	if(!prj)
 	{
-		Mes += Space + _("no project supplied") + " !!"; printError(Mes);
+		Mes += Space + _("no project supplied") + " !!"; _printError(Mes);
 		_event.Skip(); return;
 	}
-printD("prj is good ...");
+_printD("prj is good ...");
 /// is it possible ??
 // it's not the current project !
 	if ( m_pProject != prj)
@@ -1528,7 +1528,7 @@ printD("prj is good ...");
 		Mes = quote(prj->GetTitle()) + " : " ;
 		Mes += _("event project is not the current project") + " =>";
 		if (m_pProject) Mes +=  quote(m_pProject->GetTitle());
-		printWarn(Mes);
+		_printWarn(Mes);
 /// <=
 		_event.Skip(); return;
 	}
@@ -1545,7 +1545,7 @@ printD("prj is good ...");
 	/// test if the project is open
 		if (m_pMprj->IsProjectStillOpen(m_pProject))
 		{
-			Mes += Space + _("no target supplied") + " !!"; printError(Mes);
+			Mes += Space + _("no target supplied") + " !!"; _printError(Mes);
 		}
 		_event.Skip();
 		return;
@@ -1554,12 +1554,12 @@ printD("prj is good ...");
 	if (m_pCreater-> isCommandTarget(nametarget))
 	{
 		Mes =  Tab + quote("::" + nametarget);
-		Mes += Tab + _("is a command target") + " !!" ; printWarn(Mes);
+		Mes += Tab + _("is a command target") + " !!" ; _printWarn(Mes);
 		m_isQtProject = false ; m_isQtActiveTarget = false; m_isBothQt = false;
 		_event.Skip(); return;
 	}
 	m_activeNameTarget = nametarget;
-//print("OnActivateTarget => m_activeNameTarget = " + quote(m_activeNameProject + "::" + m_activeNameTarget ) );
+//_print("OnActivateTarget => m_activeNameTarget = " + quote(m_activeNameProject + "::" + m_activeNameTarget ) );
 	// all targets : real and virtual ...
 	m_isQtActiveTarget = m_pCreater->detectQtTarget(nametarget, WITH_REPORT);
 	m_isBothQt = m_isQtProject && m_isQtActiveTarget;
@@ -1574,7 +1574,7 @@ printD("prj is good ...");
 //* *********************************************************
 //	m_pCreater->beginDuration("OnActivateTarget(...)");
 //* *********************************************************
-printD("	<= End 'AddOnForQt::OnActivateTarget(...)");
+_printD("	<= End 'AddOnForQt::OnActivateTarget(...)");
 }
 
 ///-----------------------------------------------------------------------------
@@ -1589,7 +1589,7 @@ printD("	<= End 'AddOnForQt::OnActivateTarget(...)");
 ///
 void AddOnForQt::OnNewProject(CodeBlocksEvent& _event)
 {
-printD("   => Begin AddOnForQt::OnNewProject(...)");
+_printD("   => Begin AddOnForQt::OnNewProject(...)");
 /// if stop parsing project
     if (m_noParsing)
     {
@@ -1602,14 +1602,14 @@ printD("   => Begin AddOnForQt::OnNewProject(...)");
 	}
 /// debug
 //Mes = NamePlugin + "::OnNewProject(CodeBlocksEvent& event) -> ";
-//printError(Mes);
+//_printError(Mes);
 
 // the new project
 	cbProject *pProject = _event.GetProject();
 	if(!pProject)
 	{
 		Mes += _("no project supplied");
-		Mes + " !!"; printError(Mes);
+		Mes + " !!"; _printError(Mes);
 		_event.Skip(); return;
 	}
 
@@ -1621,11 +1621,11 @@ printD("   => Begin AddOnForQt::OnNewProject(...)");
 	if (nametarget.IsEmpty() )
 	{
 		Mes += _("no target supplied") ;
-		Mes += " !!"; printError(Mes);
+		Mes += " !!"; _printError(Mes);
 		_event.Skip(); return;
 	}
 //Mes = "project name" + quote(m_pProject->GetTitle()) ;
-//Mes +=  Space + "nametarget =" + quote(nametarget); printWarn(Mes);
+//Mes +=  Space + "nametarget =" + quote(nametarget); _printWarn(Mes);
 
 // detect Qt project ... with report
 	m_isQtProject = m_pCreater->detectQtProject(m_pProject, WITH_REPORT);
@@ -1641,7 +1641,7 @@ printD("   => Begin AddOnForQt::OnNewProject(...)");
 		Mes += _("is NOT a Qt project") ;
 		Mes += " !!";
 	}
-	printWarn(Mes);
+	_printWarn(Mes);
 
 // detect Qt active Target ...
 	m_isQtActiveTarget = m_pCreater->detectQtTarget(nametarget, NO_REPORT);
@@ -1650,13 +1650,13 @@ printD("   => Begin AddOnForQt::OnNewProject(...)");
 	Mes += _("is") + Space;
 	if(!m_isQtActiveTarget)		Mes += _("NOT") + Space;
 	Mes += _("a Qt target");
-	print(Mes);
+	_print(Mes);
 
 	Mes.Clear();
 /// The event processing system continues searching
 	_event.Skip();
 
-printD("    <= End AddOnForQt::OnNewProject(...)");
+_printD("    <= End AddOnForQt::OnNewProject(...)");
 }
 
 ///-----------------------------------------------------------------------------
@@ -1677,7 +1677,7 @@ printD("    <= End AddOnForQt::OnNewProject(...)");
 ///
 void AddOnForQt::OnRenameProjectOrTarget(CodeBlocksEvent& _event)
 {
-printD("=> Begin AddOnForQt::OnRenameProjectOrTarget(...)");
+_printD("=> Begin AddOnForQt::OnRenameProjectOrTarget(...)");
 /// if stop parsing project
     if (m_noParsing)
     {
@@ -1689,7 +1689,7 @@ printD("=> Begin AddOnForQt::OnRenameProjectOrTarget(...)");
 /// Debug
 //Mes = NamePlugin + "::OnRenameProjectOrTarget(CodeBlocksEvent& event) -> ";
 //Mes +=  quote(_event.GetProject()->GetTitle()) + " : " ;
-//Mes += " but 'm_pProject' is null !! " ; printWarn(Mes);
+//Mes += " but 'm_pProject' is null !! " ; _printWarn(Mes);
 /// <=
 		_event.Skip(); return;
 	}
@@ -1708,7 +1708,7 @@ printD("=> Begin AddOnForQt::OnRenameProjectOrTarget(...)");
 /// debug
 //	Mes += quote(prj->GetTitle()) + " : " ;
 //		Mes += _("event project is not the current project !!");
-//		printError(Mes);
+//		_printError(Mes);
 /// <==
 		_event.Skip();
 		return;
@@ -1729,13 +1729,13 @@ printD("=> Begin AddOnForQt::OnRenameProjectOrTarget(...)");
 			;
 //Mes  = "!!! nameProject =" + quote(prj->GetTitle());
 //Mes += ", newtarget =" + quote(nametarget);
-//Mes += ", oldtarget =" + quote(oldnametarget); printWarn(Mes);
+//Mes += ", oldtarget =" + quote(oldnametarget); _printWarn(Mes);
 
 	// it's a command target
 	if (m_pCreater-> isCommandTarget(nametarget))
 	{
 		Mes =  Tab + quote( nametarget ) + _("is a command target") + " !!" ;
-		printWarn(Mes);
+		_printWarn(Mes);
 		_event.Skip();
 		return;
 	}
@@ -1748,7 +1748,7 @@ printD("=> Begin AddOnForQt::OnRenameProjectOrTarget(...)");
 	{
 		// detect Qt project ... with report
 		m_isQtProject = m_pCreater->detectQtProject(m_pProject, WITH_REPORT);
-//Mes = "==> m_isQtProject = " + strBool(m_isQtProject); printWarn(Mes);
+//Mes = "==> m_isQtProject = " + strBool(m_isQtProject); _printWarn(Mes);
 		if (!m_isQtProject)
 		{
 			_event.Skip(); return;
@@ -1756,14 +1756,14 @@ printD("=> Begin AddOnForQt::OnRenameProjectOrTarget(...)");
 
 		Mes = "=== " ;
 		Mes += _("A new name project") + quote(m_pProject->GetTitle());
-		printWarn(Mes);
+		_printWarn(Mes);
 		Mes = quote(prj->GetTitle());
 		if (m_isQtProject)
 		{
 		// advice
 			Mes += _("has at least one target using Qt libraries") ;
 			Mes += "...";
-			printWarn(Mes);
+			_printWarn(Mes);
 		// complements exists already ?
 			m_pCreater->detectComplementsOnDisk(m_pProject, nametarget, !m_isNewProject);
 		// init
@@ -1786,14 +1786,14 @@ printD("=> Begin AddOnForQt::OnRenameProjectOrTarget(...)");
 	// new active target ?
 		wxString activetarget = m_pProject->GetActiveBuildTarget() ;
 //Mes += "!! activetarget =" + quote(activetarget);
-//Mes += ", nametarget =" + quote(nametarget); printWarn(Mes);
+//Mes += ", nametarget =" + quote(nametarget); _printWarn(Mes);
 
 	// advice
 		Mes = "=== " ;
 		Mes += _("Old target name") + quote(oldnametarget)  ;
 		Mes += "=> " ;
 		Mes += _("New target name") + quote(nametarget);
-		printWarn(Mes);
+		_printWarn(Mes);
 
 		if (!activetarget.Matches(nametarget))
 		{
@@ -1803,7 +1803,7 @@ printD("=> Begin AddOnForQt::OnRenameProjectOrTarget(...)");
 			Mes += _("is") + Space;
 			if(!okqt)		Mes += _("NOT") + Space;
 			Mes += _("a Qt target");
-			printWarn(Mes);
+			_printWarn(Mes);
 		}
 	// updates of the new target :
 		// new build target
@@ -1818,7 +1818,7 @@ printD("=> Begin AddOnForQt::OnRenameProjectOrTarget(...)");
 	Mes.Clear();
 /// The event processing system continues searching
 	_event.Skip();
-printD("    <= End AddOnForQt::OnRenameProjectOrTarget(...)");
+_printD("    <= End AddOnForQt::OnRenameProjectOrTarget(...)");
 }
 
 ///-----------------------------------------------------------------------------
@@ -1852,7 +1852,7 @@ wxString AddOnForQt::domakeToStr(const cbFutureBuild&  _domake)
 ///
 void AddOnForQt::OnBeginFileRemoved(CodeBlocksEvent& _event)
 {
-printD("=> Begin 'AddOnForQt::OnBeginFileRemoved(..)'" );
+_printD("=> Begin 'AddOnForQt::OnBeginFileRemoved(..)'" );
 
 // if stop parsing project
     if (m_noParsing)
@@ -1867,7 +1867,7 @@ printD("=> Begin 'AddOnForQt::OnBeginFileRemoved(..)'" );
 	}
 	_event.Skip();
 
-printD("	<= End  'AddOnForQt::OnBeginFileRemoved(..)'" );
+_printD("	<= End  'AddOnForQt::OnBeginFileRemoved(..)'" );
 }
 
 ///-----------------------------------------------------------------------------
@@ -1890,7 +1890,7 @@ printD("	<= End  'AddOnForQt::OnBeginFileRemoved(..)'" );
 ///
 void AddOnForQt::OnProjectFileRemoved(CodeBlocksEvent& _event)
 {
-printD("=> Begin 'AddOnForQt::OnProjectFileRemoved(..)'" );
+_printD("=> Begin 'AddOnForQt::OnProjectFileRemoved(..)'" );
 // if stop parsing project
     if (m_noParsing)
     {
@@ -1907,7 +1907,7 @@ printD("=> Begin 'AddOnForQt::OnProjectFileRemoved(..)'" );
 	{
 /// Debug
 //	Mes = quote(prj->GetTitle()) + ": " ;
-//	Mes += _("event project is not the current project") + " !!";  printError(Mes);
+//	Mes += _("event project is not the current project") + " !!";  _printError(Mes);
 /// <==
 		_event.Skip();	return;
 	}
@@ -1929,7 +1929,7 @@ printD("=> Begin 'AddOnForQt::OnProjectFileRemoved(..)'" );
 // only name less path
 	wxString file = filename.AfterLast(Slash) ;
 //Mes = Lf + "filename = " + quote(filename);
-//Mes += ",file =" + quote(file); print(Mes);
+//Mes += ",file =" + quote(file); _print(Mes);
 	bool ok = false;
 	Mes = wxEmptyString;
 // it's a complement file ?
@@ -1940,7 +1940,7 @@ printD("=> Begin 'AddOnForQt::OnProjectFileRemoved(..)'" );
 		{
 			Mes = "==> " + _("Complement file(s) was removed from C::B and disk");
 			Mes += " ..." ;
-			printWarn(Mes);
+			_printWarn(Mes);
 			m_removingIsFirst = false;
 		}
 	// unregisterer one complement file
@@ -1953,7 +1953,7 @@ printD("=> Begin 'AddOnForQt::OnProjectFileRemoved(..)'" );
 // it's a creator file ?
 	if (m_pCreater->isCreatorFile(file))
 	{
-//Mes = "file =" + quote(file) + _("is a creator file"); print(Mes);
+//Mes = "file =" + quote(file) + _("is a creator file"); _print(Mes);
 	// unregisterer one creator file and its complement file
 		//ok = m_pCreater->unregisterCreatorFile(filename, m_removingIsFirst) ;
 		ok = m_pCreater->unregisterCreatorFile(filename) ;
@@ -1962,7 +1962,7 @@ printD("=> Begin 'AddOnForQt::OnProjectFileRemoved(..)'" );
 		// delete the complement
 			Mes =  _("The creator")  + Space  + quote(filename) ;
 			Mes += _(": We must delete the complement file on disk") + "...";
-			printError(Mes);
+			_printError(Mes);
 			/// TO FINISH ...
 		}
 		else
@@ -1978,15 +1978,15 @@ printD("=> Begin 'AddOnForQt::OnProjectFileRemoved(..)'" );
 	if (!ok)
 	{
 		Mes += quote(filename) + _("file was NOT removed from project") + " !!!" ;
-		printError(Mes);
-//Mes = Tab + quote(filename); print(Mes);
+		_printError(Mes);
+//Mes = Tab + quote(filename); _print(Mes);
 	}
 
 	Mes.Clear();
 /// The event processing system continues searching
 	_event.Skip();
 
-printD("	<= End 'AddOnForQt::OnProjectFileRemoved(...)'");
+_printD("	<= End 'AddOnForQt::OnProjectFileRemoved(...)'");
 }
 ///-----------------------------------------------------------------------------
 /// After the last removed file of the project
@@ -1996,7 +1996,7 @@ printD("	<= End 'AddOnForQt::OnProjectFileRemoved(...)'");
 ///
 void AddOnForQt::OnEndFileRemoved(CodeBlocksEvent& _event)
 {
-printD("=> Begin 'AddOnForQt::OnEndFileRemoved(..)'" );
+_printD("=> Begin 'AddOnForQt::OnEndFileRemoved(..)'" );
 
 /// if stop parsing project
     if (m_noParsing)
@@ -2016,12 +2016,12 @@ printD("=> Begin 'AddOnForQt::OnEndFileRemoved(..)'" );
 	///
 		Mes = "==> " + _("End of complement file(s) removed from 'C::B' and disk");
 		Mes += " ..." ;
-		printWarn(Mes);
+		_printWarn(Mes);
 	}
 
 	_event.Skip();
 
-printD("    <= End 'AddOnForQt::OnEndFileRemoved(..)'" );
+_printD("    <= End 'AddOnForQt::OnEndFileRemoved(..)'" );
 }
 
 ///-----------------------------------------------------------------------------
@@ -2046,19 +2046,19 @@ void AddOnForQt::OnSaveProject(CodeBlocksEvent& _event)
 	}
 /// debug
 //Mes = m_NamePlugin + "::OnSaveProject(CodeBlocksEvent& event) -> ";
-// printWarn(Mes);
+// _printWarn(Mes);
 /// <==
 // the project
 	cbProject *prj = _event.GetProject();
 	if(!prj)
 	{
 		Mes += _("no project supplied") ;
-		Mes += " !!"; printError(Mes);
+		Mes += " !!"; _printError(Mes);
 		_event.Skip();
 		return;
 	}
 // messages
-	Mes += quote(prj->GetTitle()) + _("is saved") + " !!"; printWarn(Mes);
+	Mes += quote(prj->GetTitle()) + _("is saved") + " !!"; _printWarn(Mes);
 
 // The event processing system continues searching
 	_event.Skip();
@@ -2093,12 +2093,12 @@ void AddOnForQt::OnSaveFileEditor(CodeBlocksEvent& _event)
 	if (!_event.GetEditor())
 	{
 		Mes += _("no editor supplied") ;
-		Mes += " !!"; printError(Mes);
+		Mes += " !!"; _printError(Mes);
 		_event.Skip(); return;
 	}
 /// Debug
 //	Mes = NamePlugin + "::OnSaveFileEditor(CodeBlocksEvent& event) -> ";
-//	printWarn(Mes);
+//	_printWarn(Mes);
 /// <=
 // the editor
 	EditorManager * em = EditorManager::Get();
@@ -2106,7 +2106,7 @@ void AddOnForQt::OnSaveFileEditor(CodeBlocksEvent& _event)
 	if(!ed)
 	{
 		Mes += _("no editor supplied") ;
-		Mes += " !!"; printError(Mes);
+		Mes += " !!"; _printError(Mes);
 		_event.Skip();
 		return;
 	}
@@ -2116,7 +2116,7 @@ void AddOnForQt::OnSaveFileEditor(CodeBlocksEvent& _event)
 	Mes += quote(ed->GetTitle()) + _("is saved") ;
 	//Mes +=  quote(filename);
 	Mes += ": " + m_pCreater->date();
-	printWarn(Mes);
+	_printWarn(Mes);
 
 // The event processing system continues searching
 	_event.Skip();

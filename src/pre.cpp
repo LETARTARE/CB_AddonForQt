@@ -76,7 +76,7 @@ Pre::~Pre()
 /// ----------------------------------------------------------------------------
 bool Pre::CallMenu(const wxMenuBar* _mbar, const wxString& _menuPath)
 {
-printD("=> Begin 'Pre::CallMenu(...," + _menuPath + ")'" );
+_printD("=> Begin 'Pre::CallMenu(...," + _menuPath + ")'" );
 	bool good = false;
     // this code is partially based on MenuItemsManager::CreateFromString()
     wxMenu* menu = nullptr;
@@ -90,9 +90,9 @@ printD("=> Begin 'Pre::CallMenu(...," + _menuPath + ")'" );
         // find next slash
         size_t nextPos = pos;
         while (nextPos < _menuPath.Length() && _menuPath.GetChar(++nextPos) != '/' ) ;
-printD(" => menuPath =" + quote(_menuPath) );
+_printD(" => menuPath =" + quote(_menuPath) );
         wxString current = _menuPath.Mid(pos, nextPos - pos);
-printD(" => current =" + quote(current) );
+_printD(" => current =" + quote(current) );
         if (current.IsEmpty())       break;
 
         bool isLast = nextPos >= _menuPath.Length();
@@ -110,7 +110,7 @@ printD(" => current =" + quote(current) );
             if (isLast)
             {
                 int id = menu->FindItem(current);
-printD("id => " + strInt(id) );
+_printD("id => " + strInt(id) );
 				good = id != wxNOT_FOUND ;
                 if (good)
                 {
@@ -129,7 +129,7 @@ printD("id => " + strInt(id) );
         pos = nextPos; // prepare for next loop
     }
 
-printD("    <= End 'Pre::CallMenu(...) =>" + strInt(idMenu) );
+_printD("    <= End 'Pre::CallMenu(...) =>" + strInt(idMenu) );
     return good ;
 }
 ///-----------------------------------------------------------------------------
@@ -176,13 +176,13 @@ void Pre::beginDuration(const wxString & _namefunction)
 	Mes += _("PreBuild");
 	Mes += " :" ;
 	Mes += quote( m_nameActiveTarget );
-	printWarn(Mes);
+	_printWarn(Mes);
 */
 // date
 	Mes = Lf + "==> ";
 	Mes += _("Start of") + quote(_namefunction) ;
 	Mes += ": " + date();
-	printWarn(Mes);
+	_printWarn(Mes);
 	m_start = clock();
 	Mes.Clear();
 }
@@ -200,7 +200,7 @@ void Pre::endDuration(const wxString & _namefunction)
 	Mes += _("End of") + quote( _namefunction  ) ;
 	Mes += " : " + date();
 	Mes += " -> " + duration();
-	printWarn(Mes);
+	_printWarn(Mes);
 	Mes.Clear();
 }
 ///-----------------------------------------------------------------------------
@@ -223,7 +223,7 @@ wxString Pre::GetDateBuildPlugin()
 /// TODO ...
 	// search lang = "xx_XX"
 	// wxString lang =  wxLocale::GetLanguageInfo(wxLANGUAGE_DEFAULT)->GetLocaleName();
-	// printWarn(quote(lang));
+	// _printWarn(quote(lang));
 /// path of '*.so' or 'lib*.so'
 	if (! m_pMam)
 		m_pMam = m_pM->GetMacrosManager();
@@ -238,7 +238,7 @@ wxString Pre::GetDateBuildPlugin()
             namePlugin = m_namePlugin;
         #endif
 		namePath += strSlash + namePlugin + DOT_DYNAMICLIB_EXT;
-//printWarn(namePath);
+//_printWarn(namePath);
 		if (::wxFileExists(namePath))
 		{
 			wxFileName pluginFile(namePath);
@@ -248,9 +248,9 @@ wxString Pre::GetDateBuildPlugin()
 				wxDateTime plugindate = pluginFile.GetModificationTime();
 				str = plugindate.FormatDate() + "::" + plugindate.FormatTime();
 			}
-			else printError("Plugin not finded :" + quote(namePath));
+			else _printError("Plugin not finded :" + quote(namePath));
 		}
-		else printError("File not finded :" + quote(namePath));
+		else _printError("File not finded :" + quote(namePath));
 	}
     return str;
 }
@@ -338,6 +338,11 @@ wxString Pre::platForm()
 	Mes += "-32'";
 #endif
 
+// search lang = "xx_XX"
+    m_locale.Init();
+    m_lang =  m_locale.GetCanonicalName();
+    Mes += "-" + quoteNS(m_lang) ;
+
 	return Mes;
 }
 ///-----------------------------------------------------------------------------
@@ -383,12 +388,12 @@ bool Pre::isClean()
 ///
 void Pre::setAbort(bool _abort)
 {
-printD("=> Begin Pre::setAbort(" + strBool(_abort) + ")'" );
+_printD("=> Begin Pre::setAbort(" + strBool(_abort) + ")'" );
 // before using the code we must acquire the mutex
 	wxMutexLocker lock(st_mutexStop);
 	m_abort = _abort;
 
-printD("	<= End Pre::setAbort(" + strBool(m_abort) + ")'" );
+_printD("	<= End Pre::setAbort(" + strBool(m_abort) + ")'" );
 }
 ///-----------------------------------------------------------------------------
 /// Get abort
@@ -430,7 +435,7 @@ void Pre::setProject(cbProject * _pProject)
 		}
 	}
 	else
-		printError(" Error in 'Pre::setProject(_pProject == null)'" );
+		_printError(" Error in 'Pre::setProject(_pProject == null)'" );
 }
 
 ///-----------------------------------------------------------------------------
@@ -451,7 +456,7 @@ void Pre::setBuildTarget(ProjectBuildTarget * _pBuildTarget)
 				m_dirObjects += Slash;
 	}
 	else
-		printError(" Error in 'Pre::setBuildTarget(_pbuildtarget == null)'" );
+		_printError(" Error in 'Pre::setBuildTarget(_pbuildtarget == null)'" );
 }
 
 ///-----------------------------------------------------------------------------
@@ -495,8 +500,8 @@ wxString Pre::complementDirectory() const
 ///
 bool Pre::isComplementFile(const wxString & _file)
 {
-printD("==> Begin 'Pre::isComplementFile(" + _file + ")" );
-//print(allStrTable("m_Registered", m_Registered));
+_printD("==> Begin 'Pre::isComplementFile(" + _file + ")" );
+//_print(allStrTable("m_Registered", m_Registered));
 
 // target name
 	m_nameActiveTarget = m_pProject->GetActiveBuildTarget() ;
@@ -505,11 +510,11 @@ printD("==> Begin 'Pre::isComplementFile(" + _file + ")" );
 
 	wxString filename = m_dirPreBuild + fullFilename(_file) ;
 //Mes = " Pre::isComplementFile : filename = " + quote(filename);
-//printWarn(Mes);
+//_printWarn(Mes);
 	int16_t  index = m_Registered.Index (filename);
 	bool ok = index != wxNOT_FOUND;
 
-printD("	<= End 'Pre::isComplementFile()=> ok = " + strBool(ok));
+_printD("	<= End 'Pre::isComplementFile()=> ok = " + strBool(ok));
 	return ok;
 }
 
@@ -522,8 +527,8 @@ printD("	<= End 'Pre::isComplementFile()=> ok = " + strBool(ok));
 ///
 bool Pre::isCreatorFile(const wxString & _file)
 {
-printD("==> Begin 'Pre::isCreatorFile(" + _file + ")" );
-//print(allStrTable("m_Filecreator", m_Filecreator));
+_printD("==> Begin 'Pre::isCreatorFile(" + _file + ")" );
+//_print(allStrTable("m_Filecreator", m_Filecreator));
 	wxString dircreator = m_Filecreator.Item(0).BeforeLast(Slash)  ;
 	wxString filename =  dircreator + Slash + _file;
 
@@ -532,8 +537,8 @@ printD("==> Begin 'Pre::isCreatorFile(" + _file + ")" );
 //Mes = " -> file = " + file;
 //Mes += ", filename = " + filename;
 //Mes += ", index = " + strInt(index);
-//print(Mes);
-printD("	<= End 'Pre::isCreatorFile() => ok = " + strBool(ok));
+//_print(Mes);
+_printD("	<= End 'Pre::isCreatorFile() => ok = " + strBool(ok));
 	return ok;
 }
 
@@ -546,23 +551,23 @@ printD("	<= End 'Pre::isCreatorFile() => ok = " + strBool(ok));
 //
 bool Pre::isRegisteredToTarget(const wxString & _filename, wxString & _nametarget)
 {
-printD("=> Begin Pre::isRegisteredToTarget(" + _filename + ")");
+_printD("=> Begin Pre::isRegisteredToTarget(" + _filename + ")");
     if (! m_pProject)
         return false;
 
     bool ok = false;
     m_nameActiveTarget = m_pProject->GetActiveBuildTarget();
-//print("m_nameActiveTarget = " + quote(m_nameActiveTarget) );
+//_print("m_nameActiveTarget = " + quote(m_nameActiveTarget) );
 
 // filename is registerd to project ?
     int16_t  index = m_Filecreator.Index (_filename);
 	ok = index != wxNOT_FOUND;
 	if (ok)
 	{
-//Mes = _("This file ") + quote(_filename) + _(" is registered"); print(Mes);
+//Mes = _("This file ") + quote(_filename) + _(" is registered"); _print(Mes);
 	// read target name in path 'm_Registered' at index
         _nametarget = m_Registered[index].AfterFirst(Slash).BeforeFirst(Slash);
-//print("_nametarget = " + quote(_nametarget) );
+//_print("_nametarget = " + quote(_nametarget) );
         ok = _nametarget == m_nameActiveTarget;
 	}
 /// all cases
@@ -572,7 +577,7 @@ printD("=> Begin Pre::isRegisteredToTarget(" + _filename + ")");
         _nametarget = m_nameActiveTarget;
 	}
 
-printD("    <= End Pre::isRegisteredToTarget(...)");
+_printD("    <= End Pre::isRegisteredToTarget(...)");
     return ok;
 }
 
@@ -682,7 +687,7 @@ bool Pre::isVirtualQtTarget(const wxString& _namevirtualtarget, bool _warning)
 		if (ok && _warning)
 		{
 			Mes = quote(_namevirtualtarget) + _("is a virtual 'Qt' target") + " !!" ;
-			print(Mes);
+			_print(Mes);
 		}
 	}
 
@@ -704,7 +709,7 @@ wxArrayString Pre::compileableProjectTargets()
 	while (ntarget)
 	{
 		ntarget--;
-//Mes = "indice ntarget : " + strInt(ntarget); printWarn(Mes);
+//Mes = "indice ntarget : " + strInt(ntarget); _printWarn(Mes);
 		pBuildTarget = m_pProject->GetBuildTarget(ntarget);
 	// virtual target ?
 		if(!pBuildTarget) continue;
@@ -712,7 +717,7 @@ wxArrayString Pre::compileableProjectTargets()
 		if (isCommandTarget(pBuildTarget) ) continue;
 	// a compileable target
 		compilTargets.Add(pBuildTarget->GetTitle());
-//Mes = "valid target : " + strInt(ntarget); printWarn(Mes);
+//Mes = "valid target : " + strInt(ntarget); _printWarn(Mes);
 	}
 
 	return compilTargets;
@@ -766,21 +771,21 @@ wxArrayString Pre::compileableVirtualTargets(const wxString& _virtualtarget)
 ///
 bool Pre::detectQtProject(cbProject * _pProject, bool _report)
 {
-printD("=> Begin 'Pre::detectQtProject(...)");
+_printD("=> Begin 'Pre::detectQtProject(...)");
 
 	if (! _pProject)	return false;
 
 // libraries Qt in project and targets
 	m_pProject = _pProject;
 	bool isQtProject =  hasLibQt(m_pProject), isQtTarget = false;
-//Mes = "isQtProject = " + strBool(isQtProject); printWarn(Mes);
+//Mes = "isQtProject = " + strBool(isQtProject); _printWarn(Mes);
 	// search in compileable targets
 	if (!isQtProject)
 	{
 		for( wxString target: compileableProjectTargets())
 		{
 			isQtTarget = hasLibQt(m_pProject->GetBuildTarget(target));
-//print("isQtTarget => " + strBool(isQtTarget) );
+//_print("isQtTarget => " + strBool(isQtTarget) );
 			if (isQtTarget)
 				break;
 		}
@@ -803,7 +808,7 @@ printD("=> Begin 'Pre::detectQtProject(...)");
 			Mes = "... " ;
 			Mes += _("but please, DISABLE using of custom makefile");
 			Mes += Lf + quote(m_namePlugin) + _("not use makefile.");
-			print(Mes);
+			_print(Mes);
 			Mes += Lf + _("CAN NOT CONTINUE") ;
 			Mes += " !" ;
 			wxString title = _("Used makefile");
@@ -811,13 +816,13 @@ printD("=> Begin 'Pre::detectQtProject(...)");
 			cbMessageBox(Mes, title, wxICON_WARNING ) ;
 
 			Mes = m_namePlugin + " -> " + _("end") + " ...";
-			printWarn(Mes);
+			_printWarn(Mes);
 			isQtProject = false;
 		}
 	}
 
 
-printD("	<= End 'Pre::detectQtProject(...)");
+_printD("	<= End 'Pre::detectQtProject(...)");
 
 	return (isQtProject || isQtTarget);
 }
@@ -841,10 +846,10 @@ bool Pre::virtualToFirstRealTarget(wxString& _virtualtarget, bool _warning)
 			Mes += ", ";
 			Mes += _("that is replaced by his first real target") ;
 			Mes += quote( _virtualtarget);
-			printWarn(Mes);
+			_printWarn(Mes);
 	}
 //Mes = " _virtualtarget =  " + quote(_virtualtarget);
-//print(Mes);
+//_print(Mes);
 
 	return !_virtualtarget.IsEmpty();
 }
@@ -866,7 +871,7 @@ bool Pre::detectQtTarget(const wxString& _nametarget, bool _report)
 	bool ok = false ;
 	if(!m_pProject)  return ok;
 	if (isCommandTarget(_nametarget)) 	return ok;
-printD("==> Begin 'Pre::detectQtTarget(" + _nametarget + ")");
+_printD("==> Begin 'Pre::detectQtTarget(" + _nametarget + ")");
 
 // is one virtual target
 	bool virtQt = isVirtualQtTarget(_nametarget);
@@ -878,7 +883,7 @@ printD("==> Begin 'Pre::detectQtTarget(" + _nametarget + ")");
 		{
 			Mes = Tab + quote("::" + _nametarget);
 			Mes += _("is a virtual 'Qt' target that drives") ;
-			Mes += " ..."; printWarn(Mes);
+			Mes += " ..."; _printWarn(Mes);
 		}
 	}
 	else
@@ -889,9 +894,9 @@ printD("==> Begin 'Pre::detectQtTarget(" + _nametarget + ")");
 	for (wxString target : compilTargets)
 	{
 //Mes = "compare : " + quote( target) +  ", " + quote( _nametarget);
-//print(Mes);
+//_print(Mes);
 		ok = hasLibQt(m_pProject->GetBuildTarget(target));
-//Mes = strBool(ok) ; printError(Mes);
+//Mes = strBool(ok) ; _printError(Mes);
 		if (_report)
 		{
 			if (virtQt) 	Mes = Tab ;
@@ -901,18 +906,18 @@ printD("==> Begin 'Pre::detectQtTarget(" + _nametarget + ")");
 			Mes += Tab + Tab + _("is") + Space;
 			if(!ok)		Mes += _("NOT") + Space;
 			Mes += _("a Qt target.");
-			print(Mes);
+			_print(Mes);
 		}
 		goodQt = goodQt || ok ;
 	}
-//Mes = strBool(goodQt) ; printError(Mes);
+//Mes = strBool(goodQt) ; _printError(Mes);
 	if (goodQt)
 	{
 	// init
 		m_abort = false;
 	}
 
-printD("	<= End 'Pre::detectQtTarget(...)' => goodQt = " + strBool(goodQt) );
+_printD("	<= End 'Pre::detectQtTarget(...)' => goodQt = " + strBool(goodQt) );
 
 	return goodQt;
 }
@@ -926,13 +931,13 @@ printD("	<= End 'Pre::detectQtTarget(...)' => goodQt = " + strBool(goodQt) );
 ///
 bool Pre::hasLibQt(CompileTargetBase * _pContainer)
 {
-printD("==> Begin Pre::hasLibQt(...)");
+_printD("==> Begin Pre::hasLibQt(...)");
 	bool ok = false;
 	if (!_pContainer) 	return ok;
 
 	wxArrayString tablibs = _pContainer->GetLinkLibs() ;
 	wxUint16 nlib = tablibs.GetCount() ;
-//Mes = "nlib = " + strInt(nlib); printWarn(Mes);
+//Mes = "nlib = " + strInt(nlib); _printWarn(Mes);
 	if (nlib > 0 )
 	{
 		wxString namelib ;
@@ -942,19 +947,19 @@ printD("==> Begin Pre::hasLibQt(...)");
 		{
 		// lower, no extension
 			namelib = tablibs.Item(u++).Lower().BeforeFirst('.') ;
-//Mes = strInt(u) + " -> " + quote( namelib ); printWarn(Mes);
+//Mes = strInt(u) + " -> " + quote( namelib ); _printWarn(Mes);
 		// no prefix "lib"
 			pos = namelib.Find("lib") ;
 			if (pos == 0)
 				namelib.Remove(0, 3) ;
 		// begin == "qt"
 			pos = namelib.Find("qt") ;
-//Mes = "pos 'qt' = " + strInt(pos); printWarn(Mes);
+//Mes = "pos 'qt' = " + strInt(pos); _printWarn(Mes);
 			if (pos != 0) 		continue ;
 		// find
 /// ATTENTION : the table should then contain all Qt libraries !!
 			index = m_TablibQt.Index(namelib);
-//Mes = "index = " + strInt(index); printWarn(Mes);
+//Mes = "index = " + strInt(index); _printWarn(Mes);
 			ok = index != -1 ;
 		// first finded
 			if (ok)
@@ -962,7 +967,7 @@ printD("==> Begin Pre::hasLibQt(...)");
 		}
 	}
 
-printD("	<== End Pre::hasLibQt(...) => ok = " + strBool(ok));
+_printD("	<== End Pre::hasLibQt(...) => ok = " + strBool(ok));
 
 	return ok;
 }
@@ -981,7 +986,7 @@ printD("	<== End Pre::hasLibQt(...) => ok = " + strBool(ok));
 
 bool Pre::detectComplementsOnDisk(cbProject * _pProject, const wxString & _nametarget,  bool _report)
 {
-printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + strBool(_report) + ")'" );
+_printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + strBool(_report) + ")'" );
 /// DEBUG
 //* *********************************************************
 //	beginDuration("Pre::detectComplementsOnDisk(...)");
@@ -991,7 +996,7 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 
 	bool ok = wxDirExists(m_dirPreBuild);
 //Mes = "m_dirPreBuild = " + quote( m_dirPreBuild ) + ",  ok = ") +  strBool(ok);
-//print(Mes);
+//_print(Mes);
 // it's an old project already compiled once
 	if (ok)
 	{
@@ -1009,7 +1014,7 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 		// extract target name
 			nametarget = filepath.AfterFirst(Slash).BeforeFirst(Slash);
 /// Debug
-//Mes = quote(nametarget) + Tab + "=> " + quote(filepath) ; printD(Mes);
+//Mes = quote(nametarget) + Tab + "=> " + quote(filepath) ; _printD(Mes);
 /// ...
 		// is a target of project ?
 			if (_pProject->GetBuildTarget(nametarget) )
@@ -1020,7 +1025,7 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 			else	strangers = true;
 		}
 		ok = m_Filewascreated.GetCount() > 0;
-//Mes = " n = " + strInt(n) ; print(Mes);
+//Mes = " n = " + strInt(n) ; _print(Mes);
 		if (ok)
 		{
 		// initializes all other tables
@@ -1040,12 +1045,12 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 			{
 				isQtTarget = detectQtTarget(target, NO_REPORT) ;
 	//	Mes = "target = " + quote(target) + ", isQtTarget:" + strBool(isQtTarget);
-	//	print(Mes);
+	//	_print(Mes);
 				if (!isQtTarget) 	continue;
 
 				diradding = m_dirPreBuild + target ;
 	//	Mes = "diradding  = " + quote( diradding  );
-	//	printWarn(Mes);
+	//	_printWarn(Mes);
 				ok = wxDirExists(diradding);
 				if (ok)
 				{
@@ -1074,7 +1079,7 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 						{
 							Mes += _("no complement file to disk.") ;
 						}
-						print(Mes);
+						_print(Mes);
 					}
 				}
 				else
@@ -1083,7 +1088,7 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 					Mes =  _("The directory") + quote(diradding);
 					Mes += _(" no exists")  +  Dot ;
 					Mes += Space + _("It's mandatory to 'Rebuild' the target") ;
-					Mes += " !!"; printWarn(Mes) ;
+					Mes += " !!"; _printWarn(Mes) ;
 				}
 			} // end for
 		}
@@ -1092,7 +1097,7 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 			Mes =  Tab+ "=> " + _("The directory") + quote(m_dirPreBuild);
 			Mes += _("is empty")  + Dot +  Space ;
 			Mes += _("You need to 'Rebuild' the project")  +  " !!";
-			printWarn(Mes) ;
+			_printWarn(Mes) ;
 		}
 		if (strangers)
 		{
@@ -1100,7 +1105,7 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 			Mes += quote( _pProject->GetTitle()) + _("has stranger complement files in");
 			Mes += quote(m_dirPreBuild);
 			Mes += "==> "  + _("you can delete it from the disk");
-			printError(Mes);
+			_printError(Mes);
 		}
 	}
 	else
@@ -1111,7 +1116,7 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 		Mes += " ! ,";
 		Mes += _("you need to 'Rebuild' the project") ;
 		Mes += " !!";
-		printWarn(Mes);
+		_printWarn(Mes);
 	}
 
 /// DEBUG
@@ -1120,7 +1125,7 @@ printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + str
 //* *******************************************************
 	Mes.Clear();
 
-printD("	<= End 'Pre::detectComplementsOnDisk(...) => " + strBool(ok) );
+_printD("	<= End 'Pre::detectComplementsOnDisk(...) => " + strBool(ok) );
 
 	return ok;
 }
@@ -1162,19 +1167,19 @@ bool Pre::refreshTables(bool _debug)
 	{
 	// DEBUG
 		Mes = allStrTable("m_Filewascreated", m_Filewascreated);
-		print(Mes);
+		_print(Mes);
 
 		Mes = allStrTable("m_Registered", m_Registered);
-		print(Mes);
+		_print(Mes);
 
 		Mes = allStrTable("m_Createdfile", m_Createdfile);
-		print(Mes);
+		_print(Mes);
 
 		Mes = allStrTable("m_Filecreator", m_Filecreator);
-		print(Mes);
+		_print(Mes);
 
 		Mes = allStrTable("m_Filestocreate", m_Filestocreate);
-		print(Mes);
+		_print(Mes);
 	}
 
 /// DEBUG
@@ -1194,7 +1199,7 @@ bool Pre::refreshTables(bool _debug)
 ///
 int Pre::filenameOk(wxString & _namefile)
 {
-printD("==> Begin 'Pre::filenameOk(" + _namefile + ")'" );
+_printD("==> Begin 'Pre::filenameOk(" + _namefile + ")'" );
 // all blanks -> "____"
 	int nrep =  _namefile.Replace(" ", "____" , true ) ;
 // characters list
@@ -1219,7 +1224,7 @@ printD("==> Begin 'Pre::filenameOk(" + _namefile + ")'" );
 		_namefile.Replace("____", " " , true );
 	}
 
-printD("	<= End 'Pre::filenameOk(...)' => " + strInt(ncar) + " illegal characters" );
+_printD("	<= End 'Pre::filenameOk(...)' => " + strInt(ncar) + " illegal characters" );
 
 	return ncar ;
 }
@@ -1261,7 +1266,7 @@ wxArrayString Pre::copyArray (const wxArrayString& _strarray, int _nlcopy)
 ///
 wxString Pre::allStrTable(const wxString& _title, const wxArrayString& _strarray)
 {
-//Mes = "Pre::allStrTable ..."; printError(Mes);
+//Mes = "Pre::allStrTable ..."; _printError(Mes);
 	wxString mes = "--------- debug --------------";
 	mes += Lf + quote( m_dirProject ) ;
 	mes += Lf +"=>" + quote( _title ) ;
@@ -1297,7 +1302,7 @@ wxArrayString Pre::wasCreatedToCreator()
 	{
 		fullnameCreator = toFileCreator(fcreated)  ;
 //Mes = "	fcreated = " + quote(fcreated) + " => " +  quote(fullnameCreator);
-//printWarn(Mes);
+//_printWarn(Mes);
 	//add to array
 		tmp.Add(fullnameCreator);
 	}
@@ -1322,15 +1327,15 @@ wxString Pre::toFileCreator(const wxString &_fcreated)
     {
         Mes = Tab + "- " + "the file" + quote(_fcreated) ;
         Mes += "is unexpected here, you can delete it !";
-        printWarn(Mes);
+        _printWarn(Mes);
 
         return fullname;
     }
     wxString target, fcreated, fcreator , prepend, name;
 	target = _fcreated.AfterFirst(Slash).BeforeFirst(Slash);
-//Mes = " target = " + quote(target) ; printWarn(Mes);
+//Mes = " target = " + quote(target) ; _printWarn(Mes);
 	fcreated = _fcreated.AfterLast(Slash);
-//Mes = " fcreated = " + quote(fcreated ) ; printWarn(Mes);
+//Mes = " fcreated = " + quote(fcreated ) ; _printWarn(Mes);
 	if (fcreated.Contains("_") )
 	{
 		prepend = fcreated.BeforeFirst('_') ;
@@ -1341,8 +1346,8 @@ wxString Pre::toFileCreator(const wxString &_fcreated)
 	{
 		name = fcreated;
 	}
-//Mes = " 		prepend = " + quote(prepend) ; printWarn(Mes);
-//Mes = " 		name = " + quote(name) ; printWarn(Mes);
+//Mes = " 		prepend = " + quote(prepend) ; _printWarn(Mes);
+//Mes = " 		name = " + quote(name) ; _printWarn(Mes);
 	name = name.BeforeFirst('.');
 //1- file 'ui_uuu.h'  (forms)  -> 'uuu.ui'
 	if ( prepend.Matches(m_UI) && ext.Matches(EXT_H))
@@ -1363,7 +1368,7 @@ wxString Pre::toFileCreator(const wxString &_fcreated)
 	fullname = fullFileCreator(fcreator, target);
 //Mes = " fcreator = " + quote( fcreator ) ;
 //Mes += " ->  fullname = " + quote( fullname ) ;
-//printWarn(Mes);
+//_printWarn(Mes);
 
 	return fullname;
 }
@@ -1381,7 +1386,7 @@ wxString Pre::fullFileCreator(const wxString&  _fcreator, wxString _creatortarge
 	if (!m_pProject)    return fullname;
 //Mes = Tab + " ==> search _fcreator = " + quote( _fcreator ) ;
 //Mes += " of target :" + quote(_creatortarget);
-//print(Mes);
+//_print(Mes);
 	ProjectFile * prjfile ;
 	bool good = false;
 	// all files of the project
@@ -1407,13 +1412,13 @@ wxString Pre::fullFileCreator(const wxString&  _fcreator, wxString _creatortarge
 	{
 		Mes = "**" + quote(_creatortarget) + ":" + quote( _fcreator ) ;
 		Mes += Space + _(" which is a creator file is missing in the CB project") + " !";
-		printError(Mes);
+		_printError(Mes);
 		fullname = wxEmptyString ;
 		/// ask if we should delete it!
 		/// TODO ...
 
 	}
-//Mes = _(" => fullname = ") + quote( fullname);print(Mes);
+//Mes = _(" => fullname = ") + quote( fullname);_print(Mes);
 
 	return fullname;
 }

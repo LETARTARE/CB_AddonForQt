@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-10-17
- * Modified:  2022-04-22
+ * Modified:  2022-06-11
  * Copyright: LETARTARE
  * License:   GPL
  **************************************************************/
@@ -15,7 +15,7 @@
 ///-----------------------------------------------------------------------------
 /** Version
  */
-#define VERSION_WXT wxString("'3.4.7'")
+#define VERSION_WXT wxString("'3.4.8'")
 
 /** \brief display begin and end messages of function
  */
@@ -74,17 +74,17 @@
 
 /** @brief messages  -> 'Addons log'
  */
-#define p               m_LogPageIndex
-#define print(a)	    lm->Log(a, p)
-#define printLn		    lm->Log("", p)
-#define printWarn(a)	lm->LogWarning(a, p)
-#define printError(a)	lm->LogError(a, p)
+#define __p               m_LogPageIndex
+#define _print(__a)	    lm->Log(__a, __p)
+#define _printLn		    lm->Log("", __p)
+#define _printWarn(__a)	lm->LogWarning(__a, __p)
+#define _printError(__a)	lm->LogError(__a, __p)
 #ifdef WITH_MES_DEBUG
-	#define printD(a)		lm->Log(a, p)
-	#define printWarnD(a)	lm->LogWarning(a, p)
+	#define printD(__a)		lm->Log(__a, __p)
+	#define printWarnD(__a)	lm->LogWarning(__a, __p)
 #else
-	#define printD(a)
-	#define printWarnD(a)
+	#define _printD(__a)
+	#define _printWarnD(__a)
 #endif
 ///-----------------------------------------------------------------------------
 /** @brief news extensions

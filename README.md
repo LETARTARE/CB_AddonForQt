@@ -1,10 +1,10 @@
-# AddOnForQt-3.4.7 April 24, 2022 (Win32-64, Linux-64)
+# AddOnForQt-3.4.8 June 11, 2022 (Win32-64, Linux-64)
 
 Plugin to compile QT applications with 'Code::Blocks', but without 'Code:Block' patch.
 
 **Versions for all 'Code::Block, sdk >= 2.4.0, svn >= 12142'**
 
-**Last: sdk = 2.17.0, svn = 12782 -> ...**
+**Last: sdk = 2.19.0, svn = 12830 -> ...**
 
 It uses a log 'Prebuild log' for all posts plugin.
 
@@ -43,12 +43,12 @@ It uses a log 'Prebuild log' for all posts plugin.
 	5- a directory 'CodeBlocks' containing wizards and templates files 'cbqt5'
 
 
-4- Installation to 'Code::Blocks 12800' (sdk-2.17.0)
+4- Installation to 'Code::Blocks 12834' (sdk-2.19.0)
 
 	1- first install wizards 'cbqt5',
-	2- then with 'C::B-12800' compile and install the plugin 'AddOnForQt' 
-        : change the local variable 'cb = $(#sdk2170)' in agreement with your 
-        global 'sdk2170' which should identify sources of 'Code::Blocks-sdk2170' (>= C:B-12782 )
+	2- then with 'C::B-12834' compile and install the plugin 'AddOnForQt' 
+        : change the local variable 'cb = $(#sdk2190)' in agreement with your 
+        global 'sdk2190' which should identify sources of 'Code::Blocks-sdk2190' (>= C:B-12782 )
 
 5- Using
 
@@ -59,13 +59,13 @@ It uses a log 'Prebuild log' for all posts plugin.
 
 Menu for Qt
 
-![Menu](https://github.com/LETARTARE/CB_AddonForQt/blob/Images/3.5/MenuAddon.png "MenuAddonForQt")
+![Menu](https://github.com/LETARTARE/CB_AddonForQt/blob/Images/3.4/MenuAddOn.png "MenuAddonForQt")
 
 Popup menu on project
 
-![Popup](https://github.com/LETARTARE/CB_AddonForQt/blob/Images/3.5/PopupAddon.png "PopUpAddonForQt")
+![POpup](https://github.com/LETARTARE/CB_AddonForQt/blob/Images/3.4/PopUpAddOn.png "PopUpAddonForQt")
 
 Window log 
 
-![LogAddonForQt](https://github.com/LETARTARE/CB_AddonForQt/blob/Images/3.5/LogAddon.png "LogAddonForQt")
-		
+![LogAddonForQt](https://github.com/LETARTARE/CB_AddonForQt/blob/Images/3.4/LogAddOn.png "LogAddonForQt")
+

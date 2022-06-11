@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="AddOnForCb-3.4.7-sdk2170-(Unix)" />
+		<Option title="AddOnForCb-3.4.8-sdk2190-(Unix)" />
 		<Option platforms="Unix;" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="local_305">
+			<Target title="local_305_2190">
 				<Option platforms="Unix;" />
 				<Option output="$(TARGET_NAME)/addonforQt" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/$(TARGET_NAME)/" />
@@ -36,7 +36,7 @@
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="cb" value="$(#sdk2170_305)" />
+					<Variable name="cb" value="$(#sdk2190_305)" />
 				</Environment>
 			</Target>
 			<Target title="cbqt5">
@@ -95,10 +95,6 @@
 		<Unit filename="CodeBlocks/templates/wizard/cbqt5/files/qtest.h">
 			<Option target="cbqt5" />
 		</Unit>
-		<Unit filename="adding/cbqt5/moc_qtest.cpp">
-			<Option weight="1" />
-			<Option target="cbqt5" />
-		</Unit>
 		<Unit filename="doc/addonforQt.txt">
 			<Option target="doc" />
 		</Unit>
@@ -106,49 +102,49 @@
 			<Option target="doc" />
 		</Unit>
 		<Unit filename="images/build.png">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Unit filename="images/dummy.txt">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Unit filename="images/logo.png">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Unit filename="images/rebuild.png">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Unit filename="images/run.png">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Unit filename="images/stop.png">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Unit filename="manifest.xml">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Unit filename="res/dummy.xrc">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Unit filename="src/addonforqt.cpp">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Unit filename="src/addonforqt.h">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Unit filename="src/creater.cpp">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Unit filename="src/creater.h">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Unit filename="src/defines.h">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Unit filename="src/pre.cpp">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Unit filename="src/pre.h">
-			<Option target="local_305" />
+			<Option target="local_305_2190" />
 		</Unit>
 		<Extensions>
 			<DoxyBlocks>

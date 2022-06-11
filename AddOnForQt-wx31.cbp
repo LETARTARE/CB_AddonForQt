@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="AddOnForQt-3.3-sdk260" />
+		<Option title="AddOnForQt-3.4-8-sdk2190-810dw" />
 		<Option platforms="Windows;" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
@@ -13,7 +13,7 @@
 			</notes>
 		</Option>
 		<Build>
-			<Target title="local_314">
+			<Target title="local_315">
 				<Option platforms="Windows;" />
 				<Option output="$(TARGET_NAME)/AddOnForQt" prefix_auto="0" extension_auto="1" />
 				<Option object_output="objs/$(TARGET_NAME)" />
@@ -54,7 +54,7 @@
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="wx" value="$(#wx314_810dw)" />
+					<Variable name="wx" value="$(#wx315_810dw)" />
 				</Environment>
 			</Target>
 			<Target title="cbqt5">
@@ -97,7 +97,7 @@
 				<Option compiler="gcc" />
 			</Target>
 			<Environment>
-				<Variable name="cb" value="$(#sdk260dw)" />
+				<Variable name="cb" value="$(#sdk2190dw)" />
 			</Environment>
 		</Build>
 		<Compiler>
@@ -148,34 +148,34 @@
 			<Option target="doc" />
 		</Unit>
 		<Unit filename="images/dummy.txt">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="manifest.xml">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="res/dummy.xrc">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="src/addonforqt.cpp">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="src/addonforqt.h">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="src/build.cpp">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="src/build.h">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="src/defines.h">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="src/pre.cpp">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Unit filename="src/pre.h">
-			<Option target="local_314" />
+			<Option target="local_315" />
 		</Unit>
 		<Extensions>
 			<envvars set="default" />
