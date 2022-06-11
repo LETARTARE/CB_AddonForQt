@@ -48,7 +48,7 @@ It uses a log 'Prebuild log' for all posts plugin.
 	1- first install wizards 'cbqt5',
 	2- then with 'C::B-12834' compile and install the plugin 'AddOnForQt' 
         : change the local variable 'cb = $(#sdk2190)' in agreement with your 
-        global 'sdk2190' which should identify sources of 'Code::Blocks-sdk2190' (>= C:B-12782 )
+        global 'sdk2190' which should identify sources of 'Code::Blocks-sdk2190' (>= C:B-12830 )
 
 5- Using
 
