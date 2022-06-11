@@ -1,8 +1,9 @@
 <map id="Creater::verifyIncluded" name="Creater::verifyIncluded">
-<area shape="rect" id="node2" href="$class_creater.html#aeabf6115b7eff219e9f599dcacc447fa" title="Indicates whether the file is already included in another. " alt="" coords="207,31,349,57"/>
-<area shape="rect" id="node3" href="$class_creater.html#ad1855fcda415c49ea304fa1e9c3e7f87" title="Built one file elegible necessary complement. " alt="" coords="397,5,543,32"/>
-<area shape="rect" id="node6" href="$class_creater.html#a7e5eb4c44171aca6b3dc35c28d956b37" title="Record one file elegible necessary complement. " alt="" coords="401,56,539,83"/>
-<area shape="rect" id="node4" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="591,5,788,32"/>
-<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="836,5,1068,32"/>
-<area shape="rect" id="node7" href="$class_creater.html#a43598b93980df75bd8b45fd14acf6fd0" title="Records in an internal table to build additional files. " alt="" coords="621,56,758,83"/>
+<area shape="rect" id="node2" href="$class_creater.html#aeabf6115b7eff219e9f599dcacc447fa" title="Indicates whether the file is already included in another. " alt="" coords="203,31,344,57"/>
+<area shape="rect" id="node3" href="$class_creater.html#ad1855fcda415c49ea304fa1e9c3e7f87" title="Built one file elegible necessary complement. " alt="" coords="579,5,723,32"/>
+<area shape="rect" id="node6" href="$class_creater.html#a7e5eb4c44171aca6b3dc35c28d956b37" title="Record one file elegible necessary complement. " alt="" coords="392,56,531,83"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="961,31,1159,57"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="1207,31,1439,57"/>
+<area shape="rect" id="node7" href="$class_creater.html#ade74f5a6ec3c53918af7b62625410abb" title="Records in an internal table to build additional files. " alt="" coords="583,56,719,83"/>
+<area shape="rect" id="node8" href="$class_creater.html#a6e2b0f55ede69708f479336b97f0c9a3" title="Built all files necessary complements. " alt="" coords="771,56,913,83"/>
 </map>

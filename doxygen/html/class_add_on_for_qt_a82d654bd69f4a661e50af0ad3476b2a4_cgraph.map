@@ -1,51 +1,51 @@
 <map id="AddOnForQt::OnAttach" name="AddOnForQt::OnAttach">
-<area shape="rect" id="node2" href="$class_add_on_for_qt.html#a9e26c0625bf170ea273b83884e449365" title="This method called by plugin is manually loaded. " alt="" coords="233,249,430,276"/>
-<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a7f329c0fb9b4a95d5c1614597674b078" title="This method called by project activate allows detect project using the Qt libraries. " alt="" coords="501,183,707,209"/>
-<area shape="rect" id="node19" href="$class_add_on_for_qt.html#a60a167b3ec433a15f79c3a99dfb69f07" title="This method called by loading complete. " alt="" coords="231,133,431,174"/>
-<area shape="rect" id="node20" href="$class_add_on_for_qt.html#afc675a04536a3374dc97c2bdbfc2bb68" title="This method called by begin shutdown application. " alt="" coords="213,199,449,225"/>
-<area shape="rect" id="node21" href="$class_add_on_for_qt.html#acffd342a9ece6dbf1d2353e83736949f" title="This method called by target activate allows detect target using the Qt libraries. " alt="" coords="503,284,705,311"/>
-<area shape="rect" id="node22" href="$class_add_on_for_qt.html#a65e6a89da4a8f9506c4e24d5f44e2bf1" title="AddOnForQt::OnNewProject" alt="" coords="511,31,697,57"/>
-<area shape="rect" id="node23" href="$class_add_on_for_qt.html#a0a38116a5cea7b270d13fed98665f739" title="This method called by &#39;cbEVT_PROJECT_FILE_REMOVED&#39; for allows remove complement file. " alt="" coords="218,351,445,377"/>
-<area shape="rect" id="node24" href="$class_add_on_for_qt.html#a7e14fd23c1a5e3a4aa3b97eb41f3bc1f" title="AddOnForQt::OnProjectFile\lRemoved" alt="" coords="513,647,695,689"/>
-<area shape="rect" id="node27" href="$class_add_on_for_qt.html#aad6a516558f710b189c836bd3d5ff80a" title="AddOnForQt::SwitchToLog" alt="" coords="773,604,950,631"/>
-<area shape="rect" id="node35" href="$class_add_on_for_qt.html#a4a9ab02d2f83ab06472be490e00a2e55" title="AddOnForQt::OnEndFileRemoved" alt="" coords="223,503,440,529"/>
-<area shape="rect" id="node36" href="$class_add_on_for_qt.html#a6ea70e7d45a80b96729ca276c5bce27e" title="This method called by &#39;cbEVT_WORKSPACE_CLOSING_BEGIN&#39; for no analyse by AddOnForQt. " alt="" coords="218,553,445,580"/>
-<area shape="rect" id="node37" href="$class_add_on_for_qt.html#a331fe10ab63e4fa63b1fb32bb3b035ef" title="This method called by &#39;cbEVT_WORKSPACE_LOADING_COMPLETE&#39; for allows analyse by AddOnForQt. " alt="" coords="211,604,452,631"/>
-<area shape="rect" id="node38" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="500,382,708,423"/>
-<area shape="rect" id="node45" href="$class_pre.html#a7db8c1b2eb192852bfc7e07578cc8618" title="Adjusts variable depending on the platform. " alt="" coords="281,705,382,732"/>
-<area shape="rect" id="node46" href="$class_pre.html#aed8baffdb77fae0ad8153469cdcdd338" title="Get SDK version from &#39;cbplugin.h&#39;. " alt="" coords="260,756,403,783"/>
-<area shape="rect" id="node47" href="$class_pre.html#a0fdec89814261cb970450a316ecb7c7f" title="Get the date followed by the time of construction of the plugin. " alt="" coords="249,807,413,833"/>
-<area shape="rect" id="node49" href="$class_add_on_for_qt.html#a1a6faf44bbb533277cedabc95c8b99c3" title="Extract from *.zip all bitmaps. " alt="" coords="252,857,411,884"/>
-<area shape="rect" id="node50" href="$class_add_on_for_qt.html#accbde2df6ac936502521f86a3d620360" title="Any descendent plugin should override this virtual method and perform any necessary de&#45;initialization..." alt="" coords="248,908,415,935"/>
-<area shape="rect" id="node4" href="$class_add_on_for_qt.html#aa36bc551d5a87ae3326e1d7c5b9e71ec" title=" " alt="" coords="764,132,959,159"/>
-<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a5052ad009afe668df4540517c5607c11" title="Enable alls menus bar for Qt. " alt="" coords="758,233,965,260"/>
-<area shape="rect" id="node6" href="$class_pre.html#a38b56fceb859dbb8eb6f23079767cefe" title="Detects if the project has at least one target using Qt libraries refuses QT projects using a &#39;makefi..." alt="" coords="791,31,932,57"/>
+<area shape="rect" id="node2" href="$class_add_on_for_qt.html#a9e26c0625bf170ea273b83884e449365" title="This method called by plugin is manually loaded. " alt="" coords="233,249,432,276"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a7f329c0fb9b4a95d5c1614597674b078" title="This method called by project activate allows detect project using the Qt libraries. " alt="" coords="503,183,709,209"/>
+<area shape="rect" id="node19" href="$class_add_on_for_qt.html#a60a167b3ec433a15f79c3a99dfb69f07" title="This method called by loading complete. " alt="" coords="232,133,433,174"/>
+<area shape="rect" id="node20" href="$class_add_on_for_qt.html#afc675a04536a3374dc97c2bdbfc2bb68" title="This method called by begin shutdown application. " alt="" coords="215,199,450,225"/>
+<area shape="rect" id="node21" href="$class_add_on_for_qt.html#acffd342a9ece6dbf1d2353e83736949f" title="This method called by target activate allows detect target using the Qt libraries. " alt="" coords="505,284,707,311"/>
+<area shape="rect" id="node22" href="$class_add_on_for_qt.html#a65e6a89da4a8f9506c4e24d5f44e2bf1" title="AddOnForQt::OnNewProject" alt="" coords="513,31,699,57"/>
+<area shape="rect" id="node23" href="$class_add_on_for_qt.html#a0a38116a5cea7b270d13fed98665f739" title="This method called by &#39;cbEVT_PROJECT_FILE_REMOVED&#39; for allows remove complement file. " alt="" coords="219,351,446,377"/>
+<area shape="rect" id="node24" href="$class_add_on_for_qt.html#a7e14fd23c1a5e3a4aa3b97eb41f3bc1f" title="AddOnForQt::OnProjectFile\lRemoved" alt="" coords="515,647,697,689"/>
+<area shape="rect" id="node27" href="$class_add_on_for_qt.html#aad6a516558f710b189c836bd3d5ff80a" title="AddOnForQt::SwitchToLog" alt="" coords="775,604,952,631"/>
+<area shape="rect" id="node35" href="$class_add_on_for_qt.html#a4a9ab02d2f83ab06472be490e00a2e55" title="AddOnForQt::OnEndFileRemoved" alt="" coords="224,503,441,529"/>
+<area shape="rect" id="node36" href="$class_add_on_for_qt.html#a6ea70e7d45a80b96729ca276c5bce27e" title="This method called by &#39;cbEVT_WORKSPACE_CLOSING_BEGIN&#39; for no analyse by AddOnForQt. " alt="" coords="219,553,446,580"/>
+<area shape="rect" id="node37" href="$class_add_on_for_qt.html#a331fe10ab63e4fa63b1fb32bb3b035ef" title="This method called by &#39;cbEVT_WORKSPACE_LOADING_COMPLETE&#39; for allows analyse by AddOnForQt. " alt="" coords="212,604,453,631"/>
+<area shape="rect" id="node38" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="501,382,711,423"/>
+<area shape="rect" id="node45" href="$class_pre.html#a7db8c1b2eb192852bfc7e07578cc8618" title="Adjusts variable depending on the platform. " alt="" coords="282,705,383,732"/>
+<area shape="rect" id="node46" href="$class_pre.html#aed8baffdb77fae0ad8153469cdcdd338" title="Get SDK version from &#39;cbplugin.h&#39;. " alt="" coords="261,756,404,783"/>
+<area shape="rect" id="node47" href="$class_pre.html#a0fdec89814261cb970450a316ecb7c7f" title="Get the date followed by the time of construction of the plugin. " alt="" coords="251,807,414,833"/>
+<area shape="rect" id="node49" href="$class_add_on_for_qt.html#a1a6faf44bbb533277cedabc95c8b99c3" title="Extract from *.zip all bitmaps. " alt="" coords="253,857,412,884"/>
+<area shape="rect" id="node50" href="$class_add_on_for_qt.html#accbde2df6ac936502521f86a3d620360" title="Any descendent plugin should override this virtual method and perform any necessary de&#45;initialization..." alt="" coords="249,908,416,935"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#aa36bc551d5a87ae3326e1d7c5b9e71ec" title=" " alt="" coords="765,132,961,159"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a5052ad009afe668df4540517c5607c11" title="Enable alls menus bar for Qt. " alt="" coords="760,233,967,260"/>
+<area shape="rect" id="node6" href="$class_pre.html#a38b56fceb859dbb8eb6f23079767cefe" title="Detects if the project has at least one target using Qt libraries refuses QT projects using a &#39;makefi..." alt="" coords="793,31,934,57"/>
 <area shape="rect" id="node10" href="$class_pre.html#ab083f585803ea1ec03a3511709396890" title="Detects if the current target uses Qt libraries,. " alt="" coords="1076,183,1212,209"/>
-<area shape="rect" id="node13" href="$class_pre.html#afbf33d96d5e261d073efceef616f8c0d" title="Detects if the project has complements on disk. " alt="" coords="756,385,967,412"/>
-<area shape="rect" id="node7" href="$class_pre.html#ac27db6d07134211ee91fb08a5daa3b94" title="Search Qt libraries in project or target. " alt="" coords="1609,81,1711,108"/>
-<area shape="rect" id="node8" href="$class_pre.html#ad69b57decb44dabf2ed92df9d84a0147" title="Give compileable targets list for project or virtual target. " alt="" coords="1559,5,1761,32"/>
-<area shape="rect" id="node9" href="$class_pre.html#a70d06eec2a18717fa4bfc0d9a6c9a2b1" title="Give if target is command only. " alt="" coords="1809,132,1965,159"/>
-<area shape="rect" id="node11" href="$class_pre.html#afc6ff6a132516346e5e3ac7ae1215c59" title="Give if target is virtual Qt. " alt="" coords="1342,183,1490,209"/>
-<area shape="rect" id="node12" href="$class_pre.html#a9fde82bbc8790fc150a7922595e02911" title="Give compileable targets list for project or virtual target. " alt="" coords="1560,233,1760,260"/>
-<area shape="rect" id="node14" href="$class_pre.html#a7d459cbf34dd34cdad89f2403f5e7743" title="refresh all tables from &#39;m_Filewascreated&#39; " alt="" coords="1080,335,1208,361"/>
-<area shape="rect" id="node15" href="$class_pre.html#ab689a6ece34f421ffa05427eba2e9b3d" title="Give an array from another. " alt="" coords="1361,385,1471,412"/>
-<area shape="rect" id="node16" href="$class_pre.html#ac62c969d8110bed016f491417759370a" title="Construct &#39;m_FilesCreator&#39; from &#39;m_Filewascreated&#39;. " alt="" coords="1328,436,1504,463"/>
-<area shape="rect" id="node18" href="$class_pre.html#a7db810e7c49ed541b37cc0118634a560" title="give a string of table &#39;title&#39; for debug " alt="" coords="1361,335,1471,361"/>
-<area shape="rect" id="node17" href="$class_pre.html#a5ed098f76b18d56146066371e7040a7b" title="Give an string from another. " alt="" coords="1597,436,1723,463"/>
-<area shape="rect" id="node25" href="$class_pre.html#a5c97ece38dda5b4371754bde1a9a32f8" title="Set &#39;m_pProject&#39;. " alt="" coords="807,553,916,580"/>
-<area shape="rect" id="node28" href="$class_pre.html#a1844648470830f4ba69ab9e915e451b0" title="Test if complement filename. " alt="" coords="784,655,939,681"/>
-<area shape="rect" id="node31" href="$class_creater.html#afe8712a0fbf50679bee8c773ee97d2e1" title="Unregister a project file complement to &#39;Pregen&#39;. " alt="" coords="1031,756,1257,783"/>
-<area shape="rect" id="node33" href="$class_pre.html#ab3c4df0d2827767ee4e06f98616675ab" title="Test if creator filename. " alt="" coords="799,705,923,732"/>
-<area shape="rect" id="node34" href="$class_creater.html#af3f7cb48fe1b7c1fa71312084cd68497" title="Unregister a project file creator to &#39;Pregen&#39;. " alt="" coords="764,756,959,783"/>
+<area shape="rect" id="node13" href="$class_pre.html#afbf33d96d5e261d073efceef616f8c0d" title="Detects if the project has complements on disk. " alt="" coords="759,385,968,412"/>
+<area shape="rect" id="node7" href="$class_pre.html#ac27db6d07134211ee91fb08a5daa3b94" title="Search Qt libraries in project or target. " alt="" coords="1605,81,1707,108"/>
+<area shape="rect" id="node8" href="$class_pre.html#ad69b57decb44dabf2ed92df9d84a0147" title="Give compileable targets list for project or virtual target. " alt="" coords="1555,5,1757,32"/>
+<area shape="rect" id="node9" href="$class_pre.html#a70d06eec2a18717fa4bfc0d9a6c9a2b1" title="Give if target is command only. " alt="" coords="1805,132,1960,159"/>
+<area shape="rect" id="node11" href="$class_pre.html#afc6ff6a132516346e5e3ac7ae1215c59" title="Give if target is virtual Qt. " alt="" coords="1340,183,1487,209"/>
+<area shape="rect" id="node12" href="$class_pre.html#a9fde82bbc8790fc150a7922595e02911" title="Give compileable targets list for project or virtual target. " alt="" coords="1557,233,1755,260"/>
+<area shape="rect" id="node14" href="$class_pre.html#a7d459cbf34dd34cdad89f2403f5e7743" title="refresh all tables from &#39;m_Filewascreated&#39; " alt="" coords="1081,335,1207,361"/>
+<area shape="rect" id="node15" href="$class_pre.html#ab689a6ece34f421ffa05427eba2e9b3d" title="Give an array from another. " alt="" coords="1359,385,1468,412"/>
+<area shape="rect" id="node16" href="$class_pre.html#ac62c969d8110bed016f491417759370a" title="Construct &#39;m_FilesCreator&#39; from &#39;m_Filewascreated&#39;. " alt="" coords="1326,436,1501,463"/>
+<area shape="rect" id="node18" href="$class_pre.html#a7db810e7c49ed541b37cc0118634a560" title="give a string of table &#39;title&#39; for debug " alt="" coords="1358,335,1469,361"/>
+<area shape="rect" id="node17" href="$class_pre.html#a5ed098f76b18d56146066371e7040a7b" title="Give an string from another. " alt="" coords="1594,436,1718,463"/>
+<area shape="rect" id="node25" href="$class_pre.html#a5c97ece38dda5b4371754bde1a9a32f8" title="Set &#39;m_pProject&#39;. " alt="" coords="809,553,918,580"/>
+<area shape="rect" id="node28" href="$class_pre.html#a1844648470830f4ba69ab9e915e451b0" title="Test if complement filename. " alt="" coords="786,655,941,681"/>
+<area shape="rect" id="node31" href="$class_creater.html#afe8712a0fbf50679bee8c773ee97d2e1" title="Unregister a project file complement to &#39;Pregen&#39;. " alt="" coords="1033,756,1255,783"/>
+<area shape="rect" id="node33" href="$class_pre.html#ab3c4df0d2827767ee4e06f98616675ab" title="Test if creator filename. " alt="" coords="802,705,925,732"/>
+<area shape="rect" id="node34" href="$class_creater.html#af3f7cb48fe1b7c1fa71312084cd68497" title="Unregister a project file creator to &#39;Pregen&#39;. " alt="" coords="767,756,959,783"/>
 <area shape="rect" id="node26" href="$class_pre.html#a64b4d6cd53cf2ee82505d1c5a264bf62" title="Set &#39;m_pBuildTarget&#39;. " alt="" coords="1077,604,1211,631"/>
-<area shape="rect" id="node29" href="$class_pre.html#ae74187e399a9de879c26974fa779a2f3" title="If it is a virtual target, replace it with its first real target. " alt="" coords="1322,644,1510,671"/>
-<area shape="rect" id="node30" href="$class_pre.html#aaf48588ec443692538fc1d894f747d26" title="Give a full complement filename. " alt="" coords="1084,705,1204,732"/>
-<area shape="rect" id="node32" href="$class_creater.html#a3839b95d299d925a80ba552f5ab8faca" title="Remove one complement file to disk directory &quot;m_dirPreBuild&quot;. " alt="" coords="1321,557,1511,598"/>
-<area shape="rect" id="node39" href="$class_creater.html#aeb5dbc63005929e220fedcfd3cfb9a05" title="Total updates of the new target. " alt="" coords="756,444,967,471"/>
-<area shape="rect" id="node40" href="$class_creater.html#acc6136a82883d29c4c69c1f4381fedc4" title="Unregister an old target to &#39;CB&#39;. " alt="" coords="1015,553,1273,580"/>
-<area shape="rect" id="node41" href="$class_creater.html#a549f2a0d6febde534249af55be0a4d2b" title="Remove complement directory file to disk directory &quot;m_dirPreBuild&quot;. " alt="" coords="1049,437,1239,478"/>
-<area shape="rect" id="node43" href="$class_creater.html#ac83efc7e5ad1034c4994d801a7a5ffda" title="Remove old path include table for executable. " alt="" coords="1048,503,1240,529"/>
+<area shape="rect" id="node29" href="$class_pre.html#ae74187e399a9de879c26974fa779a2f3" title="If it is a virtual target, replace it with its first real target. " alt="" coords="1321,644,1506,671"/>
+<area shape="rect" id="node30" href="$class_pre.html#aaf48588ec443692538fc1d894f747d26" title="Give a full complement filename. " alt="" coords="1085,705,1203,732"/>
+<area shape="rect" id="node32" href="$class_creater.html#a3839b95d299d925a80ba552f5ab8faca" title="Remove one complement file to disk directory &quot;m_dirPreBuild&quot;. " alt="" coords="1320,557,1507,598"/>
+<area shape="rect" id="node39" href="$class_creater.html#aeb5dbc63005929e220fedcfd3cfb9a05" title="Total updates of the new target. " alt="" coords="760,444,967,471"/>
+<area shape="rect" id="node40" href="$class_creater.html#acc6136a82883d29c4c69c1f4381fedc4" title="Unregister an old target to &#39;CB&#39;. " alt="" coords="1016,553,1272,580"/>
+<area shape="rect" id="node41" href="$class_creater.html#a549f2a0d6febde534249af55be0a4d2b" title="Remove complement directory file to disk directory &quot;m_dirPreBuild&quot;. " alt="" coords="1051,437,1237,478"/>
+<area shape="rect" id="node43" href="$class_creater.html#ac83efc7e5ad1034c4994d801a7a5ffda" title="Remove old path include table for executable. " alt="" coords="1049,503,1239,529"/>
 <area shape="rect" id="node44" href="$class_creater.html#abaf5e701336f1061200c83cbb46fbe77" title="Remove old executable. " alt="" coords="1045,385,1243,412"/>
-<area shape="rect" id="node42" href="$class_creater.html#a4133fd9ca174319b29b95aa53c02b0ef" title="Recursively deletes non&#45;empty directories. " alt="" coords="1343,487,1489,513"/>
-<area shape="rect" id="node48" href="$class_pre.html#a24a743a50db14bf61a51bcf631410748" title="Plugin name. " alt="" coords="545,807,663,833"/>
+<area shape="rect" id="node42" href="$class_creater.html#a4133fd9ca174319b29b95aa53c02b0ef" title="Recursively deletes non&#45;empty directories. " alt="" coords="1341,487,1485,513"/>
+<area shape="rect" id="node48" href="$class_pre.html#a24a743a50db14bf61a51bcf631410748" title="Plugin name. " alt="" coords="547,807,665,833"/>
 </map>

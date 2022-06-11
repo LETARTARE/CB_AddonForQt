@@ -2,10 +2,6 @@ var files =
 [
     [ "addonforqt.cpp", "addonforqt_8cpp.html", "addonforqt_8cpp" ],
     [ "addonforqt.h", "addonforqt_8h.html", "addonforqt_8h" ],
-    [ "build.cpp", "build_8cpp.html", "build_8cpp" ],
-    [ "build.h", "build_8h.html", [
-      [ "Creater", "class_creater.html", "class_creater" ]
-    ] ],
     [ "creater.cpp", "creater_8cpp.html", "creater_8cpp" ],
     [ "creater.h", "creater_8h.html", [
       [ "Creater", "class_creater.html", "class_creater" ]

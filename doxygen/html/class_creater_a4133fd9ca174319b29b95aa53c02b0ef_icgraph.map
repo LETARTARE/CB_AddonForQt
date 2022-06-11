@@ -1,6 +1,6 @@
 <map id="Creater::recursRmDir" name="Creater::recursRmDir">
-<area shape="rect" id="node2" href="$class_creater.html#a549f2a0d6febde534249af55be0a4d2b" title="Remove complement directory file to disk directory &quot;m_dirPreBuild&quot;. " alt="" coords="200,5,389,47"/>
-<area shape="rect" id="node3" href="$class_creater.html#aeb5dbc63005929e220fedcfd3cfb9a05" title="Total updates of the new target. " alt="" coords="437,13,648,39"/>
-<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="696,5,904,47"/>
-<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="952,13,1109,39"/>
+<area shape="rect" id="node2" href="$class_creater.html#a549f2a0d6febde534249af55be0a4d2b" title="Remove complement directory file to disk directory &quot;m_dirPreBuild&quot;. " alt="" coords="197,5,384,47"/>
+<area shape="rect" id="node3" href="$class_creater.html#aeb5dbc63005929e220fedcfd3cfb9a05" title="Total updates of the new target. " alt="" coords="432,13,639,39"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="687,5,896,47"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="944,13,1103,39"/>
 </map>

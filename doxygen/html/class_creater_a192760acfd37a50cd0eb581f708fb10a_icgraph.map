@@ -1,8 +1,9 @@
 <map id="Creater::qt_find" name="Creater::qt_find">
-<area shape="rect" id="node2" href="$class_creater.html#ad8926d4761e32b7c2e85b82aaf7301d9" title="Search a Qt macro inside file. " alt="" coords="165,31,288,57"/>
-<area shape="rect" id="node3" href="$class_creater.html#a14195c51b8836f1ab1d1ec40e2ed60a2" title="Give if file is elegible. " alt="" coords="336,31,465,57"/>
-<area shape="rect" id="node4" href="$class_creater.html#ad1855fcda415c49ea304fa1e9c3e7f87" title="Built one file elegible necessary complement. " alt="" coords="515,5,661,32"/>
-<area shape="rect" id="node7" href="$class_creater.html#aa6decf57b5e24a39198b7b25f5853521" title="Search the eligible files (which requires additional files) " alt="" coords="513,56,663,83"/>
-<area shape="rect" id="node5" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="711,5,908,32"/>
-<area shape="rect" id="node6" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="956,5,1188,32"/>
+<area shape="rect" id="node2" href="$class_creater.html#ad8926d4761e32b7c2e85b82aaf7301d9" title="Search a Qt macro inside file. " alt="" coords="164,31,285,57"/>
+<area shape="rect" id="node3" href="$class_creater.html#a14195c51b8836f1ab1d1ec40e2ed60a2" title="Give if file is elegible. " alt="" coords="333,31,461,57"/>
+<area shape="rect" id="node4" href="$class_creater.html#ad1855fcda415c49ea304fa1e9c3e7f87" title="Built one file elegible necessary complement. " alt="" coords="704,5,848,32"/>
+<area shape="rect" id="node7" href="$class_creater.html#a2439a65ac1b3b4d5632e31106c2673f5" title="Search the eligible files (which requires additional files) " alt="" coords="509,56,656,83"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="896,31,1093,57"/>
+<area shape="rect" id="node6" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="1141,31,1373,57"/>
+<area shape="rect" id="node8" href="$class_creater.html#a6e2b0f55ede69708f479336b97f0c9a3" title="Built all files necessary complements. " alt="" coords="705,56,847,83"/>
 </map>

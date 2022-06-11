@@ -40,11 +40,13 @@ var searchData=
   ['m_5fisqtproject',['m_isQtProject',['../class_add_on_for_qt.html#a64e5fafee6dcdd690ed5c767f86ed3c9',1,'AddOnForQt']]],
   ['m_5fisrunning',['m_isRunning',['../class_add_on_for_qt.html#a162ee40c1e7e927dbd000789677c258b',1,'AddOnForQt']]],
   ['m_5fitembuildposy',['m_itemBuildposY',['../class_add_on_for_qt.html#aa3367759e0a39b48e5201659356f980b',1,'AddOnForQt']]],
+  ['m_5flang',['m_lang',['../class_pre.html#addcd7a3c7c64ace42af9020fa94070a9',1,'Pre']]],
   ['m_5flastindex',['m_LastIndex',['../class_add_on_for_qt.html#adb99283f4d8ab893f4b9802b59395fa6',1,'AddOnForQt']]],
   ['m_5flastlog',['m_Lastlog',['../class_add_on_for_qt.html#a2fd4b9a1bbf8f2d94fd6b0e62ecc1d66',1,'AddOnForQt']]],
   ['m_5flexe',['m_Lexe',['../class_pre.html#acd1c808d95e8dde8c7769717d37807c1',1,'Pre']]],
   ['m_5flinux',['m_Linux',['../class_pre.html#a708b229def87e2ac047a00940acd53a9',1,'Pre']]],
   ['m_5flm',['m_Lm',['../class_pre.html#a7871be0e8fdfeaf6014262c24240aabb',1,'Pre']]],
+  ['m_5flocale',['m_locale',['../class_pre.html#aeed3a527a557e989f8629c96920b1b4a',1,'Pre']]],
   ['m_5flogman',['m_LogMan',['../class_add_on_for_qt.html#a5edeab53f81e3ef915b989f367e24364',1,'AddOnForQt']]],
   ['m_5flogpageindex',['m_LogPageIndex',['../class_add_on_for_qt.html#a29b38692d426dab38a0d5b2937656056',1,'AddOnForQt::m_LogPageIndex()'],['../class_pre.html#a039eccbbd1e0cd97217783eead7e0798',1,'Pre::m_LogPageIndex()']]],
   ['m_5fmac',['m_Mac',['../class_pre.html#ac9c15734b417071c7a80ab7cbdfaabd9',1,'Pre']]],
@@ -83,5 +85,5 @@ var searchData=
   ['m_5fwin',['m_Win',['../class_pre.html#a038fc37161d02da7a850f9ae8848fa64',1,'Pre']]],
   ['m_5fwithmessage',['m_WithMessage',['../class_add_on_for_qt.html#a1f4c5f3c7453bf6eda4dac48ae8f6317',1,'AddOnForQt']]],
   ['mes',['Mes',['../class_add_on_for_qt.html#ab78c5f4bdd561fed29560452c7f94caf',1,'AddOnForQt::Mes()'],['../class_pre.html#a41cea99c88eaf5b2c7bb49b65921c8a4',1,'Pre::Mes()']]],
-  ['modifydate',['modifyDate',['../class_creater.html#a6588a2dd5fdf8cc7c7b350cc077c3a2b',1,'Creater::modifyDate(const wxString &amp;_fileref, const wxString &amp;_filetarget)'],['../class_creater.html#a6588a2dd5fdf8cc7c7b350cc077c3a2b',1,'Creater::modifyDate(const wxString &amp;_fileref, const wxString &amp;_filetarget)']]]
+  ['modifydate',['modifyDate',['../class_creater.html#a6588a2dd5fdf8cc7c7b350cc077c3a2b',1,'Creater']]]
 ];

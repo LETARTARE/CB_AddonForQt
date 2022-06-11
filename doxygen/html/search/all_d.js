@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ok',['ok',['../creater_8cpp.html#ab73fdaa1fb7669da760b49600c45d9be',1,'ok():&#160;creater.cpp'],['../build_8cpp.html#ab73fdaa1fb7669da760b49600c45d9be',1,'ok():&#160;build.cpp']]],
+  ['ok',['ok',['../creater_8cpp.html#ab73fdaa1fb7669da760b49600c45d9be',1,'creater.cpp']]],
   ['onactivateproject',['OnActivateProject',['../class_add_on_for_qt.html#a7f329c0fb9b4a95d5c1614597674b078',1,'AddOnForQt']]],
   ['onactivatetarget',['OnActivateTarget',['../class_add_on_for_qt.html#acffd342a9ece6dbf1d2353e83736949f',1,'AddOnForQt']]],
   ['onappbeginshutdown',['OnAppBeginShutDown',['../class_add_on_for_qt.html#afc675a04536a3374dc97c2bdbfc2bb68',1,'AddOnForQt']]],

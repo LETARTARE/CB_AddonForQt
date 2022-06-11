@@ -1,5 +1,5 @@
 <map id="Creater::removeOldExecutable" name="Creater::removeOldExecutable">
-<area shape="rect" id="node2" href="$class_creater.html#aeb5dbc63005929e220fedcfd3cfb9a05" title="Total updates of the new target. " alt="" coords="252,13,463,39"/>
-<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="511,5,719,47"/>
-<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="767,13,924,39"/>
+<area shape="rect" id="node2" href="$class_creater.html#aeb5dbc63005929e220fedcfd3cfb9a05" title="Total updates of the new target. " alt="" coords="252,13,459,39"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="507,5,716,47"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="764,13,923,39"/>
 </map>

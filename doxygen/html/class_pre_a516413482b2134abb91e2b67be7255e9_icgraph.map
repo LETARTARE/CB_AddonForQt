@@ -1,4 +1,4 @@
 <map id="Pre::getAbort" name="Pre::getAbort">
-<area shape="rect" id="node2" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="399,5,631,32"/>
-<area shape="rect" id="node3" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="153,31,351,57"/>
+<area shape="rect" id="node2" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="397,5,629,32"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="152,31,349,57"/>
 </map>

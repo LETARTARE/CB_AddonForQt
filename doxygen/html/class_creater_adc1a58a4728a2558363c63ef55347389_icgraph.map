@@ -1,6 +1,8 @@
 <map id="Creater::createFileComplement" name="Creater::createFileComplement">
-<area shape="rect" id="node2" href="$class_creater.html#a6113fdc882a704e4a25b0e51a5625309" title="Execute commands &#39;moc&#39;, &#39;uic&#39;, &#39;rcc&#39;. " alt="" coords="257,5,440,32"/>
-<area shape="rect" id="node3" href="$class_creater.html#ad1855fcda415c49ea304fa1e9c3e7f87" title="Built one file elegible necessary complement. " alt="" coords="276,56,421,83"/>
-<area shape="rect" id="node4" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="488,56,685,83"/>
-<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="733,56,965,83"/>
+<area shape="rect" id="node2" href="$class_creater.html#ad1855fcda415c49ea304fa1e9c3e7f87" title="Built one file elegible necessary complement. " alt="" coords="485,5,629,32"/>
+<area shape="rect" id="node5" href="$class_creater.html#abb96c7847313015daf2253b3586d3f97" title="Execute commands &#39;moc&#39;, &#39;uic&#39;, &#39;rcc&#39;. " alt="" coords="256,56,437,83"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="868,31,1065,57"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="1113,31,1345,57"/>
+<area shape="rect" id="node6" href="$class_creater.html#a181de225e0bfd08ac61793153182f542" title="Creating complements files. " alt="" coords="489,56,625,83"/>
+<area shape="rect" id="node7" href="$class_creater.html#a6e2b0f55ede69708f479336b97f0c9a3" title="Built all files necessary complements. " alt="" coords="677,56,820,83"/>
 </map>
