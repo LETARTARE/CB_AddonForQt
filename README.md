@@ -63,9 +63,9 @@ Menu for Qt
 
 Popup menu on project
 
-![Popup](https://github.com/LETARTARE/CB_AddonForQt/raw/Images/3.5/PopUpAddOn.png "PopUpAddonForQt")
+![Popup](https://github.com/LETARTARE/CB_AddonForQt/raw/Images/3.5/PopUpAddon.png "PopUpAddonForQt")
 
 Window log 
 
-![LogAddonForQt](https://github.com/LETARTARE/CB_AddonForQt/raw/Images/3.5/LogAddOn.png "LogAddonForQt")
+![LogAddonForQt](https://github.com/LETARTARE/CB_AddonForQt/raw/Images/3.5/LogAddon.png "LogAddonForQt")
 
