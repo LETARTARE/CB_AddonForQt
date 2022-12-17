@@ -63,7 +63,7 @@ Menu for Qt
 
 Popup menu on project
 
-![Popup](https://github.com/LETARTARE/CB_AddonForQt/raw/Images/3.5/PopUpAddon.png "PopUpAddonForQt")
+![Popup](https://github.com/LETARTARE/CB_AddonForQt/raw/Images/3.5/PopupAddon.png "PopUpAddonForQt")
 
 Window log 
 
