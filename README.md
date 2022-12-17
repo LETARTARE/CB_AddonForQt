@@ -59,7 +59,7 @@ It uses a log 'Prebuild log' for all posts plugin.
 
 Menu for Qt
 
-![Menu](https://github.com/LETARTARE/CB_AddonForQt/raw/Images/3.5/LogAddon.png "MenuAddonForQt")
+![Menu](https://github.com/LETARTARE/CB_AddonForQt/raw/Images/3.5/MenuAddon.png "MenuAddonForQt")
 
 Popup menu on project
 
