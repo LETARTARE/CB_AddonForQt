@@ -1,6 +1,6 @@
 <map id="Creater::isGoodTargetQt" name="Creater::isGoodTargetQt">
-<area shape="rect" id="node2" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="601,5,799,32"/>
-<area shape="rect" id="node4" href="$class_creater.html#a2439a65ac1b3b4d5632e31106c2673f5" title="Search the eligible files (which requires additional files) " alt="" coords="216,31,363,57"/>
-<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="847,5,1079,32"/>
-<area shape="rect" id="node5" href="$class_creater.html#a6e2b0f55ede69708f479336b97f0c9a3" title="Built all files necessary complements. " alt="" coords="411,31,553,57"/>
+<area shape="rect" id="node2" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="605,5,803,32"/>
+<area shape="rect" id="node4" href="$class_creater.html#a2439a65ac1b3b4d5632e31106c2673f5" title="Search the eligible files (which requires additional files) " alt="" coords="217,31,367,57"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="851,5,1083,32"/>
+<area shape="rect" id="node5" href="$class_creater.html#a6e2b0f55ede69708f479336b97f0c9a3" title="Built all files necessary complements. " alt="" coords="415,31,557,57"/>
 </map>

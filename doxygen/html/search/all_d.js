@@ -13,7 +13,7 @@ var searchData=
   ['onpluginloaded',['OnPluginLoaded',['../class_add_on_for_qt.html#a9e26c0625bf170ea273b83884e449365',1,'AddOnForQt']]],
   ['onpluginloadingcomplete',['OnPluginLoadingComplete',['../class_add_on_for_qt.html#a60a167b3ec433a15f79c3a99dfb69f07',1,'AddOnForQt']]],
   ['onprojectfileremoved',['OnProjectFileRemoved',['../class_add_on_for_qt.html#a7e14fd23c1a5e3a4aa3b97eb41f3bc1f',1,'AddOnForQt']]],
-  ['onrelease',['OnRelease',['../class_add_on_for_qt.html#accbde2df6ac936502521f86a3d620360',1,'AddOnForQt']]],
+  ['onrelease',['OnRelease',['../class_add_on_for_qt.html#a26444d34abc3c5b15683ce72d479bb6a',1,'AddOnForQt']]],
   ['onrenameprojectortarget',['OnRenameProjectOrTarget',['../class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0',1,'AddOnForQt']]],
   ['onsavefileeditor',['OnSaveFileEditor',['../class_add_on_for_qt.html#aeede58b8ae6c75b45a58c8b0e9a3c6c0',1,'AddOnForQt']]],
   ['onsaveproject',['OnSaveProject',['../class_add_on_for_qt.html#ad62c7ee81df99882973f361b8eac5b1a',1,'AddOnForQt']]],

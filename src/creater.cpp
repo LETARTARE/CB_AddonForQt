@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-10-17
- * Modified:  2022-04-22
+ * Modified:  2022-12-13
  * Copyright: LETARTARE
  * License:   GPL
  **************************************************************/
@@ -31,8 +31,8 @@
 Creater::Creater(const wxString & _namePlugin, int _logIndex)
 	: Pre(_namePlugin, _logIndex)
 {
-/// !! not use  '+ Slash'   !!  because Slash = wxT(...)
-	m_dirPreBuild = "adding" + wxString(Slash) ;
+/// !! not use  '+ cSlash'   !!  because cSlash = wxT(...)
+	m_dirPreBuild = "adding" + wxString(cSlash) ;
 }
 ///-----------------------------------------------------------------------------
 /// Destructor
@@ -73,7 +73,7 @@ void Creater::beginMesBuildCreate()
 
 // display log
 	Mes = "-------------- " ;
-	Mes += "PreBuild :" ;
+	Mes += _("PreBuild") + " :" ;
 	Mes += quote( m_nameActiveTarget );
 	Mes += _("in");
 	Mes += quote( m_nameProject );
@@ -187,7 +187,7 @@ bool Creater::buildAllFiles(cbProject * _pProject, cb_unused bool _workspace, bo
 					good = validCreated() ;
 					if (!good)
 					{
-						Mes = Tab + _("No file to create.") ;
+						Mes = Tab + _("No file to create") + Dot;
 						_printWarn(Mes);
 
 					}
@@ -247,7 +247,7 @@ void Creater::beginMesFileCreate()
 // banner
 	_printLn;
 	Mes = "-------------- " ;
-	Mes += "PreCompileFile :" ;
+	Mes += _("PreCompileFile") + " :" ;
 	Mes += quote( m_pProject->GetActiveBuildTarget() );
 	Mes += _("in");
 	Mes += quote( m_pProject->GetTitle() );
@@ -255,7 +255,7 @@ void Creater::beginMesFileCreate()
 	Mes += "-------------- " ;
 	_printWarn(Mes);
 // date
-	Mes = _("started on : ") + date() ;
+	Mes = _("started on") + " : " + date() ;
 	_print(Mes);
 // for duration
 	m_start = clock();
@@ -273,9 +273,9 @@ void Creater::beginMesFileCreate()
 void Creater::endMesFileCreate()
 {
 // date and duration
-	Mes = _("ended on : ") + date() ;
+	Mes = _("ended on")+ " : " + date() ;
 	_print (Mes) ;
-	Mes =  _("duration = ") + duration() ;
+	Mes =  _("duration") + " = " + duration() ;
 	_printWarn(Mes);
 	Mes.Clear();
 }
@@ -353,16 +353,16 @@ _printD("=> Begin Creater::buildOneFile(..., " + quote(_fcreator) + ")'" );
         {
         // display message
             Mes  = "===> " ;
-            Mes += _("can not add this file ");
-            Mes += quote( fout ) + _(" to target ") + m_nameActiveTarget ;
+            Mes += _("can not add this file");
+            Mes += quote( fout ) + _("to target") + quote(m_nameActiveTarget) ;
             _printError (Mes) ;
             cbMessageBox(Mes, "AddFile(...)", wxICON_ERROR) ;
         }
     // display
         if (nocompile)
         {
-            Mes = Tab + _("Add ") + quote( fout ) ;
-            Mes += Lf + Tab + Tab + "*** " + _("This file is included, ") ;
+            Mes = Tab + _("Add") + quote( fout ) ;
+            Mes += Lf + Tab + Tab + "*** " + _("This file is included")  + ", ";
             Mes += _("attributes 'compile' and 'link' will be set to 'false'") ;
             _print(Mes);
         }
@@ -391,7 +391,7 @@ _printD("=> Begin Creater::buildOneFile(..., " + quote(_fcreator) + ")'" );
     else
 ///-----------------------------------------------------------------------------
     {
-        Mes = Tab + _(" One complement file is created in the project ...") ;
+        Mes = Tab + _("One complement file is created in the project") + " ...";
         _printWarn(Mes);
     // create file complement with 'moc'
         wxString strerror = createFileComplement(m_Mexe, _fcreator, fout);
@@ -399,13 +399,12 @@ _printD("=> Begin Creater::buildOneFile(..., " + quote(_fcreator) + ")'" );
         if (!strerror.IsEmpty())
         {
         // error message
-            wxString title = _("Creating ") + quote( fout ) ;
-            title += _(" failed") ;
-            title += " ...";
+            wxString title = _("Creating") + quote( fout ) ;
+            title += _("failed") + " ...";
 		//1- error create directory  :
-			// = _("Unable to create directory ")
+			// = _("Unable to create directory")
 		//2- error buildtarget no exist :
-			// = quote( m_nameActiveTarget ) + _(" does not exist !!") ;
+			// = quote( m_nameActiveTarget ) + _("does not exist") + " !!" ;
 		//3- error create complement
             Mes =  "=> " ;
             Mes += strerror.BeforeLast(Lf.GetChar(0)) ;
@@ -517,8 +516,8 @@ _printD("=> Begin 'Creater::pathlibQt(...)");
 //Mes = Lf + _("Local variable path Qt => '") + path; Mes += "'"; _print(Mes);
 				path_nomacro =  path ;
 			// remove "\lib"
-				path_nomacro = path_nomacro.BeforeLast(Slash) ;
-				path_nomacro += wxString(Slash)  ;
+				path_nomacro = path_nomacro.BeforeLast(cSlash) ;
+				path_nomacro += wxString(cSlash)  ;
 			}
 			else
 			{
@@ -532,8 +531,8 @@ _printD("=> Begin 'Creater::pathlibQt(...)");
 //Mes = Lf + _("Global variable path Qt => '") + path;Mes += "'"; _print(Mes);
 					path_nomacro =  path ;
 				// remove "\lib"
-					path_nomacro = path_nomacro.BeforeLast(Slash) ;
-					path_nomacro += wxString(Slash)  ;
+					path_nomacro = path_nomacro.BeforeLast(cSlash) ;
+					path_nomacro += wxString(cSlash)  ;
 				}
 			// no variable ! , absolute path ?
 				else
@@ -568,15 +567,17 @@ _printD("=> Begin 'Creater::findTargetQtexe(...)");
 // Mes = Lf + _("QT path for the target = ") + quote(qtpath); _print(Mes);
 	if(qtpath.IsEmpty() || qtpath == "\\" )
 	{
-		Mes = _("No library path QT 'in the target") + Lf + _("or nothing library !")  ;
-		Mes += Lf +  _("Check that you have a correct path to the Qt path libraries !") ;
-		Mes += Lf + _("Cannot continue.") ;
+		Mes = _("No library path QT 'in the target") + Lf + _("or nothing library") + " !";
+		Mes += Lf +  _("Check that you have a correct path to the Qt path libraries") + " !" ;
+		Mes += Lf + _("Cannot continue") + Dot;
 		_printError(Mes);
 	//	cbMessageBox(Mes, "", wxICON_ERROR) ;
 		return false ;
 	}
-
+/// for qt5
 	wxString qtexe = qtpath + "bin" + wxFILE_SEP_PATH  ;
+/// for qt6
+    // wxString qtexe = qtpath + "libexec" + wxFILE_SEP_PATH  ;
 //	Mes = "qtexe = " + quote(qtexe) ;  _printWarn(Mes);
 	if (m_Win)
 	{
@@ -584,7 +585,10 @@ _printD("=> Begin 'Creater::findTargetQtexe(...)");
 		m_Uexe = qtexe + "uic.exe" ;
 		m_Rexe = qtexe + "rcc.exe" ;
 		// compile *_fr.ts -> *_fr.qm
+/// for qt5
 		m_Lexe = qtexe + "lrelease.exe" ;
+/// for qt6
+        // m_Lexe = qtexe + "lrelease-pro.exe" ;
 	}
 	else
 	if (m_Linux)
@@ -592,8 +596,11 @@ _printD("=> Begin 'Creater::findTargetQtexe(...)");
 		m_Mexe = qtexe + "moc" ;
 		m_Uexe = qtexe + "uic" ;
 		m_Rexe = qtexe + "rcc" ;
+/// for qt5
 		m_Lexe = qtexe + "lrelease" ;
-	}
+/// for qt6
+        // m_Lexe = qtexe + "lrelease-pro.exe" ;
+    	}
 	else
 	if (m_Mac)
 	{ 	// ???
@@ -601,6 +608,8 @@ _printD("=> Begin 'Creater::findTargetQtexe(...)");
 		m_Uexe = qtexe + "uic" ;
 		m_Rexe = qtexe + "rcc" ;
 		m_Lexe = qtexe + "lrelease" ;
+/// for qt6
+        // m_Lexe = qtexe + "lrelease-pro.exe" ;
 	}
 /// debug
 //	Mes = "m_Mexe = " + quote(m_Mexe) ;  _printWarn(Mes);
@@ -649,10 +658,9 @@ _printD("=> Begin 'Creater::findTargetQtexe(...)");
 		if (bdquote)
 		{
             Mes += " (" ;
-            Mes += _("!! you have a quote in path !!");
-            Mes += "" ;
+            Mes += "!! " + _("you have a quote in path") + " !!";
 		}
-		Mes += "." ;
+		Mes += Dot ;
 		_printError(Mes);
 
 		wxString title = _("Search executable Qt") ;
@@ -908,7 +916,7 @@ bool Creater::isGoodTargetQt(const ProjectBuildTarget * _pBuildTarget)
 	{
 	// TODO ...
 		Mes = Tab + _("This target have nothing library Qt") + " !" ;
-		Mes += Lf + Tab + _("PreBuild cannot continue.") ;
+		Mes += Lf + Tab + _("PreBuild cannot continue") + Dot;
 		_printWarn(Mes);
 	}
 //Mes = "isGoodTargetQt  = " + strBool( ok && isqt); _printWarn(Mes);
@@ -1093,8 +1101,8 @@ _printD("=> Begin 'Creater::q_object(" + _filename + ", " + _qt_macro + "'" );
 		}
 		else
 		{
-			Mes = _("The file") + Space + _filename + Space;
-			Mes += _("is not a good creator !!") ;
+			Mes = _("The file") + quote(_filename);
+			Mes += _("is not a good creator") + " !!" ;
 			_printError(Mes);
 		}
 
@@ -1214,13 +1222,12 @@ bool Creater::unregisterCreatorFile(const wxString & _file)
 /// 	return 'true' when right
 ///
 ///	Called by :
-///		1. AddOnForQt::OnProjectFileRemoved(CodeBlocksEvent& _event):1,
-///		2. Creater::unregisterCreatorFile(const wxString & _file):n,
+///		1.  AddOnForQt::OnProjectFileRemoved(CodeBlocksEvent& _event):1,
+///		2.  Creater::unregisterCreatorFile(const wxString & _file):n,
 ///
 ///	Calls to :
-///		1. Pre::nameCreated(const wxString& _file):1,
-/// 	2. Creater::removeComplementToDisk(const wxString & _filename, bool _withobject = false):1,
-///
+///     1.	  Creater::removeComplementToDisk(const wxString & _filename, bool _withobject = false):1,
+///     2.    Pre::nameCreated(const wxString& _file):1,
 
 bool Creater::unregisterComplementFile(wxString & _file)
 {
@@ -1496,7 +1503,7 @@ bool Creater::removeComplementDirToDisk(const wxString & _oldTargetName)
 	_printWarn(Mes);
 
 	ok = recursRmDir(file);
-	Mes = Tab + "- " + quoteNS( file + Slash + "*.*" ) ;
+	Mes = Tab + "- " + quoteNS( file + cSlash + "*.*" ) ;
 	if(ok)
 	{
 		Mes += Space + _("is deleted");
@@ -1505,7 +1512,7 @@ bool Creater::removeComplementDirToDisk(const wxString & _oldTargetName)
 	else
 	{
 		Mes += " ==> " ;
-		Mes +=  _(" cannot be deleted !!!");
+		Mes +=  _(" cannot be deleted") + " !!!";
 		_printError(Mes);
 	}
 // delete old complements objects directory : 'obj\_oldTargetName\"m_dirPreBuild"\*.*'
@@ -1523,8 +1530,8 @@ bool Creater::removeComplementDirToDisk(const wxString & _oldTargetName)
 	}
 	if (!ok)
 	{
-		Mes += " ==>" ;
-		Mes += _(" cannot be deleted");
+		Mes += " ==> " ;
+		Mes += _("cannot be deleted");
 		Mes += " !!!";
 		_printError(Mes);
 	}
@@ -1563,9 +1570,7 @@ bool Creater::removeOldExecutable(ProjectBuildTarget* _pBuildTarget, const wxStr
 			}
 			else
 			{
-				Mes += " ==> " ;
-				Mes += _("cannot be deleted") ;
-				Mes += " !!!";
+				Mes += " ==> " + _("cannot be deleted") + " !!!";
 				_printError(Mes);
 			}
 		}
@@ -1849,7 +1854,7 @@ _printD("==> Begin 'Creater::hasIncluded(" + _fcreator + ")'" );
 // ext
 	wxString ext = _fcreator.AfterLast('.');
 //Mes = Tab + Tab + "ext = " + quote( ext ) ; _print(Mes);
-	namefile = namefile.AfterLast(Slash).BeforeLast('.')  ;
+	namefile = namefile.AfterLast(cSlash).BeforeLast('.')  ;
 	wxString txt = "";
 	bool include = false;
 //1- ext == EXT_H =>  search >"moc_namefile.cpp"<
@@ -1998,8 +2003,7 @@ wxUint16 Creater::filesTocreate(bool _allrebuild)
 	bool ok = m_pM->GetEditorManager()->SaveAll();
 	if (!ok )
 	{
-		Mes = _("Couldn't save all files ") ;
-		Mes += " !!"  ;
+		Mes = _("Couldn't save all files ") + " !!"  ;
 		_printError (Mes);
 		cbMessageBox(Mes, "", wxICON_ERROR)  ;
 		return ok  ;
@@ -2237,7 +2241,7 @@ bool Creater::createFiles()
 			}
 			else
 			{
-				Mes = Tab  + _("Continue building") + " ...";;
+				Mes = Tab  + _("Continue building") + " ...";
 				_printWarn (Mes) ;
 				created = true;
 			}
@@ -2365,7 +2369,7 @@ wxString Creater::createFileComplement(const wxString& _qexe,
 	ProjectFile * prjfile =  m_pProject->GetFileByFilename(_fout, IS_RELATIVE, IS_UNIX_FILENAME) ;
 	if (!prjfile)
 	{
-		Mes = _fout + _(" is no correct !!");
+		Mes = quote(_fout) + _("is no correct") + " !!";
 		return  Mes;
 	}
 // request abort ?
@@ -2425,7 +2429,7 @@ _printD("=> Begin 'Creater::createComplement(...)'");
 //1- name relative input file  "src\filecreator.xxx"
 	wxString inputfile = m_Filecreator.Item(_index) ;
 	// create directory for m_nameActiveTarget
-	wxString dircomplement = m_Registered.Item(_index).BeforeLast(Slash)  ;
+	wxString dircomplement = m_Registered.Item(_index).BeforeLast(cSlash)  ;
 	dircomplement +=  wxFILE_SEP_PATH ;
 
 	if (!createDir(dircomplement))
@@ -2524,7 +2528,7 @@ bool Creater::validCreated()
 		ok =  m_pMprj->SaveProject(m_pProject)  ;
 		if(!ok)
 		{
-			Mes = _("Save project is not possible !!");
+			Mes = _("Save project is not possible") + " !!";
 			_printError(Mes);
 		}
 	}

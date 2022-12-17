@@ -2,14 +2,14 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="AddOnForCb-3.4.7-sdk2170_31-(Unix)" />
+		<Option title="AddOnForCb-3.4.9-sdk21x0-(Unix)" />
 		<Option platforms="Unix;" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="local_315">
+			<Target title="lin_317_2190">
 				<Option platforms="Unix;" />
-				<Option output="$(TARGET_NAME)/libaddonforQt" prefix_auto="0" extension_auto="1" />
+				<Option output="$(TARGET_NAME)/addonforQt" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/$(TARGET_NAME)/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -32,14 +32,46 @@
 					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.zip manifest.xml" />
 					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.zip res/*" />
 					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.zip images/*" />
-					<Add after="zip -j9 $(TARGET_NAME)/libaddonforQt.cbplugin $(TARGET_NAME)/libaddonforQt.so $(TARGET_NAME)/addonforQt.zip" />
+					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.cbplugin $(TARGET_NAME)/addonforQt.so $(TARGET_NAME)/addonforQt.zip" />
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="cb" value="$(#sdk2170_315)" />
+					<Variable name="cb" value="$(#sdk2190_317)" />
 				</Environment>
 			</Target>
-			<Target title="local_305">
+			<Target title="lin_317_2180">
+				<Option platforms="Unix;" />
+				<Option output="$(TARGET_NAME)/addonforQt" prefix_auto="0" extension_auto="1" />
+				<Option object_output=".objs/$(TARGET_NAME)/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="`wx-config --cflags  --version=3.1`" />
+					<Add option="-Wno-write-strings" />
+					<Add directory="src" />
+					<Add directory="$cb/include" />
+					<Add directory="$cb/include/tinyxml" />
+					<Add directory="$cb/sdk/wxscintilla/include" />
+					<Add directory="$cb/plugins/codecompletion" />
+				</Compiler>
+				<Linker>
+					<Add option="`wx-config --libs  --version=3.1`" />
+					<Add library="codeblocks" />
+					<Add directory="$cb/devel31" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.zip manifest.xml" />
+					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.zip res/*" />
+					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.zip images/*" />
+					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.cbplugin $(TARGET_NAME)/addonforQt.so $(TARGET_NAME)/addonforQt.zip" />
+					<Mode after="always" />
+				</ExtraCommands>
+				<Environment>
+					<Variable name="cb" value="$(#sdk2180_317)" />
+				</Environment>
+			</Target>
+			<Target title="lin_315_2190">
 				<Option platforms="Unix;" />
 				<Option output="$(TARGET_NAME)/libaddonforQt" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/$(TARGET_NAME)/" />
@@ -68,7 +100,39 @@
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="cb" value="$(#sdk2170)" />
+					<Variable name="cb" value="$(#sdk2190_315)" />
+				</Environment>
+			</Target>
+			<Target title="lin_315_2180">
+				<Option platforms="Unix;" />
+				<Option output="$(TARGET_NAME)/libaddonforQt" prefix_auto="0" extension_auto="1" />
+				<Option object_output=".objs/$(TARGET_NAME)/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="`wx-config --cflags  --version=3.1`" />
+					<Add option="-Wno-write-strings" />
+					<Add directory="src" />
+					<Add directory="$cb/include" />
+					<Add directory="$cb/include/tinyxml" />
+					<Add directory="$cb/sdk/wxscintilla/include" />
+					<Add directory="$cb/plugins/codecompletion" />
+				</Compiler>
+				<Linker>
+					<Add option="`wx-config --libs  --version=3.1`" />
+					<Add library="codeblocks" />
+					<Add directory="$cb/devel31" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.zip manifest.xml" />
+					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.zip res/*" />
+					<Add after="zip -j9 $(TARGET_NAME)/addonforQt.zip images/*" />
+					<Add after="zip -j9 $(TARGET_NAME)/libaddonforQt.cbplugin $(TARGET_NAME)/libaddonforQt.so $(TARGET_NAME)/addonforQt.zip" />
+					<Mode after="always" />
+				</ExtraCommands>
+				<Environment>
+					<Variable name="cb" value="$(#sdk2180_315)" />
 				</Environment>
 			</Target>
 			<Target title="cbqt5">
@@ -126,10 +190,6 @@
 		<Unit filename="CodeBlocks/templates/wizard/cbqt5/files/qtest.h">
 			<Option target="cbqt5" />
 		</Unit>
-		<Unit filename="adding/cbqt5/moc_qtest.cpp">
-			<Option weight="1" />
-			<Option target="cbqt5" />
-		</Unit>
 		<Unit filename="doc/addonforQt.txt">
 			<Option target="doc" />
 		</Unit>
@@ -137,64 +197,100 @@
 			<Option target="doc" />
 		</Unit>
 		<Unit filename="images/build.png">
-			<Option target="local_305" />
-			<Option target="local_315" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
 		</Unit>
 		<Unit filename="images/dummy.txt">
-			<Option target="local_305" />
-			<Option target="local_315" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
 		</Unit>
 		<Unit filename="images/logo.png">
-			<Option target="local_305" />
-			<Option target="local_315" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
 		</Unit>
 		<Unit filename="images/rebuild.png">
-			<Option target="local_305" />
-			<Option target="local_315" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
 		</Unit>
 		<Unit filename="images/run.png">
-			<Option target="local_305" />
-			<Option target="local_315" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
 		</Unit>
 		<Unit filename="images/stop.png">
-			<Option target="local_305" />
-			<Option target="local_315" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
 		</Unit>
 		<Unit filename="manifest.xml">
-			<Option target="local_305" />
-			<Option target="local_315" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
 		</Unit>
 		<Unit filename="res/dummy.xrc">
-			<Option target="local_305" />
-			<Option target="local_315" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
 		</Unit>
 		<Unit filename="src/addonforqt.cpp">
-			<Option target="local_305" />
-			<Option target="local_315" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
 		</Unit>
 		<Unit filename="src/addonforqt.h">
-			<Option target="local_305" />
-			<Option target="local_315" />
-		</Unit>
-		<Unit filename="src/build.cpp">
-			<Option target="local_305" />
-			<Option target="local_315" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
 		</Unit>
 		<Unit filename="src/build.h">
-			<Option target="local_305" />
-			<Option target="local_315" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
+		</Unit>
+		<Unit filename="src/creater.cpp">
+			<Option target="lin_317_2190" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
+		</Unit>
+		<Unit filename="src/creater.h">
+			<Option target="lin_317_2190" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
 		</Unit>
 		<Unit filename="src/defines.h">
-			<Option target="local_305" />
-			<Option target="local_315" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
 		</Unit>
 		<Unit filename="src/pre.cpp">
-			<Option target="local_305" />
-			<Option target="local_315" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
 		</Unit>
 		<Unit filename="src/pre.h">
-			<Option target="local_305" />
-			<Option target="local_315" />
+			<Option target="lin_315_2190" />
+			<Option target="lin_317_2190" />
+			<Option target="lin_317_2180" />
+			<Option target="lin_315_2180" />
 		</Unit>
 		<Extensions>
 			<DoxyBlocks>

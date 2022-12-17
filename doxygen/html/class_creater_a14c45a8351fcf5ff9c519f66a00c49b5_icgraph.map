@@ -1,6 +1,6 @@
 <map id="Creater::isNoFile" name="Creater::isNoFile">
-<area shape="rect" id="node2" href="$class_creater.html#a181de225e0bfd08ac61793153182f542" title="Creating complements files. " alt="" coords="172,5,308,32"/>
-<area shape="rect" id="node3" href="$class_creater.html#a6e2b0f55ede69708f479336b97f0c9a3" title="Built all files necessary complements. " alt="" coords="356,5,499,32"/>
-<area shape="rect" id="node4" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="547,5,744,32"/>
-<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="792,5,1024,32"/>
+<area shape="rect" id="node2" href="$class_creater.html#a181de225e0bfd08ac61793153182f542" title="Creating complements files. " alt="" coords="175,5,312,32"/>
+<area shape="rect" id="node3" href="$class_creater.html#a6e2b0f55ede69708f479336b97f0c9a3" title="Built all files necessary complements. " alt="" coords="360,5,503,32"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="551,5,748,32"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="796,5,1028,32"/>
 </map>

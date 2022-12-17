@@ -62,20 +62,17 @@ class Creater  : public Pre
 
 		/** \brief Unregister a project file creator to 'Pregen'
 		 *  @param _file : file name  (creator)
-		 *  @param _first : the first call to 'unregisterProjectFile(...)'
 		 *  @return	true if correct
 		 */
 		bool unregisterCreatorFile(const wxString & _file);
 		/** \brief Unregister a project file complement to 'Pregen'
 		 *  @param _file : file name  (complement)
-		 *  @param _first : the first call to 'unregisterProjectFile(...)'
 		 *  @return	true if correct
 		 */
 		bool unregisterComplementFile(wxString & _file);
 
 		/**	\brief Remove one complement file to disk directory "m_dirPreBuild"
 		 *  @param  _filename : complement file name
-		 *  @param  _first :  it's first complement to remove
 		 *  @param  _withobject :  a compiled file exists
 		 *  @return	true if correct
          */

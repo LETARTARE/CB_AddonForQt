@@ -44,7 +44,7 @@ class Pre
 
 		/** \brief Locate and call a menu from string (e.g. "/Valgrind/Run Valgrind::MemCheck")
 		 *  it's a copy of 'CodeBlocks::sc_globals.cpp::CallMenu(const wxString& menuPath)'
-		 *  \param _menuBar : search for _menuPath
+		 *  \param _mbar : search for _menuPath
          *  \param _menuPath : menu to find
 		 *  \return true if is good
          */
@@ -84,7 +84,7 @@ class Pre
 		 */
         bool isCreatorFile(const wxString & _file);
         /** \brief Test if a filename is registerd to target
-		 * @param _file : short name
+		 * @param _filename : short name
 		 * @param _nametarget : target name
 		 * @return true if is a registerd file inot target
 		 */
@@ -245,6 +245,11 @@ class Pre
 		/** \brief name of plugin
 		 */
 		wxString m_namePlugin = wxEmptyString;
+		 /** \brief for localization
+		 */
+        wxLocale m_locale;
+        wxString m_lang = "" ; //"fr_FR";
+
 		/** \brief platforms Windows
 		 */
 		bool m_Win = false,

@@ -175,7 +175,7 @@ function SetupProject(project)
 	project.AddCompilerOption (_T("-std=gnu++11"));
 	// get compiler
     local idcompiler = Wizard.GetCompilerID();
-    // enable compiler exception
+ // enable compiler exception
 	CppExceptionsOn(project, idcompiler);
 //print(idcompiler);
 	if (PLATFORM == PLATFORM_MSW && idcompiler.Find(_T("gcc")) != -1)
@@ -198,7 +198,7 @@ function SetupProject(project)
     local target = project.GetBuildTarget(Wizard.GetDebugName());
     if (!IsNull(target))
     {
-	// ttConsoleOnly: console for debugging
+		// ttConsoleOnly: console for debugging
         target.SetTargetType(ttConsoleOnly);
         target.SetVar(LocalOut, _T("$(TARGET_OUTPUT_DIR)"), false);
         target.AddLibDir(QtPathDefaultLib);

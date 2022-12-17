@@ -1,4 +1,4 @@
 <map id="Pre::virtualToFirstRealTarget" name="Pre::virtualToFirstRealTarget">
-<area shape="rect" id="node2" href="$class_pre.html#a9fde82bbc8790fc150a7922595e02911" title="Give compileable targets list for project or virtual target. " alt="" coords="239,5,437,32"/>
-<area shape="rect" id="node3" href="$class_pre.html#a70d06eec2a18717fa4bfc0d9a6c9a2b1" title="Give if target is command only. " alt="" coords="485,5,640,32"/>
+<area shape="rect" id="node2" href="$class_pre.html#a9fde82bbc8790fc150a7922595e02911" title="Give compileable targets list for project or virtual target. " alt="" coords="241,5,441,32"/>
+<area shape="rect" id="node3" href="$class_pre.html#a70d06eec2a18717fa4bfc0d9a6c9a2b1" title="Give if target is command only. " alt="" coords="489,5,645,32"/>
 </map>

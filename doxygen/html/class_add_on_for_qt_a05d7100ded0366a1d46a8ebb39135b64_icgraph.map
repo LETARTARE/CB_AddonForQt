@@ -1,3 +1,4 @@
 <map id="AddOnForQt::enableMenusQt" name="AddOnForQt::enableMenusQt">
-<area shape="rect" id="node2" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="248,5,480,32"/>
+<area shape="rect" id="node2" href="$class_add_on_for_qt.html#a2501d977d69a8f0b98f926d0ec721fec" title="This method is called by Code::Blocks core modules (EditorManager, ProjectManager etc) and is used by..." alt="" coords="260,5,465,32"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="247,56,479,83"/>
 </map>

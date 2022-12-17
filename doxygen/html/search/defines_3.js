@@ -1,13 +1,8 @@
 var searchData=
 [
-  ['dot',['Dot',['../defines_8h.html#ae8a4b0c3578b007c05bb651c80b7b19e',1,'Dot():&#160;defines.h'],['../defines_8h.html#adecf5d6273480fb438d640425e20b40d',1,'dot():&#160;defines.h']]],
-  ['dot_5fdynamiclib_5fext',['DOT_DYNAMICLIB_EXT',['../defines_8h.html#a5781c56423c65c692d08a10e0b0409b9',1,'defines.h']]],
-  ['dot_5fext_5fcpp',['DOT_EXT_CPP',['../defines_8h.html#a2fe8d37215380717b82d083d5927a83e',1,'defines.h']]],
-  ['dot_5fext_5fh',['DOT_EXT_H',['../defines_8h.html#af3c62bef0b8a2e893f364051be991f2a',1,'defines.h']]],
-  ['dot_5fext_5fmoc',['DOT_EXT_MOC',['../defines_8h.html#a0b0327fbe2efdc792bb53b8e152e26d8',1,'defines.h']]],
-  ['dot_5fext_5fqrc',['DOT_EXT_QRC',['../defines_8h.html#ac85014dde61752b56498faed7364efc5',1,'defines.h']]],
-  ['dot_5fext_5fui',['DOT_EXT_UI',['../defines_8h.html#a80666895cbde7cd3f6e719610ed157c0',1,'defines.h']]],
-  ['dprint',['DPrint',['../defines_8h.html#a2e2d822c8231efd08f4b3cf870810157',1,'defines.h']]],
-  ['dprinterr',['DPrintErr',['../defines_8h.html#a0d03d0c7994d57499f35c8075c44fe3d',1,'defines.h']]],
-  ['dquote',['dquote',['../defines_8h.html#a047d293eb4ee91d9e9fa9af8416127c7',1,'dquote():&#160;defines.h'],['../defines_8h.html#a6a16eef36fb6e84aadea6b9fa501053e',1,'Dquote():&#160;defines.h']]]
+  ['cdot',['cDot',['../defines_8h.html#a158185ab5fed6be74ff822740583dc44',1,'defines.h']]],
+  ['cr',['Cr',['../defines_8h.html#ab3c7f0f0aedce722db4ce3786cff83c6',1,'defines.h']]],
+  ['crlf',['CrLf',['../defines_8h.html#a1800acf4e0d887322bde0bd2a3b09361',1,'defines.h']]],
+  ['cslash',['cSlash',['../defines_8h.html#a9c0bfcd4b48a4fed03661fc80588b8c9',1,'defines.h']]],
+  ['ctostr',['cToStr',['../defines_8h.html#a60af73f8995f6c0dd95bf2b153abf2f8',1,'defines.h']]]
 ];

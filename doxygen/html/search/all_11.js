@@ -10,13 +10,12 @@ var searchData=
   ['setproject',['setProject',['../class_pre.html#a5c97ece38dda5b4371754bde1a9a32f8',1,'Pre']]],
   ['sizele',['SizeLe',['../defines_8h.html#a799696268f44d9dc34647a0208df5ba1',1,'defines.h']]],
   ['sizesep',['SizeSep',['../defines_8h.html#a109f64db69faa7a1c15094dd816269e2',1,'SizeSep():&#160;defines.h'],['../pre_8cpp.html#a109f64db69faa7a1c15094dd816269e2',1,'SizeSep():&#160;pre.cpp']]],
-  ['slash',['Slash',['../defines_8h.html#a30ed96a93c11a71c1933ecf7d1f8091b',1,'defines.h']]],
   ['space',['Space',['../defines_8h.html#ab8efc174fd44ac155917e1f46ccb56aa',1,'defines.h']]],
   ['st_5fmutexstop',['st_mutexStop',['../pre_8cpp.html#a9eb2c021b4ed0dde357329fe074e5fd3',1,'pre.cpp']]],
   ['strbool',['strBool',['../defines_8h.html#aa4ddb879565e7367497e6bca09c8ab91',1,'defines.h']]],
-  ['strchar',['strChar',['../defines_8h.html#a1faa9511c0aeb02c95fa1b2927a04a2b',1,'defines.h']]],
+  ['strchar',['strChar',['../defines_8h.html#a7731af821a2863f80bb843eeebd91275',1,'defines.h']]],
   ['strdouble',['strDouble',['../defines_8h.html#ae0247527e379ad15f020c16ab04a8130',1,'defines.h']]],
-  ['strint',['strInt',['../defines_8h.html#aaa7c669cff4ca67826a2603d68f2f59d',1,'defines.h']]],
+  ['strint',['strInt',['../defines_8h.html#a885ea07af99590d4772de744a227028b',1,'defines.h']]],
   ['strslash',['strSlash',['../defines_8h.html#a85a02062aea7b372cfd3dc28e824f418',1,'defines.h']]],
   ['switchtolog',['SwitchToLog',['../class_add_on_for_qt.html#aed7c0e2a923348051c80fd127ff11757',1,'AddOnForQt::SwitchToLog(int _indexLog)'],['../class_add_on_for_qt.html#aad6a516558f710b189c836bd3d5ff80a',1,'AddOnForQt::SwitchToLog()']]]
 ];

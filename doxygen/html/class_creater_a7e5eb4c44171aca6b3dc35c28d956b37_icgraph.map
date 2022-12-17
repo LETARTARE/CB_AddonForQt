@@ -1,6 +1,6 @@
 <map id="Creater::addOneFile" name="Creater::addOneFile">
-<area shape="rect" id="node2" href="$class_creater.html#ade74f5a6ec3c53918af7b62625410abb" title="Records in an internal table to build additional files. " alt="" coords="192,5,328,32"/>
-<area shape="rect" id="node3" href="$class_creater.html#a6e2b0f55ede69708f479336b97f0c9a3" title="Built all files necessary complements. " alt="" coords="376,5,519,32"/>
-<area shape="rect" id="node4" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="567,5,764,32"/>
-<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="812,5,1044,32"/>
+<area shape="rect" id="node2" href="$class_creater.html#ade74f5a6ec3c53918af7b62625410abb" title="Records in an internal table to build additional files. " alt="" coords="192,5,329,32"/>
+<area shape="rect" id="node3" href="$class_creater.html#a6e2b0f55ede69708f479336b97f0c9a3" title="Built all files necessary complements. " alt="" coords="377,5,520,32"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="568,5,765,32"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="813,5,1045,32"/>
 </map>

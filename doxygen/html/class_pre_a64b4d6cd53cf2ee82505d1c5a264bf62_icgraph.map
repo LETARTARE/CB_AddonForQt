@@ -1,6 +1,6 @@
 <map id="Pre::setBuildTarget" name="Pre::setBuildTarget">
 <area shape="rect" id="node2" href="$class_pre.html#a5c97ece38dda5b4371754bde1a9a32f8" title="Set &#39;m_pProject&#39;. " alt="" coords="187,46,296,73"/>
-<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="344,5,553,47"/>
-<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a7e14fd23c1a5e3a4aa3b97eb41f3bc1f" title="AddOnForQt::OnProjectFile\lRemoved" alt="" coords="357,71,540,112"/>
-<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="601,46,760,73"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="344,5,552,47"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a7e14fd23c1a5e3a4aa3b97eb41f3bc1f" title="AddOnForQt::OnProjectFile\lRemoved" alt="" coords="357,71,539,112"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="600,46,757,73"/>
 </map>

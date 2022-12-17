@@ -1,7 +1,8 @@
 <map id="AddOnForQt::SwitchToLog" name="AddOnForQt::SwitchToLog">
-<area shape="rect" id="node2" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="513,141,671,168"/>
-<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="476,10,708,37"/>
-<area shape="rect" id="node4" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="231,36,428,62"/>
-<area shape="rect" id="node5" href="$class_add_on_for_qt.html#aa0c072547163adc7d2384e4d64b56568" title="Places the status graph in stop report and Stop current action. " alt="" coords="240,137,419,164"/>
-<area shape="rect" id="node6" href="$class_add_on_for_qt.html#a7e14fd23c1a5e3a4aa3b97eb41f3bc1f" title="AddOnForQt::OnProjectFile\lRemoved" alt="" coords="238,188,421,230"/>
+<area shape="rect" id="node2" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="521,41,679,67"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a2501d977d69a8f0b98f926d0ec721fec" title="This method is called by Code::Blocks core modules (EditorManager, ProjectManager etc) and is used by..." alt="" coords="231,37,436,63"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="484,205,716,231"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="235,154,432,181"/>
+<area shape="rect" id="node6" href="$class_add_on_for_qt.html#aa0c072547163adc7d2384e4d64b56568" title="Places the status graph in stop report and Stop current action. " alt="" coords="244,205,423,231"/>
+<area shape="rect" id="node7" href="$class_add_on_for_qt.html#a7e14fd23c1a5e3a4aa3b97eb41f3bc1f" title="AddOnForQt::OnProjectFile\lRemoved" alt="" coords="243,88,424,129"/>
 </map>

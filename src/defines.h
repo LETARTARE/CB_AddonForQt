@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-10-17
- * Modified:  2022-06-11
+ * Modified:  2022-12-13
  * Copyright: LETARTARE
  * License:   GPL
  **************************************************************/
@@ -15,7 +15,12 @@
 ///-----------------------------------------------------------------------------
 /** Version
  */
-#define VERSION_WXT wxString("'3.4.8'")
+#define VERSION_WXT wxString("'3.5.0'")
+
+/** Version Qt
+ */
+#define Qt 5
+//#define Qt 6
 
 /** \brief display begin and end messages of function
  */
@@ -33,7 +38,7 @@
 #define 	Space	wxString(" ")
 #define 	Point	wxString(".")
 #define 	Dot	    wxString(".")
-#define 	dot		'.'
+#define 	cDot		'.'
 /** \brief text separator
  */
 #define 	SepD 	char(13) 	// 0xD, \n
@@ -47,17 +52,21 @@
 #define 	dquote(a)	(Space + Dquote + wxString(a) + Dquote + Space)
 /** \brief  for print an integer and a boolean
  */
-#define     strInt(a)		(wxString()<<a)
+#define     strInt(__a)		(wxString()<<__a)
+    #define iToStr(__a)			( wxString()<<__a )
 #define     strDouble(a)	(wxString()<<a)
+    #define  dToStr(__a)	(wxString()<<__a)
 #define     strBool(a)		(wxString()<<(a==0 ? _("false"): _("true") ))
-#define     strChar(a)		wxString(a)
+    #define bToStr(__b)			( wxString()<<(__b==0 ? _("false" ): _("true")) )
+#define     strChar(__c)		wxString(__c)
+    #define cToStr(__c)		wxString(__c)
 
 #include <wx/filefn.h>
 /** @brief directory separator
- *  use "...."  +  strSlash   : not  "...."  +  Slash !!
+ *  use "...."  +  strSlash   : not  "...."  +  cSlash !!
  */
-#define 	Slash 		wxFILE_SEP_PATH
-#define 	strSlash  	wxString(Slash)
+#define 	cSlash 		wxFILE_SEP_PATH
+#define 	strSlash  	wxString(cSlash)
 ///-----------------------------------------------------------------------------
 #include <logmanager.h>
 #define lm				Manager::Get()->GetLogManager()

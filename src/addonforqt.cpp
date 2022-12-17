@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-10-17
- * Modified:  2022-04-22
+ * Modified:  2022-12-13
  * Copyright: LETARTARE
  * License:   GPL
  *************************************************************
@@ -199,34 +199,34 @@ _printD("=> Begin AddOnForQt::OnAttach()");
 	// version
 		Mes = m_pCreater->platForm();
 		Mes += ", sdk => " + quoteNS(m_pCreater->GetVersionSDK());
-		Mes += ",  " + quote(m_NamePlugin) + _(" version") + " : " + VERSION_WXT;
+		Mes += ",  " + quote(m_NamePlugin) + _("version") + " : " + VERSION_WXT;
 		Mes += ", " + _("built on") + quote(m_pCreater->GetDateBuildPlugin()) + Lf;
 		_printWarn(Mes);
     // icons from *.zip
         m_bmLogoQt    = LoadPNG(_T("logo.png"));
-            if (!m_bmLogoQt.IsOk()) _printError("Error with 'm_bmLogoQt'");
+            if (!m_bmLogoQt.IsOk()) _printError(_("Error with 'm_bmLogoQt'"));
         m_bmBuild   = LoadPNG(_T("build.png"));
-            if (!m_bmBuild.IsOk()) _printError("Error with 'm_bmBuild'");
+            if (!m_bmBuild.IsOk()) _printError(_("Error with 'm_bmBuild'"));
 		//	m_bmBuildOff   = LoadPNG(_T("buildoff.png"));
 		//        if (!m_bmBuildOff.IsOk()) _printError("Error with 'm_bmBuildOff'");
 		m_bmBuildPlus   = LoadPNG(_T("build+.png"));
-            if (!m_bmBuildPlus.IsOk()) _printError("Error with 'm_bmBuild'");
+            if (!m_bmBuildPlus.IsOk()) _printError(_("Error with 'm_bmBuild'"));
 		//	m_bmBuildPlusOff   = LoadPNG(_T("buildPlusoff.png"));
 		//        if (!m_bmBuilPlusdOff.IsOk()) _printError("Error with 'm_bmBuildPlusOff'");
         m_bmReBuild = LoadPNG(_T("rebuild.png"));
-            if (!m_bmReBuild.IsOk()) _printError("Error with 'm_bmReBuild'");
+            if (!m_bmReBuild.IsOk()) _printError(_("Error with 'm_bmReBuild'"));
 		//	m_bmReBuildOff   = LoadPNG(_T("rebuildoff.png"));
 		//        if (!m_bmReBuildOff.IsOk()) _printError("Error with 'm_bmReBuildOff'");
 		m_bmReBuildPlus = LoadPNG(_T("rebuild+.png"));
-            if (!m_bmReBuildPlus.IsOk()) _printError("Error with 'm_bmReBuild'");
+            if (!m_bmReBuildPlus.IsOk()) _printError(_("Error with 'm_bmReBuild'"));
 		//	m_bmReBuildPlusOff   = LoadPNG(_T("rebuild+off.png"));
 		//        if (!m_bmReBuildPlusOff.IsOk()) _printError("Error with 'm_bmReBuildPlusOff'");
         m_bmStop    = LoadPNG(_T("stop.png"));
-            if (!m_bmStop.IsOk()) _printError("Error with 'm_bmStop'");
+            if (!m_bmStop.IsOk()) _printError(_("Error with 'm_bmStop'"));
        // m_bmStopOff     = LoadPNG(_T("stopoff.png"));
         //    if (!m_bmStopOff.IsOk()) _printError("Error with 'm_bmStopOff'");
 		m_bmSetting     = LoadPNG(_T("options.png"));
-            if (!m_bmSetting.IsOk()) _printError("Error with 'm_bmSetting'");
+            if (!m_bmSetting.IsOk()) _printError(_("Error with 'm_bmSetting'"));
 		//m_bmSettingOff     = LoadPNG(_T("optionsoff.png"));
           //  if (!m_bmSettingOff.IsOk()) _printError("Error with 'm_bmSettingOff'");
 	}
@@ -403,7 +403,7 @@ _printD("	<= End 'AddOnForQt::enableMenuBarQt(...)'");
 /// Call to :
 ///		1. Pre::filenameOk(wxString & _namefile):1,
 ///
-void AddOnForQt::AddOnForQt::BuildModuleMenu(const ModuleType _type, wxMenu* _menu, const FileTreeData* _data)
+void AddOnForQt::BuildModuleMenu(const ModuleType _type, wxMenu* _menu, const FileTreeData* _data)
 {
 _printD("=> Begin 'AddOnForQt::BuildModuleMenu(...)'");
 
@@ -496,8 +496,8 @@ _printD("=> Begin 'AddOnForQt::BuildModuleMenu(...)'");
                            // wxString title = quote("addonforQt ") + VERSION_WXT ;
                             wxString title = quote(m_NamePlugin) + VERSION_WXT ;
                             Mes = _("The project name ") + quote(nameprj);
-                            Mes += Lf + _(" contains illegal character(s) ");
-                            Mes += Lf + _("Do you want to replace all with \"\" ?");
+                            Mes += Lf + _("contains illegal character(s)");
+                            Mes += Lf + _("Do you want to replace all with") + " \"\" ?";
                             int choice = cbMessageBox(Mes, title, wxICON_QUESTION | wxYES_NO);
                             if (choice == wxID_YES)
                             {
@@ -865,7 +865,7 @@ _printD("=> Begin 'AddOnForQt::OnMenuComplements(...)'  with 'checked' :" + strB
 		SwitchToLog();
 		if (m_pCreater->getAbort())
 		{
-			Mes = _("You had avorted building processus !!!");
+			Mes = _("You had avorted building processus") + " !!!";
 			_printWarn(Mes);
 		}
 		else
@@ -918,7 +918,7 @@ _printD("=> Begin 'AddOnForQt::doComplements(" + strInt(_domake) + ")'" );
 	wxString nametarget = m_pProject->GetActiveBuildTarget();
 	if (nametarget.IsEmpty() )
 	{
-		Mes += _("no target supplied !!"); _printError(Mes);
+		Mes += _("no target supplied") + " !!"; _printError(Mes);
 		return false;
 	}
 	else
@@ -1010,7 +1010,7 @@ _printWarn(Mes);
 			    	if (!m_pCreater->getAbort())
 					{
 						Mes = Tab + "m_pCreater->buildAllFiles(...) => ";
-						Mes += _("Error 'PreBuild' !!!");   _printError(Mes);
+						Mes += _("Error 'PreBuild'") + " !!!";   _printError(Mes);
 					}
 			    }
 			    m_isRunning = false;
@@ -1267,7 +1267,7 @@ _printD("=> Begin 'AddOnForQt::OnAppBeginShutDown(...)'");
 ///
 /// Called by : 'PluginManager' actually
 ///
-void AddOnForQt::OnRelease(bool appShutDown)
+void AddOnForQt::OnRelease(bool _appShutDown)
 {
 /// !! No _print here !!
 //1- delete builder"
@@ -1294,7 +1294,7 @@ void AddOnForQt::OnRelease(bool appShutDown)
     // which means you must not use any of the SDK Managers
     // NOTE: after this function, the inherited member variable
     // m_IsAttached will be FALSE...
-    if(!appShutDown)
+    if(!_appShutDown)
 		m_pM->RemoveAllEventSinksFor(this);
 }
 
@@ -1388,8 +1388,8 @@ _printD("m_noParsing = true");
 	cbProject *prj = _event.GetProject();
 	if(!prj)
 	{
-		Mes += _("no project supplied") ;
-		Mes += " !!"; _printError(Mes);
+		Mes += _("no project supplied") + " !!";
+		_printError(Mes);
 		_event.Skip(!m_pseudoEvent);
 		m_pseudoEvent = false;
 		return;
@@ -1608,8 +1608,8 @@ _printD("   => Begin AddOnForQt::OnNewProject(...)");
 	cbProject *pProject = _event.GetProject();
 	if(!pProject)
 	{
-		Mes += _("no project supplied");
-		Mes + " !!"; _printError(Mes);
+		Mes += _("no project supplied") + " !!";
+		_printError(Mes);
 		_event.Skip(); return;
 	}
 
@@ -1620,8 +1620,8 @@ _printD("   => Begin AddOnForQt::OnNewProject(...)");
 	wxString nametarget = m_pProject->GetActiveBuildTarget();
 	if (nametarget.IsEmpty() )
 	{
-		Mes += _("no target supplied") ;
-		Mes += " !!"; _printError(Mes);
+		Mes += _("no target supplied") + " !!";
+		_printError(Mes);
 		_event.Skip(); return;
 	}
 //Mes = "project name" + quote(m_pProject->GetTitle()) ;
@@ -1633,13 +1633,11 @@ _printD("   => Begin AddOnForQt::OnNewProject(...)");
 	Mes = _("The New project") + quote(m_pProject->GetTitle());
 	if (m_isQtProject)
 	{
-		Mes += _("has at least one target using Qt libraries") ;
-		Mes += "...";
+		Mes += _("has at least one target using Qt libraries") + "...";
 	}
 	else
 	{
-		Mes += _("is NOT a Qt project") ;
-		Mes += " !!";
+		Mes += _("is NOT a Qt project") + " !!";
 	}
 	_printWarn(Mes);
 
@@ -1927,7 +1925,7 @@ _printD("=> Begin 'AddOnForQt::OnProjectFileRemoved(..)'" );
 // switch  'Prebuild' log
     SwitchToLog();
 // only name less path
-	wxString file = filename.AfterLast(Slash) ;
+	wxString file = filename.AfterLast(cSlash) ;
 //Mes = Lf + "filename = " + quote(filename);
 //Mes += ",file =" + quote(file); _print(Mes);
 	bool ok = false;
@@ -1960,8 +1958,8 @@ _printD("=> Begin 'AddOnForQt::OnProjectFileRemoved(..)'" );
 		if (ok)
 		{
 		// delete the complement
-			Mes =  _("The creator")  + Space  + quote(filename) ;
-			Mes += _(": We must delete the complement file on disk") + "...";
+			Mes =  _("The creator") + quote(filename)  + ": ";
+			Mes += _("We must delete the complement file on disk") + "...";
 			_printError(Mes);
 			/// TO FINISH ...
 		}
@@ -2092,8 +2090,8 @@ void AddOnForQt::OnSaveFileEditor(CodeBlocksEvent& _event)
 // not editor
 	if (!_event.GetEditor())
 	{
-		Mes += _("no editor supplied") ;
-		Mes += " !!"; _printError(Mes);
+		Mes += _("no editor supplied") + " !!";
+		_printError(Mes);
 		_event.Skip(); return;
 	}
 /// Debug
@@ -2105,8 +2103,8 @@ void AddOnForQt::OnSaveFileEditor(CodeBlocksEvent& _event)
 	cbEditor * ed = em->GetBuiltinEditor(_event.GetEditor());
 	if(!ed)
 	{
-		Mes += _("no editor supplied") ;
-		Mes += " !!"; _printError(Mes);
+		Mes += _("no editor supplied") + " !!";
+		_printError(Mes);
 		_event.Skip();
 		return;
 	}
@@ -2142,7 +2140,7 @@ wxBitmap AddOnForQt::LoadPNG(const wxString & _name)
     wxString Mes ;
     if (file == nullptr)
     {
-        Mes = _("File not found: ") + quote(filename) ;
+        Mes = _("File not found") + " :" + quote(filename) ;
     /// !! to 'Code::Blocks' log !!
         PrintError(Mes);
 
@@ -2159,7 +2157,7 @@ wxBitmap AddOnForQt::LoadPNG(const wxString & _name)
 	// wxBitmap bmp =cbLoadBitmapScaled(prefix + _name , wxBITMAP_TYPE_PNG, scaleFactor),
     if (!bmp.IsOk())
     {
-        Mes = _("File not loaded correctly: ") + quote(filename) ;
+        Mes = _("File not loaded correctly") + " :" + quote(filename) ;
         PrintError(Mes);
         // to 'Code::Blocks' log
         return wxBitmap();

@@ -1,8 +1,8 @@
 <map id="AddOnForQt::OnActivateTarget" name="AddOnForQt::OnActivateTarget">
 <area shape="rect" id="node2" href="$class_add_on_for_qt.html#a5052ad009afe668df4540517c5607c11" title="Enable alls menus bar for Qt. " alt="" coords="256,5,463,32"/>
 <area shape="rect" id="node3" href="$class_pre.html#ab083f585803ea1ec03a3511709396890" title="Detects if the current target uses Qt libraries,. " alt="" coords="291,56,427,83"/>
-<area shape="rect" id="node4" href="$class_pre.html#a70d06eec2a18717fa4bfc0d9a6c9a2b1" title="Give if target is command only. " alt="" coords="952,5,1107,32"/>
-<area shape="rect" id="node5" href="$class_pre.html#afc6ff6a132516346e5e3ac7ae1215c59" title="Give if target is virtual Qt. " alt="" coords="511,81,657,108"/>
-<area shape="rect" id="node6" href="$class_pre.html#a9fde82bbc8790fc150a7922595e02911" title="Give compileable targets list for project or virtual target. " alt="" coords="705,31,904,57"/>
-<area shape="rect" id="node7" href="$class_pre.html#ac27db6d07134211ee91fb08a5daa3b94" title="Search Qt libraries in project or target. " alt="" coords="753,107,856,133"/>
+<area shape="rect" id="node4" href="$class_pre.html#a70d06eec2a18717fa4bfc0d9a6c9a2b1" title="Give if target is command only. " alt="" coords="955,5,1111,32"/>
+<area shape="rect" id="node5" href="$class_pre.html#afc6ff6a132516346e5e3ac7ae1215c59" title="Give if target is virtual Qt. " alt="" coords="511,81,659,108"/>
+<area shape="rect" id="node6" href="$class_pre.html#a9fde82bbc8790fc150a7922595e02911" title="Give compileable targets list for project or virtual target. " alt="" coords="707,31,907,57"/>
+<area shape="rect" id="node7" href="$class_pre.html#ac27db6d07134211ee91fb08a5daa3b94" title="Search Qt libraries in project or target. " alt="" coords="755,107,858,133"/>
 </map>

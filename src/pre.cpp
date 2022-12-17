@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-02-27
- * Modified:  2022-04-22
+ * Modified:  2022-12-13
  * Copyright: LETARTARE
  * License:   GPL
  **************************************************************/
@@ -452,8 +452,8 @@ void Pre::setBuildTarget(ProjectBuildTarget * _pBuildTarget)
 	/// NO for a virtaual target
 		m_dirObjects =  m_pBuildTarget->GetObjectOutput();
         m_pMam->ReplaceMacros(m_dirObjects);
-        if (!(m_dirObjects.Last() != Slash) )
-				m_dirObjects += Slash;
+        if (!(m_dirObjects.Last() != cSlash) )
+				m_dirObjects += cSlash;
 	}
 	else
 		_printError(" Error in 'Pre::setBuildTarget(_pbuildtarget == null)'" );
@@ -469,7 +469,7 @@ wxString Pre::fullFilename(const wxString & _file)
 {
 	wxString filename = _file;
 	wxString nameactivetarget = m_pProject->GetActiveBuildTarget() ;
-	filename = nameactivetarget + wxString(Slash) + filename;
+	filename = nameactivetarget + wxString(cSlash) + filename;
 
 	return filename;
 }
@@ -484,7 +484,7 @@ wxString Pre::fullFilename(const wxString & _file)
 wxString Pre::complementDirectory() const
 {
 	wxString nameactivetarget = m_pProject->GetActiveBuildTarget() ;
-	wxString dircomplement = m_dirPreBuild + nameactivetarget + wxString(Slash) ;
+	wxString dircomplement = m_dirPreBuild + nameactivetarget + wxString(cSlash) ;
 
 	return dircomplement;
 }
@@ -529,8 +529,8 @@ bool Pre::isCreatorFile(const wxString & _file)
 {
 _printD("==> Begin 'Pre::isCreatorFile(" + _file + ")" );
 //_print(allStrTable("m_Filecreator", m_Filecreator));
-	wxString dircreator = m_Filecreator.Item(0).BeforeLast(Slash)  ;
-	wxString filename =  dircreator + Slash + _file;
+	wxString dircreator = m_Filecreator.Item(0).BeforeLast(cSlash)  ;
+	wxString filename =  dircreator + cSlash + _file;
 
 	int16_t  index = m_Filecreator.Index (filename);
 	bool ok = index != wxNOT_FOUND;
@@ -564,9 +564,9 @@ _printD("=> Begin Pre::isRegisteredToTarget(" + _filename + ")");
 	ok = index != wxNOT_FOUND;
 	if (ok)
 	{
-//Mes = _("This file ") + quote(_filename) + _(" is registered"); _print(Mes);
+//Mes = _("This file ") + quote(_filename) + _("is registered"); _print(Mes);
 	// read target name in path 'm_Registered' at index
-        _nametarget = m_Registered[index].AfterFirst(Slash).BeforeFirst(Slash);
+        _nametarget = m_Registered[index].AfterFirst(cSlash).BeforeFirst(cSlash);
 //_print("_nametarget = " + quote(_nametarget) );
         ok = _nametarget == m_nameActiveTarget;
 	}
@@ -597,12 +597,12 @@ wxString Pre::nameCreated(const wxString& _file)
 {
 	wxString name  = _file.BeforeLast('.') ;
 	wxString fout ;
-	if (name.Find(Slash) > 0)
+	if (name.Find(cSlash) > 0)
 	{
 	// short name
-		name = name.AfterLast(Slash) ;
+		name = name.AfterLast(cSlash) ;
 	// before path
-		fout += _file.BeforeLast(Slash) + wxString(Slash) ;
+		fout += _file.BeforeLast(cSlash) + wxString(cSlash) ;
 	}
 	wxString ext  = _file.AfterLast('.')  ;
 //1- file *.ui  (forms)
@@ -621,7 +621,7 @@ wxString Pre::nameCreated(const wxString& _file)
 	if (ext.Matches(EXT_CPP) )
 		fout +=  name + DOT_EXT_MOC ;
 
-	fout = fout.AfterLast(Slash) ;
+	fout = fout.AfterLast(cSlash) ;
 
 	return fout  ;
 }
@@ -1012,7 +1012,7 @@ _printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + st
 		for (wxString filepath : filesdisk)
 		{
 		// extract target name
-			nametarget = filepath.AfterFirst(Slash).BeforeFirst(Slash);
+			nametarget = filepath.AfterFirst(cSlash).BeforeFirst(cSlash);
 /// Debug
 //Mes = quote(nametarget) + Tab + "=> " + quote(filepath) ; _printD(Mes);
 /// ...
@@ -1086,7 +1086,7 @@ _printD("=> Begin 'Pre::detectComplementsOnDisk(..., " + _nametarget + ", " + st
 				if (_report)
 				{
 					Mes =  _("The directory") + quote(diradding);
-					Mes += _(" no exists")  +  Dot ;
+					Mes += _("no exists")  +  Dot ;
 					Mes += Space + _("It's mandatory to 'Rebuild' the target") ;
 					Mes += " !!"; _printWarn(Mes) ;
 				}
@@ -1332,9 +1332,9 @@ wxString Pre::toFileCreator(const wxString &_fcreated)
         return fullname;
     }
     wxString target, fcreated, fcreator , prepend, name;
-	target = _fcreated.AfterFirst(Slash).BeforeFirst(Slash);
+	target = _fcreated.AfterFirst(cSlash).BeforeFirst(cSlash);
 //Mes = " target = " + quote(target) ; _printWarn(Mes);
-	fcreated = _fcreated.AfterLast(Slash);
+	fcreated = _fcreated.AfterLast(cSlash);
 //Mes = " fcreated = " + quote(fcreated ) ; _printWarn(Mes);
 	if (fcreated.Contains("_") )
 	{
@@ -1403,15 +1403,15 @@ wxString Pre::fullFileCreator(const wxString&  _fcreator, wxString _creatortarge
 	// read the relative file name
 		fullname = prjfile->relativeToCommonTopLevelPath ;
 	// we found the file ?
-		good = fullname.AfterLast(Slash).Matches(_fcreator);
+		good = fullname.AfterLast(cSlash).Matches(_fcreator);
 		if (good)
 			break;
 	}
 
 	if (!good)
 	{
-		Mes = "**" + quote(_creatortarget) + ":" + quote( _fcreator ) ;
-		Mes += Space + _(" which is a creator file is missing in the CB project") + " !";
+		Mes = "**" + quote(_creatortarget) + ":" + quote(_fcreator) ;
+		Mes += _("which is a creator file is missing in the CB project") + " !";
 		_printError(Mes);
 		fullname = wxEmptyString ;
 		/// ask if we should delete it!

@@ -1,8 +1,8 @@
 <map id="Pre::detectComplementsOnDisk" name="Pre::detectComplementsOnDisk">
-<area shape="rect" id="node2" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="267,19,465,45"/>
-<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a7f329c0fb9b4a95d5c1614597674b078" title="This method called by project activate allows detect project using the Qt libraries. " alt="" coords="263,95,469,121"/>
-<area shape="rect" id="node7" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="529,158,738,199"/>
-<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="517,5,749,32"/>
-<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="797,107,956,133"/>
-<area shape="rect" id="node6" href="$class_add_on_for_qt.html#a9e26c0625bf170ea273b83884e449365" title="This method called by plugin is manually loaded. " alt="" coords="534,107,733,133"/>
+<area shape="rect" id="node2" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="269,19,466,45"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a7f329c0fb9b4a95d5c1614597674b078" title="This method called by project activate allows detect project using the Qt libraries. " alt="" coords="264,95,471,121"/>
+<area shape="rect" id="node7" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="531,158,739,199"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="519,5,751,32"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="799,107,956,133"/>
+<area shape="rect" id="node6" href="$class_add_on_for_qt.html#a9e26c0625bf170ea273b83884e449365" title="This method called by plugin is manually loaded. " alt="" coords="536,107,733,133"/>
 </map>

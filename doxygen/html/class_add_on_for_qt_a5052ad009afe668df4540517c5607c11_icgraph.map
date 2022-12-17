@@ -1,8 +1,9 @@
 <map id="AddOnForQt::enableMenuBarQt" name="AddOnForQt::enableMenuBarQt">
-<area shape="rect" id="node2" href="$class_add_on_for_qt.html#a05d7100ded0366a1d46a8ebb39135b64" title="Enable alls menus : menu bar, popup menu, tool menu for Qt. " alt="" coords="266,12,461,39"/>
-<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a7f329c0fb9b4a95d5c1614597674b078" title="This method called by project activate allows detect project using the Qt libraries. " alt="" coords="260,69,467,96"/>
-<area shape="rect" id="node7" href="$class_add_on_for_qt.html#acffd342a9ece6dbf1d2353e83736949f" title="This method called by target activate allows detect target using the Qt libraries. " alt="" coords="529,157,732,184"/>
-<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="515,5,747,32"/>
-<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="795,107,953,133"/>
-<area shape="rect" id="node6" href="$class_add_on_for_qt.html#a9e26c0625bf170ea273b83884e449365" title="This method called by plugin is manually loaded. " alt="" coords="531,107,730,133"/>
+<area shape="rect" id="node2" href="$class_add_on_for_qt.html#a05d7100ded0366a1d46a8ebb39135b64" title="Enable alls menus : menu bar, popup menu, tool menu for Qt. " alt="" coords="267,56,460,83"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a7f329c0fb9b4a95d5c1614597674b078" title="This method called by project activate allows detect project using the Qt libraries. " alt="" coords="260,119,467,145"/>
+<area shape="rect" id="node8" href="$class_add_on_for_qt.html#acffd342a9ece6dbf1d2353e83736949f" title="This method called by target activate allows detect target using the Qt libraries. " alt="" coords="262,195,465,221"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a2501d977d69a8f0b98f926d0ec721fec" title="This method is called by Code::Blocks core modules (EditorManager, ProjectManager etc) and is used by..." alt="" coords="528,5,733,32"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="515,56,747,83"/>
+<area shape="rect" id="node6" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="795,157,952,184"/>
+<area shape="rect" id="node7" href="$class_add_on_for_qt.html#a9e26c0625bf170ea273b83884e449365" title="This method called by plugin is manually loaded. " alt="" coords="532,157,729,184"/>
 </map>

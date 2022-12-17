@@ -1,12 +1,12 @@
 <map id="Pre::isVirtualQtTarget" name="Pre::isVirtualQtTarget">
-<area shape="rect" id="node2" href="$class_pre.html#ab083f585803ea1ec03a3511709396890" title="Detects if the current target uses Qt libraries,. " alt="" coords="200,125,336,152"/>
-<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a7f329c0fb9b4a95d5c1614597674b078" title="This method called by project activate allows detect project using the Qt libraries. " alt="" coords="643,176,849,202"/>
-<area shape="rect" id="node6" href="$class_add_on_for_qt.html#acffd342a9ece6dbf1d2353e83736949f" title="This method called by target activate allows detect target using the Qt libraries. " alt="" coords="387,14,590,41"/>
-<area shape="rect" id="node7" href="$class_add_on_for_qt.html#a65e6a89da4a8f9506c4e24d5f44e2bf1" title="AddOnForQt::OnNewProject" alt="" coords="921,265,1108,292"/>
-<area shape="rect" id="node8" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="641,59,851,100"/>
-<area shape="rect" id="node9" href="$class_pre.html#afbf33d96d5e261d073efceef616f8c0d" title="Detects if the project has complements on disk. " alt="" coords="384,125,593,152"/>
-<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="1179,164,1337,190"/>
-<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a9e26c0625bf170ea273b83884e449365" title="This method called by plugin is manually loaded. " alt="" coords="915,214,1114,241"/>
-<area shape="rect" id="node10" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="647,125,845,152"/>
-<area shape="rect" id="node11" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="899,113,1131,140"/>
+<area shape="rect" id="node2" href="$class_pre.html#ab083f585803ea1ec03a3511709396890" title="Detects if the current target uses Qt libraries,. " alt="" coords="201,121,337,148"/>
+<area shape="rect" id="node3" href="$class_add_on_for_qt.html#a7f329c0fb9b4a95d5c1614597674b078" title="This method called by project activate allows detect project using the Qt libraries. " alt="" coords="645,172,851,199"/>
+<area shape="rect" id="node6" href="$class_add_on_for_qt.html#acffd342a9ece6dbf1d2353e83736949f" title="This method called by target activate allows detect target using the Qt libraries. " alt="" coords="915,5,1117,32"/>
+<area shape="rect" id="node7" href="$class_add_on_for_qt.html#a65e6a89da4a8f9506c4e24d5f44e2bf1" title="AddOnForQt::OnNewProject" alt="" coords="397,240,584,267"/>
+<area shape="rect" id="node8" href="$class_add_on_for_qt.html#a9a73babcd2a009253a79acd49ea759b0" title="This method called by &#39;cbEVT_PROJECT_RENAMED&#39; for notifie rename project or &#39;cbEVT_BUILDTARGET_RENAME..." alt="" coords="644,55,852,97"/>
+<area shape="rect" id="node9" href="$class_pre.html#afbf33d96d5e261d073efceef616f8c0d" title="Detects if the project has complements on disk. " alt="" coords="385,121,596,148"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4" title="Any descendent plugin should override this virtual method and perform any necessary initialization..." alt="" coords="1180,161,1337,188"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a9e26c0625bf170ea273b83884e449365" title="This method called by plugin is manually loaded. " alt="" coords="917,212,1115,239"/>
+<area shape="rect" id="node10" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="649,121,847,148"/>
+<area shape="rect" id="node11" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="900,111,1132,137"/>
 </map>

@@ -1,5 +1,5 @@
 <map id="Pre::detectQtProject" name="Pre::detectQtProject">
 <area shape="rect" id="node2" href="$class_pre.html#ac27db6d07134211ee91fb08a5daa3b94" title="Search Qt libraries in project or target. " alt="" coords="245,5,347,32"/>
 <area shape="rect" id="node3" href="$class_pre.html#ad69b57decb44dabf2ed92df9d84a0147" title="Give compileable targets list for project or virtual target. " alt="" coords="195,56,397,83"/>
-<area shape="rect" id="node4" href="$class_pre.html#a70d06eec2a18717fa4bfc0d9a6c9a2b1" title="Give if target is command only. " alt="" coords="445,56,600,83"/>
+<area shape="rect" id="node4" href="$class_pre.html#a70d06eec2a18717fa4bfc0d9a6c9a2b1" title="Give if target is command only. " alt="" coords="445,56,601,83"/>
 </map>

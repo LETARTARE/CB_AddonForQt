@@ -1,8 +1,8 @@
 <map id="Creater::q_object" name="Creater::q_object">
-<area shape="rect" id="node2" href="$class_creater.html#a14195c51b8836f1ab1d1ec40e2ed60a2" title="Give if file is elegible. " alt="" coords="175,31,303,57"/>
-<area shape="rect" id="node3" href="$class_creater.html#ad1855fcda415c49ea304fa1e9c3e7f87" title="Built one file elegible necessary complement. " alt="" coords="545,5,689,32"/>
-<area shape="rect" id="node6" href="$class_creater.html#a2439a65ac1b3b4d5632e31106c2673f5" title="Search the eligible files (which requires additional files) " alt="" coords="351,56,497,83"/>
-<area shape="rect" id="node4" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="737,31,935,57"/>
-<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="983,31,1215,57"/>
-<area shape="rect" id="node7" href="$class_creater.html#a6e2b0f55ede69708f479336b97f0c9a3" title="Built all files necessary complements. " alt="" coords="546,56,689,83"/>
+<area shape="rect" id="node2" href="$class_creater.html#a14195c51b8836f1ab1d1ec40e2ed60a2" title="Give if file is elegible. " alt="" coords="176,31,305,57"/>
+<area shape="rect" id="node3" href="$class_creater.html#ad1855fcda415c49ea304fa1e9c3e7f87" title="Built one file elegible necessary complement. " alt="" coords="551,5,696,32"/>
+<area shape="rect" id="node6" href="$class_creater.html#a2439a65ac1b3b4d5632e31106c2673f5" title="Search the eligible files (which requires additional files) " alt="" coords="353,56,503,83"/>
+<area shape="rect" id="node4" href="$class_add_on_for_qt.html#afed31a831ac8d3c9efd7d087932a9ab7" title="This method called by &#39;OnMenuComplements(wxCommandEvent&amp; _event)&#39;. " alt="" coords="744,31,941,57"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a1a4cf30a09a34447417f1ad536f0dabf" title="This method called by menu clicked. " alt="" coords="989,31,1221,57"/>
+<area shape="rect" id="node7" href="$class_creater.html#a6e2b0f55ede69708f479336b97f0c9a3" title="Built all files necessary complements. " alt="" coords="552,56,695,83"/>
 </map>

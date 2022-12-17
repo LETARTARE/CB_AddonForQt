@@ -73,19 +73,19 @@ class AddOnForQt : public cbPlugin
     virtual int GetConfigurationGroup() const { return cgContribPlugin; }
 
     /** Return plugin's configuration panel.
-     * @param parent The parent window.
+     * @param _parent The parent window.
      * @return A pointer to the plugin's cbConfigurationPanel. It is deleted by the caller.
      */
-    virtual cbConfigurationPanel* GetConfigurationPanel(cb_unused wxWindow* parent) { return nullptr ;}
+    virtual cbConfigurationPanel* GetConfigurationPanel(cb_unused wxWindow* _parent) { return nullptr ;}
 
     /** Return plugin's configuration panel for projects.
      * The panel returned from this function will be added in the project's
      * configuration dialog.
-     * @param parent The parent window.
-     * @param project The project that is being edited.
+     * @param _parent The parent window.
+     * @param _project The project that is being edited.
      * @return A pointer to the plugin's cbConfigurationPanel. It is deleted by the caller.
      */
-    virtual cbConfigurationPanel* GetProjectConfigurationPanel(cb_unused wxWindow* parent, cb_unused cbProject* project){ return nullptr ;}
+    virtual cbConfigurationPanel* GetProjectConfigurationPanel(cb_unused wxWindow* _parent, cb_unused cbProject* _project){ return nullptr ;}
 
     /** \brief This method is called by Code::Blocks and is used by the plugin
      * to add any menu items it needs on Code::Blocks's menu bar.\n
@@ -96,7 +96,7 @@ class AddOnForQt : public cbPlugin
      * @note This function may be called more than one time. This can happen,
      * for example, when a plugin is installed or uninstalled.
      *
-     * @param menuBar the wxMenuBar to create items in
+     * @param _menuBar the wxMenuBar to create items in
      */
     virtual void BuildMenu(wxMenuBar* _menuBar);
 
@@ -111,9 +111,9 @@ class AddOnForQt : public cbPlugin
      * in that menu. This method is called.\n
      * If the plugin does not need to add items in the menu,
      * just do nothing ;)
-     * @param type the module that's preparing a popup menu
-     * @param menu pointer to the popup menu
-     * @param data pointer to FileTreeData object (to access/modify the file tree)
+     * @param _type the module that's preparing a popup menu
+     * @param _menu pointer to the popup menu
+     * @param _data pointer to FileTreeData object (to access/modify the file tree)
      */
     virtual void BuildModuleMenu(const ModuleType _type, wxMenu* _menu, const FileTreeData* _data = nullptr);
 
@@ -122,7 +122,7 @@ class AddOnForQt : public cbPlugin
      * It is a pure virtual method that needs to be implemented by all
      * plugins. If the plugin does not need to add items on the toolbar,
      * just do nothing ;)
-     * @param toolBar the wxToolBar to create items on
+     * @param _toolBar the wxToolBar to create items on
      * @return The plugin should return true if it needed the toolbar, false if not
      */
     virtual bool BuildToolBar(wxToolBar* _toolBar) {return false;};
@@ -158,11 +158,11 @@ class AddOnForQt : public cbPlugin
      * Code::Blocks (PluginManager actually) when the plugin has been
      * loaded, attached and should de-attach from Code::Blocks.\n
      * Think of this method as the actual destructor...
-     * @param appShutDown If true, the application is shutting down. In this
+     * @param _appShutDown If true, the application is shutting down. In this
      *         case *don't* use Manager::Get()->Get...() functions or the
      *         behaviour is undefined...
      */
-    virtual void OnRelease(bool appShutDown);
+    virtual void OnRelease(bool _appShutDown);
 
   /// --------------------------------------------------------------------------
 

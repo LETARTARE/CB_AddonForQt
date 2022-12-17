@@ -1,10 +1,14 @@
 var searchData=
 [
-  ['eol',['Eol',['../defines_8h.html#a31aaad529146b8d0418b7a56b55deaa3',1,'Eol():&#160;defines.h'],['../pre_8cpp.html#a31aaad529146b8d0418b7a56b55deaa3',1,'Eol():&#160;pre.cpp'],['../pre_8cpp.html#a31aaad529146b8d0418b7a56b55deaa3',1,'Eol():&#160;pre.cpp'],['../pre_8cpp.html#a31aaad529146b8d0418b7a56b55deaa3',1,'Eol():&#160;pre.cpp']]],
-  ['ext_5fcpp',['EXT_CPP',['../defines_8h.html#aae8f2a3e3452ea18090dfc46895d8913',1,'defines.h']]],
-  ['ext_5fh',['EXT_H',['../defines_8h.html#a756e4d5d7366024c2af007057a9c087a',1,'defines.h']]],
-  ['ext_5fhpp',['EXT_HPP',['../defines_8h.html#a2ad0562b7ab52f009c8055078aaf72e4',1,'defines.h']]],
-  ['ext_5fmoc',['EXT_MOC',['../defines_8h.html#a4ddd10ea993d0ef23e3e3f40ce6e38fd',1,'defines.h']]],
-  ['ext_5fqrc',['EXT_QRC',['../defines_8h.html#ae16c5d6fa2dd7f2a2d474555c3968dcd',1,'defines.h']]],
-  ['ext_5fui',['EXT_UI',['../defines_8h.html#a8f38dce4cfccf9a89b7ef4eea968c1fd',1,'defines.h']]]
+  ['dot',['Dot',['../defines_8h.html#ae8a4b0c3578b007c05bb651c80b7b19e',1,'defines.h']]],
+  ['dot_5fdynamiclib_5fext',['DOT_DYNAMICLIB_EXT',['../defines_8h.html#a5781c56423c65c692d08a10e0b0409b9',1,'defines.h']]],
+  ['dot_5fext_5fcpp',['DOT_EXT_CPP',['../defines_8h.html#a2fe8d37215380717b82d083d5927a83e',1,'defines.h']]],
+  ['dot_5fext_5fh',['DOT_EXT_H',['../defines_8h.html#af3c62bef0b8a2e893f364051be991f2a',1,'defines.h']]],
+  ['dot_5fext_5fmoc',['DOT_EXT_MOC',['../defines_8h.html#a0b0327fbe2efdc792bb53b8e152e26d8',1,'defines.h']]],
+  ['dot_5fext_5fqrc',['DOT_EXT_QRC',['../defines_8h.html#ac85014dde61752b56498faed7364efc5',1,'defines.h']]],
+  ['dot_5fext_5fui',['DOT_EXT_UI',['../defines_8h.html#a80666895cbde7cd3f6e719610ed157c0',1,'defines.h']]],
+  ['dprint',['DPrint',['../defines_8h.html#a2e2d822c8231efd08f4b3cf870810157',1,'defines.h']]],
+  ['dprinterr',['DPrintErr',['../defines_8h.html#a0d03d0c7994d57499f35c8075c44fe3d',1,'defines.h']]],
+  ['dquote',['Dquote',['../defines_8h.html#a6a16eef36fb6e84aadea6b9fa501053e',1,'Dquote():&#160;defines.h'],['../defines_8h.html#a047d293eb4ee91d9e9fa9af8416127c7',1,'dquote():&#160;defines.h']]],
+  ['dtostr',['dToStr',['../defines_8h.html#a7c9161326d73e360baf1040f8220f2ec',1,'defines.h']]]
 ];

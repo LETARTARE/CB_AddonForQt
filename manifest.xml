@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_plugin_manifest_file>
-    <SdkVersion major="2" minor="17" release="0" />
+    <SdkVersion major="2" minor="23" release="0" />
     <Plugin name="addonforQt">
         <Value title="Addons for Qt" translate="yes"/>
-        <Value version="3.4.8-2022/06/11" />
-        <Value description="Compilling Qt software with this plugin (sdk 2.17.0)
+        <Value version="3.5.0-2022/12/17" />
+        <Value description="Compilling Qt software with this plugin (sdk 2.23.0)
 Plugin to compile QT applications with 'Code::Blocks'
 1- Overview
     It is a plugin to compile C++ Qt5 applications using 'Code::Blocks',
