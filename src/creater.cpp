@@ -32,7 +32,7 @@ Creater::Creater(const wxString & _namePlugin, int _logIndex)
 	: Pre(_namePlugin, _logIndex)
 {
 /// !! not use  '+ cSlash'   !!  because cSlash = wxT(...)
-	m_dirPreBuild = "adding" + wxString(cSlash) ;
+	m_dirPreBuild = dirAddon + wxString(cSlash) ;
 }
 ///-----------------------------------------------------------------------------
 /// Destructor

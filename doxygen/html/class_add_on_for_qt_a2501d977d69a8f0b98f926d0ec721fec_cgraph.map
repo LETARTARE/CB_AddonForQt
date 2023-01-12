@@ -1,0 +1,7 @@
+<map id="AddOnForQt::BuildModuleMenu" name="AddOnForQt::BuildModuleMenu">
+<area shape="rect" id="node2" href="$class_add_on_for_qt.html#aad6a516558f710b189c836bd3d5ff80a" title="AddOnForQt::SwitchToLog" alt="" coords="267,5,444,32"/>
+<area shape="rect" id="node3" href="$class_pre.html#a72c385efaaff473d62cb39167c57d4ad" title="check that the filename not contain illegal characters for windows ! " alt="" coords="297,56,413,83"/>
+<area shape="rect" id="node4" href="$class_pre.html#a9f78018644cb6a8217781b8d82d8cc13" title="Test if a filename is registerd to target. " alt="" coords="270,107,441,133"/>
+<area shape="rect" id="node5" href="$class_add_on_for_qt.html#a05d7100ded0366a1d46a8ebb39135b64" title="Enable alls menus : menu bar, popup menu, tool menu for Qt. " alt="" coords="259,157,452,184"/>
+<area shape="rect" id="node6" href="$class_add_on_for_qt.html#a5052ad009afe668df4540517c5607c11" title="Enable alls menus bar for Qt. " alt="" coords="500,157,707,184"/>
+</map>

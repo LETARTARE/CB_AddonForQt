@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-10-17
- * Modified:  2022-12-13
+ * Modified:  2022-12-21
  * Copyright: LETARTARE
  * License:   GPL
  **************************************************************/
@@ -15,7 +15,7 @@
 ///-----------------------------------------------------------------------------
 /** Version
  */
-#define VERSION_WXT wxString("'3.5.0'")
+#define VERSION_WXT wxString("'3.5.1'")
 
 /** Version Qt
  */
@@ -25,6 +25,10 @@
 /** \brief display begin and end messages of function
  */
 //#define WITH_MES_DEBUG
+
+/** \brief name of directory for complements
+ */
+#define dirAddon	"adding"
 
 /** @brief end of line for Win/Linux/OX
  */

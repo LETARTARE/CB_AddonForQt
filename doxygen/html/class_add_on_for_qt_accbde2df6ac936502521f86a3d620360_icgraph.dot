@@ -1,0 +1,9 @@
+digraph "AddOnForQt::OnRelease"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node317 [label="AddOnForQt::OnRelease",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node317 -> Node318 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node318 [label="AddOnForQt::OnAttach",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_add_on_for_qt.html#a82d654bd69f4a661e50af0ad3476b2a4",tooltip="Any descendent plugin should override this virtual method and perform any necessary initialization..."];
+}

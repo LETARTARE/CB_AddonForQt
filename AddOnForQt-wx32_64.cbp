@@ -2,11 +2,65 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="AddOnForQt-3.5.1-810seh-31x-sdk2190" />
+		<Option title="AddOnForQt-3.5.1-810seh-321-sdk2230" />
 		<Option platforms="Windows;" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
+			<Target title="win_321_2230">
+				<Option platforms="Windows;" />
+				<Option output="$(TARGET_NAME)/AddOnForQt" prefix_auto="0" extension_auto="1" />
+				<Option object_output="objs32_64/$(TARGET_NAME)" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<ExtraCommands>
+					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.zip manifest.xml" />
+					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.zip res\*" />
+					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.zip images\*" />
+					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.cbplugin $(TARGET_NAME)\addonforQt.dll  $(TARGET_NAME)\addonforQt.zip" />
+					<Mode after="always" />
+				</ExtraCommands>
+				<Environment>
+					<Variable name="cb" value="$(#sdk2230_321)" />
+					<Variable name="wx" value="$(#wx321_64)" />
+				</Environment>
+			</Target>
+			<Target title="win_320_2210">
+				<Option platforms="Windows;" />
+				<Option output="$(TARGET_NAME)/AddOnForQt" prefix_auto="0" extension_auto="1" />
+				<Option object_output="objs/$(TARGET_NAME)" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<ExtraCommands>
+					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.zip manifest.xml" />
+					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.zip res\*" />
+					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.zip images\*" />
+					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.cbplugin $(TARGET_NAME)\addonforQt.dll  $(TARGET_NAME)\addonforQt.zip" />
+					<Mode after="always" />
+				</ExtraCommands>
+				<Environment>
+					<Variable name="cb" value="$(#sdk2210_320)" />
+					<Variable name="wx" value="$(#wx320_64)" />
+				</Environment>
+			</Target>
+			<Target title="win_320_2200">
+				<Option platforms="Windows;" />
+				<Option output="$(TARGET_NAME)/AddOnForQt" prefix_auto="0" extension_auto="1" />
+				<Option object_output="objs/$(TARGET_NAME)" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<ExtraCommands>
+					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.zip manifest.xml" />
+					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.zip res\*" />
+					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.zip images\*" />
+					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.cbplugin $(TARGET_NAME)\addonforQt.dll  $(TARGET_NAME)\addonforQt.zip" />
+					<Mode after="always" />
+				</ExtraCommands>
+				<Environment>
+					<Variable name="cb" value="$(#sdk2200_320)" />
+					<Variable name="wx" value="$(#wx320_64)" />
+				</Environment>
+			</Target>
 			<Target title="cbqt5">
 				<Option platforms="Windows;" />
 				<Option output="$build/cbq5.exe" prefix_auto="1" extension_auto="0" />
@@ -50,83 +104,7 @@
 					<SilentBuild command=" &gt; $(CMD_NULL)" />
 				</MakeCommands>
 			</Target>
-			<Target title="win_317_2190">
-				<Option platforms="Windows;" />
-				<Option output="$(TARGET_NAME)/AddOnForQt" prefix_auto="0" extension_auto="1" />
-				<Option object_output="objs/$(TARGET_NAME)" />
-				<Option type="3" />
-				<Option compiler="gcc" />
-				<ExtraCommands>
-					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.zip manifest.xml" />
-					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.zip res\*" />
-					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.zip images\*" />
-					<Add after="zip -j9  $(TARGET_NAME)\addonforQt.cbplugin $(TARGET_NAME)\addonforQt.dll  $(TARGET_NAME)\addonforQt.zip" />
-					<Mode after="always" />
-				</ExtraCommands>
-				<Environment>
-					<Variable name="cb" value="$(#sdk2190_317)" />
-					<Variable name="wx" value="$(#wx317_64)" />
-				</Environment>
-			</Target>
-			<Target title="win_315_2190">
-				<Option platforms="Windows;" />
-				<Option output="$(TARGET_NAME)/AddOnForQt" prefix_auto="0" extension_auto="1" />
-				<Option object_output="objs/$(TARGET_NAME)" />
-				<Option type="3" />
-				<Option compiler="gcc" />
-				<ExtraCommands>
-					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQt.zip manifest.xml" />
-					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQt.zip res\*" />
-					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQt.zip images\*" />
-					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQt.cbplugin $(TARGET_NAME)\AddOnForQt.dll  $(TARGET_NAME)\AddOnForQt.zip" />
-					<Mode after="always" />
-				</ExtraCommands>
-				<Environment>
-					<Variable name="cb" value="$(#sdk2190_315)" />
-					<Variable name="wx" value="$(#wx315_64)" />
-				</Environment>
-			</Target>
-			<Target title="win_316_2180">
-				<Option platforms="Windows;" />
-				<Option output="$(TARGET_NAME)/$(name)" prefix_auto="0" extension_auto="1" />
-				<Option object_output="objs/$(TARGET_NAME)" />
-				<Option type="3" />
-				<Option compiler="gcc" />
-				<ExtraCommands>
-					<Add after="zip -j9  $(TARGET_NAME)\$(name).zip manifest.xml" />
-					<Add after="zip -j9  $(TARGET_NAME)\$(name).zip res\*" />
-					<Add after="zip -j9  $(TARGET_NAME)\$(name).zip images\*" />
-					<Add after="zip -j9  $(TARGET_NAME)\$(name).cbplugin $(TARGET_NAME)\$(name).dll  $(TARGET_NAME)\$(name).zip" />
-					<Mode after="always" />
-				</ExtraCommands>
-				<Environment>
-					<Variable name="cb" value="$(#sdk2180_316)" />
-					<Variable name="wx" value="$(#wx316_810seh)" />
-				</Environment>
-			</Target>
-			<Target title="win_315_2180">
-				<Option platforms="Windows;" />
-				<Option output="$(TARGET_NAME)/AddOnForQt" prefix_auto="0" extension_auto="1" />
-				<Option object_output="objs/$(TARGET_NAME)" />
-				<Option type="3" />
-				<Option compiler="gcc" />
-				<ExtraCommands>
-					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQt.zip manifest.xml" />
-					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQt.zip res\*" />
-					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQt.zip images\*" />
-					<Add after="zip -j9  $(TARGET_NAME)\AddOnForQt.cbplugin $(TARGET_NAME)\AddOnForQt.dll  $(TARGET_NAME)\AddOnForQt.zip" />
-					<Mode after="always" />
-				</ExtraCommands>
-				<Environment>
-					<Variable name="cb" value="$(#sdk2190_315)" />
-					<Variable name="wx" value="$(#wx315_64)" />
-				</Environment>
-			</Target>
 			<Target title="doc">
-				<Option type="4" />
-				<Option compiler="null" />
-			</Target>
-			<Target title="sdk">
 				<Option type="4" />
 				<Option compiler="null" />
 			</Target>
@@ -170,7 +148,7 @@
 		<Linker>
 			<Add option="-m64" />
 			<Add library="codeblocks" />
-			<Add library="wxmsw31u" />
+			<Add library="wxmsw32u" />
 			<Add directory="$wx/lib/gcc_dll" />
 			<Add directory="$(CODEBLOCKS)" />
 		</Linker>
@@ -193,7 +171,6 @@
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="adding/cbqt5/moc_qtest.cpp">
-			<Option weight="1" />
 			<Option target="cbqt5" />
 		</Unit>
 		<Unit filename="doc/Todo.his">
@@ -215,46 +192,39 @@
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="src/addonforqt.cpp">
-			<Option target="win_315_2180" />
-			<Option target="win_316_2180" />
-			<Option target="win_315_2190" />
-			<Option target="win_317_2190" />
+			<Option target="win_320_2200" />
+			<Option target="win_320_2210" />
+			<Option target="win_321_2230" />
 		</Unit>
 		<Unit filename="src/addonforqt.h">
-			<Option target="win_315_2180" />
-			<Option target="win_316_2180" />
-			<Option target="win_315_2190" />
-			<Option target="win_317_2190" />
+			<Option target="win_320_2200" />
+			<Option target="win_320_2210" />
+			<Option target="win_321_2230" />
 		</Unit>
 		<Unit filename="src/creater.cpp">
-			<Option target="win_315_2180" />
-			<Option target="win_316_2180" />
-			<Option target="win_315_2190" />
-			<Option target="win_317_2190" />
+			<Option target="win_320_2200" />
+			<Option target="win_320_2210" />
+			<Option target="win_321_2230" />
 		</Unit>
 		<Unit filename="src/creater.h">
-			<Option target="win_315_2180" />
-			<Option target="win_316_2180" />
-			<Option target="win_315_2190" />
-			<Option target="win_317_2190" />
+			<Option target="win_320_2200" />
+			<Option target="win_320_2210" />
+			<Option target="win_321_2230" />
 		</Unit>
 		<Unit filename="src/defines.h">
-			<Option target="win_315_2180" />
-			<Option target="win_316_2180" />
-			<Option target="win_315_2190" />
-			<Option target="win_317_2190" />
+			<Option target="win_320_2200" />
+			<Option target="win_320_2210" />
+			<Option target="win_321_2230" />
 		</Unit>
 		<Unit filename="src/pre.cpp">
-			<Option target="win_315_2180" />
-			<Option target="win_316_2180" />
-			<Option target="win_315_2190" />
-			<Option target="win_317_2190" />
+			<Option target="win_320_2200" />
+			<Option target="win_320_2210" />
+			<Option target="win_321_2230" />
 		</Unit>
 		<Unit filename="src/pre.h">
-			<Option target="win_315_2180" />
-			<Option target="win_316_2180" />
-			<Option target="win_315_2190" />
-			<Option target="win_317_2190" />
+			<Option target="win_320_2200" />
+			<Option target="win_320_2210" />
+			<Option target="win_321_2230" />
 		</Unit>
 		<Extensions>
 			<DoxyBlocks>

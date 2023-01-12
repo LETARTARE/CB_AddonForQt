@@ -3,7 +3,7 @@
     <SdkVersion major="2" minor="23" release="0" />
     <Plugin name="addonforQt">
         <Value title="Addons for Qt" translate="yes"/>
-        <Value version="3.5.0-2022/12/17" />
+        <Value version="3.5.1-2023/01/07" />
         <Value description="Compilling Qt software with this plugin (sdk 2.23.0)
 Plugin to compile QT applications with 'Code::Blocks'
 1- Overview
