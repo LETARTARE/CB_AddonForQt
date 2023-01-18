@@ -67,6 +67,6 @@ Popup menu on project
 
 Window log 
 
-![LogAddonForQt]https://github.com/LETARTARE/CB_AddonForQt/blob/Images/3.5/LogAddon.png "LogAddonForQt")
+![LogAddonForQt](https://github.com/LETARTARE/CB_AddonForQt/blob/Images/3.5/LogAddon.png "LogAddonForQt")
 
 
