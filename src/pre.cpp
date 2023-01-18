@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-02-27
- * Modified:  2022-12-13
+ * Modified:  2023-01-18
  * Copyright: LETARTARE
  * License:   GPL
  **************************************************************/
@@ -49,7 +49,8 @@ Pre::Pre(const wxString & _nameplugin, int _logindex)
 #elif defined(__WXMAC__)
 	m_Mac = true; m_Win = m_Linux = false;
 #endif
-	//platForm();
+// language : format "fr_FR'
+	m_lang = wxLocale::GetLanguageCanonicalName(wxLocale::GetSystemLanguage());
 	Mes = wxEmptyString;
 }
 ///-----------------------------------------------------------------------------
@@ -90,9 +91,9 @@ _printD("=> Begin 'Pre::CallMenu(...," + _menuPath + ")'" );
         // find next slash
         size_t nextPos = pos;
         while (nextPos < _menuPath.Length() && _menuPath.GetChar(++nextPos) != '/' ) ;
-_printD(" => menuPath =" + quote(_menuPath) );
+//_printD(" => menuPath =" + quote(_menuPath) );
         wxString current = _menuPath.Mid(pos, nextPos - pos);
-_printD(" => current =" + quote(current) );
+//_printD(" => current =" + quote(current) );
         if (current.IsEmpty())       break;
 
         bool isLast = nextPos >= _menuPath.Length();
@@ -110,7 +111,7 @@ _printD(" => current =" + quote(current) );
             if (isLast)
             {
                 int id = menu->FindItem(current);
-_printD("id => " + strInt(id) );
+//_printD("id => " + strInt(id) );
 				good = id != wxNOT_FOUND ;
                 if (good)
                 {
@@ -220,10 +221,6 @@ wxString Pre::namePlugin()
 wxString Pre::GetDateBuildPlugin()
 {
     wxString str = _("date error !");
-/// TODO ...
-	// search lang = "xx_XX"
-	// wxString lang =  wxLocale::GetLanguageInfo(wxLANGUAGE_DEFAULT)->GetLocaleName();
-	// _printWarn(quote(lang));
 /// path of '*.so' or 'lib*.so'
 	if (! m_pMam)
 		m_pMam = m_pM->GetMacrosManager();
@@ -339,8 +336,7 @@ wxString Pre::platForm()
 #endif
 
 // search lang = "xx_XX"
-    m_locale.Init();
-    m_lang =  m_locale.GetCanonicalName();
+	m_lang = wxLocale::GetLanguageCanonicalName(wxLocale::GetSystemLanguage());
     Mes += "-" + quoteNS(m_lang) ;
 
 	return Mes;

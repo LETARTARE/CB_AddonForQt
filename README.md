@@ -1,4 +1,4 @@
-# AddOnForQt-3.5.1 January 07, 2022 (Win32-64, Lin-64)
+# AddOnForQt-3.6.0 January 18, 2022 (Win32-64, Lin-64)
 
 Plugin to compile QT applications with 'Code::Blocks', but without 'Code:Block' patch.
 
@@ -43,10 +43,10 @@ It uses a log 'Prebuild log' for all posts plugin.
 	4- a plugin project for Linux : 'AddOnForQt-wx31-unix.cbp' using the directory 'src'
 	5- a plugin project for Linux : 'AddOnForQt-wx32-unix.cbp' using the directory 'src'
 	
-4- Installation to 'Code::Blocks 13118' (sdk-2.23.0)
+4- Installation to 'Code::Blocks 13154' (sdk-2.23.0)
 
 	1- first install wizards 'cbqt5',
-	2- then with 'C::B-13145' compile and install the plugin 'AddOnForQt' 
+	2- then with 'C::B-13154' compile and install the plugin 'AddOnForQt' 
         : change the local variable 'cb = $(#sdk2230)' in agreement with your 
         global 'sdk2230' which should identify sources of 'Code::Blocks-sdk2230' (>= C:B-12896 )
 
@@ -56,6 +56,16 @@ It uses a log 'Prebuild log' for all posts plugin.
 
     2- compile and run (if executable).
 
-See the Wiki
 
+Menu for Qt
+
+![Menu](https://github.com/LETARTARE/CB_AddonForQt/raw/Images/3.5/MenuAddOn.png "MenuAddonForQt")
+
+Popup menu on project
+
+![POpup](https://github.com/LETARTARE/CB_AddonForQt/raw/Images/3.5/PopUpAddOn.png "PopUpAddonForQt")
+
+Window log 
+
+![LogAddonForQt](https://github.com/LETARTARE/CB_AddonForQt/raw/Images/3.5/LogAddOn.png "LogAddonForQt")
 

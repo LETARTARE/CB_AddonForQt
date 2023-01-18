@@ -248,7 +248,7 @@ class Pre
 		 /** \brief for localization
 		 */
         wxLocale m_locale;
-        wxString m_lang = "" ; //"fr_FR";
+        wxString m_lang = "" ;
 
 		/** \brief platforms Windows
 		 */

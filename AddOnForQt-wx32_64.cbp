@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="AddOnForQt-3.5.1-810seh-321-sdk2230" />
+		<Option title="AddOnForQt-3.6.0-810seh-321-sdk2230" />
 		<Option platforms="Windows;" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />

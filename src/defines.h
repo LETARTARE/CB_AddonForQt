@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-10-17
- * Modified:  2022-12-21
+ * Modified:  2023-01-18
  * Copyright: LETARTARE
  * License:   GPL
  **************************************************************/
@@ -15,7 +15,7 @@
 ///-----------------------------------------------------------------------------
 /** Version
  */
-#define VERSION_WXT wxString("'3.5.1'")
+#define VERSION_WXT wxString("'3.6.0'")
 
 /** Version Qt
  */

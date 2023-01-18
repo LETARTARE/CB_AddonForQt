@@ -3,7 +3,7 @@
  * Purpose:   Code::Blocks plugin
  * Author:    LETARTARE
  * Created:   2015-10-17
- * Modified:  2022-12-13
+ * Modified:  2023-01-15
  * Copyright: LETARTARE
  * License:   GPL
  *************************************************************
@@ -93,7 +93,19 @@ AddOnForQt::AddOnForQt()
 }
 ///-----------------------------------------------------------------------------
 /// Create handlers event and creating the pre-builders
-/// N° 0 : the first called ( who qupports '_print(...)
+/// N° 0 : the first called ( who supports '_print(...)
+///		1. 'cbEVT_PLUGIN_INSTALLED'
+///		2. 'cbEVT_PLUGIN_LOADING_COMPLETE'
+///		3. 'cbEVT_APP_START_SHUTDOWN'
+///		4. 'cbEVT_PROJECT_ACTIVATE'
+///		5. 'cbEVT_BUILDTARGET_SELECTED'
+///		6. 'cbEVT_PROJECT_NEW'
+///		7. 'cbEVT_PROJECT_BEGIN_REMOVE_FILES'
+///		8. 		'cbEVT_PROJECT_FILE_REMOVED'
+///		9. 'cbEVT_PROJECT_END_REMOVE_FILES'
+///		10. 'cbEVT_WORKSPACE_CLOSING_BEGIN'
+///		11. 'cbEVT_WORKSPACE_LOADING_COMPLETE'
+///		12. 'cbEVT_BUILDTARGET_RENAMED'
 ///
 /// Called by 'PluginManager' actually
 ///
@@ -253,7 +265,7 @@ _printD("	=> End AddOnForQt::OnAttach()");
 ///
 void AddOnForQt::BuildMenu(wxMenuBar* _menuBar)
 {
-_printD("=> Begin 'AddOnForQt::BuildMenu(...)'");
+_print("=> Begin 'AddOnForQt::BuildMenu(...)'");
 
 	if (!IsAttached() || ! _menuBar )	return;
 
@@ -261,11 +273,14 @@ _printD("=> Begin 'AddOnForQt::BuildMenu(...)'");
 	m_pMenuBar = _menuBar;
 // locate "&Project" menu and insert after it
 	wxString label = _("&Project");
+//	wxString label = _("&Settings");
 	m_menuposX = _menuBar->FindMenu(label);
 //_print("m_menuposX = " + strInt(m_menuposX));
 	if (m_menuposX == wxNOT_FOUND )
 	{
-		_printError( quote(label) + _("cannot be found") + " !!!");
+		Mes = quote(label) + _("cannot be found") + " => 'menuposX = ";
+		Mes += iToStr(m_menuposX) + " !!!";
+		_printError(Mes);
 		return ;
 	}
 	// just after ...
@@ -277,11 +292,11 @@ _printD("=> Begin 'AddOnForQt::BuildMenu(...)'");
 
 	/// manual loading of the extension 		: m_menuposX = 5
 	///	to the activation of the extension		: m_menuposX = 5
-
+	m_menuposX = 5;
 // construct all items Qt in menu bar
 	buildMenuBarQt();
 
-_printD("	<= End 'AddOnForQt::BuildMenu(...)'");
+_print("	<= End 'AddOnForQt::BuildMenu(...)' => " + iToStr(m_menuposX) );
 }
 ///-----------------------------------------------------------------------------
 /// Construct items of "For a 'Qt project"
@@ -293,14 +308,16 @@ _printD("	<= End 'AddOnForQt::BuildMenu(...)'");
 ///
 void AddOnForQt::buildMenuBarQt()
 {
-_printD("=> Begin 'AddOnForQt::buildMenuBarQt(...)'");
+_print("=> Begin 'AddOnForQt::buildMenuBarQt(...)' => " + iToStr(m_menuposX));
 /// m_menuposX == -1 => called by first 'OnActivateProject(...)'
 
 	if (!m_pMenuBar) return ;
 
 ///-------------------------------------------------------------------
 /// for test just after '&Project'
-	m_menuposX = 5;  m_buildFinded = true;
+	if (m_menuposX < 0) m_menuposX = 5;
+
+	m_buildFinded = true;
 ///-------------------------------------------------------------------
 	wxString label;
     wxMenu * submenu = new wxMenu;
@@ -341,15 +358,15 @@ _printD("=> Begin 'AddOnForQt::buildMenuBarQt(...)'");
 	//m_pItem5->SetBitmaps( m_bmStop, m_bmStopOff);
 	m_pItem5->SetBitmap( m_bmStop);
 	submenu->Append(m_pItem5);
-/* WAITING ...
+// WAITING ...
 /// 6-
-    label 	= _("Setting");
-    Mes 	= _("Setting for Qt");
-	m_pItem6 = new wxMenuItem(submenu, idMbarSetting, label, Mes);
-	//m_pItem6->SetBitmaps( m_bmSetting, m_bmSettingOff );
-	m_pItem6->SetBitmap( m_bmSetting);
-	submenu->Append(m_pItem6);
-*/
+//    label 	= _("Setting");
+//   Mes 	= _("Setting for Qt");
+//	m_pItem6 = new wxMenuItem(submenu, idMbarSetting, label, Mes);
+//	//m_pItem6->SetBitmaps( m_bmSetting, m_bmSettingOff );
+//	m_pItem6->SetBitmap( m_bmSetting);
+//	submenu->Append(m_pItem6);
+
 /// the menu 'AddonsQt' in menu bar
 	label 	= _("&AddonsQt") ;
 	Mes 	=  _("For build projects that use 'Qt' libraries");
@@ -357,7 +374,8 @@ _printD("=> Begin 'AddOnForQt::buildMenuBarQt(...)'");
 
 /// enable or not
 	//enableMenuBarQt(true);
-_printD("    <= End 'AddOnForQt::buildMenuBarQt(...)'");
+
+_print("    <= End 'AddOnForQt::buildMenuBarQt(...)' =>  + iToStr(m_menuposX)");
 }
 
 ///-----------------------------------------------------------------------------
@@ -372,7 +390,7 @@ _printD("    <= End 'AddOnForQt::buildMenuBarQt(...)'");
 void AddOnForQt::enableMenuBarQt(const bool _enable /* = true */)
 {
 _printD("=> Begin 'AddOnForQt::enableMenuBarQt(" + strBool( _enable) + ")' ");
-
+/*
 	if(m_pMenuBar && m_buildFinded)
 	{
         m_isBothQt = m_isQtProject && m_isQtActiveTarget;
@@ -391,7 +409,7 @@ _printD("=> Begin 'AddOnForQt::enableMenuBarQt(" + strBool( _enable) + ")' ");
 	/// waiting
 	//	m_pItem6->Enable(valid);
 	}
-
+*/
 _printD("	<= End 'AddOnForQt::enableMenuBarQt(...)'");
 }
 
@@ -1010,7 +1028,7 @@ _printWarn(Mes);
 			    	if (!m_pCreater->getAbort())
 					{
 						Mes = Tab + "m_pCreater->buildAllFiles(...) => ";
-						Mes += _("Error 'PreBuild'") + " !!!";   _printError(Mes);
+						Mes += _("Error 'Build Qt'") + " !!!";   _printError(Mes);
 					}
 			    }
 			    m_isRunning = false;
@@ -1354,6 +1372,14 @@ void AddOnForQt::OnActivateProject(CodeBlocksEvent& _event)
 {
 _printD("=> Begin 'AddOnForQt::OnActivateProject(...)" );
 
+/// if stop parsing project
+    if (m_noParsing)
+    {
+/// at CB startup  => m_noParsing = true
+_printD("OnActivateProject::m_noParsing = true");
+		_event.Skip() ; return;
+	}
+
 /// enabled menu Qt
 	if (!m_buildFinded)
 		buildMenuBarQt();
@@ -1488,7 +1514,7 @@ _printD("=> Begin 'AddOnForQt::OnActivateTarget(...)");
     if (m_noParsing)
     {
 /// at CB startup  => m_noParsing = true
-_printD("m_noParsing = true");
+_printD("OnActivateTarget::m_noParsing = true");
 		_event.Skip() ; return;
 	}
 

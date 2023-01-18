@@ -3,13 +3,13 @@
     <SdkVersion major="2" minor="23" release="0" />
     <Plugin name="addonforQt">
         <Value title="Addons for Qt" translate="yes"/>
-        <Value version="3.5.1-2023/01/07" />
+        <Value version="3.6.0-2023/01/18" />
         <Value description="Compilling Qt software with this plugin (sdk 2.23.0)
 Plugin to compile QT applications with 'Code::Blocks'
 1- Overview
     It is a plugin to compile C++ Qt5 applications using 'Code::Blocks',
     in a very similar way as projects 'wxWidgets'.
-    For now it works on 'Win64' and on 'LInux'.
+    For now it works on 'Win64' and on 'Linux'.
 2- Features
     It does not use the 'Makefile'.
     This generates additional files the project by the Qt works
