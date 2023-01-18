@@ -265,7 +265,7 @@ _printD("	=> End AddOnForQt::OnAttach()");
 ///
 void AddOnForQt::BuildMenu(wxMenuBar* _menuBar)
 {
-_print("=> Begin 'AddOnForQt::BuildMenu(...)'");
+_printD("=> Begin 'AddOnForQt::BuildMenu(...)'");
 
 	if (!IsAttached() || ! _menuBar )	return;
 
@@ -292,11 +292,11 @@ _print("=> Begin 'AddOnForQt::BuildMenu(...)'");
 
 	/// manual loading of the extension 		: m_menuposX = 5
 	///	to the activation of the extension		: m_menuposX = 5
-	m_menuposX = 5;
+	//m_menuposX = 5;
 // construct all items Qt in menu bar
 	buildMenuBarQt();
 
-_print("	<= End 'AddOnForQt::BuildMenu(...)' => " + iToStr(m_menuposX) );
+_printD("	<= End 'AddOnForQt::BuildMenu(...)' => " + iToStr(m_menuposX) );
 }
 ///-----------------------------------------------------------------------------
 /// Construct items of "For a 'Qt project"
@@ -308,7 +308,7 @@ _print("	<= End 'AddOnForQt::BuildMenu(...)' => " + iToStr(m_menuposX) );
 ///
 void AddOnForQt::buildMenuBarQt()
 {
-_print("=> Begin 'AddOnForQt::buildMenuBarQt(...)' => " + iToStr(m_menuposX));
+_printD("=> Begin 'AddOnForQt::buildMenuBarQt(...)' => " + iToStr(m_menuposX));
 /// m_menuposX == -1 => called by first 'OnActivateProject(...)'
 
 	if (!m_pMenuBar) return ;
@@ -375,7 +375,7 @@ _print("=> Begin 'AddOnForQt::buildMenuBarQt(...)' => " + iToStr(m_menuposX));
 /// enable or not
 	//enableMenuBarQt(true);
 
-_print("    <= End 'AddOnForQt::buildMenuBarQt(...)' =>  + iToStr(m_menuposX)");
+_printD("    <= End 'AddOnForQt::buildMenuBarQt(...)' =>  + iToStr(m_menuposX)");
 }
 
 ///-----------------------------------------------------------------------------
